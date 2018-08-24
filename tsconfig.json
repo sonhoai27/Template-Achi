@@ -19,6 +19,10 @@
       "noUnusedLocals": true,
       "downlevelIteration": true
     },
+    "paths": {
+      "*": [ "node_modules/@types/*", "*"]
+    },
+    "typeRoots": [ "./node_modules/@types" ],
     "exclude": [
       "public",
       "node_modules",
