@@ -1,7 +1,13 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import App from './modules/App';
+import Index from './modules/App';
+import { Provider } from 'react-redux';
+import initStore from './config/store';
+
+const store = initStore()
 ReactDOM.render(
-    <App/>,
+    <Provider store={store}>
+        <Index />
+    </Provider>,
   document.getElementById('root') as HTMLElement
 );
