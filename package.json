@@ -1,0 +1,8 @@
+{
+  "name": "template",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/sonhoai27/Template-Achi.git",
+  "author": "sonH",
+  "license": "MIT"
+}
