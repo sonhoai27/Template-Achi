@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-define("BASE_URL", 'http://localhost:8080/LandingPage/src/');
+define("BASE_URL", 'http://localhost:8080/Achi/src/');
 ?>
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@ define("BASE_URL", 'http://localhost:8080/LandingPage/src/');
     <link href="<?=BASE_URL?>css/bootstrap.css" rel="stylesheet">
     <link href="<?=BASE_URL?>css/dashboard.css" rel="stylesheet">
     <?php
-        echo file_get_contents("http://localhost:8080/LandingPage/api/seo/home");
+        echo file_get_contents("http://localhost:8080/Achi/api/seo/home");
     ?>
 </head>
 <body>
