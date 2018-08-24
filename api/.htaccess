@@ -1,0 +1,18 @@
+Options -MultiViews
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
+
+<Files .htaccess>
+Order Allow,Deny
+Deny from all
+</Files>
+<Files *.php>
+Order Allow,Deny
+Deny from all
+</Files>
+<Files index.php>
+Order Deny,Allow
+Allow from all
+</Files>
