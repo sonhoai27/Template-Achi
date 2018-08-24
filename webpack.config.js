@@ -2,7 +2,7 @@ module.exports = {
     entry: "./src/index.tsx",
     output: {
         filename: "bundle.js",
-        path: __dirname + "/dist"
+        path: __dirname + "/public"
     },
     devtool: "source-map",
 
@@ -17,9 +17,5 @@ module.exports = {
             { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
         ]
     },
-    mode: 'production',
-    externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
-    }
+    mode: 'production'
 };
