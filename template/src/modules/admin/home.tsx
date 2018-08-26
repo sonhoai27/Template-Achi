@@ -1,5 +1,6 @@
 import * as React from "react";
 import Header from "./shared/header";
+import Photo from "../shared/photo";
 
 class Home extends React.Component {
     constructor(props){
@@ -13,6 +14,7 @@ class Home extends React.Component {
         return(
             <>
                 <Header/>
+                <Photo/>
             </>
         )
     }

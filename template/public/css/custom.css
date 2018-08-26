@@ -1,3 +1,109 @@
 .logo b {
     color: #333;
 }
+
+
+/* photo */
+
+.photo-app {
+    padding: 32px;
+    position: absolute;
+    background: #fff;
+    width: 90%;
+    height: 90%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    margin: auto;
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+}
+
+.photo-app .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.photo-app .header .btn-close {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.photo-app .header .btn-close .upload-file {
+    margin-right: 16px;
+}
+
+.photo-app .header .btn-close .ti-close {
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 100%;
+    transition: all .3s;
+}
+
+.photo-app .header .btn-close .ti-close:hover {
+    background: #888;
+    color: #fff;
+}
+
+.photo-app .title-app {
+    font-size: 32px;
+}
+
+.photo-app .content {
+    margin: 32px 0;
+    height: calc(100% - 100px);
+    position: relative;
+    display: block;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.photo-app .content .item {
+    margin-bottom: 24px;
+    cursor: pointer;
+}
+
+.photo-app .content::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.photo-app .content::-webkit-scrollbar {
+    width: 4px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.photo-app .content::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgba(51, 51, 51, 0.3);
+}
+
+.photo-app-context-menu {
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .55);
+    position: absolute;
+    background: #fff;
+    overflow: hidden;
+    display: none;
+    z-index: 1010;
+}
+
+.photo-app-context-menu p {
+    text-transform: capitalize;
+    color: #333;
+    padding: 8px 32px;
+    transition: all .3s;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.photo-app-context-menu p:hover {
+    background: #333;
+    color: #fff;
+}
