@@ -9,7 +9,6 @@ class ConfigModel {
     function detail($db,$id) {
         return $db->select('achi_config', 'config_id = '.$db->sqlQuote($id));
     }
-
     // type config
     function add_type_config($db,$form) {
         return $db->insert($form, 'achi_type_config');
