@@ -5,6 +5,7 @@ import Header from "../shared/header";
 import BreadCrumd from "../shared/breadcrumb";
 import BlogList from "./list";
 import BlogDetail from "./detail";
+
 interface Props {
   match?: any;
 }
