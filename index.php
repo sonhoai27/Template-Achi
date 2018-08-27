@@ -16,6 +16,11 @@ define("BASE_URL", 'http://localhost:8080/Achi/template/public/');
     <?php
         echo file_get_contents("http://localhost:8080/Achi/api/seo/home");
     ?>
+    <style>
+        :root {
+            --admin-primary-color: #096dd9;
+        }
+    </style>
 </head>
 <body>
     <div id="root"></div>

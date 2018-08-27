@@ -84,9 +84,9 @@
 }
 
 .photo-app-context-menu {
-    border-radius: 4px;
-    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .55);
+    border-radius: 2px;
+    -webkit-box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
     position: absolute;
     background: #fff;
     overflow: hidden;
@@ -106,4 +106,31 @@
 .photo-app-context-menu p:hover {
     background: #333;
     color: #fff;
+}
+
+/* blog */
+.panel-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.panel-toolbar .panel-action-bar {
+    margin-right: 18px;
+}
+.panel .content {
+    padding: 16px;
+}
+.panel .content .form-group {
+    margin-bottom: 16px;
+    display: flow-root;
+}
+
+.cover-blog {
+    background: #fafafa;
+    padding: 64px;
+    font-size: 32px;
+    text-align: center;
+}
+.cover-blog:hover {
+    cursor: pointer;
 }
