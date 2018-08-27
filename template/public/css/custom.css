@@ -1,7 +1,9 @@
 .logo b {
     color: #333;
 }
-
+.marginR-8 {
+    margin-right: 8px;
+}
 
 /* photo */
 
@@ -124,7 +126,21 @@
     margin-bottom: 16px;
     display: flow-root;
 }
-
+.panel .content .title-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.panel .content .title-action>i {
+    transition: all .3s;
+    padding: 6px 4px 4px 5px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+.panel .content .title-action>i:hover {
+    background: #333;
+    color: #fff;
+}
 .cover-blog {
     background: #fafafa;
     padding: 64px;

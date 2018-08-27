@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Editor } from "@tinymce/tinymce-react";
-class BlogAdd extends React.Component {
+class BlogDetail extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -91,10 +91,7 @@ class BlogAdd extends React.Component {
                     </div>
                   </div>
                   <div className="form-group">
-                  <label className="col-sm-12 title-action">
-                        <p>Tác giả</p>
-                        <i className="fa fa-edit"/>
-                    </label>
+                    <label className="col-sm-12">Tác giả</label>
                     <div className="col-sm-12">
                       <select className="form-control">
                         <option>1</option>
@@ -106,10 +103,7 @@ class BlogAdd extends React.Component {
                     </div>
                   </div>
                   <div className="form-group">
-                    <label className="col-sm-12 title-action">
-                        <p>Danh mục</p>
-                        <i className="fa fa-edit"/>
-                    </label>
+                    <label className="col-sm-12">Danh mục</label>
                     <div className="col-sm-12">
                       <select className="form-control">
                         <option>1</option>
@@ -130,4 +124,4 @@ class BlogAdd extends React.Component {
   }
 }
 
-export default BlogAdd;
+export default BlogDetail;
