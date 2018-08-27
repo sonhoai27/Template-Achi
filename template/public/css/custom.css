@@ -1,9 +1,11 @@
 .logo b {
     color: #333;
 }
+
 .marginR-8 {
     margin-right: 8px;
 }
+
 
 /* photo */
 
@@ -87,8 +89,8 @@
 
 .photo-app-context-menu {
     border-radius: 2px;
-    -webkit-box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
     position: absolute;
     background: #fff;
     overflow: hidden;
@@ -110,43 +112,122 @@
     color: #fff;
 }
 
+
 /* blog */
+
 .panel-toolbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
 .panel-toolbar .panel-action-bar {
     margin-right: 18px;
 }
+
 .panel .content {
     padding: 16px;
 }
+
 .panel .content .form-group {
     margin-bottom: 16px;
     display: flow-root;
 }
+
 .panel .content .title-action {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
 .panel .content .title-action>i {
     transition: all .3s;
     padding: 6px 4px 4px 5px;
     border-radius: 100%;
     cursor: pointer;
 }
+
 .panel .content .title-action>i:hover {
     background: #333;
     color: #fff;
 }
+
 .cover-blog {
     background: #fafafa;
     padding: 64px;
     font-size: 32px;
     text-align: center;
 }
+
 .cover-blog:hover {
     cursor: pointer;
+}
+
+#listElement.modal {
+    overflow-y: hidden;
+    height: 500px;
+    margin: auto;
+}
+
+#listElement .modal-body {
+    overflow-y: scroll;
+    height: calc(500px - 88px);
+    padding-top: 32px;
+    padding-bottom: 32px;
+}
+
+#listElement ul {
+    margin: 0;
+    list-style: none;
+}
+
+#listElement li {
+    display: block;
+    margin-bottom: 16px;
+    width: 25%;
+    float: left;
+}
+
+#listElement li span {
+    color: #fff;
+    background: var(--admin-primary-color);
+    transition: all .3s;
+    cursor: pointer;
+    border-radius: 16px;
+    padding: 4px 16px;
+}
+
+#listElement li span:hover {
+    color: #fff;
+    background: #222;
+}
+
+.add-element-to-ui .item.child {
+    margin-left: 32px;
+}
+
+.add-element-to-ui .item-block {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 32px;
+}
+
+.add-element-to-ui .item-block h3 {
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.add-element-to-ui .item .form-group {
+    display: inline-block;
+    width: 100%;
+}
+
+.add-element-to-ui .style {
+    width: 49%;
+    float: left;
+}
+
+.add-element-to-ui .noi-dung {
+    width: 49%;
+    display: inline-block;
 }
