@@ -1,17 +1,35 @@
 import * as React from "react";
 import ListElementOnDetailUI from "./detail-ui";
+declare var $: any;
 interface Props {
   detailUI: any;
-  sub?:any
+  sub?: any;
 }
 class ItemDetailUI extends React.Component<Props, {}> {
   constructor(props) {
     super(props);
   }
+  showListElement = (id: any)=> {
+    $("#listElement").modal('show')
+    alert(id)
+  }
   generateInfo = () => {
     return (
       <div className="item-block">
-        <h3>{this.props.detailUI.element_name}</h3>
+        <div className="toolbar">
+          <h3>{this.props.detailUI.element_name}</h3>
+          <div className="action">
+            <div
+              onClick={()=>this.showListElement(this.props.detailUI.detail_ui_id)}
+              className="btn btn-xs btn-info"
+            >
+              <i className="icon-drawar" /> Thêm Element mới
+            </div>
+            <button className="btn btn-xs btn-danger">
+              <i className=" icon-trash" /> Xoá
+            </button>
+          </div>
+        </div>
         <div className="style">
           <div className="form-group">
             <label className="col-md-12">
@@ -25,21 +43,14 @@ class ItemDetailUI extends React.Component<Props, {}> {
               />
             </div>
           </div>
-          <div className="form-group">
-            <label className="col-md-12">
-              <span className="help"> Css của đối tượng</span>
-            </label>
-            <div className="col-md-12">
-              <textarea className="form-control">
-                {this.props.detailUI.detail_ui_css}
-              </textarea>
-            </div>
-          </div>
         </div>
         <div className="noi-dung">
           <div className="form-group">
             <label className="col-md-12">
-              <span className="help"> Nội dung</span>
+              <span className="help"> Css của đối tượng</span>
+              <button className="btn btn-xs btn-info">
+                <i className=" icon-doc" /> Lưu
+              </button>
             </label>
             <div className="col-md-12">
               <textarea className="form-control">
@@ -59,11 +70,15 @@ class ItemDetailUI extends React.Component<Props, {}> {
     return content;
   };
   generateSubItemDetailUI = () => {
-    return <ListElementOnDetailUI  sub="child" detail={this.props.detailUI.child} />;
+    return (
+      <ListElementOnDetailUI sub="child" detail={this.props.detailUI.child} />
+    );
   };
   render() {
     return (
-      <div className={`item ${this.props.sub != undefined ? this.props.sub : ''}`}>
+      <div
+        className={`item ${this.props.sub != undefined ? this.props.sub : ""}`}
+      >
         {this.generateContent()}
       </div>
     );

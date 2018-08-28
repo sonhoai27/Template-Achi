@@ -179,6 +179,7 @@
 #listElement ul {
     margin: 0;
     list-style: none;
+    padding: 0;
 }
 
 #listElement li {
@@ -210,8 +211,23 @@
     display: inline-block;
     width: 100%;
     margin-bottom: 32px;
+    padding: 8px;
+    border: 1px dotted #eee;
 }
-
+.add-element-to-ui .item-block .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+.add-element-to-ui .item-block .toolbar .action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.add-element-to-ui .item-block .toolbar .action>div {
+    margin-right: 8px;
+}
 .add-element-to-ui .item-block h3 {
     margin-bottom: 8px;
     font-weight: 700;
@@ -231,5 +247,29 @@
     width: 49%;
     display: inline-block;
 }
+.add-element-to-ui .noi-dung label {
+    display: flex;
+    justify-content: space-between;
+}
 
+/* custom modal */
 
+#listElement.custom-modal{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    width: calc(100% - 40%);
+    background: #fff;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    height: calc(100vh - 40%);
+    padding: 22px;
+    margin: auto;
+}
+#listElement.custom-modal .custom-modal-content {
+
+}
