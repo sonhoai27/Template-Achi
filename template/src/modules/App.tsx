@@ -3,6 +3,7 @@ import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import PrivateRouter from "../config/PrivateRouter";
 import {BASEURL} from '../config/const'
 import AdminRouter from "./admin/AdminRouter";
+import ClientRouter from "./client/clientRouter";
 class App extends React.Component{
     constructor(props){
         super(props)
@@ -11,7 +12,7 @@ class App extends React.Component{
         return (
             <Router>
                 <Switch>
-                    <Route exact path={BASEURL}/>
+                    <Route exact path={BASEURL} component={ClientRouter}/>
                     <PrivateRouter path={BASEURL+'admin'} component={AdminRouter}/>
                 </Switch>
             </Router>
