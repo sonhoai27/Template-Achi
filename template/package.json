@@ -29,7 +29,8 @@
         "awesome-typescript-loader": "^5.2.0",
         "source-map-loader": "^0.2.4",
         "typescript": "^3.0.1",
-        "webpack-dev-server": "^3.1.5"
+        "webpack-dev-server": "^3.1.5",
+        "react-code-splitting": "^1.2.1"
     },
     "scripts": {
         "build": "webpack --watch"

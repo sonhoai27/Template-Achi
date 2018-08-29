@@ -1,17 +1,31 @@
 import * as React from "react";
 import ListElementOnDetailUI from "./detail-ui";
-declare var $: any;
+import { connect } from "react-redux";
+import { reShowListElement, reSetCurrentIdElement, reDeleteElementToDetailUI, reDetailUI } from "../reUI";
 interface Props {
   detailUI: any;
   sub?: any;
+  showListElement: any,
+  currentIdElement: any,
+  currentMatchDetailUI: any,
+  deleteElementToUIDetail: any,
+  reDetailUI: (idUI: any)=> void,
+  reDeleteElementToDetailUI: (idUI: any, idDetailUI: any)=> void,
+  reShowListElement: (status: boolean)=> void,
+  reSetCurrentIdElement: (id: any)=> void
 }
 class ItemDetailUI extends React.Component<Props, {}> {
   constructor(props) {
     super(props);
   }
+  componentWillReceiveProps(nextProps){
+    if(nextProps.deleteElementToUIDetail != this.props.deleteElementToUIDetail && nextProps.deleteElementToUIDetail.list == 1){
+      this.props.reDetailUI(this.props.currentMatchDetailUI.params.idUi)
+    }
+  }
   showListElement = (id: any)=> {
-    $("#listElement").modal('show')
-    alert(id)
+    this.props.reShowListElement(true)
+    this.props.reSetCurrentIdElement(id)
   }
   generateInfo = () => {
     return (
@@ -25,7 +39,14 @@ class ItemDetailUI extends React.Component<Props, {}> {
             >
               <i className="icon-drawar" /> Thêm Element mới
             </div>
-            <button className="btn btn-xs btn-danger">
+            <button
+              onClick={()=> {
+                this.props.reDeleteElementToDetailUI(
+                  this.props.currentMatchDetailUI.params.idUi,
+                  this.props.detailUI.detail_ui_id,
+                )
+              }}
+              className="btn btn-xs btn-danger">
               <i className=" icon-trash" /> Xoá
             </button>
           </div>
@@ -85,4 +106,19 @@ class ItemDetailUI extends React.Component<Props, {}> {
   }
 }
 
-export default ItemDetailUI;
+const mapStateToProps = storeState => ({
+  showListElement: storeState.reUI.showListElement,
+  currentIdElement: storeState.reUI.currentIdElement,
+  deleteElementToUIDetail: storeState.reUI.deleteElementToUIDetail,
+  currentMatchDetailUI: storeState.reUI.currentMatchDetailUI
+});
+const mapDispatchToProps = {
+  reShowListElement,
+  reSetCurrentIdElement,
+  reDeleteElementToDetailUI,
+  reDetailUI
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ItemDetailUI);

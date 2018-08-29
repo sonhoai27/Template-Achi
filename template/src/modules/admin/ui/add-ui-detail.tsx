@@ -1,12 +1,23 @@
 import * as React from "react";
 import ListElement from "./modal/listElement";
-import { reDetailUI } from "./reUI";
+import {
+  reDetailUI,
+  reShowListElement,
+  reSetCurrentMatchDetailUI,
+  reSetCurrentIdElement
+} from "./reUI";
 import { connect } from "react-redux";
 import ListElementOnDetailUI from "./detail-ui/detail-ui";
 interface Props {
   match?: any;
   resDetailUI: any;
+  showListElement: any;
+  currentMatchDetailUI: any;
+  currentIdElement: any;
   reDetailUI: (id: any) => void;
+  reSetCurrentMatchDetailUI: (match: any) => void;
+  reShowListElement: (status: boolean) => void;
+  reSetCurrentIdElement: (id: any) => void;
 }
 class AddUIDetail extends React.Component<Props, {}> {
   constructor(props) {
@@ -17,8 +28,12 @@ class AddUIDetail extends React.Component<Props, {}> {
   }
   componentDidMount() {
     this.props.reDetailUI(this.props.match.params.idUi);
+    this.props.reSetCurrentMatchDetailUI(this.props.match);
   }
-
+  showListElement = (id: any) => {
+    this.props.reShowListElement(true);
+    this.props.reSetCurrentIdElement(id);
+  };
   render() {
     return (
       <div className="row add-element-to-ui">
@@ -26,7 +41,14 @@ class AddUIDetail extends React.Component<Props, {}> {
           <div className="panel">
             <div className="panel-toolbar">
               <div className="panel-heading">Thêm chi tiết UI</div>
-              <div className="panel-action-bar" />
+              <div className="panel-action-bar">
+                <button
+                  onClick={() => this.showListElement("")}
+                  className="btn btn-xs btn-info"
+                >
+                  <i className="icon-drawar" /> Thêm Element mới
+                </button>
+              </div>
             </div>
             <div className="content-list-detail-ui">
               <ul className="detail-ui-element">
@@ -35,16 +57,26 @@ class AddUIDetail extends React.Component<Props, {}> {
             </div>
           </div>
         </div>
-        <ListElement />
+        {this.props.showListElement ? (
+          <ListElement match={this.props.match} />
+        ) : (
+          ""
+        )}
       </div>
     );
   }
 }
 const mapStateToProps = storeState => ({
-  resDetailUI: storeState.reUI.resDetailUI
+  resDetailUI: storeState.reUI.resDetailUI,
+  showListElement: storeState.reUI.showListElement,
+  currentMatchDetailUI: storeState.reUI.currentMatchDetailUI,
+  currentIdElement: storeState.reUI.currentIdElement
 });
 const mapDispatchToProps = {
-  reDetailUI
+  reDetailUI,
+  reShowListElement,
+  reSetCurrentIdElement,
+  reSetCurrentMatchDetailUI
 };
 export default connect(
   mapStateToProps,
