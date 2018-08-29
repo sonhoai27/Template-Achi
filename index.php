@@ -24,7 +24,7 @@ define("BASE_URL", 'http://localhost:8080/Achi/template/public/');
 </head>
 <body>
     <div id="root"></div>
-    <script src="<?=BASE_URL?>bundle.js"></script>
+    <script src="<?=BASE_URL?>main.bundle.js"></script>
     <script src="<?=BASE_URL?>js/bootstrap.min.js"></script>
 </body>
 </html>
