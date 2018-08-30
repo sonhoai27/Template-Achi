@@ -13,6 +13,7 @@ define("BASE_URL", 'http://localhost:8080/Achi/template/public/');
     <link href="<?=BASE_URL?>css/style.css" rel="stylesheet">
     <link href="<?=BASE_URL?>css/megna-dark.css" rel="stylesheet">
     <script src="<?=BASE_URL?>js/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl"></script>
     <?php
         echo file_get_contents("http://localhost:8080/Achi/api/seo/home");
     ?>

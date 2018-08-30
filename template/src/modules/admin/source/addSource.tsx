@@ -126,7 +126,7 @@ class AddSource extends React.Component<Props, State> {
                           this.setState({
                             source: {
                               ...this.state.source,
-                              source_content: e.target.getContent()
+                              source_content: e.level.content
                             }
                           })
                         }}

@@ -3,6 +3,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { connect } from "react-redux";
 import { reShowPhotoApp, reSetCurrentEditorPhoto } from "../../../reducers/init";
 import { reListUI } from "../ui/reUI";
+// declare var $: any;
 import { reUpdateSource, reDetailSource } from "./reSource";
 // import { alias } from "../../../utils/alias";
 interface Props {
@@ -161,7 +162,7 @@ class DetailSource extends React.Component<Props, State> {
                           this.setState({
                             source: {
                               ...this.state.source,
-                              source_content: e.target.getContent()
+                              source_content: e.level.content
                             }
                           })
                         }}
@@ -170,6 +171,7 @@ class DetailSource extends React.Component<Props, State> {
                           selector: "textarea",
                           height: 500,
                           theme: "modern",
+                          image_advtab: true,
                           plugins:
                             "print preview fullpage powerpaste searchreplace autolink directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount tinymcespellchecker a11ychecker imagetools mediaembed  linkchecker contextmenu colorpicker textpattern help",
                           toolbar1:
