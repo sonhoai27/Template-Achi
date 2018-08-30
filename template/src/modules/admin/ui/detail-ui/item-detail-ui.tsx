@@ -1,52 +1,67 @@
 import * as React from "react";
 import ListElementOnDetailUI from "./detail-ui";
 import { connect } from "react-redux";
-import { reShowListElement, reSetCurrentIdElement, reDeleteElementToDetailUI, reDetailUI } from "../reUI";
+import {
+  reShowListElement,
+  reSetCurrentIdElement,
+  reDeleteElementToDetailUI,
+  reDetailUI
+} from "../reUI";
 interface Props {
   detailUI: any;
   sub?: any;
-  showListElement: any,
-  currentIdElement: any,
-  currentMatchDetailUI: any,
-  deleteElementToUIDetail: any,
-  reDetailUI: (idUI: any)=> void,
-  reDeleteElementToDetailUI: (idUI: any, idDetailUI: any)=> void,
-  reShowListElement: (status: boolean)=> void,
-  reSetCurrentIdElement: (id: any)=> void
+  showListElement: any;
+  currentIdElement: any;
+  currentMatchDetailUI: any;
+  deleteElementToUIDetail: any;
+  reDetailUI: (idUI: any) => void;
+  reDeleteElementToDetailUI: (idUI: any, idDetailUI: any) => void;
+  reShowListElement: (status: boolean) => void;
+  reSetCurrentIdElement: (id: any) => void;
 }
 class ItemDetailUI extends React.Component<Props, {}> {
   constructor(props) {
     super(props);
   }
-  componentWillReceiveProps(nextProps){
-    if(nextProps.deleteElementToUIDetail != this.props.deleteElementToUIDetail && nextProps.deleteElementToUIDetail.list == 1){
-      this.props.reDetailUI(this.props.currentMatchDetailUI.params.idUi)
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.deleteElementToUIDetail != this.props.deleteElementToUIDetail &&
+      nextProps.deleteElementToUIDetail.list == 1
+    ) {
+      this.props.reDetailUI(this.props.currentMatchDetailUI.params.idUi);
     }
   }
-  showListElement = (id: any)=> {
-    this.props.reShowListElement(true)
-    this.props.reSetCurrentIdElement(id)
-  }
+  showListElement = (id: any) => {
+    this.props.reShowListElement(true);
+    this.props.reSetCurrentIdElement(id);
+  };
   generateInfo = () => {
     return (
       <div className="item-block">
         <div className="toolbar">
           <h3>{this.props.detailUI.element_name}</h3>
           <div className="action">
-            <div
-              onClick={()=>this.showListElement(this.props.detailUI.detail_ui_id)}
-              className="btn btn-xs btn-info"
-            >
-              <i className="icon-drawar" /> Thêm Element mới
-            </div>
+            {this.props.detailUI.element_type == 0 ? (
+              <div
+                onClick={() =>
+                  this.showListElement(this.props.detailUI.detail_ui_id)
+                }
+                className="btn btn-xs btn-info"
+              >
+                <i className="icon-drawar" /> Thêm Element mới
+              </div>
+            ) : (
+              ""
+            )}
             <button
-              onClick={()=> {
+              onClick={() => {
                 this.props.reDeleteElementToDetailUI(
                   this.props.currentMatchDetailUI.params.idUi,
-                  this.props.detailUI.detail_ui_id,
-                )
+                  this.props.detailUI.detail_ui_id
+                );
               }}
-              className="btn btn-xs btn-danger">
+              className="btn btn-xs btn-danger"
+            >
               <i className=" icon-trash" /> Xoá
             </button>
           </div>

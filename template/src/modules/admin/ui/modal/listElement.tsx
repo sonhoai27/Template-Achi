@@ -36,9 +36,15 @@ class ListElement extends React.Component<Props, {}> {
     return this.props.resListElement.map(element => {
       return (
         <li>
-          <span onClick={()=>this.addElementToDetailUI(
-            element.element_id, element.element_real_id
-          )}>
+          <span onClick={()=>{
+            this.addElementToDetailUI(
+              element.element_id, element.element_real_id
+            )
+            setTimeout(()=> {
+              this.props.reShowListElement(false)
+              document.body.style.overflowY = 'auto'
+            }, 1000)
+          }}>
             {element.element_name}
           </span>
         </li>

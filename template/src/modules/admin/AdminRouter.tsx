@@ -4,6 +4,7 @@ import Home from "./home";
 import BlogRouter from "./blog/router";
 import VideoRouter from "./videos/router";
 import UIRouter from "./ui/uiRouter";
+import SourceRouter from "./source/sourceRouter";
 interface Props {
   match?: any;
 }
@@ -22,6 +23,7 @@ class AdminRouter extends React.Component<Props, {}> {
         <Route path={`${this.props.match.url}/blog`} component={BlogRouter} />
         <Route path={`${this.props.match.url}/video`} component={VideoRouter} />
         <Route path={`${this.props.match.url}/ui`} component={UIRouter} />
+        <Route path={`${this.props.match.url}/source`} component={SourceRouter} />
       </div>
     );
   }

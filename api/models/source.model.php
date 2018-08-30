@@ -21,7 +21,7 @@ class SourceModel {
         return $db->select('achi_source', 'source_id = '.$db->sqlQuote($id));
     }
 
-    // type of source
+    // order of source
     function add_source_order($db,$form){
         return $db->insert($form, 'achi_source_order');
     }
