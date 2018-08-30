@@ -26,19 +26,19 @@ class AddSource extends React.Component {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="George deo..."
+                        placeholder="Tiêu đề"
                       />
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-md-12">
-                     <span className="help"> Tóm tắt</span>
+                      <span className="help"> Tóm tắt</span>
                     </label>
                     <div className="col-md-12">
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="George deo..."
+                        placeholder="Tóm tắt"
                       />
                     </div>
                   </div>
@@ -72,6 +72,54 @@ class AddSource extends React.Component {
                 </div>
                 <div className="col-sm-3">
                   <div className="form-group">
+                    <label className="col-md-12">
+                      <span className="help"> Số lượng</span>
+                    </label>
+                    <div className="col-md-12">
+                      <input
+                        type="number"
+                        className="form-control"
+                        placeholder="Số lượng"
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label className="col-md-12">
+                      <span className="help"> Giá</span>
+                    </label>
+                    <div className="col-md-12">
+                      <input
+                        type="number"
+                        className="form-control"
+                        placeholder="Giá"
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label className="col-md-12">
+                      <span className="help"> Ngày khai giảng</span>
+                    </label>
+                    <div className="col-md-12">
+                      <input
+                        type="number"
+                        className="form-control"
+                        placeholder="Ngày khai giảng"
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label className="col-sm-12">Giao diện</label>
+                    <div className="col-sm-12">
+                      <select className="form-control">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="form-group">
                     <label className="col-sm-12">Trạng thái</label>
                     <div className="col-sm-12">
                       <select className="form-control">
@@ -86,38 +134,8 @@ class AddSource extends React.Component {
                   <div className="form-group">
                     <label className="col-sm-12">Hình cover</label>
                     <div className="col-sm-12 cover-blog">
-                      <i className="ti-upload"/>
-                      <img id="img-cover-blog-preview"/>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                  <label className="col-sm-12 title-action">
-                        <p>Tác giả</p>
-                        <i className="fa fa-edit"/>
-                    </label>
-                    <div className="col-sm-12">
-                      <select className="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label className="col-sm-12 title-action">
-                        <p>Danh mục</p>
-                        <i className="fa fa-edit"/>
-                    </label>
-                    <div className="col-sm-12">
-                      <select className="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                      </select>
+                      <i className="ti-upload" />
+                      <img id="img-cover-blog-preview" />
                     </div>
                   </div>
                 </div>
