@@ -8,7 +8,8 @@ export const ACTION_TYPES = {
     SET_CURRENT_ID_ELEMENT: 'ReUI/SET_CURRENT_ID_ELEMENT',
     API_ADD_ELEMENT_TO_UI_DETAIL: 'ReUI/API_ADD_ELEMENT_TO_UI_DETAIL',
     API_DELETE_ELEMENT_DETAIl_UI: 'ReUI/API_DELETE_ELEMENT_DETAIl_UI',
-    CURRENT_MATCH_DETAIl_UI: 'ReUI/CURRENT_MATCH_DETAIl_UI'
+    CURRENT_MATCH_DETAIl_UI: 'ReUI/CURRENT_MATCH_DETAIl_UI',
+    API_LIST_UI: 'ReUI/API_LIST_UI'
 }
 
 const initialState = {
@@ -18,7 +19,8 @@ const initialState = {
     currentIdElement: '',
     addElementToUIDetail: '',
     deleteElementToUIDetail: '',
-    currentMatchDetailUI: ''
+    currentMatchDetailUI: '',
+    resListUI: []
 }
 
 export default (state = initialState, action) => {
@@ -113,6 +115,24 @@ export default (state = initialState, action) => {
                 currentMatchDetailUI: action.payload
             }
         }
+
+        // list ui
+        case REQUEST(ACTION_TYPES.API_LIST_UI): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_LIST_UI): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_LIST_UI): {
+            return {
+                ...state,
+                resListUI: action.payload.data.list
+            }
+        }
         default:
             return state;
     }
@@ -120,6 +140,7 @@ export default (state = initialState, action) => {
 
 const API_LIST_ELEMENT = API + 'ui/element'
 const API_DETAIL_UI = API + 'ui/detail-ui'
+const API_LIST_UI = API + 'ui/all-ui'
 const API_ADD_ELEMENT_DETAIL_UI = API + 'ui/add-element-to-detail-ui'
 const API_DELETE_ELEMENT_DETAIL_UI = API + 'ui/delete-element-of-detail-ui/'
 export const reListElement = () => async dispatch => {
@@ -174,6 +195,14 @@ export const reSetCurrentMatchDetailUI = (match) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.CURRENT_MATCH_DETAIl_UI,
         payload: match
+    });
+    return result;
+};
+
+export const reListUI = () => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_LIST_UI,
+        payload: axios.get(API_LIST_UI)
     });
     return result;
 };

@@ -11,6 +11,14 @@ $app->get('/ui/element', function(Request $request, Response $response){
     )
   ));
 });
+$app->get('/ui/all-ui', function(Request $request, Response $response){
+  return $response->withJson(array(
+    "status"=>200,
+    "list"=>$this->get('db_ui')->all(
+            $this->get('db')
+    )
+  ));
+});
 $app->get('/ui/detail-ui/{id}', function(Request $request, Response $response, $args){
     return $response->withJson(array(
         "status"=>200,

@@ -1,4 +1,4 @@
-exports.alias = (name: string) => {
+export const alias = (name: string) => {
     let str = name;
     str = str.toLowerCase();
     str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");

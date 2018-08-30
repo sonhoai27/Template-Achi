@@ -1,8 +1,78 @@
 import * as React from "react";
 import { Editor } from "@tinymce/tinymce-react";
-class AddSource extends React.Component {
+import { connect } from "react-redux";
+import { reShowPhotoApp, reSetCurrentEditorPhoto } from "../../../reducers/init";
+import { reListUI } from "../ui/reUI";
+import { reAddSource } from "./reSource";
+import { alias } from "../../../utils/alias";
+interface Props {
+  reSetCurrentEditorPhoto: (editor: any)=> void,
+  reShowPhotoApp: (status: boolean)=> void,
+  resListUI: any,
+  reListUI: ()=> void,
+  resAddSource: any,
+  reAddSource: (form: any)=> void
+}
+
+interface State {
+  source: {
+    source_title: string,
+    source_promo: string,
+    source_content: any,
+    source_member: number,
+    source_price: number,
+    source_ngay_khai_giang: string,
+    source_id_ui: number,
+    source_status: number
+  }
+}
+class AddSource extends React.Component<Props, State> {
   constructor(props) {
     super(props);
+    this.state = {
+      source: {
+        source_title: '',
+        source_promo: '',
+        source_content: '',
+        source_member: 0,
+        source_price: 0,
+        source_ngay_khai_giang: '',
+        source_id_ui: 0,
+        source_status: 0
+      }
+    }
+  }
+  componentDidMount(){
+    this.props.reListUI()
+  }
+  renderListUI = ()=> {
+    if(this.props.resListUI){
+      return this.props.resListUI.map((element => {
+        return (
+          <option value={element.ui_id}>{element.ui_name}</option>
+        )
+      }))
+    }
+    return ''
+  }
+  addSource = ()=> {
+    const tempDomImage: any = document.getElementById('img-cover-blog-preview')
+    this.props.reAddSource({
+      ...this.state.source,
+      source_alias: alias(this.state.source.source_title),
+      source_cover: tempDomImage.src
+    })
+  }
+  onChange = (e: any)=> {
+    const name = e.target.name
+    const value = e.target.value
+    // @ts-ignore
+    this.setState({
+     source: {
+      ...this.state.source,
+      [name]: value
+     }
+    })
   }
   render() {
     return (
@@ -12,7 +82,9 @@ class AddSource extends React.Component {
             <div className="panel-toolbar">
               <div className="panel-heading">Thêm khóa học</div>
               <div className="panel-action-bar">
-                <div className="btn btn-xs btn-info">Lưu</div>
+                <div
+                  onClick={this.addSource}
+                  className="btn btn-xs btn-info">Lưu</div>
               </div>
             </div>
             <div className="content">
@@ -24,6 +96,8 @@ class AddSource extends React.Component {
                     </label>
                     <div className="col-md-12">
                       <input
+                        onChange={(e)=>this.onChange(e)}
+                        name="source_title"
                         type="text"
                         className="form-control"
                         placeholder="Tiêu đề"
@@ -36,7 +110,9 @@ class AddSource extends React.Component {
                     </label>
                     <div className="col-md-12">
                       <input
+                        onChange={(e)=>this.onChange(e)}
                         type="text"
+                        name="source_promo"
                         className="form-control"
                         placeholder="Tóm tắt"
                       />
@@ -45,6 +121,15 @@ class AddSource extends React.Component {
                   <div className="form-group">
                     <div className="col-md-12">
                       <Editor
+                        onChange={(e: any)=> {
+                          // @ts-ignore
+                          this.setState({
+                            source: {
+                              ...this.state.source,
+                              source_content: e.target.getContent()
+                            }
+                          })
+                        }}
                         apiKey="t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl"
                         init={{
                           selector: "textarea",
@@ -61,7 +146,8 @@ class AddSource extends React.Component {
                               icon: "image",
                               tooltip: "Add Image",
                               onclick: () => {
-                                alert("KAKKA");
+                                this.props.reShowPhotoApp(true)
+                                this.props.reSetCurrentEditorPhoto(editor)
                               }
                             });
                           }
@@ -77,6 +163,8 @@ class AddSource extends React.Component {
                     </label>
                     <div className="col-md-12">
                       <input
+                        onChange={(e)=>this.onChange(e)}
+                        name="source_member"
                         type="number"
                         className="form-control"
                         placeholder="Số lượng"
@@ -89,6 +177,8 @@ class AddSource extends React.Component {
                     </label>
                     <div className="col-md-12">
                       <input
+                        onChange={(e)=>this.onChange(e)}
+                        name="source_price"
                         type="number"
                         className="form-control"
                         placeholder="Giá"
@@ -101,7 +191,9 @@ class AddSource extends React.Component {
                     </label>
                     <div className="col-md-12">
                       <input
-                        type="number"
+                        onChange={(e)=>this.onChange(e)}
+                        name="source_ngay_khai_giang"
+                        type="text"
                         className="form-control"
                         placeholder="Ngày khai giảng"
                       />
@@ -110,32 +202,38 @@ class AddSource extends React.Component {
                   <div className="form-group">
                     <label className="col-sm-12">Giao diện</label>
                     <div className="col-sm-12">
-                      <select className="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                      <select
+                        onChange={(e)=>this.onChange(e)}
+                        name="source_id_ui"
+                        className="form-control">
+                        <option>Chọn</option>
+                        {this.renderListUI()}
                       </select>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-12">Trạng thái</label>
                     <div className="col-sm-12">
-                      <select className="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                      <select
+                        onChange={(e)=>this.onChange(e)}
+                        name="source_status"
+                        className="form-control">
+                        <option>Chọn</option>
+                        <option value='0'>Hiện</option>
+                        <option value='1'>Ẩn</option>
                       </select>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-12">Hình cover</label>
-                    <div className="col-sm-12 cover-blog">
+                    <div
+                      onClick={()=> {
+                        this.props.reShowPhotoApp(true)
+                        this.props.reSetCurrentEditorPhoto('img-cover-blog-preview')
+                      }}
+                      className="col-sm-12 cover-blog">
                       <i className="ti-upload" />
-                      <img id="img-cover-blog-preview" />
+                      <img id="img-cover-blog-preview" className="img-responsive" />
                     </div>
                   </div>
                 </div>
@@ -148,4 +246,18 @@ class AddSource extends React.Component {
   }
 }
 
-export default AddSource;
+const mapStateToProps = storeState => ({
+  resListUI: storeState.reUI.resListUI,
+  resAddSource: storeState.reSource.resAddSource
+});
+const mapDispatchToProps = {
+  reSetCurrentEditorPhoto,
+  reShowPhotoApp,
+  reListUI,
+  reAddSource
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddSource);
+

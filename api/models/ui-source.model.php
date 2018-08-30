@@ -1,16 +1,16 @@
 <?php
 class UISourceModel {
     function add($db,$form) {
-        return $db->insert($form, 'achi_UISource');
+        return $db->insert($form, 'achi_ui');
     }
     function delete($db,$id) {
-        return $db->delete('achi_UISource', ' UISource_id = '.$db->sqlQuote($id));
+        return $db->delete('achi_ui', ' ui_id = '.$db->sqlQuote($id));
     }
     function edit($db,$id, $form) {
-        return $db->update($form, 'achi_UISource', ' UISource_id = '.$db->sqlQuote($id));
+        return $db->update($form, 'achi_ui', ' ui_id = '.$db->sqlQuote($id));
     }
     function all($db) {
-        $db->query('select * from achi_UISource order by achi_UISource.UISource_id desc');
+        $db->query('select * from achi_ui order by achi_ui.ui_id desc');
         return $db->fetch_object();
     }
     //ui chứa nhiều component hay element

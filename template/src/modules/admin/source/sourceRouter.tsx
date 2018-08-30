@@ -4,6 +4,7 @@ import Header from "../shared/header";
 import BreadCrumd from "../shared/breadcrumb";
 import Source from "./source";
 import AddSource from "./addSource";
+import DetailSource from "./detailSource";
 interface Props {
   match?: any;
 }
@@ -42,6 +43,10 @@ class SourceRouter extends React.Component<Props, {}> {
             <Route
               path={`${this.props.match.url}/add-source`}
               component={AddSource}
+            />
+            <Route
+              path={`${this.props.match.url}/detail-source/:id`}
+              component={DetailSource}
             />
           </div>
         </div>

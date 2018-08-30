@@ -5,8 +5,11 @@ import BlogRouter from "./blog/router";
 import VideoRouter from "./videos/router";
 import UIRouter from "./ui/uiRouter";
 import SourceRouter from "./source/sourceRouter";
+import { connect } from "react-redux";
+import Photo from "../shared/photo";
 interface Props {
-  match?: any;
+  match?: any,
+  isShowPhotoApp: any
 }
 class AdminRouter extends React.Component<Props, {}> {
   constructor(props) {
@@ -24,8 +27,18 @@ class AdminRouter extends React.Component<Props, {}> {
         <Route path={`${this.props.match.url}/video`} component={VideoRouter} />
         <Route path={`${this.props.match.url}/ui`} component={UIRouter} />
         <Route path={`${this.props.match.url}/source`} component={SourceRouter} />
+        {this.props.isShowPhotoApp ? <Photo/> : ''}
       </div>
     );
   }
 }
-export default AdminRouter;
+const mapStateToProps = storeState => ({
+  isShowPhotoApp: storeState.reInit.isShowPhotoApp,
+});
+const mapDispatchToProps = {
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AdminRouter);
+

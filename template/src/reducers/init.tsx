@@ -5,12 +5,16 @@ import { API } from '../config/const';
 export const ACTION_TYPES = {
     API_LIST_IMAGE: 'ReInit/API_LIST_IMAGE',
     API_ADD_IMAGE: 'ReInit/API_ADD_IMAGE',
-    API_DELETE_IMAGE: 'ReInit/API_DELETE_IMAGE'
+    API_DELETE_IMAGE: 'ReInit/API_DELETE_IMAGE',
+    CURRENT_EDITOR_PHOTO: 'ReInit/CURRENT_EDITOR_PHOTO',
+    IS_SHOWING_PHOTO_APP: 'ReInit/IS_SHOWING_PHOTO_APP'
 }
 const initialState = {
     resListImage: [],
     resDeleteImage: '',
-    resAddImage: ''
+    resAddImage: '',
+    currentEditorPhoto: '',
+    isShowPhotoApp: false
 
 }
 export default (state = initialState, action) => {
@@ -29,7 +33,7 @@ export default (state = initialState, action) => {
         case SUCCESS(ACTION_TYPES.API_ADD_IMAGE): {
             return {
                 ...state,
-                resAddImage: action.payload.data.list
+                resAddImage: action.payload.data
             }
         }
         // list image
@@ -46,7 +50,7 @@ export default (state = initialState, action) => {
         case SUCCESS(ACTION_TYPES.API_LIST_IMAGE): {
             return {
                 ...state,
-                resListImage: action.payload.data.list
+                resListImage: action.payload.data
             }
         }
         // delete image
@@ -63,7 +67,19 @@ export default (state = initialState, action) => {
         case SUCCESS(ACTION_TYPES.API_DELETE_IMAGE): {
             return {
                 ...state,
-                resDeleteImage: action.payload.data.list
+                resDeleteImage: action.payload.data
+            }
+        }
+        case (ACTION_TYPES.CURRENT_EDITOR_PHOTO): {
+            return {
+                ...state,
+                currentEditorPhoto: action.payload
+            }
+        }
+        case (ACTION_TYPES.IS_SHOWING_PHOTO_APP): {
+            return {
+                ...state,
+                isShowPhotoApp: action.payload
             }
         }
         default:
@@ -73,22 +89,36 @@ export default (state = initialState, action) => {
 const API_FILE = API+'file/'
 export const reListImage = () => async dispatch => {
     const result = await dispatch({
-        type: ACTION_TYPES.API_ADD_IMAGE,
+        type: ACTION_TYPES.API_LIST_IMAGE,
         payload: axios.get(API_FILE+'all/photo')
     });
     return result;
 };
-export const reDeleteSource = (id) => async dispatch => {
+export const reDeleteImage = (id) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_DELETE_IMAGE,
         payload: axios.delete(API_FILE+'delete/'+id)
     });
     return result;
 };
-export const reAddSource = (form) => async dispatch => {
+export const reAddImage = (form) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_ADD_IMAGE,
         payload: axios.post(API_FILE+'upload/photo', form)
+    });
+    return result;
+};
+export const reShowPhotoApp = (status) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.IS_SHOWING_PHOTO_APP,
+        payload: status
+    });
+    return result;
+};
+export const reSetCurrentEditorPhoto = (editor) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.CURRENT_EDITOR_PHOTO,
+        payload: editor
     });
     return result;
 };

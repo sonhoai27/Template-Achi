@@ -1,9 +1,29 @@
 import * as React from "react";
 import Image from "./image";
+import { connect } from "react-redux";
+import {
+  reShowPhotoApp,
+  reSetCurrentEditorPhoto,
+  reDeleteImage,
+  reAddImage,
+  reListImage
+} from "../../reducers/init";
 interface State {
   dataImage: object;
 }
-class Photo extends React.Component<{}, State> {
+interface Props {
+  isShowPhotoApp: any;
+  currentEditorPhoto: any;
+  resListImage: any;
+  resDeleteImage: any;
+  resAddImage: any;
+  reShowPhotoApp: (status: boolean) => void;
+  reSetCurrentEditorPhoto: (editor: any) => void;
+  reListImage: () => void;
+  reDeleteImage: (id: string) => void;
+  reAddImage: (form: any) => void;
+}
+class Photo extends React.Component<Props, State> {
   private nodeContextMenuPhotoApp;
   constructor(props) {
     super(props);
@@ -18,6 +38,7 @@ class Photo extends React.Component<{}, State> {
       this.handleClickHideUIComponents,
       false
     );
+    document.body.style.overflowY = "hidden";
   }
   componentWillUnMount() {
     window.addEventListener(
@@ -25,6 +46,9 @@ class Photo extends React.Component<{}, State> {
       this.handleClickHideUIComponents,
       false
     );
+  }
+  componentDidMount() {
+    this.props.reListImage();
   }
   handleClickHideUIComponents = e => {
     try {
@@ -50,47 +74,77 @@ class Photo extends React.Component<{}, State> {
   };
   handleInsert = () => {
     let uri: any = this.state.dataImage;
-    alert(uri.uri);
+    if (typeof this.props.currentEditorPhoto === "object") {
+      this.props.currentEditorPhoto.insertContent(
+        `<img src="` + uri.uri + `" class="img-responsive"/>`
+      );
+    } else {
+      let tempDom: any = document.getElementById(this.props.currentEditorPhoto);
+      tempDom.src = uri.uri;
+    }
+    this.props.reSetCurrentEditorPhoto("");
+    this.props.reShowPhotoApp(false);
+    document.body.style.overflowY = "auto";
   };
   handleDelete = () => {
     let name: any = this.state.dataImage;
     alert(name.name);
   };
-  render() {
-    let tempImg: any = [];
-    for (let i = 0; i < 20; i++) {
-      tempImg.push(
-        <div className="col-sm-2 item" key={i}>
-          <Image
-            dataSrc={JSON.stringify({
-              uri:
-                "https://cdn.tgdd.vn/Products/Images/42/154897/samsung-galaxy-note-9-black-400x400.jpg" +
-                i,
-              name: "samsung-galaxy-note-9-black-400x400.jpg" + i
-            })}
-            onClick={e => this._contextMenu(e)}
-            src="https://cdn.tgdd.vn/Products/Images/42/154897/samsung-galaxy-note-9-black-400x400.jpg"
-            width={150}
-            height={150}
-          />
-        </div>
-      );
+  renderListImage = () => {
+    if (this.props.resListImage) {
+      return this.props.resListImage.map((element, i) => {
+        return (
+          <div className="col-sm-2 item" key={i}>
+            <Image
+              dataSrc={JSON.stringify({
+                uri: element.uri,
+                name: element.name + i
+              })}
+              onClick={e => this._contextMenu(e)}
+              src={element.uri}
+              width={150}
+              height={150}
+            />
+          </div>
+        );
+      });
     }
+    return ''
+  };
+  render() {
     return (
       <>
         <div className="photo-app">
           <div className="header">
             <div className="title-app">Photo App</div>
             <div className="search-bar-app">
-                <input name="" id="" type="text" className="form-control" placeholder="Bạn muốn tìm gì?"/>
+              <input
+                name=""
+                id=""
+                type="text"
+                className="form-control"
+                placeholder="Bạn muốn tìm gì?"
+              />
             </div>
             <div className="btn-close">
-              <button className="btn btn-block btn-info btn-xs upload-file">Tải lên</button>
-              <i className="ti-close" style={{display: 'flex', alignItems: 'center'}}/>
+              <button className="btn btn-block btn-info btn-xs upload-file">
+                Tải lên
+              </button>
+              <i
+                onClick={() => {
+                  this.props.reShowPhotoApp(false);
+                  document.body.style.overflowY = "auto";
+                  this.props.reSetCurrentEditorPhoto("");
+                }}
+                className="ti-close"
+                style={{ display: "flex", alignItems: "center" }}
+              />
             </div>
           </div>
           <div className="content">
-            <div className="row">{tempImg}</div>
+            <div className="row">
+              {this.renderListImage()}
+            </div>
           </div>
         </div>
         <div
@@ -98,12 +152,33 @@ class Photo extends React.Component<{}, State> {
           className="photo-app-context-menu"
           id="photo-app-context-menu"
         >
-          <p onClick={this.handleInsert}><i className="ti-link"/> Chèn</p>
-          <p onClick={this.handleDelete}><i className="ti-trash"/> Xóa</p>
+          <p onClick={this.handleInsert}>
+            <i className="ti-link" /> Chèn
+          </p>
+          <p onClick={this.handleDelete}>
+            <i className="ti-trash" /> Xóa
+          </p>
         </div>
       </>
     );
   }
 }
 
-export default Photo;
+const mapStateToProps = storeState => ({
+  isShowPhotoApp: storeState.reInit.isShowPhotoApp,
+  currentEditorPhoto: storeState.reInit.currentEditorPhoto,
+  resListImage: storeState.reInit.resListImage,
+  resDeleteImage: storeState.reInit.resDeleteImage,
+  resAddImage: storeState.reInit.resAddImage
+});
+const mapDispatchToProps = {
+  reShowPhotoApp,
+  reSetCurrentEditorPhoto,
+  reListImage,
+  reDeleteImage,
+  reAddImage
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Photo);
