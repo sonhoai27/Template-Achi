@@ -19,9 +19,6 @@ interface State {
     source_title: string,
     source_promo: string,
     source_content: any,
-    source_member: number,
-    source_price: number,
-    source_ngay_khai_giang: string,
     source_id_ui: number,
     source_status: number
   }
@@ -34,9 +31,6 @@ class AddSource extends React.Component<Props, State> {
         source_title: '',
         source_promo: '',
         source_content: '',
-        source_member: 0,
-        source_price: 0,
-        source_ngay_khai_giang: '',
         source_id_ui: 0,
         source_status: 0
       }
@@ -157,48 +151,6 @@ class AddSource extends React.Component<Props, State> {
                   </div>
                 </div>
                 <div className="col-sm-3">
-                  <div className="form-group">
-                    <label className="col-md-12">
-                      <span className="help"> Số lượng</span>
-                    </label>
-                    <div className="col-md-12">
-                      <input
-                        onChange={(e)=>this.onChange(e)}
-                        name="source_member"
-                        type="number"
-                        className="form-control"
-                        placeholder="Số lượng"
-                      />
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label className="col-md-12">
-                      <span className="help"> Giá</span>
-                    </label>
-                    <div className="col-md-12">
-                      <input
-                        onChange={(e)=>this.onChange(e)}
-                        name="source_price"
-                        type="number"
-                        className="form-control"
-                        placeholder="Giá"
-                      />
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label className="col-md-12">
-                      <span className="help"> Ngày khai giảng</span>
-                    </label>
-                    <div className="col-md-12">
-                      <input
-                        onChange={(e)=>this.onChange(e)}
-                        name="source_ngay_khai_giang"
-                        type="text"
-                        className="form-control"
-                        placeholder="Ngày khai giảng"
-                      />
-                    </div>
-                  </div>
                   <div className="form-group">
                     <label className="col-sm-12">Giao diện</label>
                     <div className="col-sm-12">

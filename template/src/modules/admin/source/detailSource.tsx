@@ -1,125 +1,140 @@
 import * as React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { connect } from "react-redux";
-import { reShowPhotoApp, reSetCurrentEditorPhoto } from "../../../reducers/init";
+import {
+  reShowPhotoApp,
+  reSetCurrentEditorPhoto
+} from "../../../reducers/init";
 import { reListUI } from "../ui/reUI";
 // declare var $: any;
 import { reUpdateSource, reDetailSource } from "./reSource";
+import { Link } from "react-router-dom";
+import { BASEURLADMIN } from "../../../config/const";
 // import { alias } from "../../../utils/alias";
 interface Props {
-    match?: any,
-  reSetCurrentEditorPhoto: (editor: any)=> void,
-  reShowPhotoApp: (status: boolean)=> void,
-  resListUI: any,
-  reListUI: ()=> void,
-  resDetailSource: any,
-  reDetailSource: (id: number)=> void
+  match?: any;
+  reSetCurrentEditorPhoto: (editor: any) => void;
+  reShowPhotoApp: (status: boolean) => void;
+  resListUI: any;
+  reListUI: () => void;
+  resDetailSource: any;
+  reDetailSource: (id: number) => void;
 }
 
 interface State {
   source: {
-    source_title: string,
-    source_promo: string,
-    source_content: any,
-    source_member: number,
-    source_price: number,
-    source_ngay_khai_giang: string,
-    source_id_ui: number,
-    source_status: number
-  }
+    source_title: string;
+    source_promo: string;
+    source_content: any;
+    source_id_ui: number;
+    source_status: number;
+  };
 }
 class DetailSource extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
       source: {
-        source_title: '',
-        source_promo: '',
-        source_content: '',
-        source_member: 0,
-        source_price: 0,
-        source_ngay_khai_giang: '',
+        source_title: "",
+        source_promo: "",
+        source_content: "",
         source_id_ui: 0,
         source_status: 0
       }
+    };
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.resDetailSource != this.props.resDetailSource) {
+      this.setState({
+        source: {
+          source_title: nextProps.resDetailSource.source_title,
+          source_promo: nextProps.resDetailSource.source_promo,
+          source_content: nextProps.resDetailSource.source_content,
+          source_id_ui: nextProps.resDetailSource.source_id_ui,
+          source_status: nextProps.resDetailSource.source_status
+        }
+      });
     }
   }
-  componentWillReceiveProps(nextProps){
-      if(nextProps.resDetailSource != this.props.resDetailSource){
-          this.setState({
-              source: {
-                source_title: nextProps.resDetailSource.source_title,
-                source_promo: nextProps.resDetailSource.source_promo,
-                source_content: nextProps.resDetailSource.source_content,
-                source_member: nextProps.resDetailSource.source_member,
-                source_price: nextProps.resDetailSource.source_price,
-                source_ngay_khai_giang: nextProps.resDetailSource.source_ngay_khai_giang,
-                source_id_ui: nextProps.resDetailSource.source_id_ui,
-                source_status: nextProps.resDetailSource.source_status
-              }
-          })
-      }
+  componentDidMount() {
+    this.props.reListUI();
+    this.props.reDetailSource(this.props.match.params.id);
   }
-  componentDidMount(){
-    this.props.reListUI()
-    this.props.reDetailSource(this.props.match.params.id)
-  }
-  renderListUI = ()=> {
-    if(this.props.resListUI){
-      return this.props.resListUI.map((element => {
+  renderListUI = () => {
+    if (this.props.resListUI) {
+      return this.props.resListUI.map(element => {
         return (
-          <option value={element.ui_id}>{element.ui_name}</option>
-        )
-      }))
+          <option
+            selected={
+              this.props.resDetailSource.source_id_ui === element.ui_id
+                ? true
+                : false
+            }
+            value={element.ui_id}
+          >
+            {element.ui_name}
+          </option>
+        );
+      });
     }
-    return ''
-  }
-  addSource = ()=> {
+    return "";
+  };
+  addSource = () => {
     // const tempDomImage: any = document.getElementById('img-cover-blog-preview')
     // this.props.reAddSource({
     //   ...this.state.source,
     //   source_alias: alias(this.state.source.source_title),
     //   source_cover: tempDomImage.src
     // })
-  }
-  onChange = (e: any)=> {
-    const name = e.target.name
-    const value = e.target.value
+  };
+  onChange = (e: any) => {
+    const name = e.target.name;
+    const value = e.target.value;
     // @ts-ignore
     this.setState({
-     source: {
-      ...this.state.source,
-      [name]: value
-     }
-    })
-  }
+      source: {
+        ...this.state.source,
+        [name]: value
+      }
+    });
+  };
   render() {
     return (
       <div className="row">
         <div className="col-md-12">
           <div className="panel">
             <div className="panel-toolbar">
-              <div className="panel-heading" style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between'
-              }}>
+              <div
+                className="panel-heading"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between"
+                }}
+              >
                 <h3>Thông tin khóa học</h3>
-                <div
-                    style={{
-                        marginLeft: 32,
-                        marginRight: 32
-                    }}
-                  onClick={this.addSource}
-                  className="btn btn-sm btn-primary">Thời gian</div>
+                <Link to={BASEURLADMIN+'source/add-sche/'+this.props.match.params.id}>
                   <div
+                    style={{
+                      marginLeft: 32,
+                      marginRight: 32
+                    }}
+                    className="btn btn-sm btn-primary"
+                  >
+                    Thời khoá biểu
+                  </div>
+                </Link>
+                <div
                   onClick={this.addSource}
-                  className="btn btn-sm btn-primary">Landing Page</div>
+                  className="btn btn-sm btn-primary"
+                >
+                  Landing Page
+                </div>
               </div>
               <div className="panel-action-bar">
-                <div
-                  onClick={this.addSource}
-                  className="btn btn-sm btn-info">Lưu</div>
+                <div onClick={this.addSource} className="btn btn-sm btn-info">
+                  Lưu
+                </div>
               </div>
             </div>
             <div className="content">
@@ -131,7 +146,7 @@ class DetailSource extends React.Component<Props, State> {
                     </label>
                     <div className="col-md-12">
                       <input
-                        onChange={(e)=>this.onChange(e)}
+                        onChange={e => this.onChange(e)}
                         name="source_title"
                         type="text"
                         className="form-control"
@@ -145,7 +160,7 @@ class DetailSource extends React.Component<Props, State> {
                     </label>
                     <div className="col-md-12">
                       <input
-                        onChange={(e)=>this.onChange(e)}
+                        onChange={e => this.onChange(e)}
                         type="text"
                         name="source_promo"
                         className="form-control"
@@ -156,15 +171,15 @@ class DetailSource extends React.Component<Props, State> {
                   <div className="form-group">
                     <div className="col-md-12">
                       <Editor
-                      initialValue={this.state.source.source_content}
-                        onChange={(e: any)=> {
+                        initialValue={this.state.source.source_content}
+                        onChange={(e: any) => {
                           // @ts-ignore
                           this.setState({
                             source: {
                               ...this.state.source,
                               source_content: e.level.content
                             }
-                          })
+                          });
                         }}
                         apiKey="t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl"
                         init={{
@@ -183,8 +198,8 @@ class DetailSource extends React.Component<Props, State> {
                               icon: "image",
                               tooltip: "Add Image",
                               onclick: () => {
-                                this.props.reShowPhotoApp(true)
-                                this.props.reSetCurrentEditorPhoto(editor)
+                                this.props.reShowPhotoApp(true);
+                                this.props.reSetCurrentEditorPhoto(editor);
                               }
                             });
                           }
@@ -195,54 +210,13 @@ class DetailSource extends React.Component<Props, State> {
                 </div>
                 <div className="col-sm-3">
                   <div className="form-group">
-                    <label className="col-md-12">
-                      <span className="help"> Số lượng</span>
-                    </label>
-                    <div className="col-md-12">
-                      <input
-                        onChange={(e)=>this.onChange(e)}
-                        name="source_member"
-                        type="number"
-                        className="form-control"
-                        value={this.state.source.source_member}
-                      />
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label className="col-md-12">
-                      <span className="help"> Giá</span>
-                    </label>
-                    <div className="col-md-12">
-                      <input
-                        onChange={(e)=>this.onChange(e)}
-                        name="source_price"
-                        type="number"
-                        className="form-control"
-                        value={this.state.source.source_price}
-                      />
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label className="col-md-12">
-                      <span className="help"> Ngày khai giảng</span>
-                    </label>
-                    <div className="col-md-12">
-                      <input
-                        onChange={(e)=>this.onChange(e)}
-                        name="source_ngay_khai_giang"
-                        type="text"
-                        className="form-control"
-                        value={this.state.source.source_ngay_khai_giang}
-                      />
-                    </div>
-                  </div>
-                  <div className="form-group">
                     <label className="col-sm-12">Giao diện</label>
                     <div className="col-sm-12">
                       <select
-                        onChange={(e)=>this.onChange(e)}
+                        onChange={e => this.onChange(e)}
                         name="source_id_ui"
-                        className="form-control">
+                        className="form-control"
+                      >
                         <option>Chọn</option>
                         {this.renderListUI()}
                       </select>
@@ -252,27 +226,51 @@ class DetailSource extends React.Component<Props, State> {
                     <label className="col-sm-12">Trạng thái</label>
                     <div className="col-sm-12">
                       <select
-                        onChange={(e)=>this.onChange(e)}
+                        onChange={e => this.onChange(e)}
                         name="source_status"
-                        className="form-control">
+                        className="form-control"
+                      >
                         <option>Chọn</option>
-                        <option value='0'>Hiện</option>
-                        <option value='1'>Ẩn</option>
+                        <option
+                          selected={
+                            this.props.resDetailSource.source_status == 0
+                              ? true
+                              : false
+                          }
+                          value="0"
+                        >
+                          Hiện
+                        </option>
+                        <option
+                          selected={
+                            this.props.resDetailSource.source_status == 1
+                              ? true
+                              : false
+                          }
+                          value="1"
+                        >
+                          Ẩn
+                        </option>
                       </select>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-12">Hình cover</label>
                     <div
-                      onClick={()=> {
-                        this.props.reShowPhotoApp(true)
-                        this.props.reSetCurrentEditorPhoto('img-cover-blog-preview')
+                      onClick={() => {
+                        this.props.reShowPhotoApp(true);
+                        this.props.reSetCurrentEditorPhoto(
+                          "img-cover-blog-preview"
+                        );
                       }}
-                      className="col-sm-12 cover-blog">
+                      className="col-sm-12 cover-blog"
+                    >
                       <i className="ti-upload" />
-                      <img id="img-cover-blog-preview"
+                      <img
+                        id="img-cover-blog-preview"
                         src={this.props.resDetailSource.source_cover}
-                        className="img-responsive" />
+                        className="img-responsive"
+                      />
                     </div>
                   </div>
                 </div>
@@ -301,4 +299,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(DetailSource);
-

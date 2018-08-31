@@ -283,3 +283,10 @@
     overflow-y: scroll;
     padding: 18px;
 }
+
+/* source */
+#add-type-sche .modal-title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}

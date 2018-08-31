@@ -5,22 +5,26 @@ import { API } from "../../../config/const";
 export const ACTION_TYPES = {
     API_DETAIL_SOURCE: 'ReSource/API_DETAIL_SOURCE',
     API_ADD_SOURCE: 'ReSource/API_DETAIL_SOURCE',
-    API_ADD_TYPE_SCHE: 'ReSource/API_ADD_TYPE_SCHE',
+    API_ADD_DATE_SCHE: 'ReSource/API_ADD_DATE_SCHE',
     API_ADD_SCHE: 'ReSource/API_ADD_SCHE',
     API_LIST_SOURCE: 'ReSource/API_LIST_SOURCE',
+    API_LIST_SCHE: 'ReSource/API_LIST_SCHE',
     API_UPDATE_SOURCE: 'ReSource/API_LIST_SOURCE',
-    API_UPDATE_TYPE_SCHE: 'ReSource/API_UPDATE_TYPE_SCHE',
-    API_UPDATE_SCHE: 'ReSource/API_UPDATE_SCHE'
+    API_UPDATE_DATE_SCHE: 'ReSource/API_UPDATE_DATE_SCHE',
+    API_UPDATE_SCHE: 'ReSource/API_UPDATE_SCHE',
+    API_DETAIL_SCHE: 'ReSource/API_DETAIL_SCHE'
 }
 const initialState = {
     resDetailSource: [],
     resAddSource: [],
-    resAddTypeSche: '',
+    resAddDateSche: '',
     resAddSche: '',
     reslistSource: {},
+    resListSche: [],
     resUpdateSource: {},
-    resUpdateTypeSche: {},
-    resUpdateSche: {}
+    resUpdateDateSche: {},
+    resUpdateSche: {},
+    resDetailSche: {}
 }
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -76,20 +80,20 @@ export default (state = initialState, action) => {
             }
         }
         // add type sche
-        case REQUEST(ACTION_TYPES.API_ADD_TYPE_SCHE): {
+        case REQUEST(ACTION_TYPES.API_ADD_DATE_SCHE): {
             return {
                 ...state
             }
         }
-        case FAILURE(ACTION_TYPES.API_ADD_TYPE_SCHE): {
+        case FAILURE(ACTION_TYPES.API_ADD_DATE_SCHE): {
             return {
                 ...state
             }
         }
-        case SUCCESS(ACTION_TYPES.API_ADD_TYPE_SCHE): {
+        case SUCCESS(ACTION_TYPES.API_ADD_DATE_SCHE): {
             return {
                 ...state,
-                resAddTypeSche: action.payload.data.list
+                resAddDateSche: action.payload.data.list
             }
         }
         // list source
@@ -127,20 +131,20 @@ export default (state = initialState, action) => {
             }
         }
         // update typesche
-        case REQUEST(ACTION_TYPES.API_UPDATE_TYPE_SCHE): {
+        case REQUEST(ACTION_TYPES.API_UPDATE_DATE_SCHE): {
             return {
                 ...state
             }
         }
-        case FAILURE(ACTION_TYPES.API_UPDATE_TYPE_SCHE): {
+        case FAILURE(ACTION_TYPES.API_UPDATE_DATE_SCHE): {
             return {
                 ...state
             }
         }
-        case SUCCESS(ACTION_TYPES.API_UPDATE_TYPE_SCHE): {
+        case SUCCESS(ACTION_TYPES.API_UPDATE_DATE_SCHE): {
             return {
                 ...state,
-                resUpdateTypeSche: action.payload.data
+                resUpdateDateSche: action.payload.data
             }
         }
         // update sche
@@ -158,6 +162,40 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 resUpdateSche: action.payload.data
+            }
+        }
+        // list sche
+        case REQUEST(ACTION_TYPES.API_LIST_SCHE): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_LIST_SCHE): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_LIST_SCHE): {
+            return {
+                ...state,
+                resListSche: action.payload.data
+            }
+        }
+        // detail sche
+        case REQUEST(ACTION_TYPES.API_DETAIL_SCHE): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_DETAIL_SCHE): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_DETAIL_SCHE): {
+            return {
+                ...state,
+                resDetailSche: action.payload.data.list
             }
         }
         default:
@@ -181,15 +219,15 @@ export const reAddSource = (form) => async dispatch => {
 };
 export const reAddSche = (form) => async dispatch => {
     const result = await dispatch({
-        type: ACTION_TYPES.API_ADD_SOURCE,
+        type: ACTION_TYPES.API_ADD_SCHE,
         payload: axios.post(API_SOURCE+'add-sche', form)
     });
     return result;
 };
-export const reAddTypeSche = (form) => async dispatch => {
+export const reAddDateSche = (form) => async dispatch => {
     const result = await dispatch({
-        type: ACTION_TYPES.API_ADD_SOURCE,
-        payload: axios.post(API_SOURCE+'add-type-source', form)
+        type: ACTION_TYPES.API_ADD_DATE_SCHE,
+        payload: axios.post(API_SOURCE+'add-date-source', form)
     });
     return result;
 };
@@ -207,10 +245,10 @@ export const reUpdateSource = (form, id) => async dispatch => {
     });
     return result;
 };
-export const reUpdateTypeSche = (form, id) => async dispatch => {
+export const reUpdateDateSche = (form, id) => async dispatch => {
     const result = await dispatch({
-        type: ACTION_TYPES.API_UPDATE_TYPE_SCHE,
-        payload: axios.put(API_SOURCE+'update-type-sche'+"/"+id, form)
+        type: ACTION_TYPES.API_UPDATE_DATE_SCHE,
+        payload: axios.put(API_SOURCE+'update-date-sche'+"/"+id, form)
     });
     return result;
 };
@@ -218,6 +256,20 @@ export const reUpdateSche = (form, id) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_UPDATE_SCHE,
         payload: axios.put(API_SOURCE+'update-sche'+"/"+id, form)
+    });
+    return result;
+};
+export const reListSche = (id) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_LIST_SCHE,
+        payload: axios.get(API_SOURCE+'all-sche/'+id)
+    });
+    return result;
+};
+export const reDetailSche = (id) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_DETAIL_SCHE,
+        payload: axios.get(API_SOURCE+'detail-sche/'+id)
     });
     return result;
 };
