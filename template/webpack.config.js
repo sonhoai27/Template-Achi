@@ -29,7 +29,14 @@ module.exports = {
     mode: 'production',
     performance: {
         hints: false
-    }
+    },
+    devServer: {
+        port: 8080,
+        open: true,
+        proxy: {
+          "/api/": "http://localhost:8080/Achi/api/"
+        }
+      }
     // optimization: {
     //     splitChunks: {
     //         chunks: 'all',
