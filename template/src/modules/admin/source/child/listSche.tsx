@@ -24,9 +24,9 @@ class ListSche extends React.Component<Props, {}> {
                     <td className="text-center">{element.source_sche_id}</td>
                     <td>
                     <Link to={BASEURLADMIN + "source/detail-sche/"+element.source_sche_id}>
-                        <span className="text-muted">
-                        {element.source_title} - {element.source_sche_id}
-                        </span>
+                        <h4 style={{marginBottom: 0, marginTop: 0}}>
+                        {element.source_title} - khóa {element.source_sche_id}
+                        </h4>
                     </Link>
                     </td>
                     <td>
@@ -49,7 +49,9 @@ class ListSche extends React.Component<Props, {}> {
             <div className="panel-toolbar">
               <div className="panel-heading">Danh sách lịch học</div>
               <div className="panel-action-bar">
+                <Link to={BASEURLADMIN+'source/add-sche/'+this.props.match.params.idSource}>
                 <div className="btn btn-xs btn-info">Thêm lịch học</div>
+                </Link>
               </div>
             </div>
             <div className="content">

@@ -113,7 +113,7 @@ class DetailSource extends React.Component<Props, State> {
                 }}
               >
                 <h3>Thông tin khóa học</h3>
-                <Link to={BASEURLADMIN+'source/add-sche/'+this.props.match.params.id}>
+                <Link to={BASEURLADMIN+'source/list-sche/'+this.props.match.params.id}>
                   <div
                     style={{
                       marginLeft: 32,
@@ -124,12 +124,14 @@ class DetailSource extends React.Component<Props, State> {
                     Thời khoá biểu
                   </div>
                 </Link>
+                <Link to={BASEURLADMIN+'source/ui-source/'+this.props.match.params.id}>
                 <div
                   onClick={this.addSource}
                   className="btn btn-sm btn-primary"
                 >
                   Landing Page
                 </div>
+                </Link>
               </div>
               <div className="panel-action-bar">
                 <div onClick={this.addSource} className="btn btn-sm btn-info">

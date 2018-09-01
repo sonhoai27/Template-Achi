@@ -1,66 +1,83 @@
 import * as React from "react";
-import { BASEURLADMIN } from "../../../../config/const";
-import { Link } from "react-router-dom";
-
-class ListDateSche extends React.Component {
+import { connect } from "react-redux";
+import { reListDateSche } from "../reSource";
+import DetailDateSche from "./detailDateSche";
+interface Props {
+  currentIdSche: any,
+  reListDateSche: (id: number)=> void,
+  resListDateSche: any
+}
+interface State {
+  showModelUpdateDateSche: boolean,
+  currentDateSche: any
+}
+class ListDateSche extends React.Component<Props, State> {
   constructor(props) {
     super(props);
+    this.state = {
+      showModelUpdateDateSche: false,
+      currentDateSche: {}
+    }
+  }
+  componentDidMount(){
+    this.props.reListDateSche(this.props.currentIdSche)
+  }
+  hiddenModalDetailDateSche = ()=> {
+    this.setState({
+      currentDateSche: '',
+      showModelUpdateDateSche: !this.state.showModelUpdateDateSche
+    })
+  }
+  renderListDateSche = ()=> {
+    if(this.props.resListDateSche.list){
+      return this.props.resListDateSche.list.map(element => {
+        return (
+            <tr>
+              <td className="text-center">Vị trí {element.date_source_stt}</td>
+              <td onClick={()=> {
+                this.setState({
+                  currentDateSche: element,
+                  showModelUpdateDateSche: !this.state.showModelUpdateDateSche
+                })
+              }}>
+                <div dangerouslySetInnerHTML={{ __html: element.date_source_time }}/>
+              </td>
+            </tr>
+        )
+      })
+    }
+    return <p>Chưa có</p>
   }
   render() {
     return (
-      <div className="row">
-        <div className="col-md-12">
-          <div className="panel">
-            <div className="panel-toolbar">
-              <div className="panel-heading">Danh sách ngày học</div>
-              <div className="panel-action-bar">
-                <div className="btn btn-xs btn-info">Thêm ngày học</div>
-              </div>
-            </div>
-            <div className="content">
-              <div className="row">
-                <div className="col-sm-12">
-                  <div className="table-responsive">
-                    <table className="table table-hover manage-u-table">
-                      <thead>
-                        <tr>
-                          <th className="text-center">#</th>
-                          <th>Tên</th>
-                          <th>Giá</th>
-                          <th>Số lượng</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td className="text-center">1</td>
-                          <td>
-                            <Link to={BASEURLADMIN + "source/detail-sche/1"}>
-                              <span className="text-muted">
-                                Texas, Unitedd states
-                              </span>
-                            </Link>
-                          </td>
-                          <td>
-                            Visual Designer
-                            <br />
-                            <span className="text-muted">Past : teacher</span>
-                          </td>
-                          <td>
-                            Visual Designer
-                            <br />
-                            <span className="text-muted">Past : teacher</span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <>
+      <div className="table-responsive">
+          <table className="table table-hover manage-u-table">
+            <tbody>
+              {this.renderListDateSche()}
+            </tbody>
+          </table>
         </div>
-      </div>
+        {
+          this.state.showModelUpdateDateSche ? <DetailDateSche dateSche={
+           {
+            ...this.state.currentDateSche,
+            idSche: this.props.currentIdSche
+           }
+          } onclick={this.hiddenModalDetailDateSche}/> : ''
+        }
+      </>
     );
   }
 }
-export default ListDateSche;
+const mapStateToProps = storeState => ({
+  resListDateSche: storeState.reSource.resListDateSche
+});
+const mapDispatchToProps = {
+  reListDateSche
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ListDateSche);
+

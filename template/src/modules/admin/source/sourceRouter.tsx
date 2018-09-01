@@ -5,6 +5,7 @@ import BreadCrumd from "../shared/breadcrumb";
 import Source from "./source";
 import AddSource from "./addSource";
 import DetailSource from "./detailSource";
+import AddContentUISource from "./addContentUISource";
 import ListSche from "./child/listSche";
 import AddSche from "./child/addSche";
 import detailSche from "./child/detailSche";
@@ -52,6 +53,10 @@ class SourceRouter extends React.Component<Props, {}> {
               component={DetailSource}
             />
             <Route
+              path={`${this.props.match.url}/ui-source/:idSource`}
+              component={AddContentUISource}
+            />
+            <Route
               path={`${this.props.match.url}/add-sche/:idSource`}
               component={AddSche}
             />
@@ -61,18 +66,6 @@ class SourceRouter extends React.Component<Props, {}> {
             />
             <Route
               path={`${this.props.match.url}/detail-sche/:idSche`}
-              component={detailSche}
-            />
-            <Route
-              path={`${this.props.match.url}/add-date-sche/:idSche`}
-              component={detailSche}
-            />
-            <Route
-              path={`${this.props.match.url}/detail-date-sche/:idDateSche`}
-              component={detailSche}
-            />
-            <Route
-              path={`${this.props.match.url}/list-date-sche/:idSche`}
               component={detailSche}
             />
           </div>

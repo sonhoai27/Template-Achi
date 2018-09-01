@@ -1,6 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import {reDetailSche, reUpdateSche } from "../reSource";
+import ListDateSche from "./listDateSche";
+import AddDateSche from "./addDateSche";
 interface Props {
     match: any,
     reDetailSche: (id: any)=> void,
@@ -176,14 +178,16 @@ class DetailSche extends React.Component<Props, State> {
                             <div className="panel-heading">Thời gian diễn ra</div>
                             <div className="panel-action-bar">
                                 <div
+                                    data-toggle="modal" data-target="#add-date-sche"
                                     className="btn btn-xs btn-info">Thêm mới</div>
                             </div>
                         </div>
                         <div className="content">
-                            
+                            <ListDateSche currentIdSche={this.props.match.params.idSche}/>
                         </div>
                     </div>
                 </div>
+                <AddDateSche currentIdSche={this.props.match.params.idSche}/>
             </div>
         );
     }

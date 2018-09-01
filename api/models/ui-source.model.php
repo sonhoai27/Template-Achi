@@ -29,7 +29,16 @@ class UISourceModel {
         $detail = $db->fetch_object();
         return ($this->makeListElementParentChild($detail));
     }
-
+    function detail_ui_source($db,$idUi, $idSource) {
+        $db->query('select * from achi_detail_ui
+        inner join achi_element on achi_detail_ui.detail_ui_id_element = achi_element.element_id
+        left OUTER JOIN achi_content_element on achi_content_element.content_element_id_detail_ui = achi_detail_ui.detail_ui_id
+        where achi_detail_ui.detail_ui_id_ui = '.$db->sqlQuote($idUi).' 
+        and achi_content_element.content_element_id_source = '.$db->sqlQuote($idSource).' 
+        or achi_content_element.content_element_id_source is NULL');
+        $detail = $db->fetch_object();
+        return ($this->makeListElementParentChild($detail));
+    }
     private function makeListElementParentChild($list, $parent = null){
         $tempList = array();
         for($i = 0; $i < count($list); $i++){

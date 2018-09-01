@@ -9,6 +9,7 @@ export const ACTION_TYPES = {
     API_ADD_SCHE: 'ReSource/API_ADD_SCHE',
     API_LIST_SOURCE: 'ReSource/API_LIST_SOURCE',
     API_LIST_SCHE: 'ReSource/API_LIST_SCHE',
+    API_LIST_DATE_SCHE: 'ReSource/API_LIST_DATE_SCHE',
     API_UPDATE_SOURCE: 'ReSource/API_LIST_SOURCE',
     API_UPDATE_DATE_SCHE: 'ReSource/API_UPDATE_DATE_SCHE',
     API_UPDATE_SCHE: 'ReSource/API_UPDATE_SCHE',
@@ -21,6 +22,7 @@ const initialState = {
     resAddSche: '',
     reslistSource: {},
     resListSche: [],
+    resListDateSche: [],
     resUpdateSource: {},
     resUpdateDateSche: {},
     resUpdateSche: {},
@@ -93,7 +95,7 @@ export default (state = initialState, action) => {
         case SUCCESS(ACTION_TYPES.API_ADD_DATE_SCHE): {
             return {
                 ...state,
-                resAddDateSche: action.payload.data.list
+                resAddDateSche: action.payload.data
             }
         }
         // list source
@@ -198,6 +200,23 @@ export default (state = initialState, action) => {
                 resDetailSche: action.payload.data.list
             }
         }
+        // list date sche
+        case REQUEST(ACTION_TYPES.API_LIST_DATE_SCHE): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_LIST_DATE_SCHE): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_LIST_DATE_SCHE): {
+            return {
+                ...state,
+                resListDateSche: action.payload.data
+            }
+        }
         default:
             return state;
     }
@@ -227,7 +246,7 @@ export const reAddSche = (form) => async dispatch => {
 export const reAddDateSche = (form) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_ADD_DATE_SCHE,
-        payload: axios.post(API_SOURCE+'add-date-source', form)
+        payload: axios.post(API_SOURCE+'add-date-sche', form)
     });
     return result;
 };
@@ -270,6 +289,13 @@ export const reDetailSche = (id) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_DETAIL_SCHE,
         payload: axios.get(API_SOURCE+'detail-sche/'+id)
+    });
+    return result;
+};
+export const reListDateSche = (id) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_LIST_DATE_SCHE,
+        payload: axios.get(API_SOURCE+'all-date-sche/'+id)
     });
     return result;
 };

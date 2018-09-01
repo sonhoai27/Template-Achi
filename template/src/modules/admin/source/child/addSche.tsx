@@ -43,7 +43,7 @@ class AddSche extends React.Component<Props, State> {
     render() {
         return (
             <div className="row">
-                <div className="col-md-8">
+                <div className="col-md-12">
                     <div className="panel">
                         <div className="panel-toolbar">
                             <div className="panel-heading">Thêm lịch học</div>
@@ -56,7 +56,7 @@ class AddSche extends React.Component<Props, State> {
                         <div className="content">
                             <div className="row">
                                 <div className="col-sm-12">
-                                    <div className="form-group">
+                                    <div className="form-group" style={{width: '50%', float: 'left'}}>
                                         <label className="col-md-12">
                                             <span className="help"> Số lượng</span>
                                         </label>
@@ -70,7 +70,7 @@ class AddSche extends React.Component<Props, State> {
                                             />
                                         </div>
                                     </div>
-                                    <div className="form-group">
+                                    <div className="form-group" style={{width: '50%', float: 'left'}}>
                                         <label className="col-md-12">
                                             <span className="help"> Giá</span>
                                         </label>
@@ -84,7 +84,7 @@ class AddSche extends React.Component<Props, State> {
                                             />
                                         </div>
                                     </div>
-                                    <div className="form-group">
+                                    <div className="form-group" style={{width: '50%', float: 'left'}}>
                                         <label className="col-md-12">
                                             <span className="help"> Giảm giá</span>
                                         </label>
@@ -98,7 +98,7 @@ class AddSche extends React.Component<Props, State> {
                                             />
                                         </div>
                                     </div>
-                                    <div className="form-group">
+                                    <div className="form-group" style={{width: '50%', float: 'left'}}>
                                         <label className="col-md-12">
                                             <span className="help"> Địa chỉ học</span>
                                         </label>
@@ -112,7 +112,7 @@ class AddSche extends React.Component<Props, State> {
                                             />
                                         </div>
                                     </div>
-                                    <div className="form-group">
+                                    <div className="form-group" style={{width: '50%', float: 'left'}}>
                                         <label className="col-md-12">
                                             <span className="help"> Giáo viên</span>
                                         </label>
@@ -126,7 +126,7 @@ class AddSche extends React.Component<Props, State> {
                                             />
                                         </div>
                                     </div>
-                                    <div className="form-group">
+                                    <div className="form-group" style={{width: '50%', float: 'left'}}>
                                         <label className="col-md-12">
                                             <span className="help"> Trạng thái</span>
                                         </label>

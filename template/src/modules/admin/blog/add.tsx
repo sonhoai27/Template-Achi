@@ -48,6 +48,7 @@ class BlogAdd extends React.Component {
                         apiKey="t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl"
                         init={{
                           selector: "textarea",
+                          spellchecker_language: 'vi-VN',
                           height: 500,
                           theme: "modern",
                           plugins:
