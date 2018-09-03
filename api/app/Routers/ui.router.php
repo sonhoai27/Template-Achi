@@ -51,3 +51,42 @@ $app->delete('/ui/delete-element-of-detail-ui/{idUI}/{idDetailUI}', function(Req
     ));
   }
 });
+
+// landing page
+$app->get('/ui/detail-ui-source/{idUI}/{idSource}', function(Request $request, Response $response, $args){
+  return $response->withJson(array(
+      "status"=>200,
+      "list"=>$this->get('db_ui')->detail_ui_source(
+              $this->get('db'),
+              $args['idUI'],
+              $args['idSource']
+      )
+    ));
+});
+
+$app->post('/ui/add-update-content-element', function(Request $request, Response $response, $args){
+  $body = $request->getParsedBody();
+  if(isset($body['content_element_id']) && $body['content_element_id'] != null){
+    $content_element_id = $body['content_element_id'];
+    unset($body['content_element_id']);
+    unset($body['idVirtualElement']);
+    return $response->withJson(array(
+        "status"=>200,
+        "list"=>$this->get('db_ui')->update_content_element(
+                $this->get('db'),
+                $body,
+                $content_element_id
+        )
+    ));
+  }else {
+    unset($body['content_element_id']);
+    unset($body['idVirtualElement']);
+    return $response->withJson(array(
+      "status"=>200,
+      "list"=>$this->get('db_ui')->add_content_element(
+              $this->get('db'),
+              $body
+      )
+  ));
+  }
+});

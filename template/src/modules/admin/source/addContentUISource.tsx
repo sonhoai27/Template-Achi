@@ -1,13 +1,27 @@
 import * as React from "react";
 import { connect } from "react-redux";
-
-class AddContentUISource extends React.Component {
+import { reListContentUISource } from "./reSource";
+import ListElementDetailUISource from "./detail-ui/detail-ui";
+import { Link } from "react-router-dom";
+import { BASEURLADMIN } from "../../../config/const";
+interface Props {
+  match: any,
+  resListContentUISource: any,
+  reListContentUISource: (idUI: number, idSource: number)=> void
+}
+class AddContentUISource extends React.Component<Props, {}> {
   constructor(props) {
     super(props);
   }
+  componentDidMount(){
+    this.props.reListContentUISource(
+      this.props.match.params.idUI,
+      this.props.match.params.idSource
+    );
+  }
   render() {
     return (
-      <div className="row">
+      <div className="row add-element-to-ui add-content-ui-source">
         <div className="col-md-12">
           <div className="panel">
             <div className="panel-toolbar">
@@ -17,15 +31,17 @@ class AddContentUISource extends React.Component {
                   justifyContent: "space-between"
                 }}>
               Chi tiết Landing Page
-              <div className="btn btn-xs btn-info" style={{marginLeft: 16}}>
-                  Xem thử
-                </div>
               </div>
               <div className="panel-action-bar">
-                <div className="btn btn-xs btn-info">
-                  Lưu
+               <Link to={BASEURLADMIN+'source/review-landing-page/'+this.props.match.params.idUI+'/'+this.props.match.params.idSource}>
+               <div className="btn btn-sm btn-info">
+                <i className="ti-eye"/> Xem thử
                 </div>
+               </Link>
               </div>
+            </div>
+            <div className="content">
+                <ListElementDetailUISource match={this.props.match} detail={this.props.resListContentUISource.list}/>
             </div>
           </div>
         </div>
@@ -33,8 +49,12 @@ class AddContentUISource extends React.Component {
     );
   }
 }
-const mapStateToProps = storeState => ({});
-const mapDispatchToProps = {};
+const mapStateToProps = storeState => ({
+  resListContentUISource: storeState.reSource.resListContentUISource
+});
+const mapDispatchToProps = {
+  reListContentUISource
+};
 export default connect(
   mapStateToProps,
   mapDispatchToProps

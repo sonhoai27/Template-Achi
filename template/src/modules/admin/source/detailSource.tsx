@@ -79,7 +79,7 @@ class DetailSource extends React.Component<Props, State> {
     }
     return "";
   };
-  addSource = () => {
+  saveSource = () => {
     // const tempDomImage: any = document.getElementById('img-cover-blog-preview')
     // this.props.reAddSource({
     //   ...this.state.source,
@@ -124,9 +124,8 @@ class DetailSource extends React.Component<Props, State> {
                     Thời khoá biểu
                   </div>
                 </Link>
-                <Link to={BASEURLADMIN+'source/ui-source/'+this.props.match.params.id}>
+                <Link to={BASEURLADMIN+'source/ui-source/'+this.state.source.source_id_ui+'/'+this.props.match.params.id}>
                 <div
-                  onClick={this.addSource}
                   className="btn btn-sm btn-primary"
                 >
                   Landing Page
@@ -134,7 +133,7 @@ class DetailSource extends React.Component<Props, State> {
                 </Link>
               </div>
               <div className="panel-action-bar">
-                <div onClick={this.addSource} className="btn btn-sm btn-info">
+                <div onClick={this.saveSource} className="btn btn-sm btn-info">
                   Lưu
                 </div>
               </div>

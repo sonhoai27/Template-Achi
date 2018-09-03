@@ -13,7 +13,8 @@ export const ACTION_TYPES = {
     API_UPDATE_SOURCE: 'ReSource/API_LIST_SOURCE',
     API_UPDATE_DATE_SCHE: 'ReSource/API_UPDATE_DATE_SCHE',
     API_UPDATE_SCHE: 'ReSource/API_UPDATE_SCHE',
-    API_DETAIL_SCHE: 'ReSource/API_DETAIL_SCHE'
+    API_DETAIL_SCHE: 'ReSource/API_DETAIL_SCHE',
+    API_LIST_CONTENT_UI_SOURCE: 'ReSource/API_LIST_CONTENT_UI_SOURCE'
 }
 const initialState = {
     resDetailSource: [],
@@ -26,7 +27,8 @@ const initialState = {
     resUpdateSource: {},
     resUpdateDateSche: {},
     resUpdateSche: {},
-    resDetailSche: {}
+    resDetailSche: {},
+    resListContentUISource: []
 }
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -217,11 +219,30 @@ export default (state = initialState, action) => {
                 resListDateSche: action.payload.data
             }
         }
+
+        //list content ui source
+        case REQUEST(ACTION_TYPES.API_LIST_CONTENT_UI_SOURCE): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_LIST_CONTENT_UI_SOURCE): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_LIST_CONTENT_UI_SOURCE): {
+            return {
+                ...state,
+                resListContentUISource: action.payload.data
+            }
+        }
         default:
             return state;
     }
 }
 const API_SOURCE = API+'source/'
+const API_UI = API+'ui/'
 export const reDetailSource = (id) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_DETAIL_SOURCE,
@@ -296,6 +317,13 @@ export const reListDateSche = (id) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_LIST_DATE_SCHE,
         payload: axios.get(API_SOURCE+'all-date-sche/'+id)
+    });
+    return result;
+};
+export const reListContentUISource = (idUI, idSource) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_LIST_CONTENT_UI_SOURCE,
+        payload: axios.get(API_UI+'detail-ui-source/'+idUI+'/'+idSource)
     });
     return result;
 };

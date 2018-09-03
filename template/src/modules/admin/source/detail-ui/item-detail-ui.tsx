@@ -1,76 +1,93 @@
 import * as React from "react";
-import ListElementOnDetailUI from "./detail-ui";
 import { connect } from "react-redux";
+import ListElementDetailUISource from "./detail-ui";
+import { reAddUpdateContentElement } from "../../ui/reUI";
+import { reListContentUISource } from "../reSource";
 
 interface Props {
   detailUI: any;
   sub?: any;
-  showListElement: any;
-  currentIdElement: any;
-  currentMatchDetailUI: any;
-  deleteElementToUIDetail: any;
-  reDetailUI: (idUI: any) => void;
-  reDeleteElementToDetailUI: (idUI: any, idDetailUI: any) => void;
-  reShowListElement: (status: boolean) => void;
-  reSetCurrentIdElement: (id: any) => void;
+  match: any,
+  reAddUpdateContentElement: (form: any)=> void,
+  resAddUpdateContentElement: any,
+  reListContentUISource: (idUI: number, idSource: number)=> void
 }
-class ItemDetailUISource extends React.Component<Props, {}> {
-  constructor(props) {
-    super(props);
+interface State {
+  content_element_attribute: string,
+  content_element_attribute_src: string,
+  content_element_data: string,
+  content_element_class: string
+}
+class ItemDetailUISource extends React.Component<Props, State> {
+  state = {
+    content_element_attribute: this.props.detailUI.content_element_attribute,
+      content_element_attribute_src: this.props.detailUI.content_element_attribute_src,
+      content_element_data: this.props.detailUI.content_element_data,
+      content_element_class: this.props.detailUI.content_element_class
   }
-  componentWillReceiveProps(nextProps) {
-    if (
-      nextProps.deleteElementToUIDetail != this.props.deleteElementToUIDetail &&
-      nextProps.deleteElementToUIDetail.list == 1
-    ) {
-      this.props.reDetailUI(this.props.currentMatchDetailUI.params.idUi);
+  componentWillReceiveProps(nextProps){
+    if(nextProps.resAddUpdateContentElement != this.props.resAddUpdateContentElement){
+      if(nextProps.resAddUpdateContentElement.list == true){
+        this.props.reListContentUISource(
+          this.props.match.params.idUI,
+          this.props.match.params.idSource
+        );
+      }
     }
   }
-  showListElement = (id: any) => {
-    this.props.reShowListElement(true);
-    this.props.reSetCurrentIdElement(id);
-  };
+  saveContentElement = (obj)=> {
+    const tempDom: any = document.getElementById(obj.idVirtualElement)
+    this.props.reAddUpdateContentElement({
+      ...obj,
+      [tempDom.name]: tempDom.value
+    })
+  }
   generateInfo = () => {
     return (
       <div className="item-block">
         <div className="toolbar">
           <h3>{this.props.detailUI.element_name}</h3>
-          <div className="action">
-            {this.props.detailUI.element_type == 0 ? (
-              <div
-                onClick={() =>
-                  this.showListElement(this.props.detailUI.detail_ui_id)
-                }
-                className="btn btn-xs btn-info"
-              >
-                <i className="icon-drawar" /> Thêm Element mới
-              </div>
-            ) : (
-              ""
-            )}
-            <button
-              onClick={() => {
-                this.props.reDeleteElementToDetailUI(
-                  this.props.currentMatchDetailUI.params.idUi,
-                  this.props.detailUI.detail_ui_id
-                );
-              }}
-              className="btn btn-xs btn-danger"
-            >
-              <i className=" icon-trash" /> Xoá
-            </button>
-          </div>
-        </div>
+         </div>
         <div className="style">
           <div className="form-group">
             <label className="col-md-12">
-              <span className="help"> Id của đối tượng</span>
+              <span className="help"> Nội dung của đối tượng</span>
+              <div onClick={()=> this.saveContentElement({
+                idVirtualElement: this.props.detailUI.detail_ui_random_id+'-content',
+                content_element_id: this.props.detailUI.content_element_id,
+                content_element_id_detail_ui: this.props.detailUI.detail_ui_id,
+                content_element_id_source: this.props.match.params.idSource
+              })} className="btn btn-xs btn-info">
+                <i className=" icon-doc" /> Lưu
+              </div>
+            </label>
+            <div className="col-md-12">
+              <textarea 
+              defaultValue={this.state.content_element_data} 
+              name="content_element_data" 
+              id={this.props.detailUI.detail_ui_random_id+'-content'} 
+              className="form-control" style={{height: 123}}/>
+            </div>
+          </div>
+          <div className="form-group">
+            <label className="col-md-12">
+              <span className="help"> Class của đối tượng</span>
+              <div onClick={()=> this.saveContentElement({
+                idVirtualElement: this.props.detailUI.detail_ui_random_id+'-class',
+                content_element_id: this.props.detailUI.content_element_id,
+                content_element_id_detail_ui: this.props.detailUI.detail_ui_id,
+                content_element_id_source: this.props.match.params.idSource
+              })} className="btn btn-xs btn-info">
+                <i className=" icon-doc" /> Lưu
+              </div>
             </label>
             <div className="col-md-12">
               <input
+                name="content_element_class"
+                id={this.props.detailUI.detail_ui_random_id+'-class'}
                 type="text"
                 className="form-control"
-                value={this.props.detailUI.detail_ui_random_id}
+                defaultValue={this.state.content_element_class}
               />
             </div>
           </div>
@@ -78,15 +95,44 @@ class ItemDetailUISource extends React.Component<Props, {}> {
         <div className="noi-dung">
           <div className="form-group">
             <label className="col-md-12">
-              <span className="help"> Css của đối tượng</span>
-              <button className="btn btn-xs btn-info">
+              <span className="help"> Attribute của đối tượng</span>
+              <div onClick={()=> this.saveContentElement({
+                idVirtualElement: this.props.detailUI.detail_ui_random_id+'-attr',
+                content_element_id: this.props.detailUI.content_element_id,
+                content_element_id_detail_ui: this.props.detailUI.detail_ui_id,
+                content_element_id_source: this.props.match.params.idSource
+              })} className="btn btn-xs btn-info">
                 <i className=" icon-doc" /> Lưu
-              </button>
+              </div>
             </label>
             <div className="col-md-12">
-              <textarea className="form-control">
-                {this.props.detailUI.detail_ui_css}
-              </textarea>
+              <input className="form-control"
+              type="text"
+              name="content_element_attribute"
+              defaultValue={this.state.content_element_attribute}
+              id={this.props.detailUI.detail_ui_random_id+'-attr'}/>
+            </div>
+          </div>
+          <div className="form-group">
+            <label className="col-md-12">
+              <span className="help"> Content Attribute của đối tượng</span>
+              <div onClick={()=> this.saveContentElement({
+                idVirtualElement: this.props.detailUI.detail_ui_random_id+'-content-attr',
+                content_element_id: this.props.detailUI.content_element_id,
+                content_element_id_detail_ui: this.props.detailUI.detail_ui_id,
+                content_element_id_source: this.props.match.params.idSource
+              })} className="btn btn-xs btn-info">
+                <i className=" icon-doc" /> Lưu
+              </div>
+            </label>
+            <div className="col-md-12">
+              <input
+                name="content_element_attribute_src"
+                id={this.props.detailUI.detail_ui_random_id+'-content-attr'}
+                type="text"
+                defaultValue={this.state.content_element_attribute_src}
+                className="form-control"
+              />
             </div>
           </div>
         </div>
@@ -102,7 +148,7 @@ class ItemDetailUISource extends React.Component<Props, {}> {
   };
   generateSubItemDetailUI = () => {
     return (
-      <ListElementOnDetailUI sub="child" detail={this.props.detailUI.child} />
+      <ListElementDetailUISource match={this.props.match} sub="child" detail={this.props.detailUI.child} />
     );
   };
   render() {
@@ -117,12 +163,11 @@ class ItemDetailUISource extends React.Component<Props, {}> {
 }
 
 const mapStateToProps = storeState => ({
-  showListElement: storeState.reUI.showListElement,
-  currentIdElement: storeState.reUI.currentIdElement,
-  deleteElementToUIDetail: storeState.reUI.deleteElementToUIDetail,
-  currentMatchDetailUI: storeState.reUI.currentMatchDetailUI
+  resAddUpdateContentElement: storeState.reUI.resAddUpdateContentElement
 });
 const mapDispatchToProps = {
+  reAddUpdateContentElement,
+  reListContentUISource
 };
 export default connect(
   mapStateToProps,

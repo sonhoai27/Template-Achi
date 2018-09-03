@@ -6,6 +6,7 @@ import Source from "./source";
 import AddSource from "./addSource";
 import DetailSource from "./detailSource";
 import AddContentUISource from "./addContentUISource";
+import ReviewLadingPage from "./child/review";
 import ListSche from "./child/listSche";
 import AddSche from "./child/addSche";
 import detailSche from "./child/detailSche";
@@ -53,8 +54,12 @@ class SourceRouter extends React.Component<Props, {}> {
               component={DetailSource}
             />
             <Route
-              path={`${this.props.match.url}/ui-source/:idSource`}
+              path={`${this.props.match.url}/ui-source/:idUI/:idSource`}
               component={AddContentUISource}
+            />
+             <Route
+              path={`${this.props.match.url}/review-landing-page/:idUI/:idSource`}
+              component={ReviewLadingPage}
             />
             <Route
               path={`${this.props.match.url}/add-sche/:idSource`}

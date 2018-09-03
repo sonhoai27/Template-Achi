@@ -9,7 +9,8 @@ export const ACTION_TYPES = {
     API_ADD_ELEMENT_TO_UI_DETAIL: 'ReUI/API_ADD_ELEMENT_TO_UI_DETAIL',
     API_DELETE_ELEMENT_DETAIl_UI: 'ReUI/API_DELETE_ELEMENT_DETAIl_UI',
     CURRENT_MATCH_DETAIl_UI: 'ReUI/CURRENT_MATCH_DETAIl_UI',
-    API_LIST_UI: 'ReUI/API_LIST_UI'
+    API_LIST_UI: 'ReUI/API_LIST_UI',
+    API_ADD_UPDATE_CONTENT_UI_ELEMENT: 'ReUI/API_ADD_UPDATE_CONTENT_UI_ELEMENT'
 }
 
 const initialState = {
@@ -20,7 +21,8 @@ const initialState = {
     addElementToUIDetail: '',
     deleteElementToUIDetail: '',
     currentMatchDetailUI: '',
-    resListUI: []
+    resListUI: [],
+    resAddUpdateContentElement: {}
 }
 
 export default (state = initialState, action) => {
@@ -133,6 +135,24 @@ export default (state = initialState, action) => {
                 resListUI: action.payload.data.list
             }
         }
+
+        // add update content element
+        case REQUEST(ACTION_TYPES.API_ADD_UPDATE_CONTENT_UI_ELEMENT): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_ADD_UPDATE_CONTENT_UI_ELEMENT): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_ADD_UPDATE_CONTENT_UI_ELEMENT): {
+            return {
+                ...state,
+                resAddUpdateContentElement: action.payload.data
+            }
+        }
         default:
             return state;
     }
@@ -143,6 +163,7 @@ const API_DETAIL_UI = API + 'ui/detail-ui'
 const API_LIST_UI = API + 'ui/all-ui'
 const API_ADD_ELEMENT_DETAIL_UI = API + 'ui/add-element-to-detail-ui'
 const API_DELETE_ELEMENT_DETAIL_UI = API + 'ui/delete-element-of-detail-ui/'
+const API_ADD_UPDATE_CONTENT_UI_ELEMENT = API+'ui/add-update-content-element'
 export const reListElement = () => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_LIST_ELEMENT,
@@ -203,6 +224,13 @@ export const reListUI = () => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_LIST_UI,
         payload: axios.get(API_LIST_UI)
+    });
+    return result;
+};
+export const reAddUpdateContentElement = (form) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_ADD_UPDATE_CONTENT_UI_ELEMENT,
+        payload: axios.post(API_ADD_UPDATE_CONTENT_UI_ELEMENT, form)
     });
     return result;
 };

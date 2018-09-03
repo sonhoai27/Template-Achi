@@ -29,6 +29,7 @@ class UISourceModel {
         $detail = $db->fetch_object();
         return ($this->makeListElementParentChild($detail));
     }
+    // tra ve bao gom cac detail ui cua 1 ui va content cua cac detail ui do
     function detail_ui_source($db,$idUi, $idSource) {
         $db->query('select * from achi_detail_ui
         inner join achi_element on achi_detail_ui.detail_ui_id_element = achi_element.element_id
@@ -66,7 +67,7 @@ class UISourceModel {
         $flag = 0;
         $temp = $this->makeIdDetailUI($this->findChildElement($detail, $idDetailUI),$idDetailUI);
         for($i = 0; $i < count($temp); $i++){
-            if($db->delete('achi_detail_ui', ' detail_ui_id = '.$temp[$i])){
+            if($db->delete('achi_content_element', ' content_element_id_detail_ui = '.$temp[$i]) && $db->delete('achi_detail_ui', ' detail_ui_id = '.$temp[$i])){
                 $flag = 1;
             }else {
                 $flag = 0;
@@ -99,5 +100,12 @@ class UISourceModel {
         }
         array_push($temp, $idParentDetailUI);
         return $temp;
+    }
+
+    function update_content_element($db, $form, $content_element_id){
+        return $db->update($form, 'achi_content_element', ' content_element_id = '.$db->sqlQuote($content_element_id));
+    }
+    function add_content_element($db,$form) {
+        return $db->insert($form, 'achi_content_element');
     }
 }

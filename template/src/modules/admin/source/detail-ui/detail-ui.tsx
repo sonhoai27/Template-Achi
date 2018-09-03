@@ -1,8 +1,9 @@
 import * as React from "react";
-import ItemDetailUI from "./item-detail-ui";
+import ItemDetailUISource from "./item-detail-ui";
 interface Props {
     detail: any,
     sub?: any,
+    match: any
 }
 interface State {
     detail: any
@@ -24,16 +25,21 @@ class ListElementDetailUISource extends React.Component<Props, State> {
     renderListElementOfUI = ()=> {
         if(this.state.detail){
           return this.state.detail.map(element => {
-              return <ItemDetailUI
+              return <ItemDetailUISource
                 sub={this.props.sub}
                 key={element.detail_ui_random_id}
+                match={this.props.match}
                 detailUI={element}/>
           })
         }
         return ''
     }
     render(){
-        return this.renderListElementOfUI()
+        return (
+            <>
+            {this.renderListElementOfUI()}
+            </>
+        )
     }
 }
 
