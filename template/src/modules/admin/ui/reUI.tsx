@@ -10,7 +10,8 @@ export const ACTION_TYPES = {
     API_DELETE_ELEMENT_DETAIl_UI: 'ReUI/API_DELETE_ELEMENT_DETAIl_UI',
     CURRENT_MATCH_DETAIl_UI: 'ReUI/CURRENT_MATCH_DETAIl_UI',
     API_LIST_UI: 'ReUI/API_LIST_UI',
-    API_ADD_UPDATE_CONTENT_UI_ELEMENT: 'ReUI/API_ADD_UPDATE_CONTENT_UI_ELEMENT'
+    API_ADD_UPDATE_CONTENT_UI_ELEMENT: 'ReUI/API_ADD_UPDATE_CONTENT_UI_ELEMENT',
+    API_ADD_CSS: 'ReUI/API_ADD_CSS'
 }
 
 const initialState = {
@@ -22,7 +23,8 @@ const initialState = {
     deleteElementToUIDetail: '',
     currentMatchDetailUI: '',
     resListUI: [],
-    resAddUpdateContentElement: {}
+    resAddUpdateContentElement: {},
+    resAddCss: {}
 }
 
 export default (state = initialState, action) => {
@@ -153,6 +155,23 @@ export default (state = initialState, action) => {
                 resAddUpdateContentElement: action.payload.data
             }
         }
+        // add css
+        case REQUEST(ACTION_TYPES.API_ADD_CSS): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_ADD_CSS): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_ADD_CSS): {
+            return {
+                ...state,
+                resAddCss: action.payload.data
+            }
+        }
         default:
             return state;
     }
@@ -164,6 +183,7 @@ const API_LIST_UI = API + 'ui/all-ui'
 const API_ADD_ELEMENT_DETAIL_UI = API + 'ui/add-element-to-detail-ui'
 const API_DELETE_ELEMENT_DETAIL_UI = API + 'ui/delete-element-of-detail-ui/'
 const API_ADD_UPDATE_CONTENT_UI_ELEMENT = API+'ui/add-update-content-element'
+const API_ADD_CSS = API + 'ui/add-css/'
 export const reListElement = () => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_LIST_ELEMENT,
@@ -231,6 +251,13 @@ export const reAddUpdateContentElement = (form) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_ADD_UPDATE_CONTENT_UI_ELEMENT,
         payload: axios.post(API_ADD_UPDATE_CONTENT_UI_ELEMENT, form)
+    });
+    return result;
+};
+export const reAddCss = (form, id) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_ADD_CSS,
+        payload: axios.post(API_ADD_CSS+id, form)
     });
     return result;
 };

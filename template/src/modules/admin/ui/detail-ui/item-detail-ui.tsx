@@ -5,7 +5,8 @@ import {
   reShowListElement,
   reSetCurrentIdElement,
   reDeleteElementToDetailUI,
-  reDetailUI
+  reDetailUI,
+  reAddCss
 } from "../reUI";
 interface Props {
   detailUI: any;
@@ -17,11 +18,18 @@ interface Props {
   reDetailUI: (idUI: any) => void;
   reDeleteElementToDetailUI: (idUI: any, idDetailUI: any) => void;
   reShowListElement: (status: boolean) => void;
-  reSetCurrentIdElement: (id: any) => void;
+  reSetCurrentIdElement: (id: any) => void,
+  reAddCss: (form: any, id: number)=> void
 }
-class ItemDetailUI extends React.Component<Props, {}> {
+interface State {
+  detail_ui_css: string
+}
+class ItemDetailUI extends React.Component<Props, State> {
   constructor(props) {
     super(props);
+    this.state = {
+      detail_ui_css: ''
+    }
   }
   componentWillReceiveProps(nextProps) {
     if (
@@ -30,11 +38,21 @@ class ItemDetailUI extends React.Component<Props, {}> {
     ) {
       this.props.reDetailUI(this.props.currentMatchDetailUI.params.idUi);
     }
+    
   }
-  showListElement = (id: any) => {
+  showListElement = (id: number) => {
     this.props.reShowListElement(true);
     this.props.reSetCurrentIdElement(id);
   };
+  addCss = (idDetailUI: number)=> {
+    this.props.reAddCss(this.state, idDetailUI)
+  }
+  onChangeCss = (e: any)=> {
+    // @ts-ignore
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
   generateInfo = () => {
     return (
       <div className="item-block">
@@ -53,7 +71,7 @@ class ItemDetailUI extends React.Component<Props, {}> {
             ) : (
               ""
             )}
-            <button
+            <div
               onClick={() => {
                 this.props.reDeleteElementToDetailUI(
                   this.props.currentMatchDetailUI.params.idUi,
@@ -63,7 +81,7 @@ class ItemDetailUI extends React.Component<Props, {}> {
               className="btn btn-xs btn-danger"
             >
               <i className=" icon-trash" /> Xoá
-            </button>
+            </div>
           </div>
         </div>
         <div className="style">
@@ -84,14 +102,16 @@ class ItemDetailUI extends React.Component<Props, {}> {
           <div className="form-group">
             <label className="col-md-12">
               <span className="help"> Css của đối tượng</span>
-              <button className="btn btn-xs btn-info">
+              <div
+                onClick={()=>{
+                  this.addCss(this.props.detailUI.detail_ui_id)
+                }}
+                className="btn btn-xs btn-info">
                 <i className=" icon-doc" /> Lưu
-              </button>
+              </div>
             </label>
             <div className="col-md-12">
-              <textarea className="form-control">
-                {this.props.detailUI.detail_ui_css}
-              </textarea>
+              <textarea name="detail_ui_css" onChange={this.onChangeCss} className="form-control" defaultValue={this.props.detailUI.detail_ui_css}/>
             </div>
           </div>
         </div>
@@ -125,13 +145,14 @@ const mapStateToProps = storeState => ({
   showListElement: storeState.reUI.showListElement,
   currentIdElement: storeState.reUI.currentIdElement,
   deleteElementToUIDetail: storeState.reUI.deleteElementToUIDetail,
-  currentMatchDetailUI: storeState.reUI.currentMatchDetailUI
+  currentMatchDetailUI: storeState.reUI.currentMatchDetailUI,
 });
 const mapDispatchToProps = {
   reShowListElement,
   reSetCurrentIdElement,
   reDeleteElementToDetailUI,
-  reDetailUI
+  reDetailUI,
+  reAddCss
 };
 export default connect(
   mapStateToProps,

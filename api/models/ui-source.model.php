@@ -9,6 +9,9 @@ class UISourceModel {
     function edit($db,$id, $form) {
         return $db->update($form, 'achi_ui', ' ui_id = '.$db->sqlQuote($id));
     }
+    function edit_css($db,$form,$id) {
+        return $db->update($form, 'achi_detail_ui', ' detail_ui_id = '.$db->sqlQuote($id));
+    }
     function all($db) {
         $db->query('select * from achi_ui order by achi_ui.ui_id desc');
         return $db->fetch_object();

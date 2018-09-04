@@ -33,19 +33,14 @@ class ReviewLandingPage extends React.Component<Props, State> {
     render(){
         return(
             <div id="review-lading-page">
-                {
-                    this.state.isFinish ?
-                    <ItemReviewLandingPage items={this.props.resListContentUISource.list}/>
-                    : ''
-                }
+                <ItemReviewLandingPage items={this.props.resListContentUISource.list}/>
             </div>
         )
     }
 }
 
 const mapStateToProps = storeState => ({
-    resListContentUISource: storeState.reSource.resListContentUISource
-  });
+    resListContentUISource: storeState.reSource.resListContentUISource,  });
   const mapDispatchToProps = {
     reListContentUISource
   };

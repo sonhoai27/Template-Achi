@@ -2,8 +2,8 @@ import * as React from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import PrivateRouter from "../config/PrivateRouter";
 import { BASEURL } from "../config/const";
-import AdminRouter from "./admin/AdminRouter";
 import ClientRouter from "./client/clientRouter";
+import Loadable from 'react-loadable';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +13,11 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route exact path={BASEURL} component={ClientRouter} />
-          <PrivateRouter path={BASEURL + "admin"} component={AdminRouter} />
+          <PrivateRouter path={BASEURL + "admin"}
+          component={Loadable({
+            loader: () => import(/*webpackChunkName: "admin"*/'./admin/AdminRouter'),
+            loading: ()=> <h1>Loading....</h1>,
+          })} />
         </Switch>
       </Router>
     );

@@ -14,6 +14,7 @@ interface Props {
   showListElement: any;
   currentMatchDetailUI: any;
   currentIdElement: any;
+  resAddCss: any,
   reDetailUI: (id: any) => void;
   reSetCurrentMatchDetailUI: (match: any) => void;
   reShowListElement: (status: boolean) => void;
@@ -24,7 +25,12 @@ class AddUIDetail extends React.Component<Props, {}> {
     super(props);
   }
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.resDetailUI.length);
+    if(nextProps.resAddCss != this.props.resAddCss){
+      alert("Thành công")
+    }
+  }
+  componentDidUpdate(preProps, preState, snapsot){
+    console.log(this.props.resAddCss,snapsot)
   }
   componentDidMount() {
     this.props.reDetailUI(this.props.match.params.idUi);
@@ -70,7 +76,8 @@ const mapStateToProps = storeState => ({
   resDetailUI: storeState.reUI.resDetailUI,
   showListElement: storeState.reUI.showListElement,
   currentMatchDetailUI: storeState.reUI.currentMatchDetailUI,
-  currentIdElement: storeState.reUI.currentIdElement
+  currentIdElement: storeState.reUI.currentIdElement,
+  resAddCss: storeState.reUI.resAddCss
 });
 const mapDispatchToProps = {
   reDetailUI,
