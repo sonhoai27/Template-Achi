@@ -7,6 +7,7 @@ import UIRouter from "./ui/uiRouter";
 import SourceRouter from "./source/sourceRouter";
 import { connect } from "react-redux";
 import Photo from "../shared/photo";
+import NotifySuccess from "../shared/notifySuccess";
 interface Props {
   match?: any,
   isShowPhotoApp: any
@@ -28,6 +29,9 @@ class AdminRouter extends React.Component<Props, {}> {
         <Route path={`${this.props.match.url}/ui`} component={UIRouter} />
         <Route path={`${this.props.match.url}/source`} component={SourceRouter} />
         {this.props.isShowPhotoApp ? <Photo/> : ''}
+        <div className="jq-toast-wrap top-right">
+            <NotifySuccess/>
+        </div>
       </div>
     );
   }

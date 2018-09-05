@@ -9,22 +9,31 @@ class DetailReviewLandingPage extends React.Component<Props, {}> {
     constructor(props) {
         super(props);
     }
+    componentDidMount(){
+        if(!this.props.item.child){
+            const temp: any = document.getElementById(this.props.item.detail_ui_random_id)
+            temp.innerHTML = this.props.item.content_element_data
+        }
+    }
     makeItem = () => {
+        
         let content = React.createElement(
             this.props.item.element_tag,
             {
-                class: this.props.item.element_class,
+                class: this.props.item.element_class+' '+this.props.item.content_element_class,
                 id: this.props.item.detail_ui_random_id,
                 [this.props.item.content_element_attribute]: this.props.item.content_element_attribute_src
             },
-            (!this.props.item.child ? this.props.item.content_element_data : [this.makeSub()]) 
+            this.makeSub()
         )
         return content;
     }
     makeSub = ()=> {
-        return (
-            <ItemReviewLandingPage items={this.props.item.child} />
-        );
+        if(this.props.item.child){
+            return [<ItemReviewLandingPage items={this.props.item.child} />]
+        }else {
+            return this.props.item.content_element_data
+        }
     }
     render(){
         return (

@@ -27,7 +27,7 @@ class Home extends React.Component {
             <BreadCrumd uri={breadCrumb} title="Bài viết"/>
           </div>
         </div>
-      </>   
+      </>
     );
   }
 }

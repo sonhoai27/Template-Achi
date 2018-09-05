@@ -3,13 +3,16 @@
 <?php
 define("BASE_URL", 'http://localhost:8080/Achi/template/public/');
 ?>
+<base href="http://localhost:8080/Achi/template/public/">
 <head>
     <meta charset="UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="<?=BASE_URL?>css/bootstrap.css" rel="stylesheet">
     <link href="<?=BASE_URL?>css/sidebar-nav.min.css" rel="stylesheet">
     <link href="<?=BASE_URL?>css/animate.css" rel="stylesheet">
+    <link href="<?=BASE_URL?>css/jquery.toast.css" rel="stylesheet">
     <link href="<?=BASE_URL?>css/style.css" rel="stylesheet">
     <link href="<?=BASE_URL?>css/megna-dark.css" rel="stylesheet">
     <script src="<?=BASE_URL?>js/jquery-3.3.1.slim.min.js"></script>
@@ -21,6 +24,7 @@ define("BASE_URL", 'http://localhost:8080/Achi/template/public/');
             --admin-primary-color: #096dd9;
         }
     </style>
+    <link href="<?=BASE_URL?>css/client.css" rel="stylesheet">
 </head>
 <body>
     <div id="root"></div>

@@ -39,7 +39,7 @@ class UISourceModel {
         left OUTER JOIN achi_content_element on achi_content_element.content_element_id_detail_ui = achi_detail_ui.detail_ui_id
         where achi_detail_ui.detail_ui_id_ui = '.$db->sqlQuote($idUi).' 
         and achi_content_element.content_element_id_source = '.$db->sqlQuote($idSource).' 
-        or achi_content_element.content_element_id_source is NULL');
+        or achi_content_element.content_element_id_source is NULL order by detail_ui_id asc ');
         $detail = $db->fetch_object();
         return ($this->makeListElementParentChild($detail));
     }

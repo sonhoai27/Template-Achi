@@ -2,15 +2,11 @@ import * as React from "react";
 import { connect } from "react-redux";
 import ListElementDetailUISource from "./detail-ui";
 import { reAddUpdateContentElement } from "../../ui/reUI";
-import { reListContentUISource } from "../reSource";
-
 interface Props {
   detailUI: any;
   sub?: any;
   match: any,
-  reAddUpdateContentElement: (form: any)=> void,
-  resAddUpdateContentElement: any,
-  reListContentUISource: (idUI: number, idSource: number)=> void
+  reAddUpdateContentElement: (form: any)=> void
 }
 interface State {
   content_element_attribute: string,
@@ -25,16 +21,6 @@ class ItemDetailUISource extends React.Component<Props, State> {
       content_element_data: this.props.detailUI.content_element_data,
       content_element_class: this.props.detailUI.content_element_class
   }
-  componentWillReceiveProps(nextProps){
-    if(nextProps.resAddUpdateContentElement != this.props.resAddUpdateContentElement){
-      if(nextProps.resAddUpdateContentElement.list == true){
-        this.props.reListContentUISource(
-          this.props.match.params.idUI,
-          this.props.match.params.idSource
-        );
-      }
-    }
-  }
   saveContentElement = (obj)=> {
     const tempDom: any = document.getElementById(obj.idVirtualElement)
     this.props.reAddUpdateContentElement({
@@ -44,7 +30,7 @@ class ItemDetailUISource extends React.Component<Props, State> {
   }
   generateInfo = () => {
     return (
-      <div className="item-block">
+      <div className="item-block" style={{marginBottom: 0}}>
         <div className="toolbar">
           <h3>{this.props.detailUI.element_name}</h3>
          </div>
@@ -66,7 +52,7 @@ class ItemDetailUISource extends React.Component<Props, State> {
               defaultValue={this.state.content_element_data} 
               name="content_element_data" 
               id={this.props.detailUI.detail_ui_random_id+'-content'} 
-              className="form-control" style={{height: 123}}/>
+              className="form-control" style={{height: 50}}/>
             </div>
           </div>
           <div className="form-group">
@@ -163,11 +149,9 @@ class ItemDetailUISource extends React.Component<Props, State> {
 }
 
 const mapStateToProps = storeState => ({
-  resAddUpdateContentElement: storeState.reUI.resAddUpdateContentElement
 });
 const mapDispatchToProps = {
   reAddUpdateContentElement,
-  reListContentUISource
 };
 export default connect(
   mapStateToProps,

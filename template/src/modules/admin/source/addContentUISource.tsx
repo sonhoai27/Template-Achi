@@ -7,6 +7,7 @@ import { BASEURLADMIN } from "../../../config/const";
 interface Props {
   match: any,
   resListContentUISource: any,
+  resAddUpdateContentElement: any,
   reListContentUISource: (idUI: number, idSource: number)=> void
 }
 class AddContentUISource extends React.Component<Props, {}> {
@@ -18,6 +19,16 @@ class AddContentUISource extends React.Component<Props, {}> {
       this.props.match.params.idUI,
       this.props.match.params.idSource
     );
+  }
+  componentWillReceiveProps(nextProps){
+    if(nextProps.resAddUpdateContentElement != this.props.resAddUpdateContentElement){
+      if(nextProps.resAddUpdateContentElement.list){
+        this.props.reListContentUISource(
+          this.props.match.params.idUI,
+          this.props.match.params.idSource
+        );
+      }
+    }
   }
   render() {
     return (
@@ -33,7 +44,7 @@ class AddContentUISource extends React.Component<Props, {}> {
               Chi tiết Landing Page
               </div>
               <div className="panel-action-bar">
-               <Link to={BASEURLADMIN+'source/review-landing-page/'+this.props.match.params.idUI+'/'+this.props.match.params.idSource}>
+               <Link target="_blank" to={BASEURLADMIN+'source/review-landing-page/'+this.props.match.params.idUI+'/'+this.props.match.params.idSource}>
                <div className="btn btn-sm btn-info">
                 <i className="ti-eye"/> Xem thử
                 </div>
@@ -50,7 +61,8 @@ class AddContentUISource extends React.Component<Props, {}> {
   }
 }
 const mapStateToProps = storeState => ({
-  resListContentUISource: storeState.reSource.resListContentUISource
+  resListContentUISource: storeState.reSource.resListContentUISource,
+  resAddUpdateContentElement: storeState.reUI.resAddUpdateContentElement
 });
 const mapDispatchToProps = {
   reListContentUISource

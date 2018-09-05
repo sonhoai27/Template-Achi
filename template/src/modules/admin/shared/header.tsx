@@ -38,7 +38,7 @@ class Header extends React.Component {
                 >
                   {" "}
                   <img
-                    src="https://wrappixel.com/ampleadmin/ampleadmin-html/plugins/images/users/varun.jpg"
+                    src=""
                     alt="user-img"
                     width={36}
                     className="img-circle"
@@ -51,7 +51,7 @@ class Header extends React.Component {
                     <div className="dw-user-box">
                       <div className="u-img">
                         <img
-                          src="https://wrappixel.com/ampleadmin/ampleadmin-html/plugins/images/users/varun.jpg"
+                          src=""
                           alt="user"
                         />
                       </div>
@@ -119,7 +119,7 @@ class Header extends React.Component {
               <li className="user-pro">
                 <a href="javascript:void(0)" className="waves-effect">
                   <img
-                    src="../plugins/images/users/varun.jpg"
+                    src=""
                     alt="user-img"
                     className="img-circle"
                   />{" "}
