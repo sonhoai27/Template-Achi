@@ -7,14 +7,18 @@ export const ACTION_TYPES = {
     API_ADD_IMAGE: 'ReInit/API_ADD_IMAGE',
     API_DELETE_IMAGE: 'ReInit/API_DELETE_IMAGE',
     CURRENT_EDITOR_PHOTO: 'ReInit/CURRENT_EDITOR_PHOTO',
-    IS_SHOWING_PHOTO_APP: 'ReInit/IS_SHOWING_PHOTO_APP'
+    IS_SHOWING_PHOTO_APP: 'ReInit/IS_SHOWING_PHOTO_APP',
+    IS_DANGER: 'ReInit/IS_DANGER',
+    IS_SUCCESS: 'ReInit/IS_DANGER'
 }
 const initialState = {
     resListImage: [],
     resDeleteImage: '',
     resAddImage: '',
     currentEditorPhoto: '',
-    isShowPhotoApp: false
+    isShowPhotoApp: false,
+    isSuccess: false,
+    isDanger: false
 
 }
 export default (state = initialState, action) => {
@@ -82,6 +86,18 @@ export default (state = initialState, action) => {
                 isShowPhotoApp: action.payload
             }
         }
+        case (ACTION_TYPES.IS_DANGER): {
+            return {
+                ...state,
+                isDanger: action.payload
+            }
+        }
+        case (ACTION_TYPES.IS_SUCCESS): {
+            return {
+                ...state,
+                isSuccess: action.payload
+            }
+        }
         default:
             return state;
     }
@@ -119,6 +135,20 @@ export const reSetCurrentEditorPhoto = (editor) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.CURRENT_EDITOR_PHOTO,
         payload: editor
+    });
+    return result;
+};
+export const reIsDanger = (status) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.IS_DANGER,
+        payload: status
+    });
+    return result;
+};
+export const reIsSuccess = (status) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.IS_SUCCESS,
+        payload: status
     });
     return result;
 };

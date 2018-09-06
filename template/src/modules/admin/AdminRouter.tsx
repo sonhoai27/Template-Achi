@@ -8,9 +8,12 @@ import SourceRouter from "./source/sourceRouter";
 import { connect } from "react-redux";
 import Photo from "../shared/photo";
 import NotifySuccess from "../shared/notifySuccess";
+import NotifyDanger from "../shared/notifyDanger";
 interface Props {
   match?: any,
-  isShowPhotoApp: any
+  isShowPhotoApp: any,
+  isDanger: boolean,
+  isSuccess: boolean
 }
 class AdminRouter extends React.Component<Props, {}> {
   constructor(props) {
@@ -30,7 +33,8 @@ class AdminRouter extends React.Component<Props, {}> {
         <Route path={`${this.props.match.url}/source`} component={SourceRouter} />
         {this.props.isShowPhotoApp ? <Photo/> : ''}
         <div className="jq-toast-wrap top-right">
-            <NotifySuccess/>
+            {this.props.isSuccess ? <NotifySuccess/> : ''}
+            {this.props.isDanger ? <NotifyDanger/> : ''}
         </div>
       </div>
     );
@@ -38,6 +42,8 @@ class AdminRouter extends React.Component<Props, {}> {
 }
 const mapStateToProps = storeState => ({
   isShowPhotoApp: storeState.reInit.isShowPhotoApp,
+  isSuccess: storeState.reInit.isSuccess,
+  isDanger: storeState.reInit.isDanger
 });
 const mapDispatchToProps = {
 };
