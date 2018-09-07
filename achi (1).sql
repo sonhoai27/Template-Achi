@@ -2,10 +2,10 @@
 -- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 04, 2018 lúc 10:15 AM
--- Phiên bản máy phục vụ: 10.1.34-MariaDB
--- Phiên bản PHP: 7.2.8
+-- Host: 127.0.0.1
+-- Generation Time: Sep 07, 2018 at 02:22 AM
+-- Server version: 10.1.34-MariaDB
+-- PHP Version: 7.2.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `achi`
+-- Database: `achi`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `achi_author`
+-- Table structure for table `achi_author`
 --
 
 CREATE TABLE `achi_author` (
@@ -38,7 +38,7 @@ CREATE TABLE `achi_author` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `achi_author`
+-- Dumping data for table `achi_author`
 --
 
 INSERT INTO `achi_author` (`author_id`, `author_name`, `author_alias`, `author_intro`, `author_avatar`, `author_created_date`) VALUES
@@ -48,7 +48,7 @@ INSERT INTO `achi_author` (`author_id`, `author_name`, `author_alias`, `author_i
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `achi_blog`
+-- Table structure for table `achi_blog`
 --
 
 CREATE TABLE `achi_blog` (
@@ -65,10 +65,11 @@ CREATE TABLE `achi_blog` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `achi_blog`
+-- Dumping data for table `achi_blog`
 --
 
 INSERT INTO `achi_blog` (`blog_id`, `blog_id_category`, `blog_id_author`, `blog_title`, `blog_alias`, `blog_promo`, `blog_cover`, `blog_content`, `blog_created_date`, `blog_id_status`) VALUES
+('', 1, 1, 'George deo...ss', 'george-deo-ss', 'George deo...sss', 'http://localhost:8080/Achi/api/uploads/images/9d6cc0e724414edaef38.png', '<p><img class=\"img-responsive\" src=\"http://localhost:8080/Achi/api/uploads/images/9d6cc0e724414edaef38.png\" data-mce-src=\"../../api/uploads/images/9d6cc0e724414edaef38.png\"></p>', '2018-09-06 16:03:47', 1),
 ('1534689799778', 2, 1, 'TÂM THƯ TUYỆT MẬT GỬI CÁC BẠN GROUP', 'tam-thu-tuyet-mat-gui-cac-ban-group', 'Anh là Mr.Share - Người phụng sự tuổi trẻ Việt. Anh đã đồng hành cùng nghề “giáo dục” cho lớp trẻ được hơn 5 năm và tới bây giờ anh đã trải qua rất nhiều việc', 'http://localhost:8080/LandingPage/api/uploads/images/98903e8e1575784e15a11534629600000.jpg', '<p style=\"margin: 6px 0px; font-family: Helvetica, Arial, sans-serif; color: rgb(29, 33, 41);\"><img class=\"img img-fluid\" src=\"http://localhost:8080/LandingPage/api/uploads/images/98903e8e1575784e15a11534629600000.jpg\" data-mce-src=\"../../api/uploads/images/98903e8e1575784e15a11534629600000.jpg\"></p><p style=\"margin: 6px 0px; font-family: Helvetica, Arial, sans-serif; color: rgb(29, 33, 41);\">Một vài công việc đã và đang làm:</p><p style=\"margin: 6px 0px; font-family: Helvetica, Arial, sans-serif; color: rgb(29, 33, 41);\">- Từng sáng lập CLB Khởi nghiệp thực tiễn cho sinh viên&nbsp;<br>- Từng quản lý chi nhánh, Trainer: Tập đoàn giáo dục quốc tế ECORP&nbsp;<br>- Founder, điều hành: Anh ngữ Max Power<br>- Tham gia hơn 100 các khóa học phát về bản thân<br>- Tác giả: Cuốn da Sống Xứng Đáng<br>- Chinh phục full marathon 42km&nbsp;<br>- Nhà đào tạo phát triển bản thân: đứng training trực tiếp cho hơn 6.000 bạn trẻ về các chủ đề: giao tiếp hiệu quả, thuyết trình, phỏng vấn xin việc, bán hàng, tổ chức sự kiện, mc, phát triển thái độ sống tích cực...</p><p style=\"margin: 6px 0px; font-family: Helvetica, Arial, sans-serif; color: rgb(29, 33, 41);\">----<br>Chưa biết sau này cuộc đời anh sẽ như thế nào, nhưng tới bây giờ thứ giúp anh có động lực sống và làm việc mỗi ngày là sự trăn trở mà chính ngày xưa anh đã gặp phải và đã vượt qua nó:</p><p style=\"margin: 6px 0px; font-family: Helvetica, Arial, sans-serif; color: rgb(29, 33, 41);\">“Làm thế nào để tuổi trẻ sống thật xứng đáng?” (Có ước mơ, có đam mê, có mục tiêu, lạc quan, tích cực, nhiệt huyết, có lòng tự hào dân tộc, đóng góp cho Việt Nam)</p><p style=\"margin: 6px 0px; font-family: Helvetica, Arial, sans-serif; color: rgb(29, 33, 41);\">Anh sinh ra ở quê, lúc nhỏ anh là một thằng nhút nhát và rụt rè, các bạn không thể tưởng tượng lớn lên tới năm 18 tuổi còn nhát hơn nữa, không có bất cứ kỹ năng nào, ngay cả việc nói chuyện với “loài người” lúc ấy cũng là một thứ nằm ngoài khả năng của anh.</p><p style=\"margin: 6px 0px; font-family: Helvetica, Arial, sans-serif; color: rgb(29, 33, 41);\">Người lạ nhát đã không nói ngay cả người thân, hàng xóm anh còn sợ hãi. Các bạn tưởng tượng ai tới nhà anh, ba mẹ dặn là chào hỏi, còn anh im im, ai hỏi gì nói đó, đúng 1 phát. Lúc mà anh đi học về nhà đứng ngoài cổng thấy có khách ở nhà là trong lòng anh sẽ tự nhiên xuất hiện một nỗi sợ người lạ, anh đứng bên ngoài cổng núp ở đâu đó chờ người ta về rồi anh mới vào nhà, nhiều lúc đứng lâu quá không thấy người ta ra lại còn trời nắng thế là anh lủi thủi đi ngõ sau để vào nhà, lén chui vào nhà trong để không phải gặp, ba mẹ anh la anh rất nhiều lần. Lúc ấy “người ta sợ ma, còn anh thì sợ người kinh khủng”. Ngày mà anh lên đại học anh chọn trường đại, học đại, anh hoàn toàn mất định hướng, không biết mình sẽ như thế nào, đi về đâu, sống tiêu cực, mất động lực vào cuộc sống.</p><p style=\"margin: 6px 0px; font-family: Helvetica, Arial, sans-serif; color: rgb(29, 33, 41);\">Sau đó anh hoàn toàn thay đổi nhờ vào những người thầy, những người bạn, những cuốn sách, quan trọng nhất là những thứ anh làm một cách quyết liệt và bắt đầu có những kết quả thật sự bản thân anh ngày trước chưa từng nghĩ đến.</p><p style=\"margin: 6px 0px; font-family: Helvetica, Arial, sans-serif; color: rgb(29, 33, 41);\">Mỗi người chúng ta anh tin đều có những kiến thức, kỹ năng, những câu chuyện mình đã vượt qua trong cuộc sống, và điều quan trọng là có sẵn sàng chia sẻ với người khác.</p><p style=\"margin: 6px 0px; font-family: Helvetica, Arial, sans-serif; color: rgb(29, 33, 41);\">Nên trong GROUP này, anh sẽ bài viết mà anh sưu tầm được, những vài viết anh viết ra từ những trải nghiệm của chính mình và quan trọng hơn là anh hi vọng các bạn có thể chia sẻ phần nào đó những kiến thức của mình. Nếu không thể viết được đơn giản post vài tấm hình. Nếu không post hình được hãy ủng hộ like, tym cho bài viết để người chia sẻ có động lực hơn tiếp tục lan tỏa. Rất cần sự chung tay của các bạn.</p><p style=\"margin: 6px 0px; font-family: Helvetica, Arial, sans-serif; color: rgb(29, 33, 41);\">Biết đâu đó tình cờ bạn trẻ nào đó đọc được, có chút cảm hứng, động lực hoặc có một bài học giúp cuộc sống tốt hơn. Điều đó thực sự ý nghĩa.</p><p style=\"margin: 6px 0px; font-family: Helvetica, Arial, sans-serif; color: rgb(29, 33, 41);\">Anh chưa phải là người quá xuất sắc, anh vẫn còn thấy mình có những thiếu sót, và bản thân anh cũng đang từng ngày học tập những người thầy đi trước. Tuy nhiên từ trái tim những điều anh chia sẻ mong muốn giúp đỡ các bạn trẻ, hi vọng bạn có thể là người chia sẻ điều này nếu bạn thấy nó giúp đỡ một chút thôi cho bạn trẻ nào đó ngoài kia để bạn trẻ Việt, sống xứng đáng với tuổi trẻ của mình.</p><p style=\"margin: 6px 0px; font-family: Helvetica, Arial, sans-serif; color: rgb(29, 33, 41);\">Đọc đến đây, chứng tỏ một điều bạn thật sự muốn tuổi trẻ của mình tuyệt vời hơn. Hãy cmt điều gì đó để chúng ta làm quen với nhau.</p><p style=\"margin: 6px 0px; font-family: Helvetica, Arial, sans-serif; color: rgb(29, 33, 41);\">Cảm ơn bạn trẻ.</p><p><br></p><p style=\"margin: 6px 0px 0px; display: inline; font-family: Helvetica, Arial, sans-serif; color: rgb(29, 33, 41);\">Mr.Share</p>', '2018-08-19 14:46:11', 2),
 ('1534691111975', 2, 1, 'HOW TO TURN SETBACKS INTO SUCCESSES', 'how-to-turn-setbacks-into-successes', 'TONY’S PATH TO LEARNING THE POWER OF GRACE AND THAT LIFE IS NOT HAPPENING TO US, BUT FOR US', 'http://localhost:8080/LandingPage/api/uploads/images/0ebae8caa264432f50ac1534629600000.jpg', '<p style=\"box-sizing: inherit; margin: 0px 0px 25px; font-size: 16px; line-height: 1.63; font-kerning: normal; font-family: proxima_nova_regular, Helvetica, san-serif;\">In my experience of interviewing people I have found that it’s rarely a straight line. For many of us, it’s a journey with many twists and turns. When I was five, I knew more than anything else that I wanted to be a fireman. I wanted to save people’s lives. By age seven the dream had evolved: I wanted to be a police artist and draw the pictures to catch the bad guys and help people. Then, by the time I was nine, it was clear to me that I was destined to be a rock star. I wanted to rock the house and give people an experience of feeling alive —&nbsp;<em style=\"box-sizing: inherit;\"><span style=\"box-sizing: inherit; font-weight: 700; line-height: 1.5;\">a feeling they’d never ever forget.</span></em></p><h3 style=\"box-sizing: inherit; font-family: proxima_nova_extrabold, Helvetica, san-serif; font-weight: 500; line-height: 1.1; margin: 13px 0px 1.5rem; font-size: 24px; text-transform: uppercase; font-kerning: normal; letter-spacing: 1px;\"><span style=\"box-sizing: inherit; font-weight: 700;\">MY BASEBALL DREAMS DASHED</span></h3><p style=\"box-sizing: inherit; margin: 0px 0px 25px; font-size: 16px; line-height: 1.63; font-kerning: normal; font-family: proxima_nova_regular, Helvetica, san-serif;\">By the time I was twelve, my father, Jim Robbins, had entered my life. He’d previously been a semi-pro baseball player, and my love for him grew into a total love for the sport. He used to hit me ground balls, literally hundreds of them, on days that were burning hot and smoggy in Glendora, California, just east of L.A. We’d be out there for five or six hours, but much to his chagrin, I just didn’t have the talent to catch the eye of any Dodgers scouts.</p><p style=\"box-sizing: inherit; margin: 0px 0px 25px; font-size: 16px; line-height: 1.63; font-kerning: normal; font-family: proxima_nova_regular, Helvetica, san-serif;\">The grounders would scream at me and pop into my head and I’d be bleeding, and he’d say, “Stay tough, big Tone.” That’s how I learned&nbsp;<em style=\"box-sizing: inherit;\">moxie</em>.</p><p style=\"box-sizing: inherit; margin: 0px 0px 25px; font-size: 16px; line-height: 1.63; font-kerning: normal; font-family: proxima_nova_regular, Helvetica, san-serif;\">When I was in junior high, I tried out for the baseball team. We went through four cuts and when it came to the final cut, I didn’t make it. I just couldn’t hit the curveball. I was completely devastated.&nbsp;<em style=\"box-sizing: inherit;\">What am I going to do with my life?</em>&nbsp;I thought.&nbsp;<em style=\"box-sizing: inherit;\">I’m fourteen and my entire career path has been annihilated! If I can’t make the junior high varsity baseball team, how will I ever make the high school team — much less get a scholarship to USC and then play pro ball? My life is over!</em>&nbsp;I laugh at this thought today but it felt like life and death for me at the time.</p><p style=\"box-sizing: inherit; margin: 0px 0px 25px; font-size: 16px; line-height: 1.63; font-kerning: normal; font-family: proxima_nova_regular, Helvetica, san-serif;\">So I made a very quick shift. I began to ask myself some questions: w<em style=\"box-sizing: inherit;\">hat were the common denominators in all the things that I wanted to do?&nbsp;</em>I wanted to help people in their lives. I wanted to live passionately. I wanted to give people some kind of unforgettable experience. I wanted to be with people and see them to their peak states of celebration and excitement. Well, I might not be the source of it as the athlete who could win the game in the bottom of the ninth, but perhaps I could be the person who augmented the experience of fans and players everywhere, as a writer and sportscaster.</p>', '2018-08-19 15:06:10', 2),
 ('1534699942205', 2, 1, 'Quick start', 'quick-start', 'Get started with Bootstrap, the world’s most popular framework for building responsive, mobile-first sites, with BootstrapCDN and a template starter page.', 'http://localhost:8080/LandingPage/api/uploads/images/98903e8e1575784e15a11534629600000.jpg', '<div>JS</div><p>Many of our components require the use of JavaScript to function. Specifically, they require&nbsp;<a href=\"https://jquery.com/\" data-mce-href=\"https://jquery.com/\">jQuery</a>,&nbsp;<a href=\"https://popper.js.org/\" data-mce-href=\"https://popper.js.org/\">Popper.js</a>, and our own JavaScript plugins. Place the following&nbsp;<code>&lt;script&gt;</code>s near the end of your pages, right before the closing&nbsp;<code>&lt;/body&gt;</code>&nbsp;tag, to enable them. jQuery must come first, then Popper.js, and then our JavaScript plugins.</p><p>We use&nbsp;<a href=\"https://blog.jquery.com/2016/06/09/jquery-3-0-final-released/\" data-mce-href=\"https://blog.jquery.com/2016/06/09/jquery-3-0-final-released/\">jQuery’s slim build</a>, but the full version is also supported.</p><div><button title=\"\" data-original-title=\"Copy to clipboard\">Copy</button></div><figure><pre><code data-lang=\"html\">&lt;script src=\"<a href=\"https://code.jquery.com/jquery-3.2.1.slim.min.js\" data-mce-href=\"https://code.jquery.com/jquery-3.2.1.slim.min.js\">https://code.jquery.com/jquery-3.2.1.slim.min.js</a>\" integrity=\"sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN\" crossorigin=\"anonymous\"&gt;&lt;/script&gt;\n&lt;script src=\"<a href=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js\" data-mce-href=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js\">https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js</a>\" integrity=\"sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q\" crossorigin=\"anonymous\"&gt;&lt;/script&gt;\n&lt;script src=\"<a href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js\" data-mce-href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js\">https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js</a>\" integrity=\"sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl\" crossorigin=\"anonymous\"&gt;&lt;/script&gt;</code></pre></figure><p>Curious which components explicitly require jQuery, our JS, and Popper.js? Click the show components link below. If you’re at all unsure about the general page structure, keep reading for an example page template.</p><details open=\"open\"><summary>Show components requiring JavaScript</summary></details><div>Starter template</div><p>Be sure to have your pages set up with the latest design and development standards. That means using an HTML5 doctype and including a viewport meta tag for proper responsive behaviors. Put it all together and your pages should look like this:</p><div><button title=\"\" data-original-title=\"Copy to clipboard\">Copy</button></div><figure><pre><code data-lang=\"html\">&lt;!doctype html&gt;\n&lt;html lang=\"en\"&gt;\n  &lt;head&gt;\n    &lt;!-- Required meta tags --&gt;\n    &lt;meta charset=\"utf-8\"&gt;\n    &lt;meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\"&gt;\n\n    &lt;!-- Bootstrap CSS --&gt;\n    &lt;link rel=\"stylesheet\" href=\"<a href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" data-mce-href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\">https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css</a>\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\"&gt;\n\n    &lt;title&gt;Hello, world!&lt;/title&gt;\n  &lt;/head&gt;\n  &lt;body&gt;\n    &lt;h1&gt;Hello, world!&lt;/h1&gt;\n\n    &lt;!-- Optional JavaScript --&gt;\n    &lt;!-- jQuery first, then Popper.js, then Bootstrap JS --&gt;\n    &lt;script src=\"<a href=\"https://code.jquery.com/jquery-3.2.1.slim.min.js\" data-mce-href=\"https://code.jquery.com/jquery-3.2.1.slim.min.js\">https://code.jquery.com/jquery-3.2.1.slim.min.js</a>\" integrity=\"sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN\" crossorigin=\"anonymous\"&gt;&lt;/script&gt;\n    &lt;script src=\"<a href=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js\" data-mce-href=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js\">https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js</a>\" integrity=\"sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q\" crossorigin=\"anonymous\"&gt;&lt;/script&gt;\n    &lt;script src=\"<a href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js\" data-mce-href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js\">https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js</a>\" integrity=\"sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl\" crossorigin=\"anonymous\"&gt;&lt;/script&gt;\n  &lt;/body&gt;\n&lt;/html&gt;</code></pre></figure><p>That’s all you need for overall page requirements. Visit the&nbsp;<a href=\"https://getbootstrap.com/docs/4.0/layout/overview/\" data-mce-href=\"https://getbootstrap.com/docs/4.0/layout/overview/\">Layout docs</a>&nbsp;or&nbsp;<a href=\"https://getbootstrap.com/docs/4.0/examples/\" data-mce-href=\"https://getbootstrap.com/docs/4.0/examples/\">our official examples</a>to start laying out your site’s content and components.</p>', '2018-08-19 17:33:18', 3),
@@ -79,7 +80,7 @@ INSERT INTO `achi_blog` (`blog_id`, `blog_id_category`, `blog_id_author`, `blog_
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `achi_category`
+-- Table structure for table `achi_category`
 --
 
 CREATE TABLE `achi_category` (
@@ -90,7 +91,7 @@ CREATE TABLE `achi_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `achi_category`
+-- Dumping data for table `achi_category`
 --
 
 INSERT INTO `achi_category` (`category_id`, `category_name`, `category_alias`, `category_created_date`) VALUES
@@ -101,7 +102,7 @@ INSERT INTO `achi_category` (`category_id`, `category_name`, `category_alias`, `
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `achi_content_element`
+-- Table structure for table `achi_content_element`
 --
 
 CREATE TABLE `achi_content_element` (
@@ -115,19 +116,59 @@ CREATE TABLE `achi_content_element` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `achi_content_element`
+-- Dumping data for table `achi_content_element`
 --
 
 INSERT INTO `achi_content_element` (`content_element_id`, `content_element_id_detail_ui`, `content_element_id_source`, `content_element_attribute`, `content_element_attribute_src`, `content_element_data`, `content_element_class`) VALUES
-(19, 93, 1, NULL, NULL, 'Chào bạn, Xin được tự giới thiệu tôi là doanh nhân – diễn giả Trần Đăng Khoa. Năm 2009, sau nhiều lần thất bại và nợ nần lên tới gần 5 tỉ đồng, tôi vẫn quyết định đầu tư hơn $10.000 để học những khóa học mà trường Đại học chắc chắn đã không dạy. Đến năm 2010 thì tôi đã trả được hết các khoản nợ nần và bắt đầu có tên tuổi ở Việt Nam. Sau hơn 10 năm sinh sống và làm việc tại Singapore, tôi trở về Việt Nam để khởi nghiệp và đạt được những thành công nhất định khi phát triển TGM từ một tập đoàn chỉ có 3 thành viên sáng lập ban đầu tiến lên thành một tổ chức có khoảng 200 thành viên hiện nay. Từ năm 2009 đến nay, có rất nhiều người khi gặp tôi đều hỏi: “Tại sao anh và TGM không mở một khóa học dạy làm giàu? Ai cũng thích làm giàu, đó là nhu cầu chung. Ở Việt Nam các khóa học dạy làm giàu đang mọc lên như nấm kìa.” Có một điểm chung tôi nhìn thấy ở nhiều khóa học làm giàu đó là có vẻ người ta nhấn mạnh vào vế “giàu” nhiều hơn là vế “làm”. Điều này về mặt quảng cáo có thể hiệu quả cho đơn vị tổ chức, nhưng để công bằng hơn cho người học, chúng ta cần vế “làm” được nhắc đến nhiều hơn. ', NULL),
-(20, 91, 1, 'src', 'http://localhost:8080/Achi/template/public/images/client/6.jpg', NULL, NULL),
-(22, 97, 1, 'src', 'http://maxpowervn.com/public/images/cdn/banner/co-phi/max_power_tranform/khoa-hoc-nay-giup-gi-cho-ban-1.png', NULL, NULL),
-(23, 89, 1, NULL, '', NULL, NULL);
+(73, 158, 1, 'src', 'http://localhost:8080/Achi/template/public/images/client/6.jpg', NULL, NULL),
+(74, 161, 1, NULL, NULL, 'Chào bạn,<br><br>\nXin được tự giới thiệu tôi là doanh nhân – diễn giả Trần Đăng Khoa. Năm 2009, sau nhiều lần thất bại và nợ nần lên tới gần 5 tỉ đồng, tôi vẫn quyết định đầu tư hơn $10.000 để học những khóa học mà trường Đại học chắc chắn đã không dạy. Đến năm 2010 thì tôi đã trả được hết các khoản nợ nần và bắt đầu có tên tuổi ở Việt Nam. Sau hơn 10 năm sinh sống và làm việc tại Singapore, tôi trở về Việt Nam để khởi nghiệp và đạt được những thành công nhất định khi phát triển TGM từ một tập đoàn chỉ có 3 thành viên sáng lập ban đầu tiến lên thành một tổ chức có khoảng 200 thành viên hiện nay.\n<br><br>\nTừ năm 2009 đến nay, có rất nhiều người khi gặp tôi đều hỏi: “Tại sao anh và TGM không mở một khóa học dạy làm giàu? Ai cũng thích làm giàu, đó là nhu cầu chung. Ở Việt Nam các khóa học dạy làm giàu đang mọc lên như nấm kìa.”\n<br><br>\nCó một điểm chung tôi nhìn thấy ở nhiều khóa học làm giàu đó là có vẻ người ta nhấn mạnh vào vế “giàu” nhiều hơn là vế “làm”. Điều này về mặt quảng cáo có thể hiệu quả cho đơn vị tổ chức, nhưng để công bằng hơn cho người học, chúng ta cần vế “làm” được nhắc đến nhiều hơn.', NULL),
+(75, 163, 1, 'src', 'http://localhost:8080/Achi/template/public/images/client/banner_1.jpg', NULL, NULL),
+(76, 167, 1, 'src', 'http://localhost:8080/Achi/template/public/images/client/banner_2.jpg', NULL, NULL),
+(77, 166, 1, NULL, NULL, 'Bất kể khóa học làm giàu nào, khi càng đi xa khỏi vế “làm” và càng nhấn mạnh vế “giàu” cùng với việc thêm thắt các gia vị “nhanh”, “dễ dàng”, “không cần làm”,… đều có thể nói là đã đi vào vùng xám của kinh doanh. Nếu không có sự tiết chế thì có thể chưa sai pháp luật nhưng vấn đề đạo đức kinh doanh và lương tâm của người làm đào tạo thì rất đáng quan ngại. Tư duy của người làm giàu thực thụ phải là tư duy đầu tư, trong đó muốn giàu thì trước hết phải biết đầu tư vào kiến thức. Nhưng nếu bỏ tiền để mua những lời hứa “nhanh”, “dễ dàng”, “không cần làm”,… thì đó là khi mỗi người phải suy nghĩ kỹ lại, đấy không phải là tư duy của người làm giàu mà là tư duy của người mơ giàu, thích giàu.\n\nĐã 7 năm qua, tôi luôn ấp ủ về một dự án mang tên “Làm Giàu 4.0” – bao gồm một khóa học Làm Giàu 4.0 và một quyển sách cùng tên nhấn mạnh vào cái LÀM. Đến nay, tôi đã thực hiện được một phần dự án khi cho ra đời khóa học Làm Giàu 4.0 với Crypto, và quyển sách tôi và cộng sự của mình đang trong giai đoạn hoàn thành.', NULL),
+(78, 168, 1, NULL, NULL, 'VÌ SAO CÓ TÊN GỌI “LÀM GIÀU 4.0 với CRYPTO”?', 'paddingY-128'),
+(79, 173, 1, NULL, NULL, 'Trong sự chuyển mình theo cấp số nhân của cuộc Cách Mạng Công Nghiệp 4.0, chỉ trong năm 2017 vừa qua, chắc hẳn chúng ta đã chứng kiến rất nhiều sự thay đổi như vũ bão của xã hội loài người từ cơn dậy sóng của tiền mã hóa, sự vượt trội của trí thông minh nhân tạo (AI) cho đến những phát minh về khoa học – công nghệ dự báo một tương lai gần đa số các công việc mang tính chất phổ thông và quy trình sẽ bị robot thay thế hoàn toàn. Thế giới mà chúng ta đang sống hôm nay đã thay đổi rất nhiều so với thế giới cách đây 5, 10 năm, và sẽ còn liên tục thay đổi không ngừng với những thách thức và cơ hội to lớn.\n\nDo vậy, tư duy làm giàu trong thế kỷ 21 và đặc biệt trong thời đại Cách mạng Công nghiệp 4.0 cần phải được cập nhật để đón đầu xu thế của thời đại trong sự bùng nổ của công nghệ và thích ứng với môi trường thực tế đầy cạnh tranh hiện nay.\n\nKhi đọc những dòng này, tôi muốn dành cho bạn một cơ hội đặc biệt được trải nghiệm một trong những khóa học chất lượng hàng đầu TGM thông qua buổi học thử khóa học Làm Giàu 4.0 với Crypto hoàn toàn miễn phí.  ', NULL),
+(80, 175, 1, 'src', 'http://localhost:8080/Achi/template/public/images/client/ebook2.png', NULL, NULL),
+(81, 170, 1, NULL, NULL, 'DOANH NHÂN – DIỄN GIẢ TRẦN ĐĂNG KHOA SẼ GIÚP BẠN XÂY DỰNG TƯ DUY LÀM GIÀU THỜI ĐẠI SỐ VỚI BUỔI HỌC THỬ “LÀM GIÀU 4.0 với CRYPTO”', 'paddingY-128'),
+(82, 178, 1, 'src', 'http://localhost:8080/Achi/template/public/images/client/banner_1.jpg', NULL, NULL),
+(83, 179, 1, NULL, NULL, 'Doanh nhân – Diễn giả\nTRẦN ĐĂNG KHOA', NULL),
+(84, 181, 1, NULL, NULL, 'CEO của TGM CORP và UBRAND.', NULL),
+(85, 182, 1, NULL, NULL, 'Chứng nhận Master Trainer.', NULL),
+(86, 183, 1, NULL, NULL, 'Hơn 10.000 giờ diễn thuyết trong 7 năm.', NULL),
+(87, 184, 1, NULL, NULL, 'Kinh nghiệm đào tạo cho hơn 120.000 học viên.', NULL),
+(88, 185, 1, NULL, NULL, 'Dịch giả của hơn 20 tựa sách với hơn 1.000.000 độc giả.', NULL),
+(89, 172, 1, NULL, NULL, 'CHƯƠNG TRÌNH SẼ GIÚP GÌ CHO BẠN?', 'paddingY-128'),
+(90, 193, 1, NULL, NULL, 'Tìm ra động lực thật sự để đi theo con đường làm giàu.', NULL),
+(91, 194, 1, NULL, NULL, 'Điểm khác biệt giữa nhóm “người thường” và nhóm “người giàu”.', NULL),
+(92, 195, 1, NULL, NULL, 'Khám phá 10 lĩnh vực hái ra tiền trong Cách mạng công nghiệp 4.0.', NULL),
+(93, 196, 1, NULL, NULL, 'Nền tảng cốt lõi của tư duy làm giàu bền vững.', NULL),
+(94, 197, 1, NULL, NULL, 'Cơ hội tiếp cận cuộc cách mạng Blockchain / Crypto đang dậy sóng gần đây.', NULL),
+(95, 198, 1, NULL, NULL, 'Chiến lược làm giàu với crypto assets (tài sản mã hóa).', NULL),
+(96, 199, 1, NULL, NULL, 'So sánh Bitcoin, vàng và tiền và hiểu về bản chất thật sự của “tiền”.', NULL),
+(97, 200, 1, 'src', 'http://localhost:8080/Achi/template/public/images/client/banner_2.jpg', NULL, NULL),
+(98, 187, 1, NULL, NULL, '“NẾU BẠN SINH RA TRONG NGHÈO KHÓ, ĐÓ KHÔNG PHẢI LÀ LỖI CỦA BẠN. NHƯNG NẾU BẠN CHẾT TRONG NGHÈO KHÓ, THÌ ĐÓ LÀ LỖI CỦA BẠN.” (BILL GATES)', 'paddingY-128'),
+(99, 189, 1, NULL, NULL, 'ĐẲNG CẤP và CHẤT LƯỢNG được cam kết bởi TGM', 'paddingY-128'),
+(100, 211, 1, NULL, NULL, '', ' icon-cup'),
+(101, 214, 1, NULL, NULL, '', ' icon-cup'),
+(102, 217, 1, NULL, NULL, '', ' icon-cup'),
+(103, 220, 1, NULL, NULL, '', ' icon-cup'),
+(104, 212, 1, NULL, NULL, 'VÌ 1 TRIỆU NGƯỜI VIỆT NAM', NULL),
+(105, 213, 1, NULL, NULL, 'Các sản phẩm của TGM đều hướng đến sự CHẤT LƯỢNG. Cho nên mặc dù hội thảo này nằm trong chương trình “Vì 1 triệu người Việt Nam hạnh phúc và thành công hơn” và bạn được hỗ trợ 95-100% chi phí tham dự, nhưng chất lượng vẫn sẽ được đặt lên hàng đầu.', NULL),
+(106, 215, 1, NULL, NULL, 'PHÒNG ĐÀO TẠO ĐẠT CHUẨN QUỐC TẾ', NULL),
+(107, 216, 1, NULL, NULL, 'TGM tự hào là tổ chức đầu tiên và duy nhất tại Việt Nam dám đầu tư và sở hữu 2 hội trường (tại TP.HCM và Hà Nội) được thiết kế đặc biệt và trang bị âm thanh, ánh sáng theo đúng các chuẩn mực quốc tế về hội trường phục vụ huấn luyện và đào tạo kỹ năng.', NULL),
+(108, 218, 1, NULL, NULL, 'ĐỘI NGŨ TỔ CHỨC CHUYÊN NGHIỆP', NULL),
+(109, 219, 1, NULL, NULL, 'Để đảm bảo chất lượng cao nhất của từng khóa học, đội ngũ tổ chức giàu kinh nghiệm, được tuyển chọn kỹ lưỡng của TGM luôn làm việc bằng tất cả nhiệt huyết và tinh thần trách nhiệm cao nhất. Chúng tôi luôn sẵn sàng hỗ trợ bạn 24/7.', NULL),
+(110, 221, 1, NULL, NULL, 'ƯU ĐÃI ĐẶC BIỆT TẠI HỘI THẢO', NULL),
+(111, 222, 1, NULL, NULL, 'Tại chương trình, bạn có thể mua các tựa sách bán chạy nhất hiện nay với giá giảm 25% hoặc combo sách với giá giảm 40%. Bên cạnh đó, bạn cũng có thể đăng ký tham gia các khóa học hữu ích của TGM với những chính sách ưu đãi đặc biệt.', NULL),
+(112, 160, 1, NULL, NULL, NULL, 'paddingY-128'),
+(113, 164, 1, NULL, NULL, NULL, 'paddingY-128'),
+(114, 169, 1, NULL, NULL, NULL, 'paddingY-128'),
+(115, 171, 1, NULL, NULL, NULL, 'paddingY-128'),
+(116, 206, 1, NULL, NULL, NULL, 'paddingY-128');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `achi_date_source`
+-- Table structure for table `achi_date_source`
 --
 
 CREATE TABLE `achi_date_source` (
@@ -139,7 +180,7 @@ CREATE TABLE `achi_date_source` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `achi_date_source`
+-- Dumping data for table `achi_date_source`
 --
 
 INSERT INTO `achi_date_source` (`date_source_id`, `date_source_id_sche`, `date_source_time`, `date_source_stt`, `date_source_created_date`) VALUES
@@ -153,7 +194,7 @@ INSERT INTO `achi_date_source` (`date_source_id`, `date_source_id_sche`, `date_s
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `achi_detail_ui`
+-- Table structure for table `achi_detail_ui`
 --
 
 CREATE TABLE `achi_detail_ui` (
@@ -169,22 +210,81 @@ CREATE TABLE `achi_detail_ui` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `achi_detail_ui`
+-- Dumping data for table `achi_detail_ui`
 --
 
 INSERT INTO `achi_detail_ui` (`detail_ui_id`, `detail_ui_id_element`, `detail_ui_id_ui`, `detail_ui_random_id`, `detail_ui_css`, `detail_ui_stt`, `detail_ui_status`, `detail_ui_parent_id`, `detail_ui_created_date`) VALUES
-(89, 50, 1, 'container-fluid-id-1535996717850', 'asss', 0, 0, NULL, '2018-09-04 06:26:26'),
-(90, 5, 1, 'row-id-1535996725754', NULL, 0, 0, 89, '2018-09-03 17:45:25'),
-(91, 30, 1, 'img-id-1535996730290', NULL, 0, 0, 90, '2018-09-03 17:45:30'),
-(92, 5, 1, 'row-id-1535996734786', NULL, 0, 0, 89, '2018-09-03 17:45:34'),
-(93, 25, 1, 'col-sm-8-id-1535996747314', '#col-sm-8-id-1535996747314{border: 1px solid}', 0, 0, 92, '2018-09-03 19:07:28'),
-(95, 21, 1, 'col-sm-4-id-1535996759818', NULL, 0, 0, 92, '2018-09-03 17:45:59'),
-(97, 30, 1, 'img-id-1535999781652', '#img-id-1535996730290{width:100%}', 0, 0, 95, '2018-09-04 03:36:18');
+(156, 17, 1, 'col-xs-12-id-1536078313583', NULL, 0, 0, NULL, '2018-09-04 16:25:13'),
+(157, 5, 1, 'row-id-1536078325093', NULL, 0, 0, 156, '2018-09-04 16:25:25'),
+(158, 30, 1, 'img-id-1536078329222', '#img-id-1536078329222 {width:100%}', 0, 0, 157, '2018-09-04 16:40:34'),
+(159, 4, 1, 'container-id-1536078335181', NULL, 0, 0, 156, '2018-09-04 16:25:35'),
+(160, 5, 1, 'row-id-1536078340093', ' ', 0, 0, 159, '2018-09-04 17:11:20'),
+(161, 23, 1, 'col-sm-6-id-1536078354197', NULL, 0, 0, 160, '2018-09-04 16:25:54'),
+(162, 23, 1, 'col-sm-6-id-1536078361549', NULL, 0, 0, 160, '2018-09-04 17:07:25'),
+(163, 30, 1, 'img-id-1536078366924', NULL, 0, 0, 162, '2018-09-04 16:26:06'),
+(164, 5, 1, 'row-id-1536078375757', NULL, 0, 0, 159, '2018-09-04 16:26:15'),
+(165, 23, 1, 'col-sm-6-id-1536078380605', NULL, 0, 0, 164, '2018-09-04 16:26:20'),
+(166, 23, 1, 'col-sm-6-id-1536078380789', NULL, 0, 0, 164, '2018-09-04 16:26:20'),
+(167, 30, 1, 'img-id-1536078394662', NULL, 0, 0, 165, '2018-09-04 16:26:34'),
+(168, 5, 1, 'row-id-1536078414692', NULL, 0, 0, 159, '2018-09-04 16:26:54'),
+(169, 5, 1, 'row-id-1536078418373', NULL, 0, 0, 159, '2018-09-04 16:26:58'),
+(170, 5, 1, 'row-id-1536078418549', NULL, 0, 0, 159, '2018-09-04 16:26:58'),
+(171, 5, 1, 'row-id-1536078418733', NULL, 0, 0, 159, '2018-09-04 16:26:58'),
+(172, 5, 1, 'row-id-1536078418909', NULL, 0, 0, 159, '2018-09-04 16:26:58'),
+(173, 23, 1, 'col-sm-6-id-1536078441108', NULL, 0, 0, 169, '2018-09-04 16:27:21'),
+(174, 23, 1, 'col-sm-6-id-1536078441260', NULL, 0, 0, 169, '2018-09-04 16:27:21'),
+(175, 30, 1, 'img-id-1536078450860', NULL, 0, 0, 174, '2018-09-04 16:27:30'),
+(176, 23, 1, 'col-sm-6-id-1536078473852', NULL, 0, 0, 171, '2018-09-04 16:27:53'),
+(177, 23, 1, 'col-sm-6-id-1536078474028', NULL, 0, 0, 171, '2018-09-04 16:27:54'),
+(178, 30, 1, 'img-id-1536078479035', NULL, 0, 0, 176, '2018-09-04 16:27:59'),
+(179, 36, 1, 'p-id-1536078488547', NULL, 0, 0, 177, '2018-09-04 16:28:08'),
+(180, 45, 1, 'ul-id-1536078501724', NULL, 0, 0, 177, '2018-09-04 16:28:21'),
+(181, 46, 1, 'li-id-1536078506523', NULL, 0, 0, 180, '2018-09-04 16:28:26'),
+(182, 46, 1, 'li-id-1536078506739', NULL, 0, 0, 180, '2018-09-04 16:28:26'),
+(183, 46, 1, 'li-id-1536078506932', NULL, 0, 0, 180, '2018-09-04 16:28:26'),
+(184, 46, 1, 'li-id-1536078507108', NULL, 0, 0, 180, '2018-09-04 16:28:27'),
+(185, 46, 1, 'li-id-1536078507284', NULL, 0, 0, 180, '2018-09-04 16:28:27'),
+(186, 5, 1, 'row-id-1536078527587', NULL, 0, 0, 159, '2018-09-04 16:28:47'),
+(187, 5, 1, 'row-id-1536078527764', NULL, 0, 0, 159, '2018-09-04 16:28:47'),
+(188, 5, 1, 'row-id-1536078527931', NULL, 0, 0, 159, '2018-09-04 16:28:47'),
+(189, 5, 1, 'row-id-1536078528099', NULL, 0, 0, 159, '2018-09-04 16:28:48'),
+(190, 25, 1, 'col-sm-8-id-1536078546043', NULL, 0, 0, 186, '2018-09-04 16:29:06'),
+(191, 21, 1, 'col-sm-4-id-1536078546483', NULL, 0, 0, 186, '2018-09-04 16:29:06'),
+(192, 45, 1, 'ul-id-1536078556219', NULL, 0, 0, 190, '2018-09-04 16:29:16'),
+(193, 46, 1, 'li-id-1536078559547', NULL, 0, 0, 192, '2018-09-04 16:29:19'),
+(194, 46, 1, 'li-id-1536078559715', NULL, 0, 0, 192, '2018-09-04 16:29:19'),
+(195, 46, 1, 'li-id-1536078559876', NULL, 0, 0, 192, '2018-09-04 16:29:19'),
+(196, 46, 1, 'li-id-1536078560035', NULL, 0, 0, 192, '2018-09-04 16:29:20'),
+(197, 46, 1, 'li-id-1536078560220', NULL, 0, 0, 192, '2018-09-04 16:29:20'),
+(198, 46, 1, 'li-id-1536078566659', NULL, 0, 0, 192, '2018-09-04 16:29:26'),
+(199, 46, 1, 'li-id-1536078566995', NULL, 0, 0, 192, '2018-09-04 16:29:27'),
+(200, 30, 1, 'img-id-1536078575835', NULL, 0, 0, 191, '2018-09-04 16:29:35'),
+(201, 20, 1, 'col-sm-3-id-1536078616386', NULL, 0, 0, 188, '2018-09-04 16:30:16'),
+(202, 20, 1, 'col-sm-3-id-1536078616603', NULL, 0, 0, 188, '2018-09-04 16:30:16'),
+(203, 20, 1, 'col-sm-3-id-1536078616795', NULL, 0, 0, 188, '2018-09-04 16:30:16'),
+(204, 20, 1, 'col-sm-3-id-1536078617004', NULL, 0, 0, 188, '2018-09-04 16:30:17'),
+(206, 5, 1, 'row-id-1536078639346', NULL, 0, 0, 159, '2018-09-04 16:30:39'),
+(207, 23, 1, 'col-sm-6-id-1536078651811', NULL, 0, 0, 206, '2018-09-04 16:30:51'),
+(208, 23, 1, 'col-sm-6-id-1536078652226', NULL, 0, 0, 206, '2018-09-04 16:30:52'),
+(209, 23, 1, 'col-sm-6-id-1536078652706', NULL, 0, 0, 206, '2018-09-04 16:30:52'),
+(210, 23, 1, 'col-sm-6-id-1536078657115', NULL, 0, 0, 206, '2018-09-04 16:30:57'),
+(211, 49, 1, 'i-id-1536078664226', NULL, 0, 0, 207, '2018-09-04 16:31:04'),
+(212, 36, 1, 'p-id-1536078668130', NULL, 0, 0, 207, '2018-09-04 16:31:08'),
+(213, 36, 1, 'p-id-1536078674778', NULL, 0, 0, 207, '2018-09-04 16:31:14'),
+(214, 49, 1, 'i-id-1536078680226', NULL, 0, 0, 208, '2018-09-04 16:31:20'),
+(215, 36, 1, 'p-id-1536078680841', NULL, 0, 0, 208, '2018-09-04 16:31:20'),
+(216, 36, 1, 'p-id-1536078681010', NULL, 0, 0, 208, '2018-09-04 16:31:21'),
+(217, 49, 1, 'i-id-1536078685361', NULL, 0, 0, 209, '2018-09-04 16:31:25'),
+(218, 36, 1, 'p-id-1536078686313', NULL, 0, 0, 209, '2018-09-04 16:31:26'),
+(219, 36, 1, 'p-id-1536078690506', NULL, 0, 0, 209, '2018-09-04 16:31:30'),
+(220, 49, 1, 'i-id-1536078695953', NULL, 0, 0, 210, '2018-09-04 16:31:36'),
+(221, 36, 1, 'p-id-1536078696762', NULL, 0, 0, 210, '2018-09-04 16:31:36'),
+(222, 36, 1, 'p-id-1536078696954', NULL, 0, 0, 210, '2018-09-04 16:31:37');
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `achi_element`
+-- Table structure for table `achi_element`
 --
 
 CREATE TABLE `achi_element` (
@@ -198,7 +298,7 @@ CREATE TABLE `achi_element` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `achi_element`
+-- Dumping data for table `achi_element`
 --
 
 INSERT INTO `achi_element` (`element_id`, `element_name`, `element_tag`, `element_real_id`, `element_class`, `element_type`, `element_created_date`) VALUES
@@ -253,7 +353,7 @@ INSERT INTO `achi_element` (`element_id`, `element_name`, `element_tag`, `elemen
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `achi_email`
+-- Table structure for table `achi_email`
 --
 
 CREATE TABLE `achi_email` (
@@ -266,7 +366,7 @@ CREATE TABLE `achi_email` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `achi_gift`
+-- Table structure for table `achi_gift`
 --
 
 CREATE TABLE `achi_gift` (
@@ -282,7 +382,7 @@ CREATE TABLE `achi_gift` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `achi_menu`
+-- Table structure for table `achi_menu`
 --
 
 CREATE TABLE `achi_menu` (
@@ -299,7 +399,7 @@ CREATE TABLE `achi_menu` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `achi_rule_user`
+-- Table structure for table `achi_rule_user`
 --
 
 CREATE TABLE `achi_rule_user` (
@@ -311,7 +411,7 @@ CREATE TABLE `achi_rule_user` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `achi_source`
+-- Table structure for table `achi_source`
 --
 
 CREATE TABLE `achi_source` (
@@ -327,7 +427,7 @@ CREATE TABLE `achi_source` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `achi_source`
+-- Dumping data for table `achi_source`
 --
 
 INSERT INTO `achi_source` (`source_id`, `source_title`, `source_alias`, `source_promo`, `source_content`, `source_cover`, `source_id_ui`, `source_status`, `source_created_date`) VALUES
@@ -337,7 +437,34 @@ INSERT INTO `achi_source` (`source_id`, `source_title`, `source_alias`, `source_
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `achi_source_sche`
+-- Table structure for table `achi_source_order`
+--
+
+CREATE TABLE `achi_source_order` (
+  `source_order_id` varchar(255) NOT NULL,
+  `source_order_id_source` int(11) NOT NULL,
+  `source_order_name_student` varchar(255) NOT NULL,
+  `source_order_email_student` varchar(255) NOT NULL,
+  `source_order_birthday_student` varchar(255) NOT NULL,
+  `source_order_number_phone_student` varchar(255) NOT NULL,
+  `source_order_school_student` varchar(255) NOT NULL,
+  `source_order_facebook` varchar(255) NOT NULL,
+  `source_order_price` int(11) NOT NULL,
+  `source_order_created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `achi_source_order`
+--
+
+INSERT INTO `achi_source_order` (`source_order_id`, `source_order_id_source`, `source_order_name_student`, `source_order_email_student`, `source_order_birthday_student`, `source_order_number_phone_student`, `source_order_school_student`, `source_order_facebook`, `source_order_price`, `source_order_created_date`) VALUES
+('fa7jAjf8nf', 1, 'Nguyen Hoai Son', 'sonhoai272@gmail.com', '27-02-1996', '0985457865', 'Ptit', 'sonhoai272', 0, '2018-09-07 00:03:53'),
+('fa7jAjs8nf', 1, 'Nguyen Hoai Son', 'sonhoai272@gmail.com', '27-02-1996', '0985457865', 'Ptit', 'sonhoai272', 0, '2018-09-07 00:03:56');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `achi_source_sche`
 --
 
 CREATE TABLE `achi_source_sche` (
@@ -353,7 +480,7 @@ CREATE TABLE `achi_source_sche` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `achi_source_sche`
+-- Dumping data for table `achi_source_sche`
 --
 
 INSERT INTO `achi_source_sche` (`source_sche_id`, `source_sche_id_source`, `source_sche_number`, `source_sche_price`, `source_sche_sale`, `source_sche_address`, `source_sche_teacher`, `source_sche_status`, `source_sche_created_date`) VALUES
@@ -364,7 +491,7 @@ INSERT INTO `achi_source_sche` (`source_sche_id`, `source_sche_id_source`, `sour
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `achi_status`
+-- Table structure for table `achi_status`
 --
 
 CREATE TABLE `achi_status` (
@@ -374,7 +501,7 @@ CREATE TABLE `achi_status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `achi_status`
+-- Dumping data for table `achi_status`
 --
 
 INSERT INTO `achi_status` (`status_id`, `status_name`, `status_created_date`) VALUES
@@ -385,7 +512,7 @@ INSERT INTO `achi_status` (`status_id`, `status_name`, `status_created_date`) VA
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `achi_ui`
+-- Table structure for table `achi_ui`
 --
 
 CREATE TABLE `achi_ui` (
@@ -395,7 +522,7 @@ CREATE TABLE `achi_ui` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Đang đổ dữ liệu cho bảng `achi_ui`
+-- Dumping data for table `achi_ui`
 --
 
 INSERT INTO `achi_ui` (`ui_id`, `ui_name`, `ui_created_date`) VALUES
@@ -404,7 +531,7 @@ INSERT INTO `achi_ui` (`ui_id`, `ui_name`, `ui_created_date`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `achi_user`
+-- Table structure for table `achi_user`
 --
 
 CREATE TABLE `achi_user` (
@@ -417,7 +544,7 @@ CREATE TABLE `achi_user` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `achi_video`
+-- Table structure for table `achi_video`
 --
 
 CREATE TABLE `achi_video` (
@@ -429,17 +556,17 @@ CREATE TABLE `achi_video` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `achi_author`
+-- Indexes for table `achi_author`
 --
 ALTER TABLE `achi_author`
   ADD PRIMARY KEY (`author_id`);
 
 --
--- Chỉ mục cho bảng `achi_blog`
+-- Indexes for table `achi_blog`
 --
 ALTER TABLE `achi_blog`
   ADD PRIMARY KEY (`blog_id`),
@@ -448,13 +575,13 @@ ALTER TABLE `achi_blog`
   ADD KEY `blog_id_status` (`blog_id_status`);
 
 --
--- Chỉ mục cho bảng `achi_category`
+-- Indexes for table `achi_category`
 --
 ALTER TABLE `achi_category`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- Chỉ mục cho bảng `achi_content_element`
+-- Indexes for table `achi_content_element`
 --
 ALTER TABLE `achi_content_element`
   ADD PRIMARY KEY (`content_element_id`),
@@ -462,14 +589,14 @@ ALTER TABLE `achi_content_element`
   ADD KEY `content_element_id_source` (`content_element_id_source`);
 
 --
--- Chỉ mục cho bảng `achi_date_source`
+-- Indexes for table `achi_date_source`
 --
 ALTER TABLE `achi_date_source`
   ADD PRIMARY KEY (`date_source_id`),
   ADD KEY `date_source_id_sche` (`date_source_id_sche`);
 
 --
--- Chỉ mục cho bảng `achi_detail_ui`
+-- Indexes for table `achi_detail_ui`
 --
 ALTER TABLE `achi_detail_ui`
   ADD PRIMARY KEY (`detail_ui_id`),
@@ -478,174 +605,181 @@ ALTER TABLE `achi_detail_ui`
   ADD KEY `detail_ui_parent_id` (`detail_ui_parent_id`);
 
 --
--- Chỉ mục cho bảng `achi_element`
+-- Indexes for table `achi_element`
 --
 ALTER TABLE `achi_element`
   ADD PRIMARY KEY (`element_id`);
 
 --
--- Chỉ mục cho bảng `achi_email`
+-- Indexes for table `achi_email`
 --
 ALTER TABLE `achi_email`
   ADD PRIMARY KEY (`email_id`);
 
 --
--- Chỉ mục cho bảng `achi_gift`
+-- Indexes for table `achi_gift`
 --
 ALTER TABLE `achi_gift`
   ADD PRIMARY KEY (`gift_id`);
 
 --
--- Chỉ mục cho bảng `achi_menu`
+-- Indexes for table `achi_menu`
 --
 ALTER TABLE `achi_menu`
   ADD PRIMARY KEY (`menu_id`),
   ADD KEY `menu_parent_id` (`menu_parent_id`);
 
 --
--- Chỉ mục cho bảng `achi_rule_user`
+-- Indexes for table `achi_rule_user`
 --
 ALTER TABLE `achi_rule_user`
   ADD PRIMARY KEY (`rule_user_id`);
 
 --
--- Chỉ mục cho bảng `achi_source`
+-- Indexes for table `achi_source`
 --
 ALTER TABLE `achi_source`
   ADD PRIMARY KEY (`source_id`),
   ADD KEY `source_id_ui` (`source_id_ui`);
 
 --
--- Chỉ mục cho bảng `achi_source_sche`
+-- Indexes for table `achi_source_order`
+--
+ALTER TABLE `achi_source_order`
+  ADD PRIMARY KEY (`source_order_id`),
+  ADD KEY `source_order_id_source` (`source_order_id_source`);
+
+--
+-- Indexes for table `achi_source_sche`
 --
 ALTER TABLE `achi_source_sche`
   ADD PRIMARY KEY (`source_sche_id`),
   ADD KEY `source_sche_id_source` (`source_sche_id_source`);
 
 --
--- Chỉ mục cho bảng `achi_status`
+-- Indexes for table `achi_status`
 --
 ALTER TABLE `achi_status`
   ADD PRIMARY KEY (`status_id`);
 
 --
--- Chỉ mục cho bảng `achi_ui`
+-- Indexes for table `achi_ui`
 --
 ALTER TABLE `achi_ui`
   ADD PRIMARY KEY (`ui_id`);
 
 --
--- Chỉ mục cho bảng `achi_user`
+-- Indexes for table `achi_user`
 --
 ALTER TABLE `achi_user`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- Chỉ mục cho bảng `achi_video`
+-- Indexes for table `achi_video`
 --
 ALTER TABLE `achi_video`
   ADD PRIMARY KEY (`video_id`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `achi_author`
+-- AUTO_INCREMENT for table `achi_author`
 --
 ALTER TABLE `achi_author`
   MODIFY `author_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT cho bảng `achi_category`
+-- AUTO_INCREMENT for table `achi_category`
 --
 ALTER TABLE `achi_category`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT cho bảng `achi_content_element`
+-- AUTO_INCREMENT for table `achi_content_element`
 --
 ALTER TABLE `achi_content_element`
-  MODIFY `content_element_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `content_element_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
--- AUTO_INCREMENT cho bảng `achi_date_source`
+-- AUTO_INCREMENT for table `achi_date_source`
 --
 ALTER TABLE `achi_date_source`
   MODIFY `date_source_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT cho bảng `achi_detail_ui`
+-- AUTO_INCREMENT for table `achi_detail_ui`
 --
 ALTER TABLE `achi_detail_ui`
-  MODIFY `detail_ui_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `detail_ui_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
 
 --
--- AUTO_INCREMENT cho bảng `achi_element`
+-- AUTO_INCREMENT for table `achi_element`
 --
 ALTER TABLE `achi_element`
   MODIFY `element_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- AUTO_INCREMENT cho bảng `achi_email`
+-- AUTO_INCREMENT for table `achi_email`
 --
 ALTER TABLE `achi_email`
   MODIFY `email_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `achi_gift`
+-- AUTO_INCREMENT for table `achi_gift`
 --
 ALTER TABLE `achi_gift`
   MODIFY `gift_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `achi_menu`
+-- AUTO_INCREMENT for table `achi_menu`
 --
 ALTER TABLE `achi_menu`
   MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `achi_rule_user`
+-- AUTO_INCREMENT for table `achi_rule_user`
 --
 ALTER TABLE `achi_rule_user`
   MODIFY `rule_user_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `achi_source`
+-- AUTO_INCREMENT for table `achi_source`
 --
 ALTER TABLE `achi_source`
   MODIFY `source_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT cho bảng `achi_source_sche`
+-- AUTO_INCREMENT for table `achi_source_sche`
 --
 ALTER TABLE `achi_source_sche`
   MODIFY `source_sche_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `achi_status`
+-- AUTO_INCREMENT for table `achi_status`
 --
 ALTER TABLE `achi_status`
   MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `achi_ui`
+-- AUTO_INCREMENT for table `achi_ui`
 --
 ALTER TABLE `achi_ui`
   MODIFY `ui_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT cho bảng `achi_video`
+-- AUTO_INCREMENT for table `achi_video`
 --
 ALTER TABLE `achi_video`
   MODIFY `video_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `achi_blog`
+-- Constraints for table `achi_blog`
 --
 ALTER TABLE `achi_blog`
   ADD CONSTRAINT `achi_blog_ibfk_1` FOREIGN KEY (`blog_id_author`) REFERENCES `achi_author` (`author_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -653,20 +787,20 @@ ALTER TABLE `achi_blog`
   ADD CONSTRAINT `achi_blog_ibfk_3` FOREIGN KEY (`blog_id_status`) REFERENCES `achi_status` (`status_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Các ràng buộc cho bảng `achi_content_element`
+-- Constraints for table `achi_content_element`
 --
 ALTER TABLE `achi_content_element`
   ADD CONSTRAINT `achi_content_element_ibfk_1` FOREIGN KEY (`content_element_id_detail_ui`) REFERENCES `achi_detail_ui` (`detail_ui_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `achi_content_element_ibfk_2` FOREIGN KEY (`content_element_id_source`) REFERENCES `achi_source` (`source_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Các ràng buộc cho bảng `achi_date_source`
+-- Constraints for table `achi_date_source`
 --
 ALTER TABLE `achi_date_source`
   ADD CONSTRAINT `achi_date_source_ibfk_1` FOREIGN KEY (`date_source_id_sche`) REFERENCES `achi_source_sche` (`source_sche_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Các ràng buộc cho bảng `achi_detail_ui`
+-- Constraints for table `achi_detail_ui`
 --
 ALTER TABLE `achi_detail_ui`
   ADD CONSTRAINT `achi_detail_ui_ibfk_1` FOREIGN KEY (`detail_ui_id_element`) REFERENCES `achi_element` (`element_id`),
@@ -674,19 +808,25 @@ ALTER TABLE `achi_detail_ui`
   ADD CONSTRAINT `achi_detail_ui_ibfk_4` FOREIGN KEY (`detail_ui_id_ui`) REFERENCES `achi_ui` (`ui_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Các ràng buộc cho bảng `achi_menu`
+-- Constraints for table `achi_menu`
 --
 ALTER TABLE `achi_menu`
   ADD CONSTRAINT `achi_menu_ibfk_1` FOREIGN KEY (`menu_parent_id`) REFERENCES `achi_menu` (`menu_id`);
 
 --
--- Các ràng buộc cho bảng `achi_source`
+-- Constraints for table `achi_source`
 --
 ALTER TABLE `achi_source`
   ADD CONSTRAINT `achi_source_ibfk_1` FOREIGN KEY (`source_id_ui`) REFERENCES `achi_ui` (`ui_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Các ràng buộc cho bảng `achi_source_sche`
+-- Constraints for table `achi_source_order`
+--
+ALTER TABLE `achi_source_order`
+  ADD CONSTRAINT `achi_source_order_ibfk_1` FOREIGN KEY (`source_order_id_source`) REFERENCES `achi_source_sche` (`source_sche_id`);
+
+--
+-- Constraints for table `achi_source_sche`
 --
 ALTER TABLE `achi_source_sche`
   ADD CONSTRAINT `achi_source_sche_ibfk_1` FOREIGN KEY (`source_sche_id_source`) REFERENCES `achi_source` (`source_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
