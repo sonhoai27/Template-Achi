@@ -30,7 +30,7 @@ class SourceModel {
         return $db->fetch_object();
     }
     function count_source_order($db){
-        $db->query('select * from achi_source_order order by achi_source_order.source_order_id desc');
+        $db->query('select count(*) as count from achi_source_order order by achi_source_order.source_order_id desc');
         return $db->fetch_object(true)->count;
     }
     function detail_source_order($db,$id) {

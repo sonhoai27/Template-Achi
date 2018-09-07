@@ -316,3 +316,16 @@
     padding-left: 15px;
     padding-right: 15px;
 }
+
+
+/* order */
+
+.order .panel-action-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.order .panel-action-bar .form-group {
+    margin-bottom: 0;
+}

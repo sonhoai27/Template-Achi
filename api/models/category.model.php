@@ -9,8 +9,8 @@ class CategoryModel {
     function edit($db,$id, $form) {
         return $db->update($form, 'achi_category', ' category_id = '.$db->sqlQuote($id));
     }
-    function all($db,$page) {
-        $db->query('select * from achi_category order by achi_category.category_id desc limit '.$page.', 20');
+    function all($db) {
+        $db->query('select * from achi_category order by achi_category.category_id desc');
         return $db->fetch_object();
     }
     function count($db){

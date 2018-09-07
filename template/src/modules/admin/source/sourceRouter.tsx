@@ -10,6 +10,7 @@ import ReviewLadingPage from "./child/review";
 import ListSche from "./child/listSche";
 import AddSche from "./child/addSche";
 import detailSche from "./child/detailSche";
+import ListOrder from "./order/ListOrder";
 interface Props {
   match?: any;
 }
@@ -72,6 +73,10 @@ class SourceRouter extends React.Component<Props, {}> {
             <Route
               path={`${this.props.match.url}/detail-sche/:idSche`}
               component={detailSche}
+            />
+            <Route
+              path={`${this.props.match.url}/order`}
+              component={ListOrder}
             />
           </div>
         </div>

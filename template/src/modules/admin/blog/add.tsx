@@ -1,8 +1,56 @@
 import * as React from "react";
 import { Editor } from "@tinymce/tinymce-react";
-class BlogAdd extends React.Component {
+import { BASEURLADMIN } from "../../../config/const";
+import { connect } from "react-redux";
+import { reShowPhotoApp, reSetCurrentEditorPhoto } from "../../../reducers/init";
+import { reAddBlog } from "./reBlog";
+import { alias } from "../../../utils/alias";
+interface Props {
+  reSetCurrentEditorPhoto: (editor: any)=> void,
+  reShowPhotoApp: (status: boolean)=> void,
+  reAddBlog: (form: any)=> void,
+  resAddBlog: any
+}
+interface State {
+  blog_id_category: number,
+  blog_id_author: number,
+  blog_title: string,
+  blog_promo: string,
+  blog_cover: string,
+  blog_content: string,
+  blog_id_status: number
+}
+class BlogAdd extends React.Component<Props, State> {
   constructor(props) {
     super(props);
+    this.state = {
+      blog_id_category: 0,
+      blog_id_author: 0,
+      blog_title: '',
+      blog_promo: '',
+      blog_cover: '',
+      blog_content: '',
+      blog_id_status: 0
+    }
+  }
+  componentDidUpdate(preProps){
+    if(preProps.resAddBlog != this.props.resAddBlog){
+      console.log(this.props.resAddBlog)
+    }
+  }
+  onChange = (e: any)=> {
+    // @ts-ignore
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+  addBlog = ()=> {
+    const temp: any = document.getElementById('img-cover-blog-preview')
+    this.props.reAddBlog({
+      ...this.state,
+      blog_alias: alias(this.state.blog_title),
+      blog_cover: temp.src
+    })
   }
   render() {
     return (
@@ -12,7 +60,11 @@ class BlogAdd extends React.Component {
             <div className="panel-toolbar">
               <div className="panel-heading">Thêm bài viết</div>
               <div className="panel-action-bar">
-                <div className="btn btn-xs btn-info">Lưu</div>
+                <div
+                  onClick={()=> {
+                    this.addBlog()
+                  }}
+                  className="btn btn-xs btn-info">Lưu</div>
               </div>
             </div>
             <div className="content">
@@ -20,31 +72,41 @@ class BlogAdd extends React.Component {
                 <div className="col-sm-9">
                   <div className="form-group">
                     <label className="col-md-12">
-                      Default Text <span className="help"> Tiêu đề</span>
+                      <span className="help"> Tiêu đề</span>
                     </label>
                     <div className="col-md-12">
                       <input
                         type="text"
+                        onChange={this.onChange}
+                        name="blog_title"
                         className="form-control"
                         defaultValue="George deo..."
-                      />{" "}
+                      />
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-md-12">
-                      Default Text <span className="help"> Tóm tắt</span>
+                      <span className="help"> Tóm tắt</span>
                     </label>
                     <div className="col-md-12">
                       <input
+                        onChange={this.onChange}
+                        name="blog_promo"
                         type="text"
                         className="form-control"
                         defaultValue="George deo..."
-                      />{" "}
+                      />
                     </div>
                   </div>
                   <div className="form-group">
                     <div className="col-md-12">
                       <Editor
+                        onChange={(e: any)=> {
+                          this.setState({
+                            ...this.state,
+                            blog_content: e.level.content
+                          })
+                        }}
                         apiKey="t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl"
                         init={{
                           selector: "textarea",
@@ -62,7 +124,8 @@ class BlogAdd extends React.Component {
                               icon: "image",
                               tooltip: "Add Image",
                               onclick: () => {
-                                alert("KAKKA");
+                                this.props.reShowPhotoApp(true)
+                                this.props.reSetCurrentEditorPhoto(editor)
                               }
                             });
                           }
@@ -75,7 +138,10 @@ class BlogAdd extends React.Component {
                   <div className="form-group">
                     <label className="col-sm-12">Trạng thái</label>
                     <div className="col-sm-12">
-                      <select className="form-control">
+                      <select
+                        onChange={this.onChange}
+                        name="blog_id_status"
+                        className="form-control">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -86,18 +152,24 @@ class BlogAdd extends React.Component {
                   </div>
                   <div className="form-group">
                     <label className="col-sm-12">Hình cover</label>
-                    <div className="col-sm-12 cover-blog">
+                    <div className="col-sm-12 cover-blog" onClick={()=> {
+                      this.props.reShowPhotoApp(true)
+                      this.props.reSetCurrentEditorPhoto('img-cover-blog-preview')
+                    }}>
                       <i className="ti-upload"/>
-                      <img id="img-cover-blog-preview"/>
+                      <img id="img-cover-blog-preview" className="img-responsive"/>
                     </div>
                   </div>
                   <div className="form-group">
                   <label className="col-sm-12 title-action">
                         <p>Tác giả</p>
-                        <i className="fa fa-edit"/>
+                        <a href={BASEURLADMIN+'blog/add-author'} target='_blank'><i className="fa fa-edit"/></a>
                     </label>
                     <div className="col-sm-12">
-                      <select className="form-control">
+                      <select
+                        onChange={this.onChange}
+                        name="blog_id_author"
+                        className="form-control">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -109,10 +181,13 @@ class BlogAdd extends React.Component {
                   <div className="form-group">
                     <label className="col-sm-12 title-action">
                         <p>Danh mục</p>
-                        <i className="fa fa-edit"/>
+                        <a href={BASEURLADMIN+'blog/add-category'} target='_blank'><i className="fa fa-edit"/></a>
                     </label>
                     <div className="col-sm-12">
-                      <select className="form-control">
+                      <select
+                        onChange={this.onChange}
+                        name="blog_id_category"
+                        className="form-control">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -131,4 +206,17 @@ class BlogAdd extends React.Component {
   }
 }
 
-export default BlogAdd;
+const mapStateToProps = storeState => ({
+  resListUI: storeState.reUI.resListUI,
+  resAddSource: storeState.reSource.resAddSource,
+  resAddBlog: storeState.reBlog.resAddBlog
+});
+const mapDispatchToProps = {
+  reSetCurrentEditorPhoto,
+  reShowPhotoApp,
+  reAddBlog
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BlogAdd);

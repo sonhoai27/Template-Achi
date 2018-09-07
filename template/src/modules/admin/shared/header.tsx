@@ -143,6 +143,18 @@ class Header extends React.Component {
                       <span className="hide-menu">Bình luận</span>
                     </a>
                   </li>
+                  <li>
+                    <a href={BASEURLADMIN+'blog/add-author'}>
+                      <i className="fa-fw">B</i>
+                      <span className="hide-menu">Tác giả</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href={BASEURLADMIN+'blog/add-category'}>
+                      <i className="fa-fw">B</i>
+                      <span className="hide-menu">Danh mục</span>
+                    </a>
+                  </li>
                 </ul>
               </li>
               <li className="devider" />

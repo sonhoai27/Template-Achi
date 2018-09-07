@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7410a6a0-0ae6-4fc3-98c1-6013aaa2dc61" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/typescript-compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/ui-source.model.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/ui-source.model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/template/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/template/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/public/admin.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/template/public/admin.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/public/css/client.css" beforeDir="false" afterPath="$PROJECT_DIR$/template/public/css/client.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/public/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/template/public/css/custom.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/public/main.bundle.js" beforeDir="false" afterPath="$PROJECT_DIR$/template/public/main.bundle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/src/modules/admin/AdminRouter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/template/src/modules/admin/AdminRouter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/src/modules/admin/home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/template/src/modules/admin/home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/src/modules/admin/shared/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/template/src/modules/admin/shared/header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/src/modules/admin/source/addContentUISource.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/template/src/modules/admin/source/addContentUISource.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/src/modules/admin/source/child/reviewLandingPage/detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/template/src/modules/admin/source/child/reviewLandingPage/detail.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/src/modules/admin/source/detail-ui/item-detail-ui.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/template/src/modules/admin/source/detail-ui/item-detail-ui.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="7410a6a0-0ae6-4fc3-98c1-6013aaa2dc61" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -32,7 +16,7 @@
     <session id="1226482537">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.8" value="1" />
@@ -133,7 +117,7 @@
       <path value="$PROJECT_DIR$/template/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="10" />
     <option name="y" value="20" />
     <option name="width" value="1346" />
@@ -260,7 +244,7 @@
     <option name="totallyTimeSpent" value="1277000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24330357" />

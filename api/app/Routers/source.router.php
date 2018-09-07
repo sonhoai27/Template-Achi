@@ -133,3 +133,45 @@ $app->put('/source/update-date-sche/{id}', function(Request $request, Response $
           ));
     }
 });
+
+
+// order
+$app->get('/source/order/all/{page}', function(Request $request, Response $response, $args){
+    return $response->withJson(array(
+        "status"=>200,
+        "list"=>$this->get('db_source')->all_source_order(
+            $this->get('db'),
+            $args['page']
+        ),
+        "count"=>$this->get('db_source')->count_source_order($this->get('db'))
+    ));
+});
+$app->get('/source/order/{id}', function(Request $request, Response $response, $args){
+    return $response->withJson(array(
+        "status"=>200,
+        "list"=>$this->get('db_source')->detail_source_order(
+            $this->get('db'),
+            $args['id']
+        )
+    ));
+});
+$app->post('/source/order', function(Request $request, Response $response){
+    if(isset_not_null($request->getParsedBody(), 'source_order_email_student')){
+        return $response->withJson(array(
+          "status"=>200,
+          "list"=>$this->get('db_source')->add_source_order(
+              $this->get('db'),
+              $request->getParsedBody()
+          )
+        ));
+    }else {
+        return $response->withJson(array(
+            "status"=>200,
+            "list"=>"Error"
+        ), 403);
+    }
+});
+$app->put('/source/order/{id}', function(Request $request, Response $response, $args){
+});
+$app->delete('/source/order/{id}', function(Request $request, Response $response, $args){
+});
