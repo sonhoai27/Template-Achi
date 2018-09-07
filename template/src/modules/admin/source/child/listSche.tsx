@@ -25,7 +25,7 @@ class ListSche extends React.Component<Props, {}> {
                     <td>
                     <Link to={BASEURLADMIN + "source/detail-sche/"+element.source_sche_id}>
                         <h4 style={{marginBottom: 0, marginTop: 0}}>
-                        {element.source_title} - khóa {element.source_sche_id}
+                        {element.source_title} - {element.source_sche_khoa}
                         </h4>
                     </Link>
                     </td>

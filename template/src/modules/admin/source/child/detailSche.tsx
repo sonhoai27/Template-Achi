@@ -19,7 +19,8 @@ interface State {
     source_sche_sale: number,
     source_sche_address: string,
     source_sche_teacher: string,
-    source_sche_status: number
+    source_sche_status: number,
+    source_sche_khoa: string
 }
 class DetailSche extends React.Component<Props, State> {
     constructor(props) {
@@ -32,7 +33,8 @@ class DetailSche extends React.Component<Props, State> {
             source_sche_sale: 0,
             source_sche_address: '',
             source_sche_teacher: '',
-            source_sche_status: 0
+            source_sche_status: 0,
+            source_sche_khoa: ''
         }
     }
     componentWillReceiveProps(nextProps){
@@ -45,7 +47,8 @@ class DetailSche extends React.Component<Props, State> {
                 source_sche_sale: nextProps.resDetailSche.source_sche_sale,
                 source_sche_address: nextProps.resDetailSche.source_sche_address,
                 source_sche_teacher: nextProps.resDetailSche.source_sche_teacher,
-                source_sche_status: nextProps.resDetailSche.source_sche_status
+                source_sche_status: nextProps.resDetailSche.source_sche_status,
+                source_sche_khoa: nextProps.resDetailSche.source_sche_khoa
             })
         }
     }
@@ -79,6 +82,20 @@ class DetailSche extends React.Component<Props, State> {
                         <div className="content">
                             <div className="row">
                                 <div className="col-sm-12">
+                                    <div className="form-group">
+                                        <label className="col-md-12">
+                                            <span className="help"> Khóa</span>
+                                        </label>
+                                        <div className="col-md-12">
+                                            <input
+                                                onChange={this.onChange}
+                                                type="text"
+                                                name="source_sche_khoa"
+                                                className="form-control"
+                                                value={this.state.source_sche_khoa}
+                                            />
+                                        </div>
+                                    </div>
                                     <div className="form-group">
                                         <label className="col-md-12">
                                             <span className="help"> Số lượng</span>

@@ -1,11 +1,13 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { reListOrder } from "./reOrder";
+import { reListOrder, reIsShowingModalExport } from "./reOrder";
 import Pagination from "../../../shared/Pagination";
-import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import ModalExport from './modalExport'
 interface Props {
   resListOrder: any;
   reListOrder: (page: number) => void;
+  reIsShowingModalExport: (status: boolean)=>void,
+  isShowingModalExport: any
 }
 class ListOrder extends React.Component<Props, {}> {
   constructor(props) {
@@ -31,18 +33,20 @@ class ListOrder extends React.Component<Props, {}> {
   };
   renderListOrder = ()=> {
       if(this.props.resListOrder.list){
-        return this.props.resListOrder.list.map(element => {
+        return this.props.resListOrder.list.map((element, index) => {
             return (
                 <tr key={element.source_order_id}>
-                    <td className="text-center">{element.source_order_id}</td>
-                    <td>{element.source_order_name_student}</td>
-                    <td>{element.source_title} - khóa {element.source_sche_id}</td>
-                    <td>{element.source_order_created_date}</td>
+                    <td className="text-center">{index + 1}</td>
+                    <td>{element.source_order_id}</td>
+                    <td>{element.source_order_ho}</td>
+                    <td>{element.source_order_ten}</td>
+                    <td>{element.source_order_gender}</td>
+                    <td>{element.source_order_birthday}</td>
+                    <td>{element.source_order_number_phone}</td>
+                    <td>{element.source_order_email}</td>
+                    <td>{element.source_title} - {element.source_sche_khoa}</td>
                     <td>{element.source_order_price}</td>
-                    <td>{element.source_order_number_phone_student}</td>
-                    <td>{element.source_order_email_student}</td>
-                    <td>{element.source_order_facebook}</td>
-                    <td>{element.source_order_school_student}</td>
+                    <td>{element.source_order_created_date}</td>
                 </tr>
             )
         })
@@ -57,40 +61,28 @@ class ListOrder extends React.Component<Props, {}> {
             <div className="panel-toolbar">
               <div className="panel-heading">Danh sách đăng ký học</div>
               <div className="panel-action-bar">
-                <div className="form-group">
-                  <div className="col-sm-12">
-                    <select name="" className="form-control">
-                      <option>Khóa học - thời khóa biểu</option>
-                      <option value="0">Hiện</option>
-                      <option value="1">Ẩn</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="btn btn-sm btn-primary">
+                <div className="btn btn-sm btn-primary" onClick={()=> {
+                  this.props.reIsShowingModalExport(true)
+                }}>
                   <i className=" icon-cloud-download" /> Export
                 </div>
-                <ReactHTMLTableToExcel
-                    id="test-table-xls-button"
-                    className="download-table-xls-button"
-                    table="table-to-xls"
-                    filename="tablexls"
-                    sheet="tablexls"
-                    buttonText="Export"/>
               </div>
             </div>
             <div className="table-responsive">
-              <table className="table table-hover manage-u-table" id="table-to-xls">
+              <table className="table table-hover manage-u-table">
                 <thead>
                   <tr>
-                    <th className="text-center">Id Order</th>
-                    <th>Tên</th>
-                    <th>Khóa học - TKB</th>
-                    <th>Ngày đăng ký</th>
-                    <th>Giá</th>
-                    <th>Điện thoại</th>
+                    <th className="text-center">STT</th>
+                    <th>Id Order</th>
+                    <th>Họ</th>
+                    <th>Tên lót & Tên</th>
+                    <th>Giới tính</th>
+                    <th>Ngày sinh</th>
+                    <th>Số điện thoại</th>
                     <th>Email</th>
-                    <th>FB</th>
-                    <th>T.học</th>
+                    <th>Khóa học - TKB</th>
+                    <th>Giá</th>
+                    <th>Ngày đăng ký</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -108,16 +100,19 @@ class ListOrder extends React.Component<Props, {}> {
             </div>
           </div>
         </div>
+        {this.props.isShowingModalExport ? <ModalExport/> : ''}
       </div>
     );
   }
 }
 
 const mapStateToProps = storeState => ({
-  resListOrder: storeState.reOrder.resListOrder
+  resListOrder: storeState.reOrder.resListOrder,
+  isShowingModalExport: storeState.reOrder.isShowingModalExport
 });
 const mapDispatchToProps = {
-  reListOrder
+  reListOrder,
+  reIsShowingModalExport
 };
 export default connect(
   mapStateToProps,

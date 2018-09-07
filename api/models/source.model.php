@@ -29,20 +29,53 @@ class SourceModel {
         $db->query('
             select
             source_order_id,
-            source_order_name_student,
+            source_order_ho,
+            source_order_ten,
             source_title,
             source_sche_id,
             source_order_price,
-            source_order_number_phone_student,
-            source_order_email_student,
-            source_order_facebook,
-            source_order_school_student,
-            source_order_birthday_student,
-            source_order_created_date
+            source_order_number_phone,
+            source_order_email,
+            source_order_gender,
+            source_order_birthday,
+            source_order_created_date,
+            source_sche_khoa
             from achi_source_order
             inner join achi_source_sche on achi_source_order.source_order_id_source = achi_source_sche.source_sche_id
             inner join achi_source on achi_source_sche.source_sche_id_source = achi_source.source_id
             order by achi_source_order.source_order_id desc limit '.$page.', 20');
+        return $db->fetch_object();
+    }
+    function all_source_order_by_sche($db, $idSche){
+        $db->query('
+        select
+        source_order_id,
+        source_order_ho,
+        source_order_ten,
+        source_title,
+        source_sche_id,
+        source_order_price,
+        source_order_number_phone,
+        source_order_email,
+        source_order_gender,
+        source_order_birthday,
+        source_order_created_date,
+        source_sche_khoa
+        from achi_source_order
+        inner join achi_source_sche on achi_source_order.source_order_id_source = achi_source_sche.source_sche_id
+        inner join achi_source on achi_source_sche.source_sche_id_source = achi_source.source_id
+        where source_order_id_source = '.$idSche.'
+        order by achi_source_order.source_order_id desc');
+        return $db->fetch_object();
+    }
+    function all_sche_order($db){
+        $db->query('
+        select
+        source_sche_id,
+        source_title,
+        source_sche_khoa
+        from achi_source_sche
+        inner join achi_source on achi_source_sche.source_sche_id_source = achi_source.source_id');
         return $db->fetch_object();
     }
     function count_source_order($db){
@@ -70,7 +103,7 @@ class SourceModel {
         return $db->update($form, 'achi_source_sche', ' source_sche_id = '.$db->sqlQuote($id));
     }
     function all_sche($db, $idSource) {
-        $db->query('select source_sche_id, source_title,source_sche_id_source,source_sche_number,
+        $db->query('select source_sche_id, source_sche_khoa,source_title,source_sche_id_source,source_sche_number,
                 source_sche_price,source_sche_sale,source_sche_address,source_sche_teacher,source_sche_status
                 from achi_source_sche
                 inner join achi_source on achi_source_sche.source_sche_id_source = achi_source.source_id

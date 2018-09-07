@@ -40,6 +40,7 @@ $app->put('/source/{id}', function(Request $request, Response $response, $args){
 $app->delete('/source/{id}', function(Request $request, Response $response, $args){
    
 });
+//sche
 $app->post('/source/add-sche', function(Request $request, Response $response){
     if(isset_not_null($request->getParsedBody(), 'source_sche_id_source')){
         return $response->withJson(array(
@@ -146,6 +147,23 @@ $app->get('/source/order/all/{page}', function(Request $request, Response $respo
         "count"=>$this->get('db_source')->count_source_order($this->get('db'))
     ));
 });
+$app->get('/source/order/sche/{idSche}', function(Request $request, Response $response, $args){
+    return $response->withJson(array(
+        "status"=>200,
+        "list"=>$this->get('db_source')->all_source_order_by_sche(
+            $this->get('db'),
+            $args['idSche']
+        )
+    ));
+});
+$app->get('/source/sche/all', function(Request $request, Response $response, $args){
+    return $response->withJson(array(
+        "status"=>200,
+        "list"=>$this->get('db_source')->all_sche_order(
+            $this->get('db')
+        )
+    ));
+});
 $app->get('/source/order/{id}', function(Request $request, Response $response, $args){
     return $response->withJson(array(
         "status"=>200,
@@ -156,7 +174,7 @@ $app->get('/source/order/{id}', function(Request $request, Response $response, $
     ));
 });
 $app->post('/source/order', function(Request $request, Response $response){
-    if(isset_not_null($request->getParsedBody(), 'source_order_email_student')){
+    if(isset_not_null($request->getParsedBody(), 'source_order_email')){
         return $response->withJson(array(
           "status"=>200,
           "list"=>$this->get('db_source')->add_source_order(
