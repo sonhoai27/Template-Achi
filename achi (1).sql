@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2018 at 02:22 AM
+-- Generation Time: Sep 07, 2018 at 07:38 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.8
 
@@ -443,12 +443,12 @@ INSERT INTO `achi_source` (`source_id`, `source_title`, `source_alias`, `source_
 CREATE TABLE `achi_source_order` (
   `source_order_id` varchar(255) NOT NULL,
   `source_order_id_source` int(11) NOT NULL,
-  `source_order_name_student` varchar(255) NOT NULL,
-  `source_order_email_student` varchar(255) NOT NULL,
-  `source_order_birthday_student` varchar(255) NOT NULL,
-  `source_order_number_phone_student` varchar(255) NOT NULL,
-  `source_order_school_student` varchar(255) NOT NULL,
-  `source_order_facebook` varchar(255) NOT NULL,
+  `source_order_ten` varchar(255) NOT NULL,
+  `source_order_email` varchar(255) NOT NULL,
+  `source_order_birthday` varchar(255) NOT NULL,
+  `source_order_number_phone` varchar(255) NOT NULL,
+  `source_order_ho` varchar(255) NOT NULL,
+  `source_order_gender` varchar(255) NOT NULL,
   `source_order_price` int(11) NOT NULL,
   `source_order_created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -457,9 +457,18 @@ CREATE TABLE `achi_source_order` (
 -- Dumping data for table `achi_source_order`
 --
 
-INSERT INTO `achi_source_order` (`source_order_id`, `source_order_id_source`, `source_order_name_student`, `source_order_email_student`, `source_order_birthday_student`, `source_order_number_phone_student`, `source_order_school_student`, `source_order_facebook`, `source_order_price`, `source_order_created_date`) VALUES
-('fa7jAjf8nf', 1, 'Nguyen Hoai Son', 'sonhoai272@gmail.com', '27-02-1996', '0985457865', 'Ptit', 'sonhoai272', 0, '2018-09-07 00:03:53'),
-('fa7jAjs8nf', 1, 'Nguyen Hoai Son', 'sonhoai272@gmail.com', '27-02-1996', '0985457865', 'Ptit', 'sonhoai272', 0, '2018-09-07 00:03:56');
+INSERT INTO `achi_source_order` (`source_order_id`, `source_order_id_source`, `source_order_ten`, `source_order_email`, `source_order_birthday`, `source_order_number_phone`, `source_order_ho`, `source_order_gender`, `source_order_price`, `source_order_created_date`) VALUES
+('fa4346d5df3', 1, 'Hoai Son', 'sonhoai272@gmail.com', '27-02-1996', '0985457865', 'Nguyen', 'Nam', 0, '2018-09-07 17:36:23'),
+('fa434s5df3', 1, 'Hoai Son', 'sonhoai272@gmail.com', '27-02-1996', '0985457865', 'Nguyen', 'Nam', 0, '2018-09-07 17:36:10'),
+('fa43d6d5df3', 1, 'Hoai Son', 'sonhoai272@gmail.com', '27-02-1996', '0985457865', 'Nguyen', 'Nam', 0, '2018-09-07 17:36:25'),
+('fa484s3df3', 1, 'Hoai Son', 'sonhoai272@gmail.com', '27-02-1996', '0985457865', 'Nguyen', 'Nam', 0, '2018-09-07 17:36:05'),
+('fa484s5df3', 1, 'Hoai Son', 'sonhoai272@gmail.com', '27-02-1996', '0985457865', 'Nguyen', 'Nam', 0, '2018-09-07 17:36:08'),
+('fa484sdf', 4, 'Hoai Son', 'sonhoai272@gmail.com', '27-02-1996', '0985457865', 'Nguyen', 'Nam', 0, '2018-09-07 17:35:39'),
+('fa484sdf3', 1, 'Hoai Son', 'sonhoai272@gmail.com', '27-02-1996', '0985457865', 'Nguyen', 'Nam', 0, '2018-09-07 17:36:02'),
+('fa7jAjf8nf', 1, 'Hoai Son', 'sonhoai272@gmail.com', '27-02-1996', '0985457865', 'Nguyen', 'Nam', 0, '2018-09-07 13:58:01'),
+('fa7jAjs8nf', 1, 'Hoai Son', 'sonhoai272@gmail.com', '27-02-1996', '0985457865', 'Nguyen', 'Nam', 0, '2018-09-07 13:58:05'),
+('fg43d6d5df3', 1, 'Hoai Son', 'sonhoai272@gmail.com', '27-02-1996', '0985457865', 'Nguyen', 'Nam', 0, '2018-09-07 17:36:28'),
+('fg43d6df3', 1, 'Hoai Son', 'sonhoai272@gmail.com', '27-02-1996', '0985457865', 'Nguyen', 'Nam', 0, '2018-09-07 17:36:31');
 
 -- --------------------------------------------------------
 
@@ -476,6 +485,7 @@ CREATE TABLE `achi_source_sche` (
   `source_sche_address` varchar(255) NOT NULL,
   `source_sche_teacher` varchar(255) NOT NULL,
   `source_sche_status` tinyint(1) NOT NULL DEFAULT '0',
+  `source_sche_khoa` varchar(255) NOT NULL,
   `source_sche_created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -483,10 +493,11 @@ CREATE TABLE `achi_source_sche` (
 -- Dumping data for table `achi_source_sche`
 --
 
-INSERT INTO `achi_source_sche` (`source_sche_id`, `source_sche_id_source`, `source_sche_number`, `source_sche_price`, `source_sche_sale`, `source_sche_address`, `source_sche_teacher`, `source_sche_status`, `source_sche_created_date`) VALUES
-(1, 1, 10, 1500000, 1500000, 'Lê Văn Sĩ', 'Nguyễn Minh Chí', 1, '2018-08-31 17:42:04'),
-(2, 1, 202, 2500000, 1000000, 'Lê Văn Sĩ', 'Nguyễn Minh Chí', 1, '2018-09-01 09:53:32'),
-(3, 2, 2, 500000, 100000, 'Lê Văn Sĩ', 'Nguyễn Minh Chí', 1, '2018-09-02 02:39:40');
+INSERT INTO `achi_source_sche` (`source_sche_id`, `source_sche_id_source`, `source_sche_number`, `source_sche_price`, `source_sche_sale`, `source_sche_address`, `source_sche_teacher`, `source_sche_status`, `source_sche_khoa`, `source_sche_created_date`) VALUES
+(1, 1, 10, 1500000, 1500000, 'Lê Văn Sĩ', 'Nguyễn Minh Chí', 1, 'Khóa 1', '2018-09-07 16:14:31'),
+(2, 1, 202, 2500000, 1000000, 'Lê Văn Sĩ', 'Nguyễn Minh Chí', 1, 'Khóa 2', '2018-09-07 16:14:40'),
+(3, 2, 2, 500000, 100000, 'Lê Văn Sĩ', 'Nguyễn Minh Chí', 1, 'Khóa 1', '2018-09-07 16:14:46'),
+(4, 2, 13, 122, 122, 'Lê Văn Sĩ', 'Nguyễn Minh Chí', 1, 'Khóa 3', '2018-09-07 16:23:03');
 
 -- --------------------------------------------------------
 
@@ -754,7 +765,7 @@ ALTER TABLE `achi_source`
 -- AUTO_INCREMENT for table `achi_source_sche`
 --
 ALTER TABLE `achi_source_sche`
-  MODIFY `source_sche_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `source_sche_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `achi_status`
