@@ -15,8 +15,6 @@ class Header extends React.Component {
                 <b>Nguyen Minh Chi</b>
               </a>
             </div>
-            {/* /Logo */}
-            {/* Search input and Toggle icon */}
             <ul className="nav navbar-top-links navbar-left">
               <li>
                 <a
@@ -26,7 +24,6 @@ class Header extends React.Component {
                   <i className="ti-close ti-menu" />
                 </a>
               </li>
-              {/* /.dropdown */}
             </ul>
             <ul className="nav navbar-top-links navbar-right pull-right">
               <li className="dropdown">

@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { reListOrder } from "./reOrder";
 import Pagination from "../../../shared/Pagination";
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 interface Props {
   resListOrder: any;
   reListOrder: (page: number) => void;
@@ -34,11 +35,14 @@ class ListOrder extends React.Component<Props, {}> {
             return (
                 <tr key={element.source_order_id}>
                     <td className="text-center">{element.source_order_id}</td>
-                    <td>a</td>
-                    <td>a</td>
+                    <td>{element.source_order_name_student}</td>
+                    <td>{element.source_title} - khóa {element.source_sche_id}</td>
                     <td>{element.source_order_created_date}</td>
                     <td>{element.source_order_price}</td>
                     <td>{element.source_order_number_phone_student}</td>
+                    <td>{element.source_order_email_student}</td>
+                    <td>{element.source_order_facebook}</td>
+                    <td>{element.source_order_school_student}</td>
                 </tr>
             )
         })
@@ -65,10 +69,17 @@ class ListOrder extends React.Component<Props, {}> {
                 <div className="btn btn-sm btn-primary">
                   <i className=" icon-cloud-download" /> Export
                 </div>
+                <ReactHTMLTableToExcel
+                    id="test-table-xls-button"
+                    className="download-table-xls-button"
+                    table="table-to-xls"
+                    filename="tablexls"
+                    sheet="tablexls"
+                    buttonText="Export"/>
               </div>
             </div>
             <div className="table-responsive">
-              <table className="table table-hover manage-u-table">
+              <table className="table table-hover manage-u-table" id="table-to-xls">
                 <thead>
                   <tr>
                     <th className="text-center">Id Order</th>
@@ -77,6 +88,9 @@ class ListOrder extends React.Component<Props, {}> {
                     <th>Ngày đăng ký</th>
                     <th>Giá</th>
                     <th>Điện thoại</th>
+                    <th>Email</th>
+                    <th>FB</th>
+                    <th>T.học</th>
                   </tr>
                 </thead>
                 <tbody>

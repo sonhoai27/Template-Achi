@@ -26,7 +26,23 @@ class SourceModel {
         return $db->insert($form, 'achi_source_order');
     }
     function all_source_order($db, $page){
-        $db->query('select * from achi_source_order order by achi_source_order.source_order_id desc limit '.$page.', 20');
+        $db->query('
+            select
+            source_order_id,
+            source_order_name_student,
+            source_title,
+            source_sche_id,
+            source_order_price,
+            source_order_number_phone_student,
+            source_order_email_student,
+            source_order_facebook,
+            source_order_school_student,
+            source_order_birthday_student,
+            source_order_created_date
+            from achi_source_order
+            inner join achi_source_sche on achi_source_order.source_order_id_source = achi_source_sche.source_sche_id
+            inner join achi_source on achi_source_sche.source_sche_id_source = achi_source.source_id
+            order by achi_source_order.source_order_id desc limit '.$page.', 20');
         return $db->fetch_object();
     }
     function count_source_order($db){
