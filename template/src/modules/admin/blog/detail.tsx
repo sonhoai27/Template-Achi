@@ -1,8 +1,39 @@
 import * as React from "react";
 import { Editor } from "@tinymce/tinymce-react";
-class BlogDetail extends React.Component {
+import { connect } from "react-redux";
+import { reShowPhotoApp, reSetCurrentEditorPhoto } from "../../../reducers/init";
+import { reDetailBlog, reUpdateBlog } from "./reBlog";
+
+interface Props {
+  match?: any,
+  reSetCurrentEditorPhoto: (editor: any)=> void,
+  reShowPhotoApp: (status: boolean)=> void,
+  resDetailBlog: any,
+  resUpdateBlog: any,
+  reDetailBlog: (idBlog: number)=> void,
+  reUpdateBlog: (form: any, idBlog: number)=> void
+}
+interface State {
+  blog_id_category: number,
+  blog_id_author: number,
+  blog_title: string,
+  blog_promo: string,
+  blog_cover: string,
+  blog_content: string,
+  blog_id_status: number
+}
+class BlogDetail extends React.Component<Props, State> {
   constructor(props) {
     super(props);
+  }
+  componentDidMount(){
+    this.props.reDetailBlog(this.props.match.params.idBlog)
+  }
+  onChange = (e: any)=> {
+    // @ts-ignore
+    this.setState({
+      [e.target.name]: e.target.value
+    })
   }
   render() {
     return (
@@ -20,31 +51,37 @@ class BlogDetail extends React.Component {
                 <div className="col-sm-9">
                   <div className="form-group">
                     <label className="col-md-12">
-                      Default Text <span className="help"> Tiêu đề</span>
+                      <span className="help"> Tiêu đề</span>
                     </label>
                     <div className="col-md-12">
                       <input
                         type="text"
                         className="form-control"
-                        defaultValue="George deo..."
+                        defaultValue="."
                       />{" "}
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-md-12">
-                      Default Text <span className="help"> Tóm tắt</span>
+                      <span className="help"> Tóm tắt</span>
                     </label>
                     <div className="col-md-12">
                       <input
                         type="text"
                         className="form-control"
-                        defaultValue="George deo..."
+                        defaultValue=""
                       />{" "}
                     </div>
                   </div>
                   <div className="form-group">
                     <div className="col-md-12">
                       <Editor
+                        onChange={(e: any)=> {
+                          this.setState({
+                            ...this.state,
+                            blog_content: e.level.content
+                          })
+                        }}
                         apiKey="t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl"
                         init={{
                           selector: "textarea",
@@ -85,7 +122,10 @@ class BlogDetail extends React.Component {
                   </div>
                   <div className="form-group">
                     <label className="col-sm-12">Hình cover</label>
-                    <div className="col-sm-12 cover-blog">
+                    <div className="col-sm-12 cover-blog" onClick={()=> {
+                      this.props.reShowPhotoApp(true)
+                      this.props.reSetCurrentEditorPhoto('img-cover-blog-preview')
+                    }}>>
                       <i className="ti-upload"/>
                       <img id="img-cover-blog-preview"/>
                     </div>
@@ -124,4 +164,20 @@ class BlogDetail extends React.Component {
   }
 }
 
-export default BlogDetail;
+const mapStateToProps = storeState => ({
+  resListUI: storeState.reUI.resListUI,
+  resAddSource: storeState.reSource.resAddSource,
+  resDetailBlog: storeState.reBlog.resDetailBlog,
+  resUpdateBlog: storeState.reBlog.resUpdateBlog
+});
+const mapDispatchToProps = {
+  reSetCurrentEditorPhoto,
+  reShowPhotoApp,
+  reUpdateBlog,
+  reDetailBlog
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BlogDetail);
+

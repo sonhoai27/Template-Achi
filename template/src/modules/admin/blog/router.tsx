@@ -38,7 +38,7 @@ class BlogRouter extends React.Component<Props, {}> {
               component={BlogList}
             />
             <Route path={`${this.props.match.url}/add`} component={BlogAdd} />
-            <Route path={`${this.props.match.url}/detail`} component={BlogDetail} />
+            <Route path={`${this.props.match.url}/detail/:idBlog`} component={BlogDetail} />
           </div>
         </div>
       </>

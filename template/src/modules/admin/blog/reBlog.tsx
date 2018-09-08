@@ -3,14 +3,35 @@ import { REQUEST, FAILURE, SUCCESS } from '../../../utils/action-type-util';
 import { API } from '../../../config/const';
 export const ACTION_TYPES = {
     API_ADD_BLOG: 'ReBlog/API_ADD_BLOG',
+    API_LIST_BLOG: 'ReBlog/API_LIST_BLOG',
     API_LIST_AUHTOR: 'ReBlog/API_LIST_AUHTOR',
     API_LIST_CATEGORY: 'ReBlog/API_LIST_CATEGORY',
+    API_DETAIL_BLOG: 'ReBlog/API_DETAIL_BLOG',
+    API_UPDATE_BLOG: 'ReBlog/API_UPDATE_BLOG',
+    API_DELETE_BLOG: 'ReBlog/API_DELETE_BLOG',
+
+    API_ADD_AUTHOR: 'ReBlog/API_ADD_AUTHOR',
+    API_ADD_CATEGORY: 'ReBlog/API_ADD_CATEGORY',
+    API_DELETE_AUTHOR: 'ReBlog/API_DELETE_AUTHOR',
+    API_DELETE_CATEGORY: 'ReBlog/API_DELETE_CATEGORY',
+    API_UPDATE_AUTHOR: 'ReBlog/API_UPDATE_AUTHOR',
+    API_UPDATE_CATEGORY: 'ReBlog/API_UPDATE_CATEGORY'
 }
 
 const initialState = {
     resAddBlog: {},
+    resListBlog: {},
     resListCategory: {},
-    resListAuthor: {}
+    resListAuthor: {},
+    resDetailBlog: {},
+    resUpdateBlog: {},
+    resDeleteBlog: {},
+    resAddAuthor: {},
+    resAddCategory: {},
+    resDeleteAuthor: {},
+    resDeleteCategory: {},
+    resUpdateAuthor: {},
+    resUpdateCategory: {}
 }
 
 export default (state = initialState, action) => {
@@ -65,17 +86,247 @@ export default (state = initialState, action) => {
                 resListCategory: action.payload.data
             }
         }
+        // list blog 
+        case REQUEST(ACTION_TYPES.API_LIST_BLOG): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_LIST_BLOG): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_LIST_BLOG): {
+            return {
+                ...state,
+                resListBlog: action.payload.data
+            }
+        }
+        // detail blog 
+        case REQUEST(ACTION_TYPES.API_DETAIL_BLOG): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_DETAIL_BLOG): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_DETAIL_BLOG): {
+            return {
+                ...state,
+                resDetailBlog: action.payload.data
+            }
+        }
+         // update blog 
+         case REQUEST(ACTION_TYPES.API_UPDATE_BLOG): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_UPDATE_BLOG): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_UPDATE_BLOG): {
+            return {
+                ...state,
+                resUpdateBlog: action.payload.data
+            }
+        }
+         // delete blog 
+         case REQUEST(ACTION_TYPES.API_DELETE_BLOG): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_DELETE_BLOG): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_DELETE_BLOG): {
+            return {
+                ...state,
+                resDeleteBlog: action.payload.data
+            }
+        }
+
+         // add author
+         case REQUEST(ACTION_TYPES.API_ADD_AUTHOR): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_ADD_AUTHOR): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_ADD_AUTHOR): {
+            return {
+                ...state,
+                resAddAuthor: action.payload.data
+            }
+        }
+
+         // add CAtegory 
+         case REQUEST(ACTION_TYPES.API_ADD_CATEGORY): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_ADD_CATEGORY): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_ADD_CATEGORY): {
+            return {
+                ...state,
+                resAddCategory: action.payload.data
+            }
+        }
+         // delete author 
+         case REQUEST(ACTION_TYPES.API_DELETE_AUTHOR): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_DELETE_AUTHOR): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_DELETE_AUTHOR): {
+            return {
+                ...state,
+                resDeleteAuthor: action.payload.data
+            }
+        }
+         // delete Ccategory 
+         case REQUEST(ACTION_TYPES.API_DELETE_CATEGORY): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_DELETE_CATEGORY): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_DELETE_CATEGORY): {
+            return {
+                ...state,
+                resDeleteCategory: action.payload.data
+            }
+        }
         default:
             return state;
     }
 }
 
 const API_BLOG = API + 'blog'
+const API_CATEGORY = API + 'category'
+const API_AUTHOR = API + 'author'
 
 export const reAddBlog = (form) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_ADD_BLOG,
         payload: axios.post(API_BLOG, form)
+    });
+    return result;
+};
+export const reListBlog = (page) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_LIST_BLOG,
+        payload: axios.get(API_BLOG+"/"+page)
+    });
+    return result;
+};
+export const reDetailBlog = (idBlog: number) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_DETAIL_BLOG,
+        payload: axios.get(API_BLOG+"/detail/"+idBlog)
+    });
+    return result;
+};
+export const reUpdateBlog = (form: any, idBlog: number) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_UPDATE_BLOG,
+        payload: axios.put(API_BLOG+"/"+idBlog)
+    });
+    return result;
+};
+export const reDeleteBlog = (idBlog: number) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_DELETE_BLOG,
+        payload: axios.delete(API_BLOG+"/"+idBlog)
+    });
+    return result;
+};
+
+// author category
+// all
+export const reListCategory = () => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_LIST_CATEGORY,
+        payload: axios.get(API_CATEGORY)
+    });
+    return result;
+};
+export const reAuthor = () => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_LIST_AUHTOR,
+        payload: axios.get(API_AUTHOR)
+    });
+    return result;
+};
+// add
+export const reAddAuthor = (form) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_ADD_AUTHOR,
+        payload: axios.post(API_AUTHOR, form)
+    });
+    return result;
+};
+export const reAddCategory = (form) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_ADD_CATEGORY,
+        payload: axios.post(API_CATEGORY, form)
+    });
+    return result;
+};
+// delete
+export const reDeleteAuthor = (id) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_DELETE_AUTHOR,
+        payload: axios.delete(API_AUTHOR+"/"+id)
+    });
+    return result;
+};
+export const reDeleteCategory = (id: number) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_DELETE_CATEGORY,
+        payload: axios.delete(API_CATEGORY+"/"+id)
+    });
+    return result;
+};
+// put
+export const reUpdateAuthor = (form, id) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_UPDATE_AUTHOR,
+        payload: axios.put(API_AUTHOR+"/"+id, form)
+    });
+    return result;
+};
+export const reUpdateCategory = (form: any, id: number) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_UPDATE_CATEGORY,
+        payload: axios.put(API_CATEGORY+"/"+id, form)
     });
     return result;
 };

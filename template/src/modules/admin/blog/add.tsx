@@ -49,7 +49,8 @@ class BlogAdd extends React.Component<Props, State> {
     this.props.reAddBlog({
       ...this.state,
       blog_alias: alias(this.state.blog_title),
-      blog_cover: temp.src
+      blog_cover: temp.src,
+      blog_id: (Date.now())
     })
   }
   render() {
@@ -80,7 +81,7 @@ class BlogAdd extends React.Component<Props, State> {
                         onChange={this.onChange}
                         name="blog_title"
                         className="form-control"
-                        defaultValue="George deo..."
+                        defaultValue=""
                       />
                     </div>
                   </div>
@@ -94,7 +95,7 @@ class BlogAdd extends React.Component<Props, State> {
                         name="blog_promo"
                         type="text"
                         className="form-control"
-                        defaultValue="George deo..."
+                        defaultValue=""
                       />
                     </div>
                   </div>
