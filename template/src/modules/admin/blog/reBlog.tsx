@@ -278,7 +278,7 @@ export const reListCategory = () => async dispatch => {
     });
     return result;
 };
-export const reAuthor = () => async dispatch => {
+export const reListAuthor = () => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_LIST_AUHTOR,
         payload: axios.get(API_AUTHOR)

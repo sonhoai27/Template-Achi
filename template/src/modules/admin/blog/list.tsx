@@ -37,7 +37,7 @@ class BlogList extends React.Component<Props, {}> {
         return (
           <tr key={element.blog_id}>
             <td className="text-center" role="row">{index+1}</td>
-            <td>{element.blog_title}</td>
+            <td><Link to={BASEURLADMIN+'blog/detail/'+element.blog_id}>{element.blog_title}</Link></td>
             <td>{element.blog_promo}</td>
             <td>{element.blog_created_date}</td>
           </tr>

@@ -1,6 +1,12 @@
 import * as React from "react";
 import ListElementOnDetailUI from "./detail-ui";
 import { connect } from "react-redux";
+import AceEditor from 'react-ace';
+import 'brace/mode/css';
+import 'brace/theme/monokai';
+import 'brace/snippets/css';
+import 'brace/ext/language_tools';
+
 import {
   reShowListElement,
   reSetCurrentIdElement,
@@ -111,7 +117,25 @@ class ItemDetailUI extends React.Component<Props, State> {
               </div>
             </label>
             <div className="col-md-12">
-              <textarea name="detail_ui_css" onChange={this.onChangeCss} className="form-control" defaultValue={this.props.detailUI.detail_ui_css}/>
+              {/* <textarea name="detail_ui_css" onChange={this.onChangeCss} className="form-control" defaultValue={this.props.detailUI.detail_ui_css}/> */}
+              <AceEditor
+                style={{height: 128}}
+                mode="css"
+                theme="monokai"
+                name="blah2"
+                fontSize={14}
+                editorProps={{$blockScrolling: true}}
+                showPrintMargin={false}
+                showGutter={false}
+                highlightActiveLine={true}
+                value={`.button {color: red;}`}
+                setOptions={{
+                enableBasicAutocompletion: true,
+                enableLiveAutocompletion: true,
+                enableSnippets: true,
+                showLineNumbers: false,
+                tabSize: 1,
+                }}/>
             </div>
           </div>
         </div>

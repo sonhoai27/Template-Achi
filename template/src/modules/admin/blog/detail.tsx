@@ -2,7 +2,7 @@ import * as React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { connect } from "react-redux";
 import { reShowPhotoApp, reSetCurrentEditorPhoto } from "../../../reducers/init";
-import { reDetailBlog, reUpdateBlog } from "./reBlog";
+import { reDetailBlog, reUpdateBlog, reListAuthor, reListCategory } from "./reBlog";
 
 interface Props {
   match?: any,
@@ -11,7 +11,9 @@ interface Props {
   resDetailBlog: any,
   resUpdateBlog: any,
   reDetailBlog: (idBlog: number)=> void,
-  reUpdateBlog: (form: any, idBlog: number)=> void
+  reUpdateBlog: (form: any, idBlog: number)=> void,
+  resListCategory: any,
+  resListAuthor: any,
 }
 interface State {
   blog_id_category: number,
@@ -20,11 +22,22 @@ interface State {
   blog_promo: string,
   blog_cover: string,
   blog_content: string,
-  blog_id_status: number
+  blog_id_status: number,
+  blog_id: string
 }
 class BlogDetail extends React.Component<Props, State> {
   constructor(props) {
     super(props);
+    this.state = {
+      blog_id_category: 0,
+      blog_id_author: 0,
+      blog_title: '',
+      blog_promo: '',
+      blog_cover: '',
+      blog_content: '',
+      blog_id_status: 0,
+      blog_id: ''
+    }
   }
   componentDidMount(){
     this.props.reDetailBlog(this.props.match.params.idBlog)
@@ -34,6 +47,20 @@ class BlogDetail extends React.Component<Props, State> {
     this.setState({
       [e.target.name]: e.target.value
     })
+  }
+  componentDidUpdate(preProps){
+    if(preProps.resDetailBlog != this.props.resDetailBlog){
+      this.setState({
+        blog_id_category: this.props.resDetailBlog.list.blog_id_category,
+        blog_id_author: this.props.resDetailBlog.list.blog_id_author,
+        blog_title: this.props.resDetailBlog.list.blog_title,
+        blog_promo: this.props.resDetailBlog.list.blog_promo,
+        blog_cover: this.props.resDetailBlog.list.blog_cover,
+        blog_content: this.props.resDetailBlog.list.blog_content,
+        blog_id_status: this.props.resDetailBlog.list.blog_id_status,
+        blog_id: this.props.resDetailBlog.list.blog_id
+      })
+    }
   }
   render() {
     return (
@@ -55,10 +82,11 @@ class BlogDetail extends React.Component<Props, State> {
                     </label>
                     <div className="col-md-12">
                       <input
+                        onChange={this.onChange}
                         type="text"
                         className="form-control"
-                        defaultValue="."
-                      />{" "}
+                        defaultValue={this.state.blog_title}
+                      />
                     </div>
                   </div>
                   <div className="form-group">
@@ -67,15 +95,17 @@ class BlogDetail extends React.Component<Props, State> {
                     </label>
                     <div className="col-md-12">
                       <input
+                        onChange={this.onChange}
                         type="text"
                         className="form-control"
-                        defaultValue=""
-                      />{" "}
+                        defaultValue={this.state.blog_promo}
+                      />
                     </div>
                   </div>
                   <div className="form-group">
                     <div className="col-md-12">
                       <Editor
+                        initialValue={this.state.blog_content}
                         onChange={(e: any)=> {
                           this.setState({
                             ...this.state,
@@ -111,7 +141,7 @@ class BlogDetail extends React.Component<Props, State> {
                   <div className="form-group">
                     <label className="col-sm-12">Trạng thái</label>
                     <div className="col-sm-12">
-                      <select className="form-control">
+                      <select onChange={this.onChange} className="form-control">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -127,13 +157,13 @@ class BlogDetail extends React.Component<Props, State> {
                       this.props.reSetCurrentEditorPhoto('img-cover-blog-preview')
                     }}>>
                       <i className="ti-upload"/>
-                      <img id="img-cover-blog-preview"/>
+                      <img id="img-cover-blog-preview" className="img-responsive" src={this.state.blog_cover}/>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-12">Tác giả</label>
                     <div className="col-sm-12">
-                      <select className="form-control">
+                      <select onChange={this.onChange} className="form-control">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -145,7 +175,7 @@ class BlogDetail extends React.Component<Props, State> {
                   <div className="form-group">
                     <label className="col-sm-12">Danh mục</label>
                     <div className="col-sm-12">
-                      <select className="form-control">
+                      <select onChange={this.onChange} className="form-control">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
@@ -168,13 +198,17 @@ const mapStateToProps = storeState => ({
   resListUI: storeState.reUI.resListUI,
   resAddSource: storeState.reSource.resAddSource,
   resDetailBlog: storeState.reBlog.resDetailBlog,
-  resUpdateBlog: storeState.reBlog.resUpdateBlog
+  resUpdateBlog: storeState.reBlog.resUpdateBlog,
+  resListCategory: storeState.reBlog.resListCategory,
+  resListAuthor: storeState.reBlog.resListAuthor,
 });
 const mapDispatchToProps = {
   reSetCurrentEditorPhoto,
   reShowPhotoApp,
   reUpdateBlog,
-  reDetailBlog
+  reDetailBlog,
+  reListCategory,
+  reListAuthor
 };
 export default connect(
   mapStateToProps,

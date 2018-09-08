@@ -10,6 +10,7 @@
         "axios": "^0.18.0",
         "gatsby-plugin-react-helmet": "^2.0.11",
         "react": "^16.4.2",
+        "react-ace": "^6.1.4",
         "react-dom": "^16.4.2",
         "react-helmet": "^5.2.0",
         "react-html-parser": "^2.0.2",
