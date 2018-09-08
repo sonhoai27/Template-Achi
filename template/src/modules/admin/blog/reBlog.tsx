@@ -15,7 +15,8 @@ export const ACTION_TYPES = {
     API_DELETE_AUTHOR: 'ReBlog/API_DELETE_AUTHOR',
     API_DELETE_CATEGORY: 'ReBlog/API_DELETE_CATEGORY',
     API_UPDATE_AUTHOR: 'ReBlog/API_UPDATE_AUTHOR',
-    API_UPDATE_CATEGORY: 'ReBlog/API_UPDATE_CATEGORY'
+    API_UPDATE_CATEGORY: 'ReBlog/API_UPDATE_CATEGORY',
+    API_STATUS: 'ReBlog/API_STATUS'
 }
 
 const initialState = {
@@ -31,7 +32,8 @@ const initialState = {
     resDeleteAuthor: {},
     resDeleteCategory: {},
     resUpdateAuthor: {},
-    resUpdateCategory: {}
+    resUpdateCategory: {},
+    resListStatus: []
 }
 
 export default (state = initialState, action) => {
@@ -222,6 +224,23 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 resDeleteCategory: action.payload.data
+            }
+        }
+        // list status
+        case REQUEST(ACTION_TYPES.API_STATUS): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_STATUS): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_STATUS): {
+            return {
+                ...state,
+                res: action.payload.data
             }
         }
         default:

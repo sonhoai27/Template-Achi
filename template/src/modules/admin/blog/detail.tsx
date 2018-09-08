@@ -14,6 +14,8 @@ interface Props {
   reUpdateBlog: (form: any, idBlog: number)=> void,
   resListCategory: any,
   resListAuthor: any,
+  reListCategory: ()=> void,
+  reListAuthor: ()=> void
 }
 interface State {
   blog_id_category: number,
@@ -41,6 +43,8 @@ class BlogDetail extends React.Component<Props, State> {
   }
   componentDidMount(){
     this.props.reDetailBlog(this.props.match.params.idBlog)
+    this.props.reListAuthor()
+    this.props.reListCategory()
   }
   onChange = (e: any)=> {
     // @ts-ignore
@@ -61,6 +65,26 @@ class BlogDetail extends React.Component<Props, State> {
         blog_id: this.props.resDetailBlog.list.blog_id
       })
     }
+  }
+  renderListAuthor = ()=> {
+    if(this.props.resListAuthor.list){
+      return this.props.resListAuthor.list.map(element => {
+        return (
+          <option value={element.author_id} selected={element.author_id === this.state.blog_id_author ? true : false}>{element.author_name}</option>
+        )
+      })
+    }
+    return ''
+  }
+  renderListCategory = ()=> {
+    if(this.props.resListCategory.list){
+      return this.props.resListCategory.list.map(element => {
+        return (
+          <option value={element.category_id} selected={element.category_id === this.state.blog_id_category ? true : false}>{element.category_name}</option>
+        )
+      })
+    }
+    return ''
   }
   render() {
     return (
@@ -142,7 +166,7 @@ class BlogDetail extends React.Component<Props, State> {
                     <label className="col-sm-12">Trạng thái</label>
                     <div className="col-sm-12">
                       <select onChange={this.onChange} className="form-control">
-                        <option>1</option>
+                        <option>Chọn</option>
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
@@ -164,11 +188,8 @@ class BlogDetail extends React.Component<Props, State> {
                     <label className="col-sm-12">Tác giả</label>
                     <div className="col-sm-12">
                       <select onChange={this.onChange} className="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option>Chọn</option>
+                        {this.renderListAuthor()}
                       </select>
                     </div>
                   </div>
@@ -176,11 +197,8 @@ class BlogDetail extends React.Component<Props, State> {
                     <label className="col-sm-12">Danh mục</label>
                     <div className="col-sm-12">
                       <select onChange={this.onChange} className="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option>Chọn</option>
+                        {this.renderListCategory()}
                       </select>
                     </div>
                   </div>
