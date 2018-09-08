@@ -29,6 +29,7 @@ require(__SITE_PATH.'..\app\Routers\ui.router.php');
 require(__SITE_PATH.'..\app\Routers\source.router.php');
 require(__SITE_PATH.'..\app\Routers\author.router.php');
 require(__SITE_PATH.'..\app\Routers\category.router.php');
+require(__SITE_PATH.'..\app\Routers\status.router.php');
 $app->get('/', function(Request $request, Response $response){
   $this->get('db')->query('SELECT * FROM `achi_status` order by status_id desc');
   print_r($this->get('db')->fetch_array());

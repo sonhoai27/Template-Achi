@@ -3,13 +3,19 @@ import { Editor } from "@tinymce/tinymce-react";
 import { BASEURLADMIN } from "../../../config/const";
 import { connect } from "react-redux";
 import { reShowPhotoApp, reSetCurrentEditorPhoto } from "../../../reducers/init";
-import { reAddBlog } from "./reBlog";
+import { reAddBlog, reListStatus, reListAuthor, reListCategory } from "./reBlog";
 import { alias } from "../../../utils/alias";
 interface Props {
   reSetCurrentEditorPhoto: (editor: any)=> void,
   reShowPhotoApp: (status: boolean)=> void,
   reAddBlog: (form: any)=> void,
-  resAddBlog: any
+  resAddBlog: any,
+  resListCategory: any,
+  resListAuthor: any,
+  reListCategory: ()=> void,
+  reListAuthor: ()=> void,
+  reListStatus: ()=> void,
+  resListStatus: any
 }
 interface State {
   blog_id_category: number,
@@ -33,6 +39,11 @@ class BlogAdd extends React.Component<Props, State> {
       blog_id_status: 0
     }
   }
+  componentDidMount(){
+    this.props.reListAuthor()
+    this.props.reListCategory()
+    this.props.reListStatus()
+  }
   componentDidUpdate(preProps){
     if(preProps.resAddBlog != this.props.resAddBlog){
       console.log(this.props.resAddBlog)
@@ -52,6 +63,36 @@ class BlogAdd extends React.Component<Props, State> {
       blog_cover: temp.src,
       blog_id: (Date.now())
     })
+  }
+  renderListAuthor = ()=> {
+    if(this.props.resListAuthor.list){
+      return this.props.resListAuthor.list.map(element => {
+        return (
+          <option value={element.author_id} selected={element.author_id === this.state.blog_id_author ? true : false}>{element.author_name}</option>
+        )
+      })
+    }
+    return ''
+  }
+  renderListCategory = ()=> {
+    if(this.props.resListCategory.list){
+      return this.props.resListCategory.list.map(element => {
+        return (
+          <option value={element.category_id} selected={element.category_id === this.state.blog_id_category ? true : false}>{element.category_name}</option>
+        )
+      })
+    }
+    return ''
+  }
+  renderListStatus = ()=> {
+    if(this.props.resListStatus.list){
+      return this.props.resListStatus.list.map(element => {
+        return (
+          <option value={element.status_id} selected={element.status_id === this.state.blog_id_status ? true : false}>{element.status_name}</option>
+        )
+      })
+    }
+    return ''
   }
   render() {
     return (
@@ -143,11 +184,8 @@ class BlogAdd extends React.Component<Props, State> {
                         onChange={this.onChange}
                         name="blog_id_status"
                         className="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option>Chọn</option>
+                        {this.renderListStatus()}
                       </select>
                     </div>
                   </div>
@@ -171,11 +209,8 @@ class BlogAdd extends React.Component<Props, State> {
                         onChange={this.onChange}
                         name="blog_id_author"
                         className="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option>Chọn</option>
+                        {this.renderListAuthor()}
                       </select>
                     </div>
                   </div>
@@ -189,11 +224,8 @@ class BlogAdd extends React.Component<Props, State> {
                         onChange={this.onChange}
                         name="blog_id_category"
                         className="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option>Chọn</option>
+                        {this.renderListCategory()}
                       </select>
                     </div>
                   </div>
@@ -210,12 +242,18 @@ class BlogAdd extends React.Component<Props, State> {
 const mapStateToProps = storeState => ({
   resListUI: storeState.reUI.resListUI,
   resAddSource: storeState.reSource.resAddSource,
-  resAddBlog: storeState.reBlog.resAddBlog
+  resAddBlog: storeState.reBlog.resAddBlog,
+  resListCategory: storeState.reBlog.resListCategory,
+  resListAuthor: storeState.reBlog.resListAuthor,
+  resListStatus: storeState.reBlog.resListStatus
 });
 const mapDispatchToProps = {
   reSetCurrentEditorPhoto,
   reShowPhotoApp,
-  reAddBlog
+  reAddBlog,
+  reListCategory,
+  reListAuthor,
+  reListStatus
 };
 export default connect(
   mapStateToProps,

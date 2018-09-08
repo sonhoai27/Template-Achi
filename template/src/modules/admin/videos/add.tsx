@@ -1,4 +1,5 @@
 import * as React from "react";
+import { connect } from "react-redux";
 class VideoAdd extends React.Component {
   constructor(props) {
     super(props);
@@ -70,4 +71,11 @@ class VideoAdd extends React.Component {
   }
 }
 
-export default VideoAdd;
+const mapStateToProps = storeState => ({
+});
+const mapDispatchToProps = {
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(VideoAdd);

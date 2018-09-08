@@ -38,7 +38,7 @@ class VideoRouter extends React.Component<Props, {}> {
               component={VideoList}
             />
             <Route path={`${this.props.match.url}/add`} component={VideoAdd} />
-            <Route path={`${this.props.match.url}/detail`} component={VideoDetail} />
+            <Route path={`${this.props.match.url}/detail/:idVideo`} component={VideoDetail} />
           </div>
         </div>
       </>

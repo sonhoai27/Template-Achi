@@ -12,7 +12,9 @@ $app->post('/file/upload/photo', function(Request $request, Response $response){
     $uploadedFile = $uploadedFiles['upload-image'];
     if ($uploadedFile->getError() === UPLOAD_ERR_OK) {
         $filename = moveUploadedFile($directory, $uploadedFile);
-        $response->write($filename);
+        return $response->withJson(array(
+            'status'=>200
+        ));
     }
 });
 function moveUploadedFile($directory, UploadedFile $uploadedFile)
@@ -38,13 +40,11 @@ $app->delete('/file/delete/{id}', function(Request $request, Response $response,
     if(file_exists($this->get('upload_directory').'/'.$args['id'])){
         if(unlink($this->get('upload_directory').'/'.$args['id'])){
             return $response->withJson(array(
-                'message'=>'ok',
                 'status'=>200,
                 'uri'=>$args['id']
             ));
         }else {
             return $response->withJson(array(
-                'message'=>error,
                 'status'=>403,
                 'uri'=>$args['id']
             ), 403);  

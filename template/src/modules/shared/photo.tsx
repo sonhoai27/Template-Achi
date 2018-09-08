@@ -1,6 +1,8 @@
 import * as React from "react";
 import Image from "./image";
 import { connect } from "react-redux";
+import axios from 'axios'
+declare var $: any;
 import {
   reShowPhotoApp,
   reSetCurrentEditorPhoto,
@@ -8,8 +10,10 @@ import {
   reAddImage,
   reListImage
 } from "../../reducers/init";
+import { API } from "../../config/const";
 interface State {
   dataImage: object;
+  imageChoose: any
 }
 interface Props {
   isShowPhotoApp: any;
@@ -28,9 +32,17 @@ class Photo extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
-      dataImage: {}
+      dataImage: {},
+      imageChoose: {}
     };
     this.nodeContextMenuPhotoApp = React.createRef();
+  }
+  componentDidUpdate(preProps){
+    if(preProps.resDeleteImage != this.props.resDeleteImage){
+      if(this.props.resDeleteImage.status === 200){
+        this.props.reListImage()
+      }
+    }
   }
   componentWillMount() {
     window.addEventListener(
@@ -88,7 +100,7 @@ class Photo extends React.Component<Props, State> {
   };
   handleDelete = () => {
     let name: any = this.state.dataImage;
-    alert(name.name);
+    this.props.reDeleteImage(name.name)
   };
   renderListImage = () => {
     if (this.props.resListImage) {
@@ -98,7 +110,7 @@ class Photo extends React.Component<Props, State> {
             <Image
               dataSrc={JSON.stringify({
                 uri: element.uri,
-                name: element.name + i
+                name: element.name
               })}
               onClick={e => this._contextMenu(e)}
               src={element.uri}
@@ -127,7 +139,7 @@ class Photo extends React.Component<Props, State> {
               />
             </div>
             <div className="btn-close">
-              <button className="btn btn-block btn-info btn-xs upload-file">
+              <button className="btn btn-block btn-info btn-xs upload-file" data-toggle="modal" data-target="#upload-image">
                 Tải lên
               </button>
               <i
@@ -158,6 +170,54 @@ class Photo extends React.Component<Props, State> {
           <p onClick={this.handleDelete}>
             <i className="ti-trash" /> Xóa
           </p>
+        </div>
+        <div id="upload-image" className="modal fade" tabIndex={-1} role="dialog"
+        aria-labelledby="upload-image" aria-hidden="true">
+          <div className="modal-dialog modal-sm">
+            <div className="modal-content">
+              <div className="modal-header">
+                <button type="button" className="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 className="modal-title" id="mySmallModalLabel">Upload Hình ảnh</h4> </div>
+              <div className="modal-body">
+                <input
+                  onChange={(e: any)=> {
+                    // const data = new FormData();
+                    // data.append('upload-image', e.target.files[0]);
+                    let reader = new FileReader()
+                    reader.onload = (event: any)=> {
+                      const tempDomImage: any = document.getElementById('review-image-before-upload')
+                      tempDomImage.src = event.target.result
+                    }
+                    reader.readAsDataURL(e.target.files[0])
+                    this.setState({
+                      imageChoose: e.target.files[0]
+                    })
+                  }}
+                  name="file"
+                  id="photo-app-choose-file"
+                  type="file" placeholder="Chọn hình" accept="image/png, image/jpeg"/>
+                <img id="review-image-before-upload" className="img-responsive" width='100%' height='50'/>
+              </div>
+              <div className="modal-footer">
+                <button
+                  onClick={()=> {
+                    const data = new FormData();
+                    data.append('upload-image', this.state.imageChoose);
+                    axios.post(API+'file/upload/photo', data)
+                    .then(result => {
+                      if(result.status === 200){
+                        $('#upload-image').modal('hide')
+                        this.props.reListImage()
+                      }
+                    })
+                    .catch(err => {
+                      console.log(err)
+                    })
+                  }}
+                  type="button" className="btn btn-danger waves-effect waves-light">Tải lên</button>
+              </div>
+            </div>
+          </div>
         </div>
       </>
     );

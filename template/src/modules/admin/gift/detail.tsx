@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Editor } from "@tinymce/tinymce-react";
-class BlogDetail extends React.Component {
+import { connect } from "react-redux";
+class GiftDetail extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -124,4 +125,11 @@ class BlogDetail extends React.Component {
   }
 }
 
-export default BlogDetail;
+const mapStateToProps = storeState => ({
+});
+const mapDispatchToProps = {
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GiftDetail);

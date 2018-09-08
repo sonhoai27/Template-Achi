@@ -2,7 +2,7 @@ import * as React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { connect } from "react-redux";
 import { reShowPhotoApp, reSetCurrentEditorPhoto } from "../../../reducers/init";
-import { reDetailBlog, reUpdateBlog, reListAuthor, reListCategory } from "./reBlog";
+import { reDetailBlog, reUpdateBlog, reListAuthor, reListCategory, reListStatus } from "./reBlog";
 
 interface Props {
   match?: any,
@@ -10,12 +10,14 @@ interface Props {
   reShowPhotoApp: (status: boolean)=> void,
   resDetailBlog: any,
   resUpdateBlog: any,
-  reDetailBlog: (idBlog: number)=> void,
-  reUpdateBlog: (form: any, idBlog: number)=> void,
+  reDetailBlog: (idBlog: string)=> void,
+  reUpdateBlog: (form: any, idBlog: string)=> void,
   resListCategory: any,
   resListAuthor: any,
   reListCategory: ()=> void,
-  reListAuthor: ()=> void
+  reListAuthor: ()=> void,
+  reListStatus: ()=> void,
+  resListStatus: any
 }
 interface State {
   blog_id_category: number,
@@ -24,8 +26,7 @@ interface State {
   blog_promo: string,
   blog_cover: string,
   blog_content: string,
-  blog_id_status: number,
-  blog_id: string
+  blog_id_status: number
 }
 class BlogDetail extends React.Component<Props, State> {
   constructor(props) {
@@ -37,14 +38,14 @@ class BlogDetail extends React.Component<Props, State> {
       blog_promo: '',
       blog_cover: '',
       blog_content: '',
-      blog_id_status: 0,
-      blog_id: ''
+      blog_id_status: 0
     }
   }
   componentDidMount(){
     this.props.reDetailBlog(this.props.match.params.idBlog)
     this.props.reListAuthor()
     this.props.reListCategory()
+    this.props.reListStatus()
   }
   onChange = (e: any)=> {
     // @ts-ignore
@@ -61,9 +62,11 @@ class BlogDetail extends React.Component<Props, State> {
         blog_promo: this.props.resDetailBlog.list.blog_promo,
         blog_cover: this.props.resDetailBlog.list.blog_cover,
         blog_content: this.props.resDetailBlog.list.blog_content,
-        blog_id_status: this.props.resDetailBlog.list.blog_id_status,
-        blog_id: this.props.resDetailBlog.list.blog_id
+        blog_id_status: this.props.resDetailBlog.list.blog_id_status
       })
+    }
+    if(preProps.resUpdateBlog != this.props.resUpdateBlog){
+      this.props.reDetailBlog(this.props.match.params.idBlog)
     }
   }
   renderListAuthor = ()=> {
@@ -86,6 +89,23 @@ class BlogDetail extends React.Component<Props, State> {
     }
     return ''
   }
+  renderListStatus = ()=> {
+    if(this.props.resListStatus.list){
+      return this.props.resListStatus.list.map(element => {
+        return (
+          <option value={element.status_id} selected={element.status_id === this.state.blog_id_status ? true : false}>{element.status_name}</option>
+        )
+      })
+    }
+    return ''
+  }
+  updateBlog = ()=> {
+    const temp: any = document.getElementById('img-cover-blog-preview')
+   this.props.reUpdateBlog({
+     ...this.state,
+     blog_cover: temp.src
+   }, this.props.match.params.idBlog)
+  }
   render() {
     return (
       <div className="row">
@@ -94,7 +114,7 @@ class BlogDetail extends React.Component<Props, State> {
             <div className="panel-toolbar">
               <div className="panel-heading">Thêm bài viết</div>
               <div className="panel-action-bar">
-                <div className="btn btn-xs btn-info">Lưu</div>
+                <div onClick={this.updateBlog} className="btn btn-xs btn-info">Lưu</div>
               </div>
             </div>
             <div className="content">
@@ -165,12 +185,9 @@ class BlogDetail extends React.Component<Props, State> {
                   <div className="form-group">
                     <label className="col-sm-12">Trạng thái</label>
                     <div className="col-sm-12">
-                      <select onChange={this.onChange} className="form-control">
+                      <select onChange={this.onChange} name="blog_id_status" className="form-control">
                         <option>Chọn</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        {this.renderListStatus()}
                       </select>
                     </div>
                   </div>
@@ -179,7 +196,7 @@ class BlogDetail extends React.Component<Props, State> {
                     <div className="col-sm-12 cover-blog" onClick={()=> {
                       this.props.reShowPhotoApp(true)
                       this.props.reSetCurrentEditorPhoto('img-cover-blog-preview')
-                    }}>>
+                    }}>
                       <i className="ti-upload"/>
                       <img id="img-cover-blog-preview" className="img-responsive" src={this.state.blog_cover}/>
                     </div>
@@ -219,6 +236,7 @@ const mapStateToProps = storeState => ({
   resUpdateBlog: storeState.reBlog.resUpdateBlog,
   resListCategory: storeState.reBlog.resListCategory,
   resListAuthor: storeState.reBlog.resListAuthor,
+  resListStatus: storeState.reBlog.resListStatus
 });
 const mapDispatchToProps = {
   reSetCurrentEditorPhoto,
@@ -226,7 +244,8 @@ const mapDispatchToProps = {
   reUpdateBlog,
   reDetailBlog,
   reListCategory,
-  reListAuthor
+  reListAuthor,
+  reListStatus
 };
 export default connect(
   mapStateToProps,

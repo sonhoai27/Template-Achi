@@ -9,7 +9,7 @@ class StatusModel {
     function edit($db,$id, $form) {
         return $db->update($form, 'achi_status', ' status_id = '.$db->sqlQuote($id));
     }
-    function all($db,) {
+    function all($db) {
         $db->query('select * from achi_status order by achi_status.status_id desc');
         return $db->fetch_object();
     }

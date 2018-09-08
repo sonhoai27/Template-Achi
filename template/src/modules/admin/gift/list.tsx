@@ -1,8 +1,9 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
+import { connect } from "react-redux";
 
-class BlogList extends React.Component {
+class GiftList extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -52,4 +53,11 @@ class BlogList extends React.Component {
   }
 }
 
-export default BlogList
+const mapStateToProps = storeState => ({
+});
+const mapDispatchToProps = {
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GiftList);

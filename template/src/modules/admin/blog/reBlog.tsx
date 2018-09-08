@@ -240,7 +240,7 @@ export default (state = initialState, action) => {
         case SUCCESS(ACTION_TYPES.API_STATUS): {
             return {
                 ...state,
-                res: action.payload.data
+                resListStatus: action.payload.data
             }
         }
         default:
@@ -251,6 +251,7 @@ export default (state = initialState, action) => {
 const API_BLOG = API + 'blog'
 const API_CATEGORY = API + 'category'
 const API_AUTHOR = API + 'author'
+const API_STATUS = API + 'status'
 
 export const reAddBlog = (form) => async dispatch => {
     const result = await dispatch({
@@ -266,21 +267,21 @@ export const reListBlog = (page) => async dispatch => {
     });
     return result;
 };
-export const reDetailBlog = (idBlog: number) => async dispatch => {
+export const reDetailBlog = (idBlog: string) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_DETAIL_BLOG,
         payload: axios.get(API_BLOG+"/detail/"+idBlog)
     });
     return result;
 };
-export const reUpdateBlog = (form: any, idBlog: number) => async dispatch => {
+export const reUpdateBlog = (form: any, idBlog: string) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_UPDATE_BLOG,
-        payload: axios.put(API_BLOG+"/"+idBlog)
+        payload: axios.put(API_BLOG+"/"+idBlog, form)
     });
     return result;
 };
-export const reDeleteBlog = (idBlog: number) => async dispatch => {
+export const reDeleteBlog = (idBlog: string) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_DELETE_BLOG,
         payload: axios.delete(API_BLOG+"/"+idBlog)
@@ -301,6 +302,13 @@ export const reListAuthor = () => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_LIST_AUHTOR,
         payload: axios.get(API_AUTHOR)
+    });
+    return result;
+};
+export const reListStatus = () => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_STATUS,
+        payload: axios.get(API_STATUS)
     });
     return result;
 };

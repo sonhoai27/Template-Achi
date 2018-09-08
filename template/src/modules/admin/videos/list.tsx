@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
+import { connect } from "react-redux";
 
 class VideoList extends React.Component {
   constructor(props) {
@@ -55,4 +56,11 @@ class VideoList extends React.Component {
   }
 }
 
-export default VideoList
+const mapStateToProps = storeState => ({
+});
+const mapDispatchToProps = {
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(VideoList);
