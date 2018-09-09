@@ -2,113 +2,148 @@ import axios from 'axios'
 import { REQUEST, FAILURE, SUCCESS } from '../../../utils/action-type-util';
 import { API } from '../../../config/const';
 export const ACTION_TYPES = {
-    API_ORDER: 'ReOrder/API_ORDER',
-    API_LIST_SCHE_ORDER: 'ReOrder/API_LIST_SCHE_ORDER',
-    IS_SHOWING_MODAL_EXPORT: 'ReOrder/IS_SHOWING_MODAL_EXPORT',
-    API_LIST_ORDER_BY_SCHE: 'ReOrder/API_LIST_ORDER_BY_SCHE'
+    API_LIST_VIDEO: 'ReVideo/API_LIST_VIDEO',
+    API_ADD_VIDEO: 'ReVideo/API_ADD_VIDEO',
+    API_UPDATE_VIDEO: 'ReVideo/API_UPDATE_VIDEO',
+    API_DELETE_VIDEO: 'ReVideo/API_DELETE_VIDEO',
+    API_DETAIL_VIDEO: 'ReVideo/API_DETAIL_VIDEO'
 }
 
 const initialState = {
-    resListOrder: {},
-    resListScheOrder: [],
-    isShowingModalExport: false,
-    resListOrderBySche: {}
+    resListVideo: [],
+    resAddVideo: {},
+    resUpdateVideo: {},
+    resDeleteVideo: {},
+    resDetailVideo: {}
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case REQUEST(ACTION_TYPES.API_ORDER): {
+        case REQUEST(ACTION_TYPES.API_LIST_VIDEO): {
             return {
                 ...state
             }
         }
-        case FAILURE(ACTION_TYPES.API_ORDER): {
+        case FAILURE(ACTION_TYPES.API_LIST_VIDEO): {
             return {
                 ...state
             }
         }
-        case SUCCESS(ACTION_TYPES.API_ORDER): {
+        case SUCCESS(ACTION_TYPES.API_LIST_VIDEO): {
             return {
                 ...state,
-                resListOrder: action.payload.data
+                resListVideo: action.payload.data
             }
         }
 
-        // list sche order
-        case REQUEST(ACTION_TYPES.API_LIST_SCHE_ORDER): {
+        // add video
+        case REQUEST(ACTION_TYPES.API_ADD_VIDEO): {
             return {
                 ...state
             }
         }
-        case FAILURE(ACTION_TYPES.API_LIST_SCHE_ORDER): {
+        case FAILURE(ACTION_TYPES.API_ADD_VIDEO): {
             return {
                 ...state
             }
         }
-        case SUCCESS(ACTION_TYPES.API_LIST_SCHE_ORDER): {
+        case SUCCESS(ACTION_TYPES.API_ADD_VIDEO): {
             return {
                 ...state,
-                resListScheOrder: action.payload.data
+                resAddVideo: action.payload.data
             }
         }
 
-        case (ACTION_TYPES.IS_SHOWING_MODAL_EXPORT): {
-            return {
-                ...state,
-                isShowingModalExport: action.payload
-            }
-        }
-        // list  order sche
-        case REQUEST(ACTION_TYPES.API_LIST_ORDER_BY_SCHE): {
+        // update
+        case REQUEST(ACTION_TYPES.API_UPDATE_VIDEO): {
             return {
                 ...state
             }
         }
-        case FAILURE(ACTION_TYPES.API_LIST_ORDER_BY_SCHE): {
+        case FAILURE(ACTION_TYPES.API_UPDATE_VIDEO): {
             return {
                 ...state
             }
         }
-        case SUCCESS(ACTION_TYPES.API_LIST_ORDER_BY_SCHE): {
+        case SUCCESS(ACTION_TYPES.API_UPDATE_VIDEO): {
             return {
                 ...state,
-                resListOrderBySche: action.payload.data
+                resUpdateVideo: action.payload.data
             }
         }
+        // delete
+        case REQUEST(ACTION_TYPES.API_DELETE_VIDEO): {
+          return {
+              ...state
+          }
+        }
+        case FAILURE(ACTION_TYPES.API_DELETE_VIDEO): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_DELETE_VIDEO): {
+            return {
+                ...state,
+                resDeleteVideo: action.payload.data
+            }
+        }
+        // detail
+        case REQUEST(ACTION_TYPES.API_DETAIL_VIDEO): {
+            return {
+                ...state
+            }
+          }
+          case FAILURE(ACTION_TYPES.API_DETAIL_VIDEO): {
+              return {
+                  ...state
+              }
+          }
+          case SUCCESS(ACTION_TYPES.API_DETAIL_VIDEO): {
+              return {
+                  ...state,
+                  resDetailVideo: action.payload.data.list
+              }
+          }
         default:
             return state;
     }
 }
 
-const API_ORDER = API + 'source/order'
-const API_LIST_SCHE_ORDER = API+'source/sche/all'
-const API_LIST_ORDER_BY_SCHE = API+'source/order/sche/'
+const API_VIDEO = API + 'video'
 
-export const reListOrder = (page) => async dispatch => {
+export const reListVideo = (page) => async dispatch => {
     const result = await dispatch({
-        type: ACTION_TYPES.API_ORDER,
-        payload: axios.get(API_ORDER+'/all/'+page)
+        type: ACTION_TYPES.API_LIST_VIDEO,
+        payload: axios.get(API_VIDEO+'/all/'+page)
     });
     return result;
 };
-export const reListScheOrder = () => async dispatch => {
+export const reAddVideo = (form: any) => async dispatch => {
+  const result = await dispatch({
+      type: ACTION_TYPES.API_ADD_VIDEO,
+      payload: axios.post(API_VIDEO, form)
+  });
+  return result;
+};
+export const reUpdateVideo = (form: any, idVideo: number) => async dispatch => {
+  const result = await dispatch({
+      type: ACTION_TYPES.API_UPDATE_VIDEO,
+      payload: axios.put(API_VIDEO+'/'+idVideo, form)
+  });
+  return result;
+};
+export const reDeleteVideo = (idVideo: number) => async dispatch => {
+  const result = await dispatch({
+      type: ACTION_TYPES.API_DELETE_VIDEO,
+      payload: axios.delete(API_VIDEO+'/'+idVideo)
+  });
+  return result;
+};
+export const reDetailVideo = (idVideo: number) => async dispatch => {
     const result = await dispatch({
-        type: ACTION_TYPES.API_LIST_SCHE_ORDER,
-        payload: axios.get(API_LIST_SCHE_ORDER)
+        type: ACTION_TYPES.API_DETAIL_VIDEO,
+        payload: axios.get(API_VIDEO+'/'+idVideo)
     });
     return result;
-};
-export const reIsShowingModalExport = (status) => async dispatch => {
-    const result = await dispatch({
-        type: ACTION_TYPES.IS_SHOWING_MODAL_EXPORT,
-        payload: status
-    });
-    return result;
-};
-export const reListOrderBySche = (idSche) => async dispatch => {
-    const result = await dispatch({
-        type: ACTION_TYPES.API_LIST_ORDER_BY_SCHE,
-        payload: axios.get(API_LIST_ORDER_BY_SCHE+idSche)
-    });
-    return result;
-};
+  };

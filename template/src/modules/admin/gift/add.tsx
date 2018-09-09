@@ -1,9 +1,49 @@
 import * as React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { connect } from "react-redux";
-class GiftAdd extends React.Component {
+import { IGiftModel } from "../../../models/gift";
+import { reSetCurrentEditorPhoto, reShowPhotoApp } from "../../../reducers/init";
+import { reAddGift } from "./reGift";
+interface IState {
+  gift: IGiftModel
+}
+interface IProps {
+  resAddGift: any;
+  reAddGift: (form: IGiftModel) => void;
+  reSetCurrentEditorPhoto: (editor: any)=> void;
+  reShowPhotoApp: (status: boolean)=> void;
+
+}
+class GiftAdd extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
+    this.state = {
+      gift: {
+        gift_id: 0,
+        gift_active: 0,
+        gift_cover: '',
+        gift_name: '',
+        gift_promo: '',
+        gift_uri_file: ''
+      }
+    }
+  }
+  onChange = (e: any)=> {
+    this.setState({
+      gift: {
+        ...this.state.gift,
+        [e.target.name]: e.target.value
+      }
+    })
+  }
+  addGift = ()=> {
+    const temDom: any = document.getElementById('img-cover-blog-preview')
+    const tempGift = this.state.gift
+    delete tempGift.gift_id
+    this.props.reAddGift({
+      ...tempGift,
+      gift_cover: temDom.src
+    })
   }
   render() {
     return (
@@ -11,9 +51,9 @@ class GiftAdd extends React.Component {
         <div className="col-md-12">
           <div className="panel">
             <div className="panel-toolbar">
-              <div className="panel-heading">Thêm bài viết</div>
+              <div className="panel-heading">Thêm quà tặng</div>
               <div className="panel-action-bar">
-                <div className="btn btn-xs btn-info">Lưu</div>
+                <div className="btn btn-xs btn-info" onClick={this.addGift}>Lưu</div>
               </div>
             </div>
             <div className="content">
@@ -21,31 +61,45 @@ class GiftAdd extends React.Component {
                 <div className="col-sm-9">
                   <div className="form-group">
                     <label className="col-md-12">
-                      Default Text <span className="help"> Tiêu đề</span>
+                      <span className="help"> Tên</span>
                     </label>
                     <div className="col-md-12">
                       <input
+                        onChange={this.onChange}
+                        name="gift_name"
                         type="text"
                         className="form-control"
-                        defaultValue="George deo..."
-                      />{" "}
+                      />
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-md-12">
-                      Default Text <span className="help"> Tóm tắt</span>
+                      <span className="help"> Link quà tặng</span>
                     </label>
                     <div className="col-md-12">
                       <input
+                        onChange={this.onChange}
+                        name="gift_uri_file"
                         type="text"
                         className="form-control"
-                        defaultValue="George deo..."
-                      />{" "}
+                      />
                     </div>
                   </div>
                   <div className="form-group">
+                    <label className="col-md-12">
+                      <span className="help"> Tóm tắt</span>
+                    </label>
                     <div className="col-md-12">
                       <Editor
+                        onChange={(e: any)=> {
+                        const html: string = e.level.content
+                        this.setState({
+                            gift: {
+                              ...this.state.gift,
+                              gift_promo: html
+                            }
+                          })
+                        }}
                         apiKey="t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl"
                         init={{
                           selector: "textarea",
@@ -74,52 +128,24 @@ class GiftAdd extends React.Component {
                 </div>
                 <div className="col-sm-3">
                   <div className="form-group">
-                    <label className="col-sm-12">Trạng thái</label>
+                    <label className="col-sm-12">Tặng? - mặc định là không tặng.</label>
                     <div className="col-sm-12">
-                      <select className="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                      <select className="form-control" onChange={this.onChange}
+                        name="gift_active">
+                        <option>Chọn</option>
+                        <option value={0}>Không</option>
+                        <option value={1}>Có</option>
                       </select>
                     </div>
                   </div>
                   <div className="form-group">
                     <label className="col-sm-12">Hình cover</label>
-                    <div className="col-sm-12 cover-blog">
+                    <div className="col-sm-12 cover-blog" onClick={()=> {
+                      this.props.reShowPhotoApp(true)
+                      this.props.reSetCurrentEditorPhoto('img-cover-blog-preview')
+                    }}>
                       <i className="ti-upload"/>
-                      <img id="img-cover-blog-preview"/>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                  <label className="col-sm-12 title-action">
-                        <p>Tác giả</p>
-                        <i className="fa fa-edit"/>
-                    </label>
-                    <div className="col-sm-12">
-                      <select className="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label className="col-sm-12 title-action">
-                        <p>Danh mục</p>
-                        <i className="fa fa-edit"/>
-                    </label>
-                    <div className="col-sm-12">
-                      <select className="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                      </select>
+                      <img id="img-cover-blog-preview" className="img-responsive"/>
                     </div>
                   </div>
                 </div>
@@ -133,8 +159,12 @@ class GiftAdd extends React.Component {
 }
 
 const mapStateToProps = storeState => ({
+  resAddGift: storeState.reGift.resAddGift
 });
 const mapDispatchToProps = {
+  reSetCurrentEditorPhoto,
+  reShowPhotoApp,
+  reAddGift
 };
 export default connect(
   mapStateToProps,

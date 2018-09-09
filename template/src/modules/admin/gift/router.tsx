@@ -3,8 +3,8 @@ import { Route } from "react-router-dom";
 import Header from "../shared/header";
 import BreadCrumd from "../shared/breadcrumb";
 import VideoList from "./list";
-import VideoAdd from "./add";
-import VideoDetail from "./detail";
+import detail from "./detail";
+import add from "./add";
 
 interface Props {
   match?: any;
@@ -37,8 +37,8 @@ class VideoRouter extends React.Component<Props, {}> {
               path={`${this.props.match.url}`}
               component={VideoList}
             />
-            <Route path={`${this.props.match.url}/add`} component={VideoAdd} />
-            <Route path={`${this.props.match.url}/detail`} component={VideoDetail} />
+            <Route path={`${this.props.match.url}/add`} component={add} />
+            <Route path={`${this.props.match.url}/detail/:idGift`} component={detail} />
           </div>
         </div>
       </>

@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import Home from "./home";
 import BlogRouter from "./blog/router";
 import VideoRouter from "./videos/router";
+import GiftRouter from "./gift/router";
 import UIRouter from "./ui/uiRouter";
 import SourceRouter from "./source/sourceRouter";
 import { connect } from "react-redux";
@@ -29,6 +30,7 @@ class AdminRouter extends React.Component<Props, {}> {
         <Route exact path={`${this.props.match.url}`} component={Home} />
         <Route path={`${this.props.match.url}/blog`} component={BlogRouter} />
         <Route path={`${this.props.match.url}/video`} component={VideoRouter} />
+        <Route path={`${this.props.match.url}/gift`} component={GiftRouter} />
         <Route path={`${this.props.match.url}/ui`} component={UIRouter} />
         <Route path={`${this.props.match.url}/source`} component={SourceRouter} />
         {this.props.isShowPhotoApp ? <Photo/> : ''}

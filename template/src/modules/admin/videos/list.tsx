@@ -2,10 +2,54 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
 import { connect } from "react-redux";
-
-class VideoList extends React.Component {
+import { reListVideo } from "./reVideos";
+import Pagination from "../../shared/Pagination";
+interface Props {
+  resListVideo: any,
+  reListVideo: (page: number)=> void
+}
+class VideoList extends React.Component<Props, {}> {
   constructor(props) {
     super(props);
+  }
+  componentDidMount(){
+    this.props.reListVideo(
+      (parseInt(this.makeCurrentPage(), 10) - 1)*20
+    )
+  }
+  makeCurrentPage = () => {
+    const page = window.location.href.split("page=")[1];
+    if (page != undefined || page != null) {
+      return page;
+    } else {
+      return "1";
+    }
+  };
+  getMoreVideo = page => {
+    this.props.reListVideo(
+        (page - 1)*20
+    )
+  };
+  renderListVideo = ()=> {
+    if(this.props.resListVideo.list){
+      return this.props.resListVideo.list.map((element, index) => {
+        return (
+            <tr>
+              <td className="text-center">{index+1}</td>
+              <td>
+                <Link to={BASEURLADMIN+'video/detail/'+element.video_id}><span>{element.video_name}</span></Link>
+              </td>
+              <td>
+                <a href={element.video_uri} target="_blank">{element.video_uri}</a>
+              </td>
+              <td>
+                <img width="10%" src={element.video_cover} className="img-responsive"/>
+              </td>
+            </tr>
+        )
+      })
+    }
+    return ''
   }
   render() {
     return (
@@ -18,36 +62,32 @@ class VideoList extends React.Component {
                     <Link to={BASEURLADMIN+'video/add'}><div className="btn btn-xs btn-info">Thêm mới</div></Link>
                 </div>
             </div>
-            <div className="table-responsive">
-              <table className="table table-hover manage-u-table">
-                <thead>
-                  <tr>
-                    <th className="text-center">
-                      #
-                    </th>
-                    <th>Tên</th>
-                    <th>Video</th>
-                    <th>Quản lí</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="text-center">1</td>
-                    <td>
-                      <Link to={BASEURLADMIN+'video/detail'}><span className="text-muted">Texas, Unitedd states</span></Link>
-                    </td>
-                    <td>
-                      Visual Designer
-                      <br />
-                      <span className="text-muted">Past : teacher</span>
-                    </td>
-                    <td>
-                      <div className="btn btn-xs btn-info marginR-8">Ẩn</div>
-                      <div className="btn btn-xs btn-danger">Xoá</div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="content">
+              <div className="table-responsive">
+                <table className="table table-hover manage-u-table">
+                  <thead>
+                    <tr>
+                      <th className="text-center">
+                        #
+                      </th>
+                      <th>Tên</th>
+                      <th>Video</th>
+                      <th>Cover</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.renderListVideo()}
+                  </tbody>
+                </table>
+              </div>
+              <div className="pg">
+                <Pagination
+                  initialPage={parseInt(this.makeCurrentPage(), 10)}
+                  pageSize={20}
+                  totalItems={this.props.resListVideo.count}
+                  onChangePage={e => this.getMoreVideo(e.currentPage)}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -57,8 +97,10 @@ class VideoList extends React.Component {
 }
 
 const mapStateToProps = storeState => ({
+  resListVideo: storeState.reVideos.resListVideo
 });
 const mapDispatchToProps = {
+  reListVideo
 };
 export default connect(
   mapStateToProps,

@@ -1,6 +1,7 @@
 import * as React from "react";
 import {Helmet} from "react-helmet";
 import { RESOURCE, BASEURLADMIN } from "../../../config/const";
+import { Link } from "react-router-dom";
 class Header extends React.Component {
   render() {
     return (
@@ -165,13 +166,13 @@ class Header extends React.Component {
                 </a>
                 <ul className="nav nav-second-level collapse">
                   <li>
-                    <a href="form-basic.html">
+                    <Link to={BASEURLADMIN+'video'}>
                       <i className="fa-fw">B</i>
                       <span className="hide-menu">Danh sách video</span>
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="form-layout.html">
+                    <a href={BASEURLADMIN+'video/add'}>
                       <i className="fa-fw">L</i>
                       <span className="hide-menu">Thêm mới</span>
                     </a>

@@ -1,7 +1,7 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-include_once(__SITE_PATH."\models\video.model.php");
+include_once(__SITE_PATH."\models\Video.model.php");
 $container['db_video'] = new VideoModel();
 $app->get('/video/all/{page}', function(Request $request, Response $response, $args){
     return $response->withJson(array(

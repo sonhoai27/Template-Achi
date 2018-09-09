@@ -2,8 +2,15 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
 import { connect } from "react-redux";
+import { reListGift } from "./reGift";
+import { IGiftModel } from "../../../models/gift";
 
-class GiftList extends React.Component {
+interface IProps {
+  resListGift: IGiftModel;
+  reListGift: (page: number)=> void
+}
+
+class GiftList extends React.Component<IProps,{}> {
   constructor(props) {
     super(props);
   }
@@ -54,8 +61,10 @@ class GiftList extends React.Component {
 }
 
 const mapStateToProps = storeState => ({
+  resListGift: storeState.reGift.resListGift
 });
 const mapDispatchToProps = {
+  reListGift
 };
 export default connect(
   mapStateToProps,
