@@ -13,7 +13,7 @@ class Header extends React.Component {
           <div className="navbar-header">
             <div className="top-left-part">
               <a className="logo" href="index.html">
-                <b>Nguyen Minh Chi</b>
+                <b>NMC</b>
               </a>
             </div>
             <ul className="nav navbar-top-links navbar-left">
@@ -23,19 +23,6 @@ class Header extends React.Component {
                   className="open-close waves-effect waves-light visible-xs"
                 >
                   <i className="ti-close ti-menu" />
-                </a>
-              </li>
-            </ul>
-            <ul className="nav navbar-top-links navbar-right pull-right">
-              <li className="dropdown">
-                <a
-                  className="dropdown-toggle profile-pic"
-                  data-toggle="dropdown"
-                  href="javascript:void(0)"
-                  aria-expanded="false"
-                >
-                  <b className="hidden-xs">Steave</b>
-                  <span className="caret" />
                 </a>
               </li>
             </ul>
@@ -190,21 +177,15 @@ class Header extends React.Component {
                 </a>
                 <ul className="nav nav-second-level collapse">
                   <li>
-                    <a href="basic-table.html">
+                    <a href={BASEURLADMIN+'gift'} >
                       <i className="fa-fw">B</i>
                       <span className="hide-menu">Danh sách quà tặng</span>
                     </a>
                   </li>
                   <li>
-                    <a href="table-layouts.html">
+                    <a href={BASEURLADMIN+'gift/add'} >
                       <i className="fa-fw">L</i>
                       <span className="hide-menu">Thêm mới quà tặng</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="data-table.html">
-                      <i className="fa-fw">D</i>
-                      <span className="hide-menu">Tặng quà</span>
                     </a>
                   </li>
                 </ul>

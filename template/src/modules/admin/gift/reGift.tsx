@@ -102,7 +102,7 @@ export default (state = initialState, action) => {
           case SUCCESS(ACTION_TYPES.API_DETAIL_GIFT): {
               return {
                   ...state,
-                  resDetailGift: action.payload.data.list
+                  resDetailGift: action.payload.data
               }
           }
         default:

@@ -59,7 +59,7 @@ class GiftList extends React.Component<IProps,{}> {
         <div className="col-md-12">
           <div className="panel">
             <div className="panel-toolbar">
-                <div className="panel-heading">Quản lí bài viết</div>
+                <div className="panel-heading">Quản lí quà tặng</div>
                 <div className="panel-action-bar">
                     <Link to={BASEURLADMIN+'blog/add'}><div className="btn btn-xs btn-info">Thêm mới</div></Link>
                 </div>
