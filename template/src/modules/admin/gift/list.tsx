@@ -2,13 +2,15 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
 import { connect } from "react-redux";
-import { reListGift } from "./reGift";
+import { reListGift, reUpdateGift } from "./reGift";
 import Pagination from "../../shared/Pagination";
 import { IGiftModel } from "../../../models/gift";
 
 interface IProps {
   resListGift: any;
-  reListGift: (page: number)=> void
+  reListGift: (page: number)=> void;
+  reDetailGift: (idGift: number)=> void;
+  reUpdateGift: (form: IGiftModel, idGift: number) => void;
 }
 class GiftList extends React.Component<IProps,{}> {
   constructor(props) {
@@ -32,6 +34,12 @@ class GiftList extends React.Component<IProps,{}> {
         (page - 1)*20
       )
   };
+  setActiveGift = (gift: IGiftModel)=> {
+    this.props.reUpdateGift({
+        ...gift,
+        gift_active: (gift.gift_active == 1 ? 0 : 1)
+    }, gift.gift_id)
+  }
   renderListGifts = ()=> {
     if(this.props.resListGift.list){
       return this.props.resListGift.list.map((element: IGiftModel, index: number)=> {
@@ -45,7 +53,11 @@ class GiftList extends React.Component<IProps,{}> {
                 {element.gift_uri_file}
               </td>
               <td>
-                <div className="btn btn-info btn-xs">Ưu tiên</div>
+                <div 
+                  className={'btn btn-xs ' + (element.gift_active == 0 ? 'btn-info' : 'btn-danger')} 
+                  onClick={()=> this.setActiveGift(element)}>
+                  {element.gift_active == 0 ? 'Ưu tiên' : 'Hủy ưu tiên'}
+                </div>
               </td>
           </tr>
         )
@@ -97,10 +109,12 @@ class GiftList extends React.Component<IProps,{}> {
 }
 
 const mapStateToProps = storeState => ({
-  resListGift: storeState.reGift.resListGift
+  resListGift: storeState.reGift.resListGift,
+  resUpdateGift: storeState.reGift.resUpdateGift
 });
 const mapDispatchToProps = {
-  reListGift
+  reListGift,
+  reUpdateGift
 };
 export default connect(
   mapStateToProps,
