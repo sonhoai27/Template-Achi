@@ -1,0 +1,27 @@
+import * as React from "react";
+
+class ClientBanner extends React.Component {
+  render() {
+    return (
+      <>
+        <div className="home-banner-video">
+          <h1>HEADLINE T300X</h1>
+          <video
+            autoPlay
+            loop
+            id="video-background"
+            poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148422/screencap-wheel.png"
+            muted
+          >
+            <source
+              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148422/Vienna-SD.mp4"
+              type="video/mp4"
+            />
+          </video>
+        </div>
+      </>
+    );
+  }
+}
+
+export default ClientBanner;

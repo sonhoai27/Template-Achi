@@ -13,6 +13,10 @@ class GiftModel {
         $db->query('select * from achi_gift order by achi_gift.gift_id desc limit '.$page.', 20');
         return $db->fetch_object();
     }
+    function get_gifts($db){
+        $db->query('select * from achi_gift order by achi_gift.gift_id desc ');
+        return $db->fetch_object();
+    }
     function count($db){
         $db->query('select count(gift_id) as count from achi_gift order by gift_id desc');
         return $db->fetch_object(true)->count;
@@ -27,6 +31,10 @@ class GiftModel {
     }
     function all_email($db,$page){
         $db->query('select * from achi_email order by achi_email.email_id desc limit '.$page.', 20');
+        return $db->fetch_object();
+    }
+    function get_emails($db){
+        $db->query('select * from achi_email order by achi_email.email_id desc ');
         return $db->fetch_object();
     }
     function count_email($db){

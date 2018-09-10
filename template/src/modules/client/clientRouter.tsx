@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Route } from "react-router-dom";
 import { BASEURL, RESOURCE } from "../../config/const";
-import EbookLadingPage from "./ebook/ebook";
 import {Helmet} from "react-helmet";
+import ClientHome from "./home/ClientHome";
 class ClientRouter extends React.Component {
   constructor(props) {
     super(props);
@@ -17,7 +17,7 @@ class ClientRouter extends React.Component {
         <Helmet>
           <link rel="stylesheet" href={RESOURCE + "css/client.css"} />
         </Helmet>
-        <Route exact path={BASEURL} component={EbookLadingPage} />
+        <Route exact path={BASEURL} component={ClientHome} />
       </>
     );
   }
