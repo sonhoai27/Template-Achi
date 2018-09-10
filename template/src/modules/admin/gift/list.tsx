@@ -3,16 +3,55 @@ import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
 import { connect } from "react-redux";
 import { reListGift } from "./reGift";
+import Pagination from "../../shared/Pagination";
 import { IGiftModel } from "../../../models/gift";
 
 interface IProps {
-  resListGift: IGiftModel;
+  resListGift: any;
   reListGift: (page: number)=> void
 }
-
 class GiftList extends React.Component<IProps,{}> {
   constructor(props) {
     super(props);
+  }
+  componentDidMount(){
+    this.props.reListGift(
+      (parseInt(this.makeCurrentPage(), 10) - 1)*20
+    )
+  }
+  makeCurrentPage = () => {
+    const page = window.location.href.split("page=")[1];
+    if (page != undefined || page != null) {
+      return page;
+    } else {
+      return "1";
+    }
+  };
+  getMoreGift = page => {
+    this.props.reListGift(
+        (page - 1)*20
+      )
+  };
+  renderListGifts = ()=> {
+    if(this.props.resListGift.list){
+      return this.props.resListGift.list.map((element: IGiftModel, index: number)=> {
+        return (
+          <tr>
+              <td className="text-center">{index+1}</td>
+              <td>
+                <Link to={BASEURLADMIN+'gift/detail/'+element.gift_id}><h4>{element.gift_name}</h4></Link>
+              </td>
+              <td>
+                {element.gift_uri_file}
+              </td>
+              <td>
+                <div className="btn btn-info btn-xs">Ưu tiên</div>
+              </td>
+          </tr>
+        )
+      })
+    }
+    return ''
   }
   render() {
     return (
@@ -33,25 +72,22 @@ class GiftList extends React.Component<IProps,{}> {
                       #
                     </th>
                     <th>Tên</th>
-                    <th>Promo</th>
-                    <th>Ngày tạo</th>
+                    <th>File</th>
+                    <th>Ưu tiên</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td className="text-center">1</td>
-                    <td>
-                      <Link to={BASEURLADMIN+'blog/detail'}><span className="text-muted">Texas, Unitedd states</span></Link>
-                    </td>
-                    <td>
-                      Visual Designer
-                      <br />
-                      <span className="text-muted">Past : teacher</span>
-                    </td>
-                    <td></td>
-                  </tr>
+                  {this.renderListGifts()}
                 </tbody>
               </table>
+            </div>
+            <div className="pg">
+              <Pagination
+                initialPage={parseInt(this.makeCurrentPage(), 10)}
+                pageSize={20}
+                totalItems={this.props.resListGift.count}
+                onChangePage={e => this.getMoreGift(e.currentPage)}
+              />
             </div>
           </div>
         </div>
