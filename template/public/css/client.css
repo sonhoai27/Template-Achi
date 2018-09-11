@@ -426,7 +426,7 @@ nav ul.nav-link {
 .home-banner-video {
     position: relative;
     margin-top: 128px;
-    height: 600px;
+    height: 650px;
     overflow: hidden;
 }
 
@@ -471,5 +471,55 @@ nav ul.nav-link {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1;
+}
+
+
+.footer-banner {
+    background-color: #1F9080;
+    color: white;
+    padding-top: 1em;
+    padding-bottom: 2em;
+}
+.footer-banner h4,
+.footer-banner h2 {
+    color: #fff;
+}
+
+.footer-banner h2 {
+    font-size: 2.0em;
+    margin-bottom: 0;
+}
+
+.footer-banner .form-get-access {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+.footer-banner .form-get-access input {
+    flex: 2;
+    margin-right: 32px;
+    border: .5px solid #fff;
+    box-shadow: none;
+    color: #000;
+    font-size: 16px;
+    width: 100%;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+.footer-banner .form-get-access .btn {
+    flex: 1;
+    background-color: #DAE6E2;
+    font-size: 20px;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    color: #000;
+}
+.footer-banner .footer-banner-img {
+    padding: 0;
+}
+.footer-banner .footer-banner-img img {
+    position: absolute;
+    top: -50px;
     z-index: 1;
 }
