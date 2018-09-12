@@ -1,7 +1,7 @@
 <?php
 $sitePath = realpath(dirname(__FILE__));
 define("__SITE_PATH", $sitePath);
-define("BASE_URL", 'http://localhost:8080/Achi/api/');
+define("BASE_URL", 'http://nguyenminhchi.com/api/');
 require(__SITE_PATH.'\shared\INIT.php');
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;

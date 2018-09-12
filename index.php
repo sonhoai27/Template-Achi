@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="vi">
 <?php
-define("BASE_URL", 'http://localhost:8080/Achi/template/public/');
+define("BASE_URL", 'http://nguyenminhchi.com/template/public/');
 ?>
-<base href="http://localhost:8080/Achi/template/public/">
+<base href="http://nguyenminhchi.com/template/public/">
 <head>
     <meta charset="UTF-8">
     
@@ -17,7 +17,7 @@ define("BASE_URL", 'http://localhost:8080/Achi/template/public/');
     <link href="<?=BASE_URL?>css/megna-dark.css" rel="stylesheet">
     <script src="<?=BASE_URL?>js/jquery-3.3.1.slim.min.js"></script>
     <?php
-        echo file_get_contents("http://localhost:8080/Achi/api/seo/home");
+        echo file_get_contents("http://nguyenminhchi.com/api/seo/home");
     ?>
     <style>
         :root {
