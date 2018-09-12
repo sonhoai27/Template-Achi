@@ -1,11 +1,11 @@
 <?php
 $checkToken = function ($req, $res, $next) {
-    if(isset($req->getHeader('user-token')[0])){
-        $req = $req->withAttribute('token', $req->getHeader('user-token')[0]);
+    if(isset($_COOKIE['token'])){
+        $req = $req->withAttribute('token', $_COOKIE['token']);
         return $next($req, $res);
     }else {
       return $res->withJson(array(
         "status"=>404
-      ), 404);
+      ), 202);
     }
   };

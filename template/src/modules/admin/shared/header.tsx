@@ -1,14 +1,10 @@
 import * as React from "react";
-import {Helmet} from "react-helmet";
-import { RESOURCE, BASEURLADMIN } from "../../../config/const";
+import { BASEURLADMIN } from "../../../config/const";
 import { Link } from "react-router-dom";
 class Header extends React.Component {
   render() {
     return (
       <>
-       <Helmet>
-            <link rel="stylesheet" href={RESOURCE+'css/custom.css'}/>
-        </Helmet>
         <nav className="navbar navbar-default navbar-static-top m-b-0">
           <div className="navbar-header">
             <div className="top-left-part">

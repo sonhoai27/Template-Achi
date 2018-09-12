@@ -34,12 +34,19 @@ class UISourceModel {
     }
     // tra ve bao gom cac detail ui cua 1 ui va content cua cac detail ui do
     function detail_ui_source($db,$idUi, $idSource) {
-        $db->query('select * from achi_detail_ui
-        inner join achi_element on achi_detail_ui.detail_ui_id_element = achi_element.element_id
-        left OUTER JOIN achi_content_element on achi_content_element.content_element_id_detail_ui = achi_detail_ui.detail_ui_id
-        where achi_detail_ui.detail_ui_id_ui = '.$db->sqlQuote($idUi).' 
-        and achi_content_element.content_element_id_source = '.$db->sqlQuote($idSource).' 
-        or achi_content_element.content_element_id_source is NULL order by detail_ui_id asc ');
+        $db->query('select *
+        from achi_detail_ui t1
+        left join
+        (
+          select *
+          from achi_content_element
+        where achi_content_element.content_element_id_source = '.$db->sqlQuote($idSource).'
+          group by achi_content_element.content_element_id
+        ) t2
+          on t2.content_element_id_detail_ui = t1.detail_ui_id
+          inner join achi_element on t1.detail_ui_id_element = achi_element.element_id
+          where  t1.detail_ui_id_ui = '.$db->sqlQuote($idUi).' 
+          ORDER BY `detail_ui_id_ui` ASC');
         $detail = $db->fetch_object();
         return ($this->makeListElementParentChild($detail));
     }

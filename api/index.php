@@ -21,6 +21,12 @@ $app->add(function ($req, $res, $next) {
           ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
           ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
+$token = array(
+  "id"=>10,
+  "username"=>"son.nguyen",
+  "status"=>200
+);
+setcookie('token',json_encode($token), time() + (86400 * 1), "/");
 require(__SITE_PATH.'..\app\Routers\auth.router.php');
 require(__SITE_PATH.'..\app\Routers\file.router.php');
 require(__SITE_PATH.'..\app\Routers\seo.router.php');

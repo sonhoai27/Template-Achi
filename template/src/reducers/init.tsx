@@ -9,7 +9,9 @@ export const ACTION_TYPES = {
     CURRENT_EDITOR_PHOTO: 'ReInit/CURRENT_EDITOR_PHOTO',
     IS_SHOWING_PHOTO_APP: 'ReInit/IS_SHOWING_PHOTO_APP',
     IS_DANGER: 'ReInit/IS_DANGER',
-    IS_SUCCESS: 'ReInit/IS_DANGER'
+    IS_SUCCESS: 'ReInit/IS_DANGER',
+    API_CHECK_LOGIN: 'ReInit/API_CHECK_LOGIN',
+    API_LOGIN: 'ReInit/API_LOGIN'
 }
 const initialState = {
     resListImage: [],
@@ -18,7 +20,9 @@ const initialState = {
     currentEditorPhoto: '',
     isShowPhotoApp: false,
     isSuccess: false,
-    isDanger: false
+    isDanger: false,
+    resLogin: {},
+    resCheckLogin: {}
 
 }
 export default (state = initialState, action) => {
@@ -98,6 +102,23 @@ export default (state = initialState, action) => {
                 isSuccess: action.payload
             }
         }
+        // check login
+        case REQUEST(ACTION_TYPES.API_CHECK_LOGIN): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_CHECK_LOGIN): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_CHECK_LOGIN): {
+            return {
+                ...state,
+                resCheckLogin: action.payload.data
+            }
+        }
         default:
             return state;
     }
@@ -149,6 +170,13 @@ export const reIsSuccess = (status) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.IS_SUCCESS,
         payload: status
+    });
+    return result;
+};
+export const reCheckLogin = () => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_CHECK_LOGIN,
+        payload: axios.get(API+'auth/check')
     });
     return result;
 };
