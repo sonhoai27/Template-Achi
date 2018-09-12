@@ -16,6 +16,7 @@ class ClientRouter extends React.Component {
       <>
         <Helmet>
           <link rel="stylesheet" href={RESOURCE + "css/client.css"} />
+          <link rel="stylesheet" href={RESOURCE + "css/mobile.css"} media="screen and (max-width: 769px)"/>
         </Helmet>
         <Route exact path={BASEURL} component={ClientHome} />
       </>

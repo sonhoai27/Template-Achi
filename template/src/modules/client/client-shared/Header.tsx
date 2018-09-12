@@ -1,9 +1,27 @@
 import * as React from "react";
 import SearchBar from "./SearchBar";
 
-class ClientHeader extends React.Component {
+interface IState {
+  isShowingMenu: boolean,
+  isShowingSearch: boolean
+}
+class ClientHeader extends React.Component<{}, IState> {
   constructor(props) {
     super(props);
+    this.state = {
+      isShowingMenu: false,
+      isShowingSearch: false
+    }
+  }
+  showMenu = ()=> {
+    if(this.state.isShowingMenu === false){
+      document.body.style.overflowY = 'hidden'
+    }else {
+      document.body.style.overflowY = 'auto'
+    }
+    this.setState({
+      isShowingMenu: !this.state.isShowingMenu
+    })
   }
   render() {
     return (
@@ -45,8 +63,9 @@ class ClientHeader extends React.Component {
         </div>
         <nav id="desktop-nav" className="clearfix">
           <div className="header-container">
-            <div className="mobile-nav nav-item hidden-md hidden-lg">
-              <a href="#" id="hamburger">
+            <div>
+            <div className="mobile-nav nav-item hidden-md hidden-lg" onClick={this.showMenu}>
+              <a id="hamburger">
                 <span />
                 <span />
                 <span />
@@ -59,8 +78,20 @@ class ClientHeader extends React.Component {
                 </a>
               </li>
             </ul>
+            <div className="nav-right search search-header-icon">
+                <div className="nav-item left" onClick={()=> {
+                  this.setState({
+                    isShowingSearch: !this.state.isShowingSearch
+                  })
+                }}>
+                  <a id="search">
+                    <i className="fa fa-fw fa-lg fa-search" />
+                  </a>
+                </div>
+              </div>
+            </div>
             <div className="main-nav-wrapper">
-              <ul id="menu-main-nav" className="nav-link hidden-xs hidden-sm">
+              <ul id="menu-main-nav" className={'nav-link hidden-xs hidden-sm '+(this.state.isShowingMenu ? 'show': '')}>
                 <li className="menu-item">
                   <a title="Ask Tony" href="/ask-tony/">
                     Ask Tony <i className="fa fa-angle-down" />
@@ -226,15 +257,19 @@ class ClientHeader extends React.Component {
                 </li>
               </ul>
             </div>
-            <div className="nav-right search">
-              <div className="nav-item hidden-xs hidden-sm left">
-                <a href="#" id="search">
+            <div className="nav-right search search-header-icon">
+              <div className="nav-item hidden-xs hidden-sm left" onClick={()=> {
+                  this.setState({
+                    isShowingSearch: !this.state.isShowingSearch
+                  })
+                }}>
+                <a id="search">
                   <i className="fa fa-fw fa-lg fa-search" />
                 </a>
               </div>
             </div>
           </div>
-          <SearchBar/>
+          { this.state.isShowingSearch ? <SearchBar/> : ''}
         </nav>
       </>
     );

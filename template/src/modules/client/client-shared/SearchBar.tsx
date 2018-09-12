@@ -4,7 +4,7 @@ class SearchBar extends React.Component {
   render() {
     return (
       <>
-        <div className="hidden-search" style={{ display: "none" }}>
+        <div className="hidden-search" style={{ display: "block" }}>
           <h3>What can we help you find?</h3>
           <div className="search-bar">
             <div className="content-search">
