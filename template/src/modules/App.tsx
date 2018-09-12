@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import PrivateRouter from "../config/PrivateRouter";
-import { BASEURL } from "../config/const";
 import Loadable from "react-loadable";
 import { connect } from "react-redux";
 import { reCheckLogin } from "../reducers/init";
 import Login from "./admin/shared/login";
 import Error from "./admin/shared/error";
+import { BASEURL } from "../config/const";
 // import Login from "./admin/shared/login";
 interface IProps {
   reCheckLogin: () => void;

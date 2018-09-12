@@ -10,8 +10,8 @@ import { connect } from "react-redux";
 import Photo from "../shared/photo";
 import NotifySuccess from "../shared/notifySuccess";
 import NotifyDanger from "../shared/notifyDanger";
-import { RESOURCE } from "../../config/const";
 import Helmet from 'react-helmet'
+import { RESOURCE } from "../../config/const";
 interface Props {
   match?: any,
   isShowPhotoApp: any,
