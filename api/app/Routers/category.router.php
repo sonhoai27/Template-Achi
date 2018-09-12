@@ -1,7 +1,7 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-include_once(__SITE_PATH."\models\category.model.php");
+include_once(__SITE_PATH."/models/category.model.php");
 $container['db_category'] = new CategoryModel();
 $app->get('/category', function(Request $request, Response $response){
     return $response->withJson(array(

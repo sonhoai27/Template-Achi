@@ -1,7 +1,7 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-include_once(__SITE_PATH."\models\blog.model.php");
+include_once(__SITE_PATH."/models/blog.model.php");
 $container['db_blog'] = new BlogModel();
 $app->get('/blog/{page}', function(Request $request, Response $response, $args){
   return $response->withJson(array(

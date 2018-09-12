@@ -1,7 +1,7 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-include_once(__SITE_PATH."\models\author.model.php");
+include_once(__SITE_PATH."/models/author.model.php");
 $container['db_author'] = new AuthorModel();
 $app->get('/author', function(Request $request, Response $response){
     return $response->withJson(array(

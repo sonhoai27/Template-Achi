@@ -3,7 +3,7 @@
 <?php
 define("BASE_URL", 'http://nguyenminhchi.com/template/public/');
 ?>
-<base href="http://nguyenminhchi.com/template/public/">
+<base href="http://nguyenminhchi.com/">
 <head>
     <meta charset="UTF-8">
     
