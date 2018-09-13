@@ -53,14 +53,22 @@ export var ACTION_TYPES = {
     API_ADD_IMAGE: 'ReInit/API_ADD_IMAGE',
     API_DELETE_IMAGE: 'ReInit/API_DELETE_IMAGE',
     CURRENT_EDITOR_PHOTO: 'ReInit/CURRENT_EDITOR_PHOTO',
-    IS_SHOWING_PHOTO_APP: 'ReInit/IS_SHOWING_PHOTO_APP'
+    IS_SHOWING_PHOTO_APP: 'ReInit/IS_SHOWING_PHOTO_APP',
+    IS_DANGER: 'ReInit/IS_DANGER',
+    IS_SUCCESS: 'ReInit/IS_DANGER',
+    API_CHECK_LOGIN: 'ReInit/API_CHECK_LOGIN',
+    API_LOGIN: 'ReInit/API_LOGIN'
 };
 var initialState = {
     resListImage: [],
     resDeleteImage: '',
     resAddImage: '',
     currentEditorPhoto: '',
-    isShowPhotoApp: false
+    isShowPhotoApp: false,
+    isSuccess: false,
+    isDanger: false,
+    resLogin: {},
+    resCheckLogin: {}
 };
 export default (function (state, action) {
     if (state === void 0) { state = initialState; }
@@ -100,6 +108,22 @@ export default (function (state, action) {
         }
         case (ACTION_TYPES.IS_SHOWING_PHOTO_APP): {
             return __assign({}, state, { isShowPhotoApp: action.payload });
+        }
+        case (ACTION_TYPES.IS_DANGER): {
+            return __assign({}, state, { isDanger: action.payload });
+        }
+        case (ACTION_TYPES.IS_SUCCESS): {
+            return __assign({}, state, { isSuccess: action.payload });
+        }
+        // check login
+        case REQUEST(ACTION_TYPES.API_CHECK_LOGIN): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_CHECK_LOGIN): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_CHECK_LOGIN): {
+            return __assign({}, state, { resCheckLogin: action.payload.data });
         }
         default:
             return state;
@@ -169,6 +193,48 @@ export var reSetCurrentEditorPhoto = function (editor) { return function (dispat
             case 0: return [4 /*yield*/, dispatch({
                     type: ACTION_TYPES.CURRENT_EDITOR_PHOTO,
                     payload: editor
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reIsDanger = function (status) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.IS_DANGER,
+                    payload: status
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reIsSuccess = function (status) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.IS_SUCCESS,
+                    payload: status
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reCheckLogin = function () { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.API_CHECK_LOGIN,
+                    payload: axios.get(API + 'auth/check')
                 })];
             case 1:
                 result = _a.sent();

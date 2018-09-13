@@ -23,6 +23,7 @@ import ReviewLadingPage from "./child/review";
 import ListSche from "./child/listSche";
 import AddSche from "./child/addSche";
 import detailSche from "./child/detailSche";
+import ListOrder from "./order/ListOrder";
 var breadCrumb = [
     {
         title: "Admin",
@@ -57,7 +58,8 @@ var SourceRouter = /** @class */ (function (_super) {
                     React.createElement(Route, { path: this.props.match.url + "/review-landing-page/:idUI/:idSource", component: ReviewLadingPage }),
                     React.createElement(Route, { path: this.props.match.url + "/add-sche/:idSource", component: AddSche }),
                     React.createElement(Route, { path: this.props.match.url + "/list-sche/:idSource", component: ListSche }),
-                    React.createElement(Route, { path: this.props.match.url + "/detail-sche/:idSche", component: detailSche })))));
+                    React.createElement(Route, { path: this.props.match.url + "/detail-sche/:idSche", component: detailSche }),
+                    React.createElement(Route, { path: this.props.match.url + "/order", component: ListOrder })))));
     };
     return SourceRouter;
 }(React.Component));

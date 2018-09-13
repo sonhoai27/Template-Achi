@@ -14,12 +14,48 @@ var __extends = (this && this.__extends) || (function () {
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
+import { connect } from "react-redux";
+import { reListVideo } from "./reVideos";
+import Pagination from "../../shared/Pagination";
 var VideoList = /** @class */ (function (_super) {
     __extends(VideoList, _super);
     function VideoList(props) {
-        return _super.call(this, props) || this;
+        var _this = _super.call(this, props) || this;
+        _this.makeCurrentPage = function () {
+            var page = window.location.href.split("page=")[1];
+            if (page != undefined || page != null) {
+                return page;
+            }
+            else {
+                return "1";
+            }
+        };
+        _this.getMoreVideo = function (page) {
+            _this.props.reListVideo((page - 1) * 20);
+        };
+        _this.renderListVideo = function () {
+            if (_this.props.resListVideo.list) {
+                return _this.props.resListVideo.list.map(function (element, index) {
+                    return (React.createElement("tr", null,
+                        React.createElement("td", { className: "text-center" }, index + 1),
+                        React.createElement("td", null,
+                            React.createElement(Link, { to: BASEURLADMIN + 'video/detail/' + element.video_id },
+                                React.createElement("span", null, element.video_name))),
+                        React.createElement("td", null,
+                            React.createElement("a", { href: element.video_uri, target: "_blank" }, element.video_uri)),
+                        React.createElement("td", null,
+                            React.createElement("img", { width: "10%", src: element.video_cover, className: "img-responsive" }))));
+                });
+            }
+            return '';
+        };
+        return _this;
     }
+    VideoList.prototype.componentDidMount = function () {
+        this.props.reListVideo((parseInt(this.makeCurrentPage(), 10) - 1) * 20);
+    };
     VideoList.prototype.render = function () {
+        var _this = this;
         return (React.createElement("div", { className: "row" },
             React.createElement("div", { className: "col-md-12" },
                 React.createElement("div", { className: "panel" },
@@ -28,29 +64,26 @@ var VideoList = /** @class */ (function (_super) {
                         React.createElement("div", { className: "panel-action-bar" },
                             React.createElement(Link, { to: BASEURLADMIN + 'video/add' },
                                 React.createElement("div", { className: "btn btn-xs btn-info" }, "Th\u00EAm m\u1EDBi")))),
-                    React.createElement("div", { className: "table-responsive" },
-                        React.createElement("table", { className: "table table-hover manage-u-table" },
-                            React.createElement("thead", null,
-                                React.createElement("tr", null,
-                                    React.createElement("th", { className: "text-center" }, "#"),
-                                    React.createElement("th", null, "T\u00EAn"),
-                                    React.createElement("th", null, "Video"),
-                                    React.createElement("th", null, "Qu\u1EA3n l\u00ED"))),
-                            React.createElement("tbody", null,
-                                React.createElement("tr", null,
-                                    React.createElement("td", { className: "text-center" }, "1"),
-                                    React.createElement("td", null,
-                                        React.createElement(Link, { to: BASEURLADMIN + 'video/detail' },
-                                            React.createElement("span", { className: "text-muted" }, "Texas, Unitedd states"))),
-                                    React.createElement("td", null,
-                                        "Visual Designer",
-                                        React.createElement("br", null),
-                                        React.createElement("span", { className: "text-muted" }, "Past : teacher")),
-                                    React.createElement("td", null,
-                                        React.createElement("div", { className: "btn btn-xs btn-info marginR-8" }, "\u1EA8n"),
-                                        React.createElement("div", { className: "btn btn-xs btn-danger" }, "Xo\u00E1"))))))))));
+                    React.createElement("div", { className: "content" },
+                        React.createElement("div", { className: "table-responsive" },
+                            React.createElement("table", { className: "table table-hover manage-u-table" },
+                                React.createElement("thead", null,
+                                    React.createElement("tr", null,
+                                        React.createElement("th", { className: "text-center" }, "#"),
+                                        React.createElement("th", null, "T\u00EAn"),
+                                        React.createElement("th", null, "Video"),
+                                        React.createElement("th", null, "Cover"))),
+                                React.createElement("tbody", null, this.renderListVideo()))),
+                        React.createElement("div", { className: "pg" },
+                            React.createElement(Pagination, { initialPage: parseInt(this.makeCurrentPage(), 10), pageSize: 20, totalItems: this.props.resListVideo.count, onChangePage: function (e) { return _this.getMoreVideo(e.currentPage); } })))))));
     };
     return VideoList;
 }(React.Component));
-export default VideoList;
+var mapStateToProps = function (storeState) { return ({
+    resListVideo: storeState.reVideos.resListVideo
+}); };
+var mapDispatchToProps = {
+    reListVideo: reListVideo
+};
+export default connect(mapStateToProps, mapDispatchToProps)(VideoList);
 //# sourceMappingURL=list.js.map

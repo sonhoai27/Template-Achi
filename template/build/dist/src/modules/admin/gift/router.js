@@ -16,8 +16,8 @@ import { Route } from "react-router-dom";
 import Header from "../shared/header";
 import BreadCrumd from "../shared/breadcrumb";
 import VideoList from "./list";
-import VideoAdd from "./add";
-import VideoDetail from "./detail";
+import detail from "./detail";
+import add from "./add";
 var breadCrumb = [
     {
         title: "Admin",
@@ -42,8 +42,8 @@ var VideoRouter = /** @class */ (function (_super) {
                 React.createElement("div", { className: "container-fluid" },
                     React.createElement(BreadCrumd, { uri: breadCrumb, title: "Video" }),
                     React.createElement(Route, { exact: true, path: "" + this.props.match.url, component: VideoList }),
-                    React.createElement(Route, { path: this.props.match.url + "/add", component: VideoAdd }),
-                    React.createElement(Route, { path: this.props.match.url + "/detail", component: VideoDetail })))));
+                    React.createElement(Route, { path: this.props.match.url + "/add", component: add }),
+                    React.createElement(Route, { path: this.props.match.url + "/detail/:idGift", component: detail })))));
     };
     return VideoRouter;
 }(React.Component));

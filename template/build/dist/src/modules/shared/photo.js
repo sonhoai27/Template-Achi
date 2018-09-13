@@ -14,7 +14,9 @@ var __extends = (this && this.__extends) || (function () {
 import * as React from "react";
 import Image from "./image";
 import { connect } from "react-redux";
+import axios from 'axios';
 import { reShowPhotoApp, reSetCurrentEditorPhoto, reDeleteImage, reAddImage, reListImage } from "../../reducers/init";
+import { API } from "../../config/const";
 var Photo = /** @class */ (function (_super) {
     __extends(Photo, _super);
     function Photo(props) {
@@ -57,7 +59,7 @@ var Photo = /** @class */ (function (_super) {
         };
         _this.handleDelete = function () {
             var name = _this.state.dataImage;
-            alert(name.name);
+            _this.props.reDeleteImage(name.name);
         };
         _this.renderListImage = function () {
             if (_this.props.resListImage) {
@@ -65,18 +67,26 @@ var Photo = /** @class */ (function (_super) {
                     return (React.createElement("div", { className: "col-sm-2 item", key: i },
                         React.createElement(Image, { dataSrc: JSON.stringify({
                                 uri: element.uri,
-                                name: element.name + i
+                                name: element.name
                             }), onClick: function (e) { return _this._contextMenu(e); }, src: element.uri, width: 150, height: 150 })));
                 });
             }
             return '';
         };
         _this.state = {
-            dataImage: {}
+            dataImage: {},
+            imageChoose: {}
         };
         _this.nodeContextMenuPhotoApp = React.createRef();
         return _this;
     }
+    Photo.prototype.componentDidUpdate = function (preProps) {
+        if (preProps.resDeleteImage != this.props.resDeleteImage) {
+            if (this.props.resDeleteImage.status === 200) {
+                this.props.reListImage();
+            }
+        }
+    };
     Photo.prototype.componentWillMount = function () {
         window.addEventListener("mousedown", this.handleClickHideUIComponents, false);
         document.body.style.overflowY = "hidden";
@@ -96,7 +106,7 @@ var Photo = /** @class */ (function (_super) {
                     React.createElement("div", { className: "search-bar-app" },
                         React.createElement("input", { name: "", id: "", type: "text", className: "form-control", placeholder: "B\u1EA1n mu\u1ED1n t\u00ECm g\u00EC?" })),
                     React.createElement("div", { className: "btn-close" },
-                        React.createElement("button", { className: "btn btn-block btn-info btn-xs upload-file" }, "T\u1EA3i l\u00EAn"),
+                        React.createElement("button", { className: "btn btn-block btn-info btn-xs upload-file", "data-toggle": "modal", "data-target": "#upload-image" }, "T\u1EA3i l\u00EAn"),
                         React.createElement("i", { onClick: function () {
                                 _this.props.reShowPhotoApp(false);
                                 document.body.style.overflowY = "auto";
@@ -110,7 +120,44 @@ var Photo = /** @class */ (function (_super) {
                     " Ch\u00E8n"),
                 React.createElement("p", { onClick: this.handleDelete },
                     React.createElement("i", { className: "ti-trash" }),
-                    " X\u00F3a"))));
+                    " X\u00F3a")),
+            React.createElement("div", { id: "upload-image", className: "modal fade", tabIndex: -1, role: "dialog", "aria-labelledby": "upload-image", "aria-hidden": "true" },
+                React.createElement("div", { className: "modal-dialog modal-sm" },
+                    React.createElement("div", { className: "modal-content" },
+                        React.createElement("div", { className: "modal-header" },
+                            React.createElement("button", { type: "button", className: "close", "data-dismiss": "modal", "aria-hidden": "true" }, "\u00D7"),
+                            React.createElement("h4", { className: "modal-title", id: "mySmallModalLabel" }, "Upload H\u00ECnh \u1EA3nh"),
+                            " "),
+                        React.createElement("div", { className: "modal-body" },
+                            React.createElement("input", { onChange: function (e) {
+                                    // const data = new FormData();
+                                    // data.append('upload-image', e.target.files[0]);
+                                    var reader = new FileReader();
+                                    reader.onload = function (event) {
+                                        var tempDomImage = document.getElementById('review-image-before-upload');
+                                        tempDomImage.src = event.target.result;
+                                    };
+                                    reader.readAsDataURL(e.target.files[0]);
+                                    _this.setState({
+                                        imageChoose: e.target.files[0]
+                                    });
+                                }, name: "file", id: "photo-app-choose-file", type: "file", placeholder: "Ch\u1ECDn h\u00ECnh", accept: "image/png, image/jpeg" }),
+                            React.createElement("img", { id: "review-image-before-upload", className: "img-responsive", width: '100%', height: '50' })),
+                        React.createElement("div", { className: "modal-footer" },
+                            React.createElement("button", { onClick: function () {
+                                    var data = new FormData();
+                                    data.append('upload-image', _this.state.imageChoose);
+                                    axios.post(API + 'file/upload/photo', data)
+                                        .then(function (result) {
+                                        if (result.status === 200) {
+                                            $('#upload-image').modal('hide');
+                                            _this.props.reListImage();
+                                        }
+                                    })
+                                        .catch(function (err) {
+                                        console.log(err);
+                                    });
+                                }, type: "button", className: "btn btn-danger waves-effect waves-light" }, "T\u1EA3i l\u00EAn")))))));
     };
     return Photo;
 }(React.Component));

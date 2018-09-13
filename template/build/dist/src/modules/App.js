@@ -14,24 +14,55 @@ var __extends = (this && this.__extends) || (function () {
 import * as React from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import PrivateRouter from "../config/PrivateRouter";
+import Loadable from "react-loadable";
+import { connect } from "react-redux";
+import { reCheckLogin } from "../reducers/init";
+import Login from "./admin/shared/login";
+import Error from "./admin/shared/error";
 import { BASEURL } from "../config/const";
-import ClientRouter from "./client/clientRouter";
-import Loadable from 'react-loadable';
 var App = /** @class */ (function (_super) {
     __extends(App, _super);
     function App(props) {
-        return _super.call(this, props) || this;
+        var _this = _super.call(this, props) || this;
+        _this.state = {
+            user: {}
+        };
+        return _this;
     }
+    App.prototype.componentDidUpdate = function (preProps) {
+        if (preProps.resCheckLogin != this.props.resCheckLogin) {
+            this.setState({
+                user: this.props.resCheckLogin
+            });
+        }
+    };
+    App.prototype.componentDidMount = function () {
+        this.props.reCheckLogin();
+    };
     App.prototype.render = function () {
         return (React.createElement(Router, null,
             React.createElement(Switch, null,
-                React.createElement(Route, { exact: true, path: BASEURL, component: ClientRouter }),
-                React.createElement(PrivateRouter, { path: BASEURL + "admin", component: Loadable({
-                        loader: function () { return import(/*webpackChunkName: "admin"*/ './admin/AdminRouter'); },
-                        loading: function () { return React.createElement("h1", null, "Loading...."); },
-                    }) }))));
+                React.createElement(Route, { exact: true, path: BASEURL, component: Loadable({
+                        loader: function () {
+                            return import(/*webpackChunkName: "client"*/ "./client/clientRouter");
+                        },
+                        loading: function () { return React.createElement("h1", null, "Loading...."); }
+                    }) }),
+                this.state.user.status === 404 ? (React.createElement(Route, { path: BASEURL + 'login', component: Login })) : (React.createElement(Route, { path: BASEURL + 'login', component: Error })),
+                this.state.user.status ? (React.createElement(PrivateRouter, { resCheckLogin: this.props.resCheckLogin, path: BASEURL + "admin", component: Loadable({
+                        loader: function () {
+                            return import(/*webpackChunkName: "admin"*/ "./admin/AdminRouter");
+                        },
+                        loading: function () { return React.createElement("h1", null, "Loading...."); }
+                    }) })) : (""))));
     };
     return App;
 }(React.Component));
-export default App;
+var mapStateToProps = function (storeState) { return ({
+    resCheckLogin: storeState.reInit.resCheckLogin
+}); };
+var mapDispatchToProps = {
+    reCheckLogin: reCheckLogin
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 //# sourceMappingURL=App.js.map

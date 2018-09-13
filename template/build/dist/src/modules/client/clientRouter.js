@@ -13,13 +13,15 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import * as React from "react";
 import { Route } from "react-router-dom";
-import { BASEURL, RESOURCE } from "../../config/const";
-import EbookLadingPage from "./ebook/ebook";
+import { RESOURCE } from "../../config/const";
 import { Helmet } from "react-helmet";
+import ClientHome from "./home/ClientHome";
 var ClientRouter = /** @class */ (function (_super) {
     __extends(ClientRouter, _super);
     function ClientRouter(props) {
-        return _super.call(this, props) || this;
+        var _this = _super.call(this, props) || this;
+        console.log(_this.props.match);
+        return _this;
     }
     ClientRouter.prototype.componentDidMount = function () {
         var doc = document.body;
@@ -28,8 +30,10 @@ var ClientRouter = /** @class */ (function (_super) {
     ClientRouter.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
             React.createElement(Helmet, null,
-                React.createElement("link", { rel: "stylesheet", href: RESOURCE + "css/client.css" })),
-            React.createElement(Route, { exact: true, path: BASEURL, component: EbookLadingPage })));
+                React.createElement("link", { rel: "stylesheet", href: RESOURCE + "css/client.css" }),
+                React.createElement("link", { rel: "stylesheet", href: RESOURCE + "css/mobile.css", media: "screen and (max-width: 769px)" })),
+            React.createElement(Route, { exact: true, path: this.props.match.url, component: ClientHome }),
+            React.createElement(Route, { path: this.props.match.url + '/blog', component: ClientHome })));
     };
     return ClientRouter;
 }(React.Component));

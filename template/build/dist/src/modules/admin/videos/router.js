@@ -43,7 +43,7 @@ var VideoRouter = /** @class */ (function (_super) {
                     React.createElement(BreadCrumd, { uri: breadCrumb, title: "Video" }),
                     React.createElement(Route, { exact: true, path: "" + this.props.match.url, component: VideoList }),
                     React.createElement(Route, { path: this.props.match.url + "/add", component: VideoAdd }),
-                    React.createElement(Route, { path: this.props.match.url + "/detail", component: VideoDetail })))));
+                    React.createElement(Route, { path: this.props.match.url + "/detail/:idVideo", component: VideoDetail })))));
     };
     return VideoRouter;
 }(React.Component));

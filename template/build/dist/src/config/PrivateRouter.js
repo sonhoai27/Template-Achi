@@ -18,14 +18,14 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
-import { Redirect, Route } from 'react-router-dom';
-import * as React from 'react';
-var fakeAuth = true;
-var PrivateRouter = function (_a) {
-    var Component = _a.component, rest = __rest(_a, ["component"]);
-    return (React.createElement(Route, __assign({}, rest, { render: function (props) { return (fakeAuth
+import { Redirect, Route } from "react-router-dom";
+import * as React from "react";
+import { BASEURL } from "./const";
+export var PrivateRouter = function (_a) {
+    var Component = _a.component, User = _a.resCheckLogin, rest = __rest(_a, ["component", "resCheckLogin"]);
+    return (React.createElement(Route, __assign({}, rest, { render: function (props) { return (User.status === 404
             ? React.createElement(Component, __assign({}, props))
-            : React.createElement(Redirect, { to: '/login' })); } })));
+            : React.createElement(Redirect, { to: BASEURL + 'login' })); } })));
 };
 export default PrivateRouter;
 //# sourceMappingURL=PrivateRouter.js.map

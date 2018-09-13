@@ -43,7 +43,7 @@ var BlogRouter = /** @class */ (function (_super) {
                     React.createElement(BreadCrumd, { uri: breadCrumb, title: "B\u00E0i vi\u1EBFt" }),
                     React.createElement(Route, { exact: true, path: "" + this.props.match.url, component: BlogList }),
                     React.createElement(Route, { path: this.props.match.url + "/add", component: BlogAdd }),
-                    React.createElement(Route, { path: this.props.match.url + "/detail", component: BlogDetail })))));
+                    React.createElement(Route, { path: this.props.match.url + "/detail/:idBlog", component: BlogDetail })))));
     };
     return BlogRouter;
 }(React.Component));

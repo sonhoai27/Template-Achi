@@ -16,11 +16,15 @@ import { Route } from "react-router-dom";
 import Home from "./home";
 import BlogRouter from "./blog/router";
 import VideoRouter from "./videos/router";
+import GiftRouter from "./gift/router";
 import UIRouter from "./ui/uiRouter";
 import SourceRouter from "./source/sourceRouter";
 import { connect } from "react-redux";
 import Photo from "../shared/photo";
 import NotifySuccess from "../shared/notifySuccess";
+import NotifyDanger from "../shared/notifyDanger";
+import Helmet from 'react-helmet';
+import { RESOURCE } from "../../config/const";
 var AdminRouter = /** @class */ (function (_super) {
     __extends(AdminRouter, _super);
     function AdminRouter(props) {
@@ -32,19 +36,25 @@ var AdminRouter = /** @class */ (function (_super) {
     };
     AdminRouter.prototype.render = function () {
         return (React.createElement("div", { id: "wrapper" },
+            React.createElement(Helmet, null,
+                React.createElement("link", { rel: "stylesheet", href: RESOURCE + 'css/custom.css' })),
             React.createElement(Route, { exact: true, path: "" + this.props.match.url, component: Home }),
             React.createElement(Route, { path: this.props.match.url + "/blog", component: BlogRouter }),
             React.createElement(Route, { path: this.props.match.url + "/video", component: VideoRouter }),
+            React.createElement(Route, { path: this.props.match.url + "/gift", component: GiftRouter }),
             React.createElement(Route, { path: this.props.match.url + "/ui", component: UIRouter }),
             React.createElement(Route, { path: this.props.match.url + "/source", component: SourceRouter }),
             this.props.isShowPhotoApp ? React.createElement(Photo, null) : '',
             React.createElement("div", { className: "jq-toast-wrap top-right" },
-                React.createElement(NotifySuccess, null))));
+                this.props.isSuccess ? React.createElement(NotifySuccess, null) : '',
+                this.props.isDanger ? React.createElement(NotifyDanger, null) : '')));
     };
     return AdminRouter;
 }(React.Component));
 var mapStateToProps = function (storeState) { return ({
     isShowPhotoApp: storeState.reInit.isShowPhotoApp,
+    isSuccess: storeState.reInit.isSuccess,
+    isDanger: storeState.reInit.isDanger
 }); };
 var mapDispatchToProps = {};
 export default connect(mapStateToProps, mapDispatchToProps)(AdminRouter);

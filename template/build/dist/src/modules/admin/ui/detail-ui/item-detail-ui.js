@@ -14,6 +14,11 @@ var __extends = (this && this.__extends) || (function () {
 import * as React from "react";
 import ListElementOnDetailUI from "./detail-ui";
 import { connect } from "react-redux";
+import AceEditor from 'react-ace';
+import 'brace/mode/css';
+import 'brace/theme/monokai';
+import 'brace/snippets/css';
+import 'brace/ext/language_tools';
 import { reShowListElement, reSetCurrentIdElement, reDeleteElementToDetailUI, reDetailUI, reAddCss } from "../reUI";
 var ItemDetailUI = /** @class */ (function (_super) {
     __extends(ItemDetailUI, _super);
@@ -64,7 +69,13 @@ var ItemDetailUI = /** @class */ (function (_super) {
                                 React.createElement("i", { className: " icon-doc" }),
                                 " L\u01B0u")),
                         React.createElement("div", { className: "col-md-12" },
-                            React.createElement("textarea", { name: "detail_ui_css", onChange: _this.onChangeCss, className: "form-control", defaultValue: _this.props.detailUI.detail_ui_css }))))));
+                            React.createElement(AceEditor, { style: { height: 128 }, mode: "css", theme: "monokai", name: "blah2", fontSize: 14, editorProps: { $blockScrolling: true }, showPrintMargin: false, showGutter: false, highlightActiveLine: true, value: ".button {color: red;}", setOptions: {
+                                    enableBasicAutocompletion: true,
+                                    enableLiveAutocompletion: true,
+                                    enableSnippets: true,
+                                    showLineNumbers: false,
+                                    tabSize: 1,
+                                } }))))));
         };
         _this.generateContent = function () {
             var content = [_this.generateInfo()];

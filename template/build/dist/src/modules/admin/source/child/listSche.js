@@ -29,8 +29,8 @@ var ListSche = /** @class */ (function (_super) {
                             React.createElement(Link, { to: BASEURLADMIN + "source/detail-sche/" + element.source_sche_id },
                                 React.createElement("h4", { style: { marginBottom: 0, marginTop: 0 } },
                                     element.source_title,
-                                    " - kh\u00F3a ",
-                                    element.source_sche_id))),
+                                    " - ",
+                                    element.source_sche_khoa))),
                         React.createElement("td", null, element.source_sche_price),
                         React.createElement("td", null, element.source_sche_number)));
                 });

@@ -11,41 +11,113 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 import * as React from "react";
 import { Editor } from "@tinymce/tinymce-react";
+import { BASEURLADMIN } from "../../../config/const";
+import { connect } from "react-redux";
+import { reShowPhotoApp, reSetCurrentEditorPhoto } from "../../../reducers/init";
+import { reAddBlog, reListStatus, reListAuthor, reListCategory } from "./reBlog";
+import { alias } from "../../../utils/alias";
 var BlogAdd = /** @class */ (function (_super) {
     __extends(BlogAdd, _super);
     function BlogAdd(props) {
-        return _super.call(this, props) || this;
+        var _this = _super.call(this, props) || this;
+        _this.onChange = function (e) {
+            var _a;
+            // @ts-ignore
+            _this.setState((_a = {},
+                _a[e.target.name] = e.target.value,
+                _a));
+        };
+        _this.addBlog = function () {
+            var temp = document.getElementById('img-cover-blog-preview');
+            _this.props.reAddBlog(__assign({}, _this.state, { blog_alias: alias(_this.state.blog_title), blog_cover: temp.src, blog_id: (Date.now()) }));
+        };
+        _this.renderListAuthor = function () {
+            if (_this.props.resListAuthor.list) {
+                return _this.props.resListAuthor.list.map(function (element) {
+                    return (React.createElement("option", { value: element.author_id, selected: element.author_id === _this.state.blog_id_author ? true : false }, element.author_name));
+                });
+            }
+            return '';
+        };
+        _this.renderListCategory = function () {
+            if (_this.props.resListCategory.list) {
+                return _this.props.resListCategory.list.map(function (element) {
+                    return (React.createElement("option", { value: element.category_id, selected: element.category_id === _this.state.blog_id_category ? true : false }, element.category_name));
+                });
+            }
+            return '';
+        };
+        _this.renderListStatus = function () {
+            if (_this.props.resListStatus.list) {
+                return _this.props.resListStatus.list.map(function (element) {
+                    return (React.createElement("option", { value: element.status_id, selected: element.status_id === _this.state.blog_id_status ? true : false }, element.status_name));
+                });
+            }
+            return '';
+        };
+        _this.state = {
+            blog_id_category: 0,
+            blog_id_author: 0,
+            blog_title: '',
+            blog_promo: '',
+            blog_cover: '',
+            blog_content: '',
+            blog_id_status: 0
+        };
+        return _this;
     }
+    BlogAdd.prototype.componentDidMount = function () {
+        this.props.reListAuthor();
+        this.props.reListCategory();
+        this.props.reListStatus();
+    };
+    BlogAdd.prototype.componentDidUpdate = function (preProps) {
+        if (preProps.resAddBlog != this.props.resAddBlog) {
+            console.log(this.props.resAddBlog);
+        }
+    };
     BlogAdd.prototype.render = function () {
+        var _this = this;
         return (React.createElement("div", { className: "row" },
             React.createElement("div", { className: "col-md-12" },
                 React.createElement("div", { className: "panel" },
                     React.createElement("div", { className: "panel-toolbar" },
                         React.createElement("div", { className: "panel-heading" }, "Th\u00EAm b\u00E0i vi\u1EBFt"),
                         React.createElement("div", { className: "panel-action-bar" },
-                            React.createElement("div", { className: "btn btn-xs btn-info" }, "L\u01B0u"))),
+                            React.createElement("div", { onClick: function () {
+                                    _this.addBlog();
+                                }, className: "btn btn-xs btn-info" }, "L\u01B0u"))),
                     React.createElement("div", { className: "content" },
                         React.createElement("div", { className: "row" },
                             React.createElement("div", { className: "col-sm-9" },
                                 React.createElement("div", { className: "form-group" },
                                     React.createElement("label", { className: "col-md-12" },
-                                        "Default Text ",
                                         React.createElement("span", { className: "help" }, " Ti\u00EAu \u0111\u1EC1")),
                                     React.createElement("div", { className: "col-md-12" },
-                                        React.createElement("input", { type: "text", className: "form-control", defaultValue: "George deo..." }),
-                                        " ")),
+                                        React.createElement("input", { type: "text", onChange: this.onChange, name: "blog_title", className: "form-control", defaultValue: "" }))),
                                 React.createElement("div", { className: "form-group" },
                                     React.createElement("label", { className: "col-md-12" },
-                                        "Default Text ",
                                         React.createElement("span", { className: "help" }, " T\u00F3m t\u1EAFt")),
                                     React.createElement("div", { className: "col-md-12" },
-                                        React.createElement("input", { type: "text", className: "form-control", defaultValue: "George deo..." }),
-                                        " ")),
+                                        React.createElement("input", { onChange: this.onChange, name: "blog_promo", type: "text", className: "form-control", defaultValue: "" }))),
                                 React.createElement("div", { className: "form-group" },
                                     React.createElement("div", { className: "col-md-12" },
-                                        React.createElement(Editor, { apiKey: "t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl", init: {
+                                        React.createElement(Editor, { onChange: function (e) {
+                                                _this.setState(__assign({}, _this.state, { blog_content: e.level.content }));
+                                            }, apiKey: "t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl", init: {
                                                 selector: "textarea",
                                                 spellchecker_language: 'vi-VN',
                                                 height: 500,
@@ -58,7 +130,8 @@ var BlogAdd = /** @class */ (function (_super) {
                                                         icon: "image",
                                                         tooltip: "Add Image",
                                                         onclick: function () {
-                                                            alert("KAKKA");
+                                                            _this.props.reShowPhotoApp(true);
+                                                            _this.props.reSetCurrentEditorPhoto(editor);
                                                         }
                                                     });
                                                 }
@@ -67,41 +140,53 @@ var BlogAdd = /** @class */ (function (_super) {
                                 React.createElement("div", { className: "form-group" },
                                     React.createElement("label", { className: "col-sm-12" }, "Tr\u1EA1ng th\u00E1i"),
                                     React.createElement("div", { className: "col-sm-12" },
-                                        React.createElement("select", { className: "form-control" },
-                                            React.createElement("option", null, "1"),
-                                            React.createElement("option", null, "2"),
-                                            React.createElement("option", null, "3"),
-                                            React.createElement("option", null, "4"),
-                                            React.createElement("option", null, "5")))),
+                                        React.createElement("select", { onChange: this.onChange, name: "blog_id_status", className: "form-control" },
+                                            React.createElement("option", null, "Ch\u1ECDn"),
+                                            this.renderListStatus()))),
                                 React.createElement("div", { className: "form-group" },
                                     React.createElement("label", { className: "col-sm-12" }, "H\u00ECnh cover"),
-                                    React.createElement("div", { className: "col-sm-12 cover-blog" },
+                                    React.createElement("div", { className: "col-sm-12 cover-blog", onClick: function () {
+                                            _this.props.reShowPhotoApp(true);
+                                            _this.props.reSetCurrentEditorPhoto('img-cover-blog-preview');
+                                        } },
                                         React.createElement("i", { className: "ti-upload" }),
-                                        React.createElement("img", { id: "img-cover-blog-preview" }))),
+                                        React.createElement("img", { id: "img-cover-blog-preview", className: "img-responsive" }))),
                                 React.createElement("div", { className: "form-group" },
                                     React.createElement("label", { className: "col-sm-12 title-action" },
                                         React.createElement("p", null, "T\u00E1c gi\u1EA3"),
-                                        React.createElement("i", { className: "fa fa-edit" })),
+                                        React.createElement("a", { href: BASEURLADMIN + 'blog/add-author', target: '_blank' },
+                                            React.createElement("i", { className: "fa fa-edit" }))),
                                     React.createElement("div", { className: "col-sm-12" },
-                                        React.createElement("select", { className: "form-control" },
-                                            React.createElement("option", null, "1"),
-                                            React.createElement("option", null, "2"),
-                                            React.createElement("option", null, "3"),
-                                            React.createElement("option", null, "4"),
-                                            React.createElement("option", null, "5")))),
+                                        React.createElement("select", { onChange: this.onChange, name: "blog_id_author", className: "form-control" },
+                                            React.createElement("option", null, "Ch\u1ECDn"),
+                                            this.renderListAuthor()))),
                                 React.createElement("div", { className: "form-group" },
                                     React.createElement("label", { className: "col-sm-12 title-action" },
                                         React.createElement("p", null, "Danh m\u1EE5c"),
-                                        React.createElement("i", { className: "fa fa-edit" })),
+                                        React.createElement("a", { href: BASEURLADMIN + 'blog/add-category', target: '_blank' },
+                                            React.createElement("i", { className: "fa fa-edit" }))),
                                     React.createElement("div", { className: "col-sm-12" },
-                                        React.createElement("select", { className: "form-control" },
-                                            React.createElement("option", null, "1"),
-                                            React.createElement("option", null, "2"),
-                                            React.createElement("option", null, "3"),
-                                            React.createElement("option", null, "4"),
-                                            React.createElement("option", null, "5")))))))))));
+                                        React.createElement("select", { onChange: this.onChange, name: "blog_id_category", className: "form-control" },
+                                            React.createElement("option", null, "Ch\u1ECDn"),
+                                            this.renderListCategory()))))))))));
     };
     return BlogAdd;
 }(React.Component));
-export default BlogAdd;
+var mapStateToProps = function (storeState) { return ({
+    resListUI: storeState.reUI.resListUI,
+    resAddSource: storeState.reSource.resAddSource,
+    resAddBlog: storeState.reBlog.resAddBlog,
+    resListCategory: storeState.reBlog.resListCategory,
+    resListAuthor: storeState.reBlog.resListAuthor,
+    resListStatus: storeState.reBlog.resListStatus
+}); };
+var mapDispatchToProps = {
+    reSetCurrentEditorPhoto: reSetCurrentEditorPhoto,
+    reShowPhotoApp: reShowPhotoApp,
+    reAddBlog: reAddBlog,
+    reListCategory: reListCategory,
+    reListAuthor: reListAuthor,
+    reListStatus: reListStatus
+};
+export default connect(mapStateToProps, mapDispatchToProps)(BlogAdd);
 //# sourceMappingURL=add.js.map

@@ -47,7 +47,8 @@ var AddSche = /** @class */ (function (_super) {
             source_sche_sale: 0,
             source_sche_address: '',
             source_sche_teacher: '',
-            source_sche_status: 0
+            source_sche_status: 0,
+            source_sche_khoa: ''
         };
         return _this;
     }
@@ -62,6 +63,11 @@ var AddSche = /** @class */ (function (_super) {
                     React.createElement("div", { className: "content" },
                         React.createElement("div", { className: "row" },
                             React.createElement("div", { className: "col-sm-12" },
+                                React.createElement("div", { className: "form-group", style: { width: '50%', float: 'left' } },
+                                    React.createElement("label", { className: "col-md-12" },
+                                        React.createElement("span", { className: "help" }, " Kh\u00F3a")),
+                                    React.createElement("div", { className: "col-md-12" },
+                                        React.createElement("input", { onChange: this.onChange, type: "text", name: "source_sche_khoa", className: "form-control", placeholder: "Kh\u00F3a" }))),
                                 React.createElement("div", { className: "form-group", style: { width: '50%', float: 'left' } },
                                     React.createElement("label", { className: "col-md-12" },
                                         React.createElement("span", { className: "help" }, " S\u1ED1 l\u01B0\u1EE3ng")),

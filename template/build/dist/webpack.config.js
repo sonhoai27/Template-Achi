@@ -20,12 +20,13 @@ module.exports = {
                     }],
                 exclude: ['node_modules']
             },
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
         ]
     },
     mode: 'production',
     performance: {
         hints: false
     },
+    node: { fs: 'empty' }
 };
 //# sourceMappingURL=webpack.config.js.map

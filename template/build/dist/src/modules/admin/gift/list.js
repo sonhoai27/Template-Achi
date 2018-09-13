@@ -11,20 +11,69 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
-var BlogList = /** @class */ (function (_super) {
-    __extends(BlogList, _super);
-    function BlogList(props) {
-        return _super.call(this, props) || this;
+import { connect } from "react-redux";
+import { reListGift, reUpdateGift } from "./reGift";
+import Pagination from "../../shared/Pagination";
+var GiftList = /** @class */ (function (_super) {
+    __extends(GiftList, _super);
+    function GiftList(props) {
+        var _this = _super.call(this, props) || this;
+        _this.makeCurrentPage = function () {
+            var page = window.location.href.split("page=")[1];
+            if (page != undefined || page != null) {
+                return page;
+            }
+            else {
+                return "1";
+            }
+        };
+        _this.getMoreGift = function (page) {
+            _this.props.reListGift((page - 1) * 20);
+        };
+        _this.setActiveGift = function (gift) {
+            _this.props.reUpdateGift(__assign({}, gift, { gift_active: (gift.gift_active == 1 ? 0 : 1) }), gift.gift_id);
+        };
+        _this.renderListGifts = function () {
+            if (_this.props.resListGift.list) {
+                return _this.props.resListGift.list.map(function (element, index) {
+                    return (React.createElement("tr", null,
+                        React.createElement("td", { className: "text-center" }, index + 1),
+                        React.createElement("td", null,
+                            React.createElement(Link, { to: BASEURLADMIN + 'gift/detail/' + element.gift_id },
+                                React.createElement("h4", null, element.gift_name))),
+                        React.createElement("td", null, element.gift_uri_file),
+                        React.createElement("td", null,
+                            React.createElement("div", { className: 'btn btn-xs ' + (element.gift_active == 0 ? 'btn-info' : 'btn-danger'), onClick: function () { return _this.setActiveGift(element); } }, element.gift_active == 0 ? 'Ưu tiên' : 'Hủy ưu tiên'))));
+                });
+            }
+            return '';
+        };
+        return _this;
     }
-    BlogList.prototype.render = function () {
+    GiftList.prototype.componentDidMount = function () {
+        this.props.reListGift((parseInt(this.makeCurrentPage(), 10) - 1) * 20);
+    };
+    GiftList.prototype.render = function () {
+        var _this = this;
         return (React.createElement("div", { className: "row" },
             React.createElement("div", { className: "col-md-12" },
                 React.createElement("div", { className: "panel" },
                     React.createElement("div", { className: "panel-toolbar" },
-                        React.createElement("div", { className: "panel-heading" }, "Qu\u1EA3n l\u00ED b\u00E0i vi\u1EBFt"),
+                        React.createElement("div", { className: "panel-heading" }, "Qu\u1EA3n l\u00ED qu\u00E0 t\u1EB7ng"),
                         React.createElement("div", { className: "panel-action-bar" },
                             React.createElement(Link, { to: BASEURLADMIN + 'blog/add' },
                                 React.createElement("div", { className: "btn btn-xs btn-info" }, "Th\u00EAm m\u1EDBi")))),
@@ -34,21 +83,21 @@ var BlogList = /** @class */ (function (_super) {
                                 React.createElement("tr", null,
                                     React.createElement("th", { className: "text-center" }, "#"),
                                     React.createElement("th", null, "T\u00EAn"),
-                                    React.createElement("th", null, "Promo"),
-                                    React.createElement("th", null, "Ng\u00E0y t\u1EA1o"))),
-                            React.createElement("tbody", null,
-                                React.createElement("tr", null,
-                                    React.createElement("td", { className: "text-center" }, "1"),
-                                    React.createElement("td", null,
-                                        React.createElement(Link, { to: BASEURLADMIN + 'blog/detail' },
-                                            React.createElement("span", { className: "text-muted" }, "Texas, Unitedd states"))),
-                                    React.createElement("td", null,
-                                        "Visual Designer",
-                                        React.createElement("br", null),
-                                        React.createElement("span", { className: "text-muted" }, "Past : teacher")),
-                                    React.createElement("td", null)))))))));
+                                    React.createElement("th", null, "File"),
+                                    React.createElement("th", null, "\u01AFu ti\u00EAn"))),
+                            React.createElement("tbody", null, this.renderListGifts()))),
+                    React.createElement("div", { className: "pg" },
+                        React.createElement(Pagination, { initialPage: parseInt(this.makeCurrentPage(), 10), pageSize: 20, totalItems: this.props.resListGift.count, onChangePage: function (e) { return _this.getMoreGift(e.currentPage); } }))))));
     };
-    return BlogList;
+    return GiftList;
 }(React.Component));
-export default BlogList;
+var mapStateToProps = function (storeState) { return ({
+    resListGift: storeState.reGift.resListGift,
+    resUpdateGift: storeState.reGift.resUpdateGift
+}); };
+var mapDispatchToProps = {
+    reListGift: reListGift,
+    reUpdateGift: reUpdateGift
+};
+export default connect(mapStateToProps, mapDispatchToProps)(GiftList);
 //# sourceMappingURL=list.js.map
