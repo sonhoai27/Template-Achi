@@ -5,19 +5,38 @@
 
 body {
     background: #fff;
+    font-family: 'Montserrat', sans-serif!important;
 }
-
+.border-bottom:after {
+    display: block;
+    content: '';
+    width: 10%;
+    height: 2px;
+    background: #222;
+    margin: auto;
+}
 .paddingY-64 {
     padding-top: 64px;
     padding-bottom: 64px;
 }
-
+.paddingY-128 {
+    padding-top: 128px;
+    padding-bottom: 128px;
+}
 .paddingY-16 {
     padding-top: 16px;
     padding-bottom: 16px;
 }
-
-
+.paddingY-32 {
+    padding-top: 32px;
+    padding-bottom: 32px;
+}
+.margin-top {
+    margin-top: 128px;
+}
+.white {
+    color: #fff;
+}
 /* client */
 
 .client-page {
@@ -750,4 +769,151 @@ blockquote p:after {
 
 .list-icons-address li>i {
     margin-right: 8px;
+}
+
+/*blog*/
+.list-blogs .post {
+    padding: 16px;
+    margin-bottom: 32px;
+}
+.list-blogs .post-item-image {
+    min-height: 370px;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+}
+.list-blogs .post a {
+    position: relative;
+    display: block;
+    -webkit-transition: opacity 0.3s;
+    -o-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+}
+.list-blogs .post .post-content {
+    padding: 29px 35px 10px 35px;
+}
+.list-blogs h6.micro {
+    font-size: 15px;
+    font-weight: normal;
+    text-transform: none;
+    letter-spacing: normal;
+    text-align: left;
+    margin-bottom: 20px;
+    margin-top: 0;
+    font-style: italic;
+}
+.list-blogs h4.post-title {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    position: relative;
+}
+.list-blogs h4.post-title a {
+    color: #000;
+}
+.list-blogs h4.post-title:before {
+    content: '';
+    background-color: #6d166d;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 2px;
+}
+.list-blogs .link-more-grey {
+    font-weight: 300;
+    color: #aaa;
+    -webkit-transition: color 0.3s;
+    -o-transition: color 0.3s;
+    transition: color 0.3s;
+}
+.list-blogs .post div.post-item-container:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    -webkit-transition: opacity 0.3s;
+    -o-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+    background-color: #6d166d;
+}
+.list-blogs .post div.post-item-container:hover:before {
+    opacity: .8;
+}
+.list-blogs img.cat-icon {
+    width: auto !important;
+    height: auto !important;
+    max-width: 150px;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    opacity: 0;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    -webkit-transition: top 0.3s, opacity 0.3s;
+    -o-transition: top 0.3s, opacity 0.3s;
+    transition: top 0.3s, opacity 0.3s;
+    background-image: none;
+}
+.list-blogs a:hover img.cat-icon {
+    top: 50%;
+    opacity: 1;
+}
+
+.page-blog_banner {
+    background: url(../images/client/blog-banner.jpg);
+    background-attachment: fixed;
+    padding-top: 128px;
+    padding-bottom: 128px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.page-detail-blog_content_body {
+    text-align: justify;
+}
+.page-detail-blog_content_title p:first-child{
+    font-size: 45px;
+    line-height: 1.11;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+.page-detail-blog_content_title p:nth-child(2){
+    font-size: 24px;
+    margin-top: 20px;
+    font-weight: 600;
+    max-width: 80%;
+    display: block;
+    letter-spacing: 4px;
+    line-height: 1.4;
+}
+.page-detail-blog_content .article-author {
+    display: block;
+    margin-bottom: 59px;
+    font-size: 14px;
+    color: #aaa;
+}
+.page-detail-blog_author .media-left {
+    padding-right: 128px;
+}
+.page-source_banner {
+    background: url(../images/client/blog-banner.jpg);
+    background-attachment: fixed;
+    padding-top: 128px;
+    padding-bottom: 128px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }

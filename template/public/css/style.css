@@ -23,7 +23,6 @@
 
 body {
     background: #2f323e;
-    font-family: Rubik, sans-serif;
     margin: 0;
     overflow-x: hidden;
     color: #313131;
@@ -43,7 +42,6 @@ h4,
 h5,
 h6 {
     color: #313131;
-    font-family: Rubik, sans-serif;
     margin: 10px 0;
     font-weight: 300
 }
@@ -1797,7 +1795,7 @@ table.dataTable thead .sorting:after {
 .panel .panel-body:first-child h3 {
     margin-top: 0;
     font-weight: 500;
-    font-family: Rubik, sans-serif;
+    
     font-size: 14px;
     text-transform: uppercase
 }

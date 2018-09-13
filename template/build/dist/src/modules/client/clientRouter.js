@@ -15,7 +15,9 @@ import * as React from "react";
 import { Route } from "react-router-dom";
 import { RESOURCE } from "../../config/const";
 import { Helmet } from "react-helmet";
-import ClientHome from "./home/ClientHome";
+import Error from "../admin/shared/error";
+import ClientBlogRoute from "./blog/ClientBlogRoute";
+import ClientSourceRoute from "./source/ClientSourceRoute";
 var ClientRouter = /** @class */ (function (_super) {
     __extends(ClientRouter, _super);
     function ClientRouter(props) {
@@ -28,12 +30,13 @@ var ClientRouter = /** @class */ (function (_super) {
         doc.classList.add("client-page");
     };
     ClientRouter.prototype.render = function () {
-        return (React.createElement(React.Fragment, null,
+        return (React.createElement("div", { className: "margin-top" },
             React.createElement(Helmet, null,
                 React.createElement("link", { rel: "stylesheet", href: RESOURCE + "css/client.css" }),
                 React.createElement("link", { rel: "stylesheet", href: RESOURCE + "css/mobile.css", media: "screen and (max-width: 769px)" })),
-            React.createElement(Route, { exact: true, path: this.props.match.url, component: ClientHome }),
-            React.createElement(Route, { path: this.props.match.url + '/blog', component: ClientHome })));
+            React.createElement(Route, { exact: true, path: "" + this.props.match.url, component: Error }),
+            React.createElement(Route, { path: this.props.match.url + "/blog", component: ClientBlogRoute }),
+            React.createElement(Route, { path: this.props.match.url + "/khoa-hoc", component: ClientSourceRoute })));
     };
     return ClientRouter;
 }(React.Component));

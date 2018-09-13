@@ -20,6 +20,7 @@ import { reCheckLogin } from "../reducers/init";
 import Login from "./admin/shared/login";
 import Error from "./admin/shared/error";
 import { BASEURL } from "../config/const";
+import ClientHome from "./client/home/ClientHome";
 var App = /** @class */ (function (_super) {
     __extends(App, _super);
     function App(props) {
@@ -42,7 +43,8 @@ var App = /** @class */ (function (_super) {
     App.prototype.render = function () {
         return (React.createElement(Router, null,
             React.createElement(Switch, null,
-                React.createElement(Route, { exact: true, path: BASEURL, component: Loadable({
+                React.createElement(Route, { exact: true, path: BASEURL, component: ClientHome }),
+                React.createElement(Route, { path: BASEURL + 'page', component: Loadable({
                         loader: function () {
                             return import(/*webpackChunkName: "client"*/ "./client/clientRouter");
                         },

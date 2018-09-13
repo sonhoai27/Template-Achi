@@ -21,6 +21,8 @@ import ClientHomeBlog from "./ClientHomeBlog";
 import ClientHomeSource from "./ClientHomeSourceEbook";
 import CLientFooterBanner from "./ClientFooterBanner";
 import Footer from "../client-shared/Footer";
+import { RESOURCE } from "../../../config/const";
+import { Helmet } from "react-helmet";
 var ClientHome = /** @class */ (function (_super) {
     __extends(ClientHome, _super);
     function ClientHome(props) {
@@ -28,6 +30,9 @@ var ClientHome = /** @class */ (function (_super) {
     }
     ClientHome.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
+            React.createElement(Helmet, null,
+                React.createElement("link", { rel: "stylesheet", href: RESOURCE + "css/client.css" }),
+                React.createElement("link", { rel: "stylesheet", href: RESOURCE + "css/mobile.css", media: "screen and (max-width: 769px)" })),
             React.createElement(ClientHeader, null),
             React.createElement(ClientBanner, null),
             React.createElement(ClientIntroProfile, null),
