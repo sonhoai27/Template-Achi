@@ -50,8 +50,7 @@ class App extends React.Component<IProps, IState> {
           ) : (
             <Route path={BASEURL+'login'} component={Error}/>
           )}
-          {this.state.user.status ? (
-            <PrivateRouter
+          <PrivateRouter
               resCheckLogin={this.props.resCheckLogin}
               path={BASEURL + "admin"}
               component={Loadable({
@@ -60,9 +59,6 @@ class App extends React.Component<IProps, IState> {
                 loading: () => <h1>Loading....</h1>
               })}
             />
-          ) : (
-            ""
-          )}
         </Switch>
       </Router>
     );
