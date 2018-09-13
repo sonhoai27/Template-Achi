@@ -13,7 +13,7 @@ export const PrivateRouter = ({
 }: IPrivateRouteProps) => {
   return (
     <Route {...rest} render={(props) => (
-      User.status !== 200
+      User.status === 404
             ? <Component {...props} />
             : <Redirect to={BASEURL+'login'} />
     )} />
