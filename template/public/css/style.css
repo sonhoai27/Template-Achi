@@ -1795,7 +1795,6 @@ table.dataTable thead .sorting:after {
 .panel .panel-body:first-child h3 {
     margin-top: 0;
     font-weight: 500;
-    
     font-size: 14px;
     text-transform: uppercase
 }

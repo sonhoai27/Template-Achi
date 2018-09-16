@@ -5,7 +5,7 @@ use Slim\Http\UploadedFile;
 include_once(__SITE_PATH.'/app/Middleware/auth.middleware.php');
 $container = $app->getContainer();
 $container['client_uri'] = BASE_URL.'uploads/images/';
-$container['upload_directory'] = __SITE_PATH . '\uploads\images';
+$container['upload_directory'] = __SITE_PATH . '/uploads/images';
 $app->post('/file/upload/photo', function(Request $request, Response $response){
     $directory = $this->get('upload_directory');
     $uploadedFiles = $request->getUploadedFiles();

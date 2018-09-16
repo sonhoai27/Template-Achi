@@ -186,3 +186,18 @@ body {
 .margin-top {
     margin-top: 64px;
 }
+
+
+/* ebook */
+
+.detail-ebook .item>div:first-child {
+    margin-right: 16px;
+}
+
+.detail-ebook .item>div:first-child:before {
+    display: none;
+}
+
+.detail-ebook .item>div:first-child:after {
+    display: none;
+}

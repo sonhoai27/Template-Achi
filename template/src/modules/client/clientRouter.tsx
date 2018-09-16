@@ -5,6 +5,7 @@ import {Helmet} from "react-helmet";
 import Error from "../admin/shared/error";
 import ClientBlogRoute from "./blog/ClientBlogRoute";
 import ClientSourceRoute from "./source/ClientSourceRoute";
+import EbookLadingPage from "./ebook/ebook";
 
 interface Props {
     match?: any
@@ -31,6 +32,7 @@ class ClientRouter extends React.Component<Props, {}> {
                 <Route exact path={`${this.props.match.url}`} component={Error}/>
                 <Route path={`${this.props.match.url}/blog`} component={ClientBlogRoute}/>
                 <Route path={`${this.props.match.url}/khoa-hoc`} component={ClientSourceRoute}/>
+                <Route path={`${this.props.match.url}/sach`} component={EbookLadingPage}/>
             </div>
         );
     }

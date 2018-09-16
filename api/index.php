@@ -39,7 +39,9 @@ require(__SITE_PATH.'/app/Routers/status.router.php');
 require(__SITE_PATH.'/app/Routers/video.router.php');
 require(__SITE_PATH.'/app/Routers/gift.router.php');
 $app->get('/', function(Request $request, Response $response){
-  $this->get('db')->query('SELECT * FROM `achi_status` order by status_id desc');
-  print_r($this->get('db')->fetch_array());
+  header ("Expires: ".gmdate("D, d M Y H:i:s", time())." GMT"); 
+  header ("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT"); 
+  header ("Cache-Control: no-cache, must-revalidate"); 
+  header ("Pragma: no-cache");
 });
 $app->run();
