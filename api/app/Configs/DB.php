@@ -22,12 +22,12 @@
             $this->connection = mysqli_connect($address, $account, $pwd);
             mysqli_set_charset($this->connection,"utf8");
             if (!$this->connection){
-                die("Database connection failed: " . mysqli_error());
+                die("Database connection failed: " . mysqli_error($this->connection));
             }
             else{
                 $dbSelect = mysqli_select_db($this->connection, $name);
                 if(!$dbSelect){
-                    die("Database selection failed: " . mysqli_error());
+                    die("Database selection failed: " . mysqli_error($this->connection));
                 }
             }
         }

@@ -1432,7 +1432,7 @@ blockquote p:after {
 }
 
 .pricing-table .pricing-option .price .back a.button {
-    background: #F85E6A;
+    background: #1f9080;
     padding: 15px 20px;
     display: inline-block;
     text-decoration: none;
@@ -1451,7 +1451,7 @@ blockquote p:after {
 }
 
 .pricing-table .pricing-option .price .back a.button:hover {
-    background: #f62d3d;
+    background: #1f9080;
 }
 
 @media screen and (max-width: 600px) {
