@@ -83,7 +83,7 @@ class OrderEbook extends React.Component<IProps, IState> {
                   ×
                 </button>
                 <h4 className="modal-title">
-                  <b>Đăng ký mua Sách</b>
+                  <b style={{fontWeight: 700}}>Đăng ký mua Sách: Gói {this.state.order.order_ebook_package} Cuốn</b>
                 </h4>
               </div>
               <div className="modal-body">
@@ -121,16 +121,6 @@ class OrderEbook extends React.Component<IProps, IState> {
                     onChange={this.onChange}
                     className="form-control"
                     name="order_ebook_discount"
-                  />
-                </div>
-                <div className="form-group">
-                  <label className="control-label">Gói đã chọn</label>
-                  <input
-                    type="text"
-                    disabled={true}
-                    defaultValue={this.state.order.order_ebook_package+''}
-                    className="form-control"
-                    name="order_ebook_package"
                   />
                 </div>
                 {this.state.stateNull ? <p className="order_ebook-warning">Vui lòng xem lại</p> : ''}

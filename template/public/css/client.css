@@ -44,7 +44,9 @@ body {
 .white {
     color: #fff;
 }
-
+.black {
+    color: #252525;
+}
 .primary-color {
     color: #1F9080;
 }
@@ -1013,7 +1015,7 @@ blockquote p:after {
     background-image: none;
     border-style: none;
     border-color: #000000;
-    background-color: #252525;
+    background-color: #fff;
     opacity: 1;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
     filter: alpha(opacity=100);
@@ -1047,7 +1049,7 @@ blockquote p:after {
 }
 
 .about-ebook ul>li {
-    color: #fff;
+    color: #252525;
     margin-bottom: 24px;
     font-weight: 500;
 }
@@ -1057,10 +1059,11 @@ blockquote p:after {
     padding: 4px;
     border-radius: 100%;
     margin-right: 8px;
+    color: #fff;
 }
 
 .detail-ebook {
-    background: #333333;
+    background: #f7fafc;
 }
 
 
@@ -1112,8 +1115,17 @@ blockquote p:after {
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
+    position: relative;
 }
-
+.preview-ebook:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #ffffff;
+}
 .preview-ebook h1 {
     font-size: 34px;
     letter-spacing: 0px;
@@ -1135,19 +1147,20 @@ blockquote p:after {
 
 .preview-ebook .preview-ebook_action>i {
     padding: 24px;
-    border: 1px solid #fff;
+    border: 1px solid #1f9080;
     border-radius: 100%;
-    color: #fff;
+    color: #1f9080;
     font-size: 24px;
     cursor: pointer;
 }
 
 .preview-ebook .preview-ebook_action>i:hover {
     background: #1F9080;
+    color: #fff;
 }
 
 .comment-reader {
-    background: #252525;
+    background: #f7fafc;
 }
 
 .comment-reader_slider .item {
@@ -1232,7 +1245,7 @@ blockquote p:after {
 }
 
 .author-ebook {
-    background: #333333;
+    background: #ffffff;
 }
 
 .author-ebook h2 {
@@ -1270,7 +1283,7 @@ blockquote p:after {
 }
 
 .question-ebook {
-    background: #333333;
+    background: #ffffff;
 }
 
 .question-ebook h2 {
@@ -1285,18 +1298,18 @@ blockquote p:after {
 
 .question-ebook .rc-collapse>.rc-collapse-item>.rc-collapse-header {
     font-size: 18px;
-    color: #fff;
+    color: #333;
     transition: all .4s;
     padding: 16px;
     height: unset;
     line-height: unset;
-    background: #444;
+    background: #e4e7ea;
 }
 
 .question-ebook .rc-collapse>.rc-collapse-item>.rc-collapse-header:hover,
 .question-ebook .rc-collapse>.rc-collapse-item>.rc-collapse-header[aria-expanded="true"] {
     background: rgb(8, 97, 85);
-    color: #fff;
+    color: #ffffff;
 }
 
 .question-ebook .rc-collapse>.rc-collapse-item>.rc-collapse-header .arrow {
@@ -1310,7 +1323,9 @@ blockquote p:after {
 
 /* order ebook */
 
-.order-ebook {}
+.order-ebook {
+    /* background: #f7fafc!important; */
+}
 
 .order-ebook h2 {
     text-align: center;
@@ -1332,6 +1347,9 @@ blockquote p:after {
     padding: 64px 16px;
     text-align: center;
     transition: all .3s ease-in-out;
+    border: 2px solid rgba(31, 144, 128, 0.28);
+    overflow: hidden;
+    border-radius: 8px;
 }
 
 .pricing-table .pricing-option:hover {
@@ -1448,15 +1466,16 @@ blockquote p:after {
 
 .order-ebook .modal-body {
     display: inline-block;
+    width: 100%;
 }
 
 .order-ebook .form-group {
-    width: 48%;
+    width: 100%;
     float: left;
 }
 
 .order-ebook .form-group:nth-child(odd) {
-    margin-right: 16px;
+    /* margin-right: 16px; */
 }
 
 .order_ebook-warning {

@@ -88,10 +88,10 @@ class EbookLadingPage extends React.Component<{}, IState> {
           <div className="container">
             <div className="row">
               <div className="col-xs-12">
-                <h2 className="white text-center">VỀ CUỐN DA</h2>
+                <h2 className="black text-center">VỀ CUỐN DA</h2>
                 <div className="colelem" id="u1713" />
                 <p
-                  className="white text-center"
+                  className="black text-center"
                   style={{
                     marginBottom: 64
                   }}
@@ -158,8 +158,8 @@ class EbookLadingPage extends React.Component<{}, IState> {
         <div className="col-xs-12 detail-ebook paddingY-128">
           <div className="row">
             <div className="col-xs-12">
-              <h2 className="white text-center">LỢI ÍCH NỔI BẬT</h2>
-              <p className="text-center white">- Nổi bật của sách -</p>
+              <h2 className="black text-center">LỢI ÍCH NỔI BẬT</h2>
+              <p className="text-center black">- Nổi bật của sách -</p>
               <div className="colelem" id="u1713" />
             </div>
           </div>
@@ -171,10 +171,10 @@ class EbookLadingPage extends React.Component<{}, IState> {
                     <i className="ti-harddrives" />
                   </div>
                   <div>
-                    <h4 className="white">
+                    <h4 className="black">
                       <b>Business Topics</b>
                     </h4>
-                    <p className="white">
+                    <p className="black">
                       Lorem Ipsum is simply dummy text of the printing and
                       typesetting industry. Lorem Ipsum has been..
                     </p>
@@ -185,10 +185,10 @@ class EbookLadingPage extends React.Component<{}, IState> {
                     <i className="ti-harddrives" />
                   </div>
                   <div>
-                    <h4 className="white">
+                    <h4 className="black">
                       <b>Business Topics</b>
                     </h4>
-                    <p className="white">
+                    <p className="black">
                       Lorem Ipsum is simply dummy text of the printing and
                       typesetting industry. Lorem Ipsum has been..
                     </p>
@@ -199,10 +199,10 @@ class EbookLadingPage extends React.Component<{}, IState> {
                     <i className="ti-harddrives" />
                   </div>
                   <div>
-                    <h4 className="white">
+                    <h4 className="black">
                       <b>Business Topics</b>
                     </h4>
-                    <p className="white">
+                    <p className="black">
                       Lorem Ipsum is simply dummy text of the printing and
                       typesetting industry. Lorem Ipsum has been..
                     </p>
@@ -213,10 +213,10 @@ class EbookLadingPage extends React.Component<{}, IState> {
                     <i className="ti-harddrives" />
                   </div>
                   <div>
-                    <h4 className="white">
+                    <h4 className="black">
                       <b>Business Topics</b>
                     </h4>
-                    <p className="white">
+                    <p className="black">
                       Lorem Ipsum is simply dummy text of the printing and
                       typesetting industry. Lorem Ipsum has been..
                     </p>
@@ -227,10 +227,10 @@ class EbookLadingPage extends React.Component<{}, IState> {
                     <i className="ti-harddrives" />
                   </div>
                   <div>
-                    <h4 className="white">
+                    <h4 className="black">
                       <b>Business Topics</b>
                     </h4>
-                    <p className="white">
+                    <p className="black">
                       Lorem Ipsum is simply dummy text of the printing and
                       typesetting industry. Lorem Ipsum has been..
                     </p>
@@ -241,10 +241,10 @@ class EbookLadingPage extends React.Component<{}, IState> {
                     <i className="ti-harddrives" />
                   </div>
                   <div>
-                    <h4 className="white">
+                    <h4 className="black">
                       <b>Business Topics</b>
                     </h4>
-                    <p className="white">
+                    <p className="black">
                       Lorem Ipsum is simply dummy text of the printing and
                       typesetting industry. Lorem Ipsum has been..
                     </p>
@@ -258,8 +258,8 @@ class EbookLadingPage extends React.Component<{}, IState> {
           <div className="container">
             <div className="row">
               <div className="col-xs-12">
-                <h1 className="text-center white">XEM TRƯỚC</h1>
-                <p className="text-center white">- BEST EBOOK FEATURES -</p>
+                <h1 className="text-center black">XEM TRƯỚC</h1>
+                <p className="text-center black">- BEST EBOOK FEATURES -</p>
                 <div className="preview-ebook_action">
                   <i className="ti-control-play" />
                   <i className="ti-image" />
@@ -272,8 +272,8 @@ class EbookLadingPage extends React.Component<{}, IState> {
           <div className="container">
             <div className="row">
               <div className="col-xs-12">
-                <h2 className="white text-center">CẢM NHẬN NGƯỜI SỞ HỮU</h2>
-                <p className="text-center white">- Nổi bật của sách -</p>
+                <h2 className="black text-center">CẢM NHẬN NGƯỜI SỞ HỮU</h2>
+                <p className="text-center black">- Nổi bật của sách -</p>
                 <div className="colelem" id="u1713" />
               </div>
             </div>
@@ -286,7 +286,7 @@ class EbookLadingPage extends React.Component<{}, IState> {
                       src={RESOURCE + "images/client/clients/client.png"}
                       className="img-responsive"
                     />
-                    <div className="white">
+                    <div className="black">
                       <p>
                         Contrary to popular belief, Lorem Ipsum is not simply
                         random text. It has roots in a piece of classical Latin
@@ -305,7 +305,7 @@ class EbookLadingPage extends React.Component<{}, IState> {
                       src={RESOURCE + "images/client/clients/client.png"}
                       className="img-responsive"
                     />
-                    <div className="white">
+                    <div className="black">
                       <p>
                         Contrary to popular belief, Lorem Ipsum is not simply
                         random text. It has roots in a piece of classical Latin
@@ -328,8 +328,8 @@ class EbookLadingPage extends React.Component<{}, IState> {
         <div className="col-xs-12 author-ebook paddingY-128">
           <div className="row">
             <div className="col-xs-12">
-              <h2 className="white text-center">Về tác giả</h2>
-              <p className="text-center white">- Tác giả của sách -</p>
+              <h2 className="black text-center">Về tác giả</h2>
+              <p className="text-center black">- Tác giả của sách -</p>
               <div className="colelem" id="u1713" />
             </div>
           </div>
@@ -368,11 +368,11 @@ class EbookLadingPage extends React.Component<{}, IState> {
             </div>
           </div>
         </div>
-        <div className="col-xs-12 order-ebook paddingY-128" style={{background: '#252525'}}>
+        <div className="col-xs-12 order-ebook paddingY-128" style={{background: '#f7fafc'}}>
           <div className="row">
             <div className="col-xs-12">
-              <h2 className="white text-center">SỞ HỮU NGAY</h2>
-              <p className="text-center white">- Nhiều ưu đãi -</p>
+              <h2 className="black text-center">SỞ HỮU NGAY</h2>
+              <p className="text-center black">- Nhiều ưu đãi -</p>
               <div className="colelem" id="u1713" />
             </div>
           </div>
@@ -492,7 +492,7 @@ class EbookLadingPage extends React.Component<{}, IState> {
         <div className="col-xs-12 question-ebook paddingY-128">
           <div className="row">
             <div className="col-xs-12">
-              <h2 className="white text-center">Câu hỏi thường gặp</h2>
+              <h2 className="black text-center">Câu hỏi thường gặp</h2>
               <div className="colelem" id="u1713" />
             </div>
           </div>
