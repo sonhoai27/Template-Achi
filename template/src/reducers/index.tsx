@@ -7,6 +7,7 @@ import reOrder from '../modules/admin/source/order/reOrder';
 import reVideos from '../modules/admin/videos/reVideos';
 import reGift from '../modules/admin/gift/reGift';
 import reOrderEbook  from '../modules/client/ebook/reEbook';
+import reOrderEbookAdmin from '../modules/admin/order-ebook/reOrderEbook'
 export default combineReducers({
     reUI,
     reInit,
@@ -15,5 +16,6 @@ export default combineReducers({
     reOrder,
     reVideos,
     reGift,
-    reOrderEbook
+    reOrderEbook,
+    reOrderEbookAdmin
 })

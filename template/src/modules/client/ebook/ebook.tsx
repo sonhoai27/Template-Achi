@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet";
 import Collapse from "rc-collapse";
 import Slider from "react-slick";
 import OrderEbook from "./com/orderEbook";
+import Helper from "./com/helper";
 var Panel = Collapse.Panel;
 const settings = {
   dots: true,
@@ -17,16 +18,18 @@ const settings = {
   autoplay: true
 };
 interface IState {
-  isShowingModalOrder: boolean,
-  currentPackage: number
+  isShowingModalOrder: boolean;
+  currentPackage: number;
+  price: number
 }
 class EbookLadingPage extends React.Component<{}, IState> {
   constructor(props) {
     super(props);
     this.state = {
       isShowingModalOrder: false,
-      currentPackage: -1
-    }
+      currentPackage: -1,
+      price: 0
+    };
   }
   render() {
     return (
@@ -159,94 +162,108 @@ class EbookLadingPage extends React.Component<{}, IState> {
           <div className="row">
             <div className="col-xs-12">
               <h2 className="black text-center">LỢI ÍCH NỔI BẬT</h2>
-              <p className="text-center black">- Nổi bật của sách -</p>
+              <p className="text-center white">- Nổi bật của sách -</p>
               <div className="colelem" id="u1713" />
             </div>
           </div>
           <div className="row">
             <div className="container">
               <div className="row">
-                <div className="col-sm-4 item">
+                <div className="col-sm-6 item">
                   <div>
                     <i className="ti-harddrives" />
                   </div>
                   <div>
-                    <h4 className="black">
-                      <b>Business Topics</b>
+                    <h4 className="white">
+                      <b>ĐẶT RA NHỮNG MỤC TIÊU RÕ RÀNG</b>
                     </h4>
-                    <p className="black">
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been..
+                    <p className="white">
+                      Giúp bạn xây dựng thói quen của người thành công, luôn có
+                      rất chi tiết cụ thể mục tiêu hàng ngày, hàng tuần, hàng
+                      tháng, hàng năm để hành động quyết liệt với những điều bạn
+                      muốn
                     </p>
                   </div>
                 </div>
-                <div className="col-sm-4 item">
+                <div className="col-sm-6 item">
                   <div>
                     <i className="ti-harddrives" />
                   </div>
                   <div>
-                    <h4 className="black">
-                      <b>Business Topics</b>
+                    <h4 className="white">
+                      <b>DẪN DẮT CẢM XÚC TÍCH CỰC</b>
                     </h4>
-                    <p className="black">
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been..
+                    <p className="white">
+                      Giúp bạn sở hữu những cảm xúc tích cực: tự tin, vui vẻ,
+                      hào hứng, phấn khích,... thúc đẩy quá trình hành động đạt
+                      được hiệu suất làm việc cao tối đa.
                     </p>
                   </div>
                 </div>
-                <div className="col-sm-4 item">
+              </div>
+              <div className="row">
+                <div className="col-sm-6 item">
                   <div>
                     <i className="ti-harddrives" />
                   </div>
                   <div>
-                    <h4 className="black">
-                      <b>Business Topics</b>
+                    <h4 className="white">
+                      <b>THẤU HIỂU BẢN THÂN</b>
                     </h4>
-                    <p className="black">
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been..
+                    <p className="white">
+                      Giúp bạn hiểu được sở trường của bản thân mình khi đó năng
+                      lực được phát huy tối đa cũng như rút ra bài học kinh
+                      nghiệm khi làm một điều gì đó mà kết quả chưa như ý để làm
+                      lại tốt hơn
                     </p>
                   </div>
                 </div>
-                <div className="col-sm-4 item">
+                <div className="col-sm-6 item">
                   <div>
                     <i className="ti-harddrives" />
                   </div>
                   <div>
-                    <h4 className="black">
-                      <b>Business Topics</b>
+                    <h4 className="white">
+                      <b>XÂY DỰNG SỰ TẬP TRUNG VÀ KỶ LUẬT</b>
                     </h4>
-                    <p className="black">
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been..
+                    <p className="white">
+                      Giúp bạn tập trung cao độ vào những điều quan trọng và có
+                      ý nghĩa trong cuộc sống hiện tại, sự kỷ luật được xây dựng
+                      khi làm những việc nhỏ, đơn giản được lặp đi lặp lại hàng
+                      ngày
                     </p>
                   </div>
                 </div>
-                <div className="col-sm-4 item">
+              </div>
+              <div className="row">
+                <div className="col-sm-6 item">
                   <div>
                     <i className="ti-harddrives" />
                   </div>
                   <div>
-                    <h4 className="black">
-                      <b>Business Topics</b>
+                    <h4 className="white">
+                      <b>YÊU THƯƠNG VÀ QUÝ TRỌNG BẢN THÂN</b>
                     </h4>
-                    <p className="black">
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been..
+                    <p className="white">
+                      Giúp bạn xây dựng lòng tự tôn với bản thân mình, biết rằng
+                      bản thân mình đang liên tục tiến lên mỗi một ngày, biết tự
+                      quý trọng và yêu thương bản thân
                     </p>
                   </div>
                 </div>
-                <div className="col-sm-4 item">
+                <div className="col-sm-6 item">
                   <div>
                     <i className="ti-harddrives" />
                   </div>
                   <div>
-                    <h4 className="black">
-                      <b>Business Topics</b>
+                    <h4 className="white">
+                      <b>HẠNH PHÚC ĐỂ THÀNH CÔNG</b>
                     </h4>
-                    <p className="black">
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been..
+                    <p className="white">
+                      Giúp bạn hạnh phúc từ những điều nho nhỏ và gần gũi mỗi
+                      ngày, những điều mình làm được, những người mình biết hơn,
+                      tạo cho bạn cảm giác ý nghĩa trong từng khoảnh khắc cuộc
+                      sống.
                     </p>
                   </div>
                 </div>
@@ -258,8 +275,8 @@ class EbookLadingPage extends React.Component<{}, IState> {
           <div className="container">
             <div className="row">
               <div className="col-xs-12">
-                <h1 className="text-center black">XEM TRƯỚC</h1>
-                <p className="text-center black">- BEST EBOOK FEATURES -</p>
+                <h1 className="text-center white">XEM TRƯỚC</h1>
+                <p className="text-center white">- BEST EBOOK FEATURES -</p>
                 <div className="preview-ebook_action">
                   <i className="ti-control-play" />
                   <i className="ti-image" />
@@ -272,8 +289,8 @@ class EbookLadingPage extends React.Component<{}, IState> {
           <div className="container">
             <div className="row">
               <div className="col-xs-12">
-                <h2 className="black text-center">CẢM NHẬN NGƯỜI SỞ HỮU</h2>
-                <p className="text-center black">- Nổi bật của sách -</p>
+                <h2 className="white text-center">CẢM NHẬN NGƯỜI SỞ HỮU</h2>
+                <p className="text-center white">- Nổi bật của sách -</p>
                 <div className="colelem" id="u1713" />
               </div>
             </div>
@@ -286,7 +303,7 @@ class EbookLadingPage extends React.Component<{}, IState> {
                       src={RESOURCE + "images/client/clients/client.png"}
                       className="img-responsive"
                     />
-                    <div className="black">
+                    <div className="white">
                       <p>
                         Contrary to popular belief, Lorem Ipsum is not simply
                         random text. It has roots in a piece of classical Latin
@@ -305,7 +322,7 @@ class EbookLadingPage extends React.Component<{}, IState> {
                       src={RESOURCE + "images/client/clients/client.png"}
                       className="img-responsive"
                     />
-                    <div className="black">
+                    <div className="white">
                       <p>
                         Contrary to popular belief, Lorem Ipsum is not simply
                         random text. It has roots in a piece of classical Latin
@@ -351,15 +368,24 @@ class EbookLadingPage extends React.Component<{}, IState> {
                 <div className="col-sm-6">
                   <Collapse accordion={true}>
                     <Panel
-                      header="Nguyễn Minh Chí là ai?"
+                      header="MR.SHARE - NGƯỜI PHỤNG SỰ TUỔI TRẺ VIỆT"
                       headerClass="my-header-class"
                     >
-                      this is panel content
+                      <i>
+                        “Hãy sống xứng đáng xứng như một con ong, mục tiêu tối
+                        thượng là kiến tạo giá trị cho đời” - Mr.Share -
+                      </i>
+                      <p>
+                        - Founder, Trainer: Học viện kỹ năng Sống xứng đáng
+                        <br />- Founder Anh ngữ Max Power Tác giả: Cuốn da Sống
+                        Xứng
+                        <br />- Đáng Sáng lập CLB Khởi nghiệp thực tiễn cho sinh
+                        viên
+                        <br />- Quản lý chi nhánh: Tập đoàn giáo dục quốc tế
+                        ECORP Chinh phục Full marathon 42km.
+                      </p>
                     </Panel>
-                    <Panel header="Nguyễn Minh Chí là ai?">
-                      this is panel content2 or other
-                    </Panel>
-                    <Panel header="Theo dõi">
+                    <Panel header="KẾT NỐI VỚI TÔI">
                       this is panel content2 or other
                     </Panel>
                   </Collapse>
@@ -368,11 +394,14 @@ class EbookLadingPage extends React.Component<{}, IState> {
             </div>
           </div>
         </div>
-        <div className="col-xs-12 order-ebook paddingY-128" style={{background: '#f7fafc'}}>
+        <div
+          className="col-xs-12 order-ebook paddingY-128"
+          style={{ background: "#1F9080" }}
+        >
           <div className="row">
             <div className="col-xs-12">
-              <h2 className="black text-center">SỞ HỮU NGAY</h2>
-              <p className="text-center black">- Nhiều ưu đãi -</p>
+              <h2 className="white text-center">SỞ HỮU NGAY</h2>
+              <p className="text-center white">- Nhiều ưu đãi -</p>
               <div className="colelem" id="u1713" />
             </div>
           </div>
@@ -392,12 +421,16 @@ class EbookLadingPage extends React.Component<{}, IState> {
                     <span className="price">150.000đ/cuốn</span>
                   </div>
                   <div className="back">
-                    <a className="button" onClick={()=> {
-                      this.setState({
-                        currentPackage: 1,
-                        isShowingModalOrder: !this.state.isShowingModalOrder
-                      })
-                    }}>
+                    <a
+                      className="button"
+                      onClick={() => {
+                        this.setState({
+                          currentPackage: 1,
+                          price: 150000,
+                          isShowingModalOrder: !this.state.isShowingModalOrder
+                        });
+                      }}
+                    >
                       Mua Ngay
                     </a>
                   </div>
@@ -420,12 +453,16 @@ class EbookLadingPage extends React.Component<{}, IState> {
                     <span className="price">120.000đ/cuốn</span>
                   </div>
                   <div className="back">
-                    <a className="button" onClick={()=> {
-                      this.setState({
-                        currentPackage: 2,
-                        isShowingModalOrder: !this.state.isShowingModalOrder
-                      })
-                    }}>
+                    <a
+                      className="button"
+                      onClick={() => {
+                        this.setState({
+                          currentPackage: 2,
+                          price: 120000,
+                          isShowingModalOrder: !this.state.isShowingModalOrder
+                        });
+                      }}
+                    >
                       Mua Ngay
                     </a>
                   </div>
@@ -447,12 +484,16 @@ class EbookLadingPage extends React.Component<{}, IState> {
                     <span className="price">105.000đ/cuốn</span>
                   </div>
                   <div className="back">
-                    <a className="button" onClick={()=> {
-                      this.setState({
-                        currentPackage: 3,
-                        isShowingModalOrder: !this.state.isShowingModalOrder
-                      })
-                    }}>
+                    <a
+                      className="button"
+                      onClick={() => {
+                        this.setState({
+                          currentPackage: 3,
+                          price: 105000,
+                          isShowingModalOrder: !this.state.isShowingModalOrder
+                        });
+                      }}
+                    >
                       Mua Ngay
                     </a>
                   </div>
@@ -475,12 +516,16 @@ class EbookLadingPage extends React.Component<{}, IState> {
                     <span className="price">85.000đ/cuốn</span>
                   </div>
                   <div className="back">
-                    <a className="button" onClick={()=> {
-                      this.setState({
-                        currentPackage: 4,
-                        isShowingModalOrder: !this.state.isShowingModalOrder
-                      })
-                    }}>
+                    <a
+                      className="button"
+                      onClick={() => {
+                        this.setState({
+                          currentPackage: 4,
+                          price: 85000,
+                          isShowingModalOrder: !this.state.isShowingModalOrder
+                        });
+                      }}
+                    >
                       Mua Ngay
                     </a>
                   </div>
@@ -489,49 +534,21 @@ class EbookLadingPage extends React.Component<{}, IState> {
             </div>
           </div>
         </div>
-        <div className="col-xs-12 question-ebook paddingY-128">
-          <div className="row">
-            <div className="col-xs-12">
-              <h2 className="black text-center">Câu hỏi thường gặp</h2>
-              <div className="colelem" id="u1713" />
-            </div>
-          </div>
-          <div className="row">
-            <div
-              className="container"
-              style={{
-                marginTop: 64
-              }}
-            >
-              <div className="row">
-                <div className="col-sm-2" />
-                <div className="col-sm-8">
-                  <Collapse accordion={true}>
-                    <Panel
-                      header="Nguyễn Minh Chí là ai?"
-                      headerClass="my-header-class"
-                    >
-                      this is panel content
-                    </Panel>
-                    <Panel header="Nguyễn Minh Chí là ai?">
-                      this is panel content2 or other
-                    </Panel>
-                    <Panel header="Theo dõi">
-                      this is panel content2 or other
-                    </Panel>
-                  </Collapse>
-                </div>
-                <div className="col-sm-2" />
-              </div>
-            </div>
-          </div>
-        </div>
+        <Helper/>
         <Footer />
-       {this.state.isShowingModalOrder ?  <OrderEbook package={this.state.currentPackage} exit={()=> {
-          this.setState({
-            isShowingModalOrder: !this.state.isShowingModalOrder
-          })
-        }}/> : ''}
+        {this.state.isShowingModalOrder ? (
+          <OrderEbook
+            package={this.state.currentPackage}
+            price={this.state.price}
+            exit={() => {
+              this.setState({
+                isShowingModalOrder: !this.state.isShowingModalOrder
+              });
+            }}
+          />
+        ) : (
+          ""
+        )}
       </>
     );
   }

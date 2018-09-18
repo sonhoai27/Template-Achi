@@ -12,18 +12,23 @@ class EbookHeader extends React.Component {
           <div className="row">
             <div className="col-sm-6 buy-now">
               <div>
-                <p>What is Riopagez Ebook?</p>
-                <p>Trendy Landing Page To Sell Your EBook</p>
+                <p>
+                  “Một cuộc sống xứng đáng không tự nhiên sinh ra mà được gieo
+                  trồng, cuốn da này sẽ chỉ dẫn rất chi tiết và bước đi cùng bạn
+                  trên hành trình đó”
+                </p>
+                <p></p>
               </div>
-              <button className="btn btn-sm">BUY NOW</button>
             </div>
             <div className="col-sm-6">
-                <img
-                    style={{
-                        width: '80%',
-                        float: 'right'
-                    }}
-                    src={RESOURCE+'images/client/ebook2.png'} alt=""/>
+              <img
+                style={{
+                  width: "80%",
+                  float: "right"
+                }}
+                src={RESOURCE + "images/client/ebook2.png"}
+                alt=""
+              />
             </div>
           </div>
         </div>

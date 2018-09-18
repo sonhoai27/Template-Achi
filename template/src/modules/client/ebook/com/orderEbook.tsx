@@ -4,6 +4,7 @@ import { reOrderEbook } from "../reEbook";
 import { reIsDanger, reIsSuccess } from "../../../../reducers/init";
 
 interface IProps {
+  price: number;
   package: number;
   exit: any;
   resOrderEbook: any;
@@ -18,6 +19,7 @@ interface IState {
     order_ebook_phone: string;
     order_ebook_package: number;
     order_ebook_discount: string;
+    order_ebook_price: number;
   };
   stateNull: boolean;
 }
@@ -30,7 +32,8 @@ class OrderEbook extends React.Component<IProps, IState> {
         order_ebook_email: "",
         order_ebook_phone: "",
         order_ebook_package: this.props.package,
-        order_ebook_discount: ""
+        order_ebook_discount: "",
+        order_ebook_price: this.props.price
       },
       stateNull: false
     };
