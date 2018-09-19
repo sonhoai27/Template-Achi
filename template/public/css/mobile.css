@@ -203,4 +203,11 @@ body {
 }
 
 
-/* ebook  */
+/* source */
+.order-source .time>ul:first-child>li>p:first-child {
+    font-weight: 600;
+    flex: 1;
+}
+.order-source .time>ul:first-child>li>p:last-child {
+  flex: 3;
+}

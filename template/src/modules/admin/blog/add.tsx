@@ -144,11 +144,23 @@ class BlogAdd extends React.Component<Props, State> {
                     <div className="col-md-12">
                       <Editor
                         onChange={(e: any)=> {
-                          this.setState({
-                            ...this.state,
-                            blog_content: e.level.content
-                          })
+                          if(e.level.content === null || e.level.content === ""){
+                            let temp = "";
+                            (e.level.fragments).forEach(element => {
+                                temp +=element
+                            });
+                            this.setState({
+                              ...this.state,
+                              blog_content: temp
+                            })
+                          }else {
+                            this.setState({
+                              ...this.state,
+                              blog_content: e.level.content
+                            })
+                          }
                         }}
+                        cloudChannel='dev'
                         apiKey="t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl"
                         init={{
                           selector: "textarea",
@@ -156,7 +168,7 @@ class BlogAdd extends React.Component<Props, State> {
                           height: 500,
                           theme: "modern",
                           plugins:
-                            "print preview fullpage powerpaste searchreplace autolink directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount tinymcespellchecker a11ychecker imagetools mediaembed  linkchecker contextmenu colorpicker textpattern help",
+                            "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
                           toolbar1:
                             "fontsizeselect formatselect | bold italic strikethrough forecolor backcolor | link addImage blockquote | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat",
                           fontsize_formats:

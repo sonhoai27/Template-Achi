@@ -40,15 +40,15 @@ class DetailSche extends React.Component<Props, State> {
     componentWillReceiveProps(nextProps){
         if(nextProps.resDetailSche != this.props.resDetailSche){
             this.setState({
-                source_sche_id: nextProps.resDetailSche.source_sche_id,
-                source_sche_id_source: nextProps.resDetailSche.source_sche_id_source,
-                source_sche_number: nextProps.resDetailSche.source_sche_number,
-                source_sche_price: nextProps.resDetailSche.source_sche_price,
-                source_sche_sale: nextProps.resDetailSche.source_sche_sale,
-                source_sche_address: nextProps.resDetailSche.source_sche_address,
-                source_sche_teacher: nextProps.resDetailSche.source_sche_teacher,
-                source_sche_status: nextProps.resDetailSche.source_sche_status,
-                source_sche_khoa: nextProps.resDetailSche.source_sche_khoa
+                source_sche_id: nextProps.resDetailSche.list.source_sche_id,
+                source_sche_id_source: nextProps.resDetailSche.list.source_sche_id_source,
+                source_sche_number: nextProps.resDetailSche.list.source_sche_number,
+                source_sche_price: nextProps.resDetailSche.list.source_sche_price,
+                source_sche_sale: nextProps.resDetailSche.list.source_sche_sale,
+                source_sche_address: nextProps.resDetailSche.list.source_sche_address,
+                source_sche_teacher: nextProps.resDetailSche.list.source_sche_teacher,
+                source_sche_status: nextProps.resDetailSche.list.source_sche_status,
+                source_sche_khoa: nextProps.resDetailSche.list.source_sche_khoa
             })
         }
     }

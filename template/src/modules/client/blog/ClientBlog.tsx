@@ -1,6 +1,67 @@
 import * as React from "react";
+import { connect } from "react-redux";
+import { reListBlog } from "../../admin/blog/reBlog";
+import Pagination from "../../shared/Pagination";
+import { Link } from "react-router-dom";
 
-class ClientBlog extends React.Component {
+interface IProps {
+    resListBlog: any;
+    reListBlog: (page: number)=> void;
+    match: any;
+}
+class ClientBlog extends React.Component<IProps, {}> {
+    constructor(props){
+        super(props)
+    }
+    makeCurrentPage = () => {
+        const page = window.location.href.split("page=")[1];
+        if (page != undefined || page != null) {
+            return page;
+        } else {
+            return "1";
+        }
+    };
+    componentDidMount(){
+        this.props.reListBlog(
+            (parseInt(this.makeCurrentPage(), 10) - 1)*20
+        )
+      }
+      getMoreBlog = page => {
+          this.props.reListBlog(
+              (page - 1)*20
+          )
+    };
+    renderListBlog = ()=> {
+        if(this.props.resListBlog.list){
+          return this.props.resListBlog.list.map((element, index) => {
+            return (
+                <div className="col-sm-4">
+                <div className="post">
+                    <Link style={{backgroundImage:"url("+element.blog_cover+")"}}
+                       className="post-item-image"
+                       to={this.props.match.path+'/detail/'+element.blog_id}>
+                        <div className="post-item-container color3">
+                            <img className="ico-handshake cat-icon"
+                                 src="https://cdnwp.tonyrobbins.com/wp-content/uploads/2017/09/white-outlined_health-and-vitality.png"/>
+                        </div>
+                    </Link>
+                    <div className="post-content">
+                        <h6 className="micro">{element.category_name}</h6>
+                        <div className="archive_cat_line" style={{backgroundColor: '#6d166d'}}></div>
+                        <h4 className="post-title">
+                            <Link to={this.props.match.path+'/detail/'+element.blog_id}>{element.blog_title}</Link>
+                        </h4>
+
+                        <Link to={this.props.match.path+'/detail/'+element.blog_id}
+                           className="link-more link-more-grey">Xem thêm</Link>
+                    </div>
+                </div>
+            </div>
+            )
+          })
+        }
+        return <h1>Null</h1>
+    }
     render() {
         return (
             <>
@@ -38,124 +99,17 @@ class ClientBlog extends React.Component {
                         </div>
                     </div>
                     <div className="row list-blogs">
-                        <div className="col-sm-4">
-                            <div className="post">
-                                <a style={{backgroundImage:"url('https://cdnwp.tonyrobbins.com/wp-content/uploads/2018/09/HumanStory_Priscilla_1920x800.jpg')"}}
-                                   className="post-item-image"
-                                   href="https://www.tonyrobbins.com/leadership-impact/supporting-single-moms/">
-                                    <div className="post-item-container color3">
-                                        <img className="ico-handshake cat-icon"
-                                             src="https://cdnwp.tonyrobbins.com/wp-content/uploads/2017/09/Leadership_Impact.png"/>
-                                    </div>
-                                </a>
-
-                                <div className="post-content">
-                                    <h6 className="micro">Leadership & Impact</h6>
-                                    <div className="archive_cat_line" style={{backgroundColor: '#6d166d'}}></div>
-                                    <h4 className="post-title">
-                                        <a href="https://www.tonyrobbins.com/leadership-impact/supporting-single-moms/">The
-                                            faces of hunger in America</a>
-                                    </h4>
-
-                                    <a href="https://www.tonyrobbins.com/leadership-impact/supporting-single-moms/"
-                                       className="link-more link-more-grey">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-sm-4">
-                            <div className="post">
-                                <a style={{backgroundImage:"url('https://cdnwp.tonyrobbins.com/wp-content/uploads/2018/09/HumanStory_Priscilla_1920x800.jpg')"}}
-                                   className="post-item-image"
-                                   href="https://www.tonyrobbins.com/leadership-impact/supporting-single-moms/">
-                                    <div className="post-item-container color3">
-                                        <img className="ico-handshake cat-icon"
-                                             src="https://cdnwp.tonyrobbins.com/wp-content/uploads/2017/09/Leadership_Impact.png"/>
-                                    </div>
-                                </a>
-
-                                <div className="post-content">
-                                    <h6 className="micro">Leadership & Impact</h6>
-                                    <div className="archive_cat_line" style={{backgroundColor: '#6d166d'}}></div>
-                                    <h4 className="post-title">
-                                        <a href="https://www.tonyrobbins.com/leadership-impact/supporting-single-moms/">The
-                                            faces of hunger in America</a>
-                                    </h4>
-
-                                    <a href="https://www.tonyrobbins.com/leadership-impact/supporting-single-moms/"
-                                       className="link-more link-more-grey">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-sm-4">
-                            <div className="post">
-                                <a style={{backgroundImage:"url('https://cdnwp.tonyrobbins.com/wp-content/uploads/2018/09/HumanStory_Priscilla_1920x800.jpg')"}}
-                                   className="post-item-image"
-                                   href="https://www.tonyrobbins.com/leadership-impact/supporting-single-moms/">
-                                    <div className="post-item-container color3">
-                                        <img className="ico-handshake cat-icon"
-                                             src="https://cdnwp.tonyrobbins.com/wp-content/uploads/2017/09/Leadership_Impact.png"/>
-                                    </div>
-                                </a>
-
-                                <div className="post-content">
-                                    <h6 className="micro">Leadership & Impact</h6>
-                                    <div className="archive_cat_line" style={{backgroundColor: '#6d166d'}}></div>
-                                    <h4 className="post-title">
-                                        <a href="https://www.tonyrobbins.com/leadership-impact/supporting-single-moms/">The
-                                            faces of hunger in America</a>
-                                    </h4>
-
-                                    <a href="https://www.tonyrobbins.com/leadership-impact/supporting-single-moms/"
-                                       className="link-more link-more-grey">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-sm-4">
-                            <div className="post">
-                                <a style={{backgroundImage:"url('https://cdnwp.tonyrobbins.com/wp-content/uploads/2018/09/HumanStory_Priscilla_1920x800.jpg')"}}
-                                   className="post-item-image"
-                                   href="https://www.tonyrobbins.com/leadership-impact/supporting-single-moms/">
-                                    <div className="post-item-container color3">
-                                        <img className="ico-handshake cat-icon"
-                                             src="https://cdnwp.tonyrobbins.com/wp-content/uploads/2017/09/Leadership_Impact.png"/>
-                                    </div>
-                                </a>
-
-                                <div className="post-content">
-                                    <h6 className="micro">Leadership & Impact</h6>
-                                    <div className="archive_cat_line" style={{backgroundColor: '#6d166d'}}></div>
-                                    <h4 className="post-title">
-                                        <a href="https://www.tonyrobbins.com/leadership-impact/supporting-single-moms/">The
-                                            faces of hunger in America</a>
-                                    </h4>
-
-                                    <a href="https://www.tonyrobbins.com/leadership-impact/supporting-single-moms/"
-                                       className="link-more link-more-grey">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-sm-4">
-                            <div className="post">
-                                <a style={{backgroundImage:"url('https://cdnwp.tonyrobbins.com/wp-content/uploads/2018/09/HumanStory_Priscilla_1920x800.jpg')"}}
-                                   className="post-item-image"
-                                   href="https://www.tonyrobbins.com/leadership-impact/supporting-single-moms/">
-                                    <div className="post-item-container color3">
-                                        <img className="ico-handshake cat-icon"
-                                             src="https://cdnwp.tonyrobbins.com/wp-content/uploads/2017/09/Leadership_Impact.png"/>
-                                    </div>
-                                </a>
-
-                                <div className="post-content">
-                                    <h6 className="micro">Leadership & Impact</h6>
-                                    <div className="archive_cat_line" style={{backgroundColor: '#6d166d'}}></div>
-                                    <h4 className="post-title">
-                                        <a href="https://www.tonyrobbins.com/leadership-impact/supporting-single-moms/">The
-                                            faces of hunger in America</a>
-                                    </h4>
-
-                                    <a href="https://www.tonyrobbins.com/leadership-impact/supporting-single-moms/"
-                                       className="link-more link-more-grey">Read More</a>
-                                </div>
+                        {this.renderListBlog()}
+                    </div>
+                    <div className="row">
+                        <div className="col-xs-12">
+                        <div className="pg">
+                            <Pagination
+                                initialPage={parseInt(this.makeCurrentPage(), 10)}
+                                pageSize={20}
+                                totalItems={this.props.resListBlog.count}
+                                onChangePage={e => this.getMoreBlog(e.currentPage)}
+                            />
                             </div>
                         </div>
                     </div>
@@ -164,5 +118,14 @@ class ClientBlog extends React.Component {
         );
     }
 }
+const mapStateToProps = storeState => ({
+    resListBlog: storeState.reBlog.resListBlog
+});
+const mapDispatchToProps = {
+    reListBlog
+};
+export default connect(
+mapStateToProps,
+mapDispatchToProps
+)(ClientBlog);
 
-export default ClientBlog;

@@ -1,16 +1,42 @@
 import * as React from "react";
-
-class ClientDetailBlog extends React.Component {
+import { connect } from "react-redux";
+import { reDetailBlog } from "../../admin/blog/reBlog";
+import Helmet from "react-helmet";
+interface IProps {
+    match?: any;
+    resDetailBlog: any;
+    reDetailBlog: (id: string)=> void;
+}
+interface IState {
+    blog: any;
+}
+class ClientDetailBlog extends React.Component<IProps, IState> {
     constructor(props) {
         super(props)
+        this.state = {
+            blog: {}
+        }
     }
-
+    componentDidUpdate(preProps){
+        if(preProps.resDetailBlog != this.props.resDetailBlog){
+            this.setState({
+                blog: this.props.resDetailBlog.list
+            })
+        }
+    }
+    componentDidMount(){
+        window.scrollTo(0,0)
+        this.props.reDetailBlog(this.props.match.params.idBlog)
+    }
     render() {
         return (
             <>
+                <Helmet>
+                    <title>{this.state.blog.blog_title}</title>
+                </Helmet>
                 <div className="col-sm-12 page-detail-blog">
                     <div className="row page-detail-blog_banner" style={{
-                        backgroundImage: 'url(https://cdnwp.tonyrobbins.com/wp-content/uploads/2018/09/Girl-Hunger_BlogBanner1.jpg)',
+                        backgroundImage: 'url('+this.state.blog.blog_cover+')',
                         paddingTop: 128,
                         paddingBottom: 128,
                         backgroundAttachment: 'fixed',
@@ -37,35 +63,13 @@ class ClientDetailBlog extends React.Component {
                         <div className="container">
                             <div className="row">
                                 <div className="col-xs-12 page-detail-blog_content_title">
-                                    <p>HUNGER IS STILL THE #1 ISSUE IN AMERICA</p>
-                                    <p>WHY I CONTINUE TO PARTNER WITH FEEDING AMERICA TO FEED PEOPLE AND FAMILIES IN
-                                        NEED</p>
+                                    <p>{this.state.blog.blog_title}</p>
+                                    <p dangerouslySetInnerHTML={{__html: this.state.blog.blog_promo}}/>
                                     <span className="article-author">
-                                        Posted by <b>Tony Robbins</b>
+                                        Posted by <b>{this.state.blog.author_name}</b>
                                     </span>
                                 </div>
-                                <div className="col-xs-12 page-detail-blog_content_body">
-                                    Hi, it’s Tony. I want to share a short message with you about what I believe is
-                                    still the #1 social issue in America: the hunger crisis.
-
-                                    One out of every 8 people in America – and 1 in 6 children – struggles with hunger.
-                                    They are “food insecure,” which means that they have limited or uncertain
-                                    availability of nutritionally adequate foods. It means they do not have access, at
-                                    times, to enough food to lead active, healthy lives – to do everything that they
-                                    want to do in their day. Not enough energy to work, to grow, to flourish.
-
-                                    Imagine for a moment what that feels like. To feel tired, deeply fatigued and
-                                    continuously running on empty. To want more in life, but not have the physical
-                                    energy to work to obtain it.
-
-                                    Now think about living with a constant feeling of uncertainty, not knowing where
-                                    your next meal is coming from. To go through your day without the basic comfort of
-                                    having nutritious food available to you, with no control over what you can put in
-                                    your body as fuel for your life. Imagine what it would feel like to have total
-                                    insecurity over this basic need.
-
-                                    I know what that feels like.
-                                </div>
+                                <div className="col-xs-12 page-detail-blog_content_body"dangerouslySetInnerHTML={{__html: this.state.blog.blog_content}}/>
                             </div>
                         </div>
                     </div>
@@ -103,4 +107,13 @@ class ClientDetailBlog extends React.Component {
     }
 }
 
-export default ClientDetailBlog
+const mapStateToProps = storeState => ({
+    resDetailBlog: storeState.reBlog.resDetailBlog
+});
+const mapDispatchToProps = {
+    reDetailBlog
+};
+export default connect(
+mapStateToProps,
+mapDispatchToProps
+)(ClientDetailBlog);

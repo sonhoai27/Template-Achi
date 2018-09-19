@@ -1,4 +1,6 @@
 import * as React from "react";
+import ClientHeader from "../client-shared/Header";
+import Footer from "../client-shared/Footer";
 
 class ClientSourceHome extends React.Component {
   constructor(props) {
@@ -7,6 +9,7 @@ class ClientSourceHome extends React.Component {
   render() {
     return (
       <>
+        <ClientHeader/>
         <div className="col-xs-12 page-source">
           <div className="row page-source_banner">
             <div className="container">
@@ -201,6 +204,7 @@ class ClientSourceHome extends React.Component {
             </div>
           </div>
         </div>
+        <Footer/>
       </>
     );
   }

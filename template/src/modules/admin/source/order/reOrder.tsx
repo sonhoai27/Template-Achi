@@ -5,14 +5,16 @@ export const ACTION_TYPES = {
     API_ORDER: 'ReOrder/API_ORDER',
     API_LIST_SCHE_ORDER: 'ReOrder/API_LIST_SCHE_ORDER',
     IS_SHOWING_MODAL_EXPORT: 'ReOrder/IS_SHOWING_MODAL_EXPORT',
-    API_LIST_ORDER_BY_SCHE: 'ReOrder/API_LIST_ORDER_BY_SCHE'
+    API_LIST_ORDER_BY_SCHE: 'ReOrder/API_LIST_ORDER_BY_SCHE',
+    API_ADD_ORDER: 'ReOrder/API_ADD_ORDER',
 }
 
 const initialState = {
     resListOrder: {},
     resListScheOrder: [],
     isShowingModalExport: false,
-    resListOrderBySche: {}
+    resListOrderBySche: {},
+    resAddOrder: {}
 }
 
 export default (state = initialState, action) => {
@@ -75,6 +77,24 @@ export default (state = initialState, action) => {
                 resListOrderBySche: action.payload.data
             }
         }
+
+        // add order
+        case REQUEST(ACTION_TYPES.API_ADD_ORDER): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_ADD_ORDER): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_ADD_ORDER): {
+            return {
+                ...state,
+                resAddOrder: action.payload.data
+            }
+        }
         default:
             return state;
     }
@@ -109,6 +129,13 @@ export const reListOrderBySche = (idSche) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_LIST_ORDER_BY_SCHE,
         payload: axios.get(API_LIST_ORDER_BY_SCHE+idSche)
+    });
+    return result;
+};
+export const reAddOrder = (form) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_ADD_ORDER,
+        payload: axios.post(API_ORDER, form)
     });
     return result;
 };

@@ -199,7 +199,7 @@ export default (state = initialState, action) => {
         case SUCCESS(ACTION_TYPES.API_DETAIL_SCHE): {
             return {
                 ...state,
-                resDetailSche: action.payload.data.list
+                resDetailSche: action.payload.data
             }
         }
         // list date sche

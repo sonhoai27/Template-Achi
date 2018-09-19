@@ -5,7 +5,7 @@ class NotifyDanger extends React.Component {
     }
     render() {
         return (
-            <div className="jq-toast-single jq-has-icon jq-icon-danger"
+            <div className="jq-toast-single jq-has-icon jq-icon-error"
                  style={{textAlign: 'left', display: 'block'}}>
                 <h2 className="jq-toast-heading">
                     Thất bại, vui lòng xem lại hành động vừa thực hiện.

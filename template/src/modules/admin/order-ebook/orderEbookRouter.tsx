@@ -35,6 +35,14 @@ class OrderEbookRouter extends React.Component<Props, {}> {
               path={`${this.props.match.url}`}
               component={orderEbook}
             />
+            <Route
+              path={`${this.props.match.url}/package`}
+              component={orderEbook}
+            />
+            <Route
+              path={`${this.props.match.url}/package/add`}
+              component={orderEbook}
+            />
           </div>
         </div>
       </>
