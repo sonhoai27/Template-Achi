@@ -4,11 +4,14 @@ import { reListContentUISource } from "./reSource";
 import ListElementDetailUISource from "./detail-ui/detail-ui";
 import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
+import { reIsDanger, reIsSuccess } from "../../../reducers/init";
 interface Props {
-  match: any,
-  resListContentUISource: any,
-  resAddUpdateContentElement: any,
-  reListContentUISource: (idUI: number, idSource: number)=> void
+  match: any;
+  resListContentUISource: any;
+  resAddUpdateContentElement: any;
+  reListContentUISource: (idUI: number, idSource: number)=> void;
+  reIsSuccess: (status: boolean) => void;
+  reIsDanger: (status: boolean) => void;
 }
 class AddContentUISource extends React.Component<Props, {}> {
   constructor(props) {
@@ -65,7 +68,9 @@ const mapStateToProps = storeState => ({
   resAddUpdateContentElement: storeState.reUI.resAddUpdateContentElement
 });
 const mapDispatchToProps = {
-  reListContentUISource
+  reListContentUISource,
+  reIsDanger,
+  reIsSuccess
 };
 export default connect(
   mapStateToProps,

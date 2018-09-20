@@ -1,23 +1,25 @@
 import * as React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { connect } from "react-redux";
-import { reShowPhotoApp, reSetCurrentEditorPhoto } from "../../../reducers/init";
+import { reShowPhotoApp, reSetCurrentEditorPhoto, reIsDanger, reIsSuccess } from "../../../reducers/init";
 import { reDetailBlog, reUpdateBlog, reListAuthor, reListCategory, reListStatus } from "./reBlog";
 
 interface Props {
-  match?: any,
-  reSetCurrentEditorPhoto: (editor: any)=> void,
-  reShowPhotoApp: (status: boolean)=> void,
-  resDetailBlog: any,
-  resUpdateBlog: any,
-  reDetailBlog: (idBlog: string)=> void,
-  reUpdateBlog: (form: any, idBlog: string)=> void,
-  resListCategory: any,
-  resListAuthor: any,
-  reListCategory: ()=> void,
-  reListAuthor: ()=> void,
-  reListStatus: ()=> void,
-  resListStatus: any
+  match?: any;
+  reSetCurrentEditorPhoto: (editor: any)=> void;
+  reShowPhotoApp: (status: boolean)=> void;
+  resDetailBlog: any;
+  resUpdateBlog: any;
+  reDetailBlog: (idBlog: string)=> void;
+  reUpdateBlog: (form: any, idBlog: string)=> void;
+  resListCategory: any;
+  resListAuthor: any;
+  reListCategory: ()=> void;
+  reListAuthor: ()=> void;
+  reListStatus: ()=> void;
+  resListStatus: any;
+  reIsSuccess: (status: boolean) => void;
+  reIsDanger: (status: boolean) => void;
 }
 interface State {
   blog_id_category: number,
@@ -67,6 +69,18 @@ class BlogDetail extends React.Component<Props, State> {
     }
     if(preProps.resUpdateBlog != this.props.resUpdateBlog){
       this.props.reDetailBlog(this.props.match.params.idBlog)
+
+      if (this.props.resUpdateBlog.status === 200) {
+        this.props.reIsSuccess(true);
+        setTimeout(() => {
+          this.props.reIsSuccess(false);
+        }, 2000);
+      } else {
+        this.props.reIsDanger(true);
+        setTimeout(() => {
+          this.props.reIsDanger(false);
+        }, 2000);
+      }
     }
   }
   renderListAuthor = ()=> {
@@ -128,6 +142,7 @@ class BlogDetail extends React.Component<Props, State> {
                       <input
                         onChange={this.onChange}
                         type="text"
+                        name="blog_title"
                         className="form-control"
                         defaultValue={this.state.blog_title}
                       />
@@ -141,6 +156,7 @@ class BlogDetail extends React.Component<Props, State> {
                       <input
                         onChange={this.onChange}
                         type="text"
+                        name="blog_promo"
                         className="form-control"
                         defaultValue={this.state.blog_promo}
                       />
@@ -216,7 +232,7 @@ class BlogDetail extends React.Component<Props, State> {
                   <div className="form-group">
                     <label className="col-sm-12">Tác giả</label>
                     <div className="col-sm-12">
-                      <select onChange={this.onChange} className="form-control">
+                      <select onChange={this.onChange} name="blog_id_author" className="form-control">
                         <option>Chọn</option>
                         {this.renderListAuthor()}
                       </select>
@@ -225,7 +241,7 @@ class BlogDetail extends React.Component<Props, State> {
                   <div className="form-group">
                     <label className="col-sm-12">Danh mục</label>
                     <div className="col-sm-12">
-                      <select onChange={this.onChange} className="form-control">
+                      <select onChange={this.onChange} name="blog_id_category" className="form-control">
                         <option>Chọn</option>
                         {this.renderListCategory()}
                       </select>
@@ -257,7 +273,9 @@ const mapDispatchToProps = {
   reDetailBlog,
   reListCategory,
   reListAuthor,
-  reListStatus
+  reListStatus,
+  reIsDanger,
+  reIsSuccess
 };
 export default connect(
   mapStateToProps,

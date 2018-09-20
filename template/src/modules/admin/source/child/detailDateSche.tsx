@@ -2,12 +2,15 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Editor } from "@tinymce/tinymce-react";
 import { reUpdateDateSche, reListDateSche } from "../reSource";
+import { reIsDanger, reIsSuccess } from "../../../../reducers/init";
 interface Props {
-    onclick: any,
-    dateSche: any,
+    onclick: any;
+    dateSche: any;
     resUpdateDateSche: any;
-    reUpdateDateSche: (form: any, id: number) => void,
-    reListDateSche: (id: number)=> void
+    reUpdateDateSche: (form: any, id: number) => void;
+    reListDateSche: (id: number)=> void;
+    reIsSuccess: (status: boolean) => void;
+    reIsDanger: (status: boolean) => void;
 }
 interface State {
     date_source_time: string;
@@ -121,7 +124,9 @@ const mapStateToProps = storeState => ({
 });
 const mapDispatchToProps = {
     reUpdateDateSche,
-    reListDateSche
+    reListDateSche,
+    reIsDanger,
+    reIsSuccess
 };
 export default connect(
   mapStateToProps,

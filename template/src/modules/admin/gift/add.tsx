@@ -2,7 +2,7 @@ import * as React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { connect } from "react-redux";
 import { IGiftModel } from "../../../models/gift";
-import { reSetCurrentEditorPhoto, reShowPhotoApp } from "../../../reducers/init";
+import { reSetCurrentEditorPhoto, reShowPhotoApp, reIsDanger, reIsSuccess } from "../../../reducers/init";
 import { reAddGift } from "./reGift";
 interface IState {
   gift: IGiftModel
@@ -12,6 +12,8 @@ interface IProps {
   reAddGift: (form: IGiftModel) => void;
   reSetCurrentEditorPhoto: (editor: any)=> void;
   reShowPhotoApp: (status: boolean)=> void;
+  reIsSuccess: (status: boolean) => void;
+  reIsDanger: (status: boolean) => void;
 
 }
 class GiftAdd extends React.Component<IProps, IState> {
@@ -164,7 +166,9 @@ const mapStateToProps = storeState => ({
 const mapDispatchToProps = {
   reSetCurrentEditorPhoto,
   reShowPhotoApp,
-  reAddGift
+  reAddGift,
+  reIsDanger,
+  reIsSuccess
 };
 export default connect(
   mapStateToProps,

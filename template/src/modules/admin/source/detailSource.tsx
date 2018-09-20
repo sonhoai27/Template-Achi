@@ -3,7 +3,9 @@ import { Editor } from "@tinymce/tinymce-react";
 import { connect } from "react-redux";
 import {
   reShowPhotoApp,
-  reSetCurrentEditorPhoto
+  reSetCurrentEditorPhoto,
+  reIsDanger,
+  reIsSuccess
 } from "../../../reducers/init";
 import { reListUI } from "../ui/reUI";
 // declare var $: any;
@@ -19,6 +21,8 @@ interface Props {
   reListUI: () => void;
   resDetailSource: any;
   reDetailSource: (id: number) => void;
+  reIsSuccess: (status: boolean) => void;
+  reIsDanger: (status: boolean) => void;
 }
 
 interface State {
@@ -294,7 +298,9 @@ const mapDispatchToProps = {
   reShowPhotoApp,
   reListUI,
   reUpdateSource,
-  reDetailSource
+  reDetailSource,
+  reIsDanger,
+  reIsSuccess
 };
 export default connect(
   mapStateToProps,

@@ -2,20 +2,23 @@ import * as React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { BASEURLADMIN } from "../../../config/const";
 import { connect } from "react-redux";
-import { reShowPhotoApp, reSetCurrentEditorPhoto } from "../../../reducers/init";
+import { reShowPhotoApp, reSetCurrentEditorPhoto, reIsDanger, reIsSuccess } from "../../../reducers/init";
 import { reAddBlog, reListStatus, reListAuthor, reListCategory } from "./reBlog";
 import { alias } from "../../../utils/alias";
 interface Props {
-  reSetCurrentEditorPhoto: (editor: any)=> void,
-  reShowPhotoApp: (status: boolean)=> void,
-  reAddBlog: (form: any)=> void,
-  resAddBlog: any,
-  resListCategory: any,
-  resListAuthor: any,
-  reListCategory: ()=> void,
-  reListAuthor: ()=> void,
-  reListStatus: ()=> void,
-  resListStatus: any
+  match: any;
+  reSetCurrentEditorPhoto: (editor: any)=> void;
+  reShowPhotoApp: (status: boolean)=> void;
+  reAddBlog: (form: any)=> void;
+  resAddBlog: any;
+  resListCategory: any;
+  resListAuthor: any;
+  reListCategory: ()=> void;
+  reListAuthor: ()=> void;
+  reListStatus: ()=> void;
+  resListStatus: any;
+  reIsSuccess: (status: boolean) => void;
+  reIsDanger: (status: boolean) => void;
 }
 interface State {
   blog_id_category: number,
@@ -46,7 +49,19 @@ class BlogAdd extends React.Component<Props, State> {
   }
   componentDidUpdate(preProps){
     if(preProps.resAddBlog != this.props.resAddBlog){
-      console.log(this.props.resAddBlog)
+      if (this.props.resAddBlog.status === 200) {
+        this.props.reIsSuccess(true);
+        setTimeout(() => {
+          this.props.reIsSuccess(false);
+          window.location.href = BASEURLADMIN+'blog'
+        }, 2000);
+      } else {
+        this.props.reIsDanger(true);
+        setTimeout(() => {
+          this.props.reIsDanger(false);
+          window.location.href = BASEURLADMIN+'blog'
+        }, 2000);
+      }
     }
   }
   onChange = (e: any)=> {
@@ -265,7 +280,9 @@ const mapDispatchToProps = {
   reAddBlog,
   reListCategory,
   reListAuthor,
-  reListStatus
+  reListStatus,
+  reIsDanger,
+  reIsSuccess
 };
 export default connect(
   mapStateToProps,

@@ -3,12 +3,15 @@ import { connect } from "react-redux";
 import {reDetailSche, reUpdateSche } from "../reSource";
 import ListDateSche from "./listDateSche";
 import AddDateSche from "./addDateSche";
+import { reIsDanger, reIsSuccess } from "../../../../reducers/init";
 interface Props {
-    match: any,
-    reDetailSche: (id: any)=> void,
-    reUpdateSche: (form: any, id: number) => void,
-    resDetailSche: any,
-    resUpdateSche: any,
+    match: any;
+    reDetailSche: (id: any)=> void;
+    reUpdateSche: (form: any, id: number) => void;
+    resDetailSche: any;
+    resUpdateSche: any;
+    reIsSuccess: (status: boolean) => void;
+    reIsDanger: (status: boolean) => void;
 
 }
 interface State {
@@ -215,7 +218,9 @@ const mapStateToProps = storeState => ({
 });
 const mapDispatchToProps = {
     reDetailSche,
-    reUpdateSche
+    reUpdateSche,
+    reIsDanger,
+    reIsSuccess
 };
 export default connect(
     mapStateToProps,

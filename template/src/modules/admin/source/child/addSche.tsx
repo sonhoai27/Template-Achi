@@ -1,10 +1,13 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { reAddSche } from "../reSource";
+import { reIsDanger, reIsSuccess } from "../../../../reducers/init";
 interface Props {
-    match: any,
-    resAddSche: any,
-    reAddSche: (form: any)=> void
+    match: any;
+    resAddSche: any;
+    reAddSche: (form: any)=> void;
+    reIsSuccess: (status: boolean) => void;
+    reIsDanger: (status: boolean) => void;
 }
 interface State {
     source_sche_number: number,
@@ -169,7 +172,9 @@ const mapStateToProps = storeState => ({
     resAddSche: storeState.reSource.resAddSche
 });
 const mapDispatchToProps = {
-    reAddSche
+    reAddSche,
+    reIsDanger,
+    reIsSuccess
 };
 export default connect(
     mapStateToProps,

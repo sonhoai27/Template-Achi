@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { connect } from "react-redux";
-import { reSetCurrentEditorPhoto, reShowPhotoApp } from "../../../reducers/init";
+import { reSetCurrentEditorPhoto, reShowPhotoApp, reIsDanger, reIsSuccess } from "../../../reducers/init";
 import { IGiftModel } from "../../../models/gift";
 import { reDetailGift, reUpdateGift } from "./reGift";
 
@@ -12,6 +12,8 @@ interface IProps {
   reUpdateGift: (form: IGiftModel, idGift: number) => void;
   reSetCurrentEditorPhoto: (editor: any)=> void;
   reShowPhotoApp: (status: boolean)=> void;
+  reIsSuccess: (status: boolean) => void;
+  reIsDanger: (status: boolean) => void;
   resDetailGift: {
     list: IGiftModel
   }
@@ -191,7 +193,9 @@ const mapDispatchToProps = {
   reSetCurrentEditorPhoto,
   reShowPhotoApp,
   reDetailGift,
-  reUpdateGift
+  reUpdateGift,
+  reIsDanger,
+  reIsSuccess
 };
 export default connect(
   mapStateToProps,

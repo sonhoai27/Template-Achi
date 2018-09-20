@@ -8,6 +8,7 @@ import {
 } from "./reUI";
 import { connect } from "react-redux";
 import ListElementOnDetailUI from "./detail-ui/detail-ui";
+import { reIsDanger, reIsSuccess } from "../../../reducers/init";
 interface Props {
   match?: any;
   resDetailUI: any;
@@ -19,6 +20,8 @@ interface Props {
   reSetCurrentMatchDetailUI: (match: any) => void;
   reShowListElement: (status: boolean) => void;
   reSetCurrentIdElement: (id: any) => void;
+  reIsSuccess: (status: boolean) => void;
+  reIsDanger: (status: boolean) => void;
 }
 class AddUIDetail extends React.Component<Props, {}> {
   constructor(props) {
@@ -83,7 +86,9 @@ const mapDispatchToProps = {
   reDetailUI,
   reShowListElement,
   reSetCurrentIdElement,
-  reSetCurrentMatchDetailUI
+  reSetCurrentMatchDetailUI,
+  reIsDanger,
+  reIsSuccess
 };
 export default connect(
   mapStateToProps,
