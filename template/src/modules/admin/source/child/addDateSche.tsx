@@ -2,11 +2,15 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { reAddDateSche, reListDateSche } from "../reSource";
 import { Editor } from "@tinymce/tinymce-react";
+import { reIsDanger, reIsSuccess } from "../../../../reducers/init";
+import { BASEURLADMIN } from "../../../../config/const";
 interface Props {
     currentIdSche: any,
     resAddDateSche: any;
     reAddDateSche: (form: any) => void;
-    reListDateSche: (id: any)=> void
+    reListDateSche: (id: any)=> void;
+    reIsSuccess: (status: boolean) => void;
+    reIsDanger: (status: boolean) => void;
 }
 interface State {
     date_source_time: string;
@@ -23,8 +27,17 @@ class AddDateSche extends React.Component<Props, State> {
   componentWillReceiveProps(nextProps){
       if(nextProps.resAddDateSche != this.props.reAddDateSche){
           if(nextProps.resAddDateSche.status === 200){
-              alert('Ok')
-              this.props.reListDateSche(this.props.currentIdSche)
+            this.props.reIsSuccess(true);
+            setTimeout(() => {
+              this.props.reIsSuccess(false);
+              window.location.href = BASEURLADMIN+'source/detail-sche/'+this.props.currentIdSche
+            }, 2000);
+          } else {
+            this.props.reIsDanger(true);
+            setTimeout(() => {
+              this.props.reIsDanger(false);
+              window.location.href = BASEURLADMIN+'source/detail-sche/'+this.props.currentIdSche
+            }, 2000);
           }
       }
   }
@@ -120,7 +133,9 @@ const mapStateToProps = storeState => ({
 });
 const mapDispatchToProps = {
     reAddDateSche,
-    reListDateSche
+    reListDateSche,
+    reIsDanger,
+    reIsSuccess
 };
 export default connect(
   mapStateToProps,

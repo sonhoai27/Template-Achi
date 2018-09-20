@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { reIsDanger, reIsSuccess } from "../../../reducers/init";
+import { reIsDanger, reIsSuccess, reIsLoading } from "../../../reducers/init";
 import DatePicker from 'react-date-picker';
 import Helmet from "react-helmet";
 import { IOrderSourceModel } from "../../../models/orderSource";
@@ -20,6 +20,8 @@ interface IProps {
   match: any;
   reIsSuccess: (status: boolean) => void;
   reIsDanger: (status: boolean) => void;
+  reIsLoading: (status: boolean)=>void;
+  isLoading: any;
 }
 class ClientOrderSource extends React.Component<IProps, IState> {
   constructor(props) {
@@ -60,6 +62,7 @@ class ClientOrderSource extends React.Component<IProps, IState> {
         this.props.reIsSuccess(true);
         setTimeout(() => {
           this.props.reIsSuccess(false);
+          this.props.reIsLoading(!this.props.isLoading)
           window.location.href = BASEURL+'page/khoa-hoc/dang-ky/'+this.props.match.params.idSche
         }, 2000);
       } else {
@@ -80,17 +83,19 @@ class ClientOrderSource extends React.Component<IProps, IState> {
     });
   };
   addOrder = () => {
+    this.props.reIsLoading(!this.props.isLoading)
    if(
      !this.validateEmail(this.state.order.source_order_email)
-     && this.state.order.source_order_email === ""
-     && this.state.order.source_order_ten === ""
-     && this.state.order.source_order_ho === ""
-     && this.state.order.source_order_number_phone === ""
-     && this.state.order.source_order_gender === ""
+     || this.state.order.source_order_email === ""
+     || this.state.order.source_order_ten === ""
+     || this.state.order.source_order_ho === ""
+     || this.state.order.source_order_number_phone === ""
+     || this.state.order.source_order_gender === ""
     ){
       this.props.reIsDanger(true);
       setTimeout(() => {
         this.props.reIsDanger(false);
+        this.props.reIsLoading(!this.props.isLoading)
       }, 2000);
    }else {
     this.props.reAddOrder(this.state.order)
@@ -336,13 +341,15 @@ class ClientOrderSource extends React.Component<IProps, IState> {
 
 const mapStateToProps = storeState => ({
   resAddOrder: storeState.reOrder.resAddOrder,
-  resDetailSche: storeState.reSource.resDetailSche
+  resDetailSche: storeState.reSource.resDetailSche,
+  isLoading: storeState.reInit.isLoading
 });
 const mapDispatchToProps = {
   reIsDanger,
   reIsSuccess,
   reAddOrder,
-  reDetailSche
+  reDetailSche,
+  reIsLoading
 };
 export default connect(
   mapStateToProps,

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { IGiftModel } from "../../../models/gift";
 import { reSetCurrentEditorPhoto, reShowPhotoApp, reIsDanger, reIsSuccess } from "../../../reducers/init";
 import { reAddGift } from "./reGift";
+import { BASEURLADMIN } from "../../../config/const";
 interface IState {
   gift: IGiftModel
 }
@@ -46,6 +47,23 @@ class GiftAdd extends React.Component<IProps, IState> {
       ...tempGift,
       gift_cover: temDom.src
     })
+  }
+  componentDidUpdate(preProps){
+    if(this.props.resAddGift != preProps.resAddGift){
+      if (this.props.resAddGift.status === 200) {
+        this.props.reIsSuccess(true);
+        setTimeout(() => {
+          this.props.reIsSuccess(false);
+          window.location.href = BASEURLADMIN+'gift'
+        }, 2000);
+      } else {
+        this.props.reIsDanger(true);
+        setTimeout(() => {
+          this.props.reIsDanger(false);
+          window.location.href = BASEURLADMIN+'gift'
+        }, 2000);
+      }
+    }
   }
   render() {
     return (

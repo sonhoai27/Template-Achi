@@ -48,6 +48,21 @@ class GiftDetail extends React.Component<IProps, IState> {
         }
       })
     }
+    if(this.props.resUpdateGift != preProps.resUpdateGift){
+      if (this.props.resUpdateGift.status === 200) {
+        this.props.reIsSuccess(true);
+        setTimeout(() => {
+          this.props.reIsSuccess(false);
+          window.location.href = this.props.match.url
+        }, 2000);
+      } else {
+        this.props.reIsDanger(true);
+        setTimeout(() => {
+          this.props.reIsDanger(false);
+          window.location.href = this.props.match.url
+        }, 2000);
+      }
+    }
   }
   componentDidMount(){
     this.props.reDetailGift(this.props.match.params.idGift)

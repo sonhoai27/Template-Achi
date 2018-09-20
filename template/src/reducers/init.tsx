@@ -11,7 +11,8 @@ export const ACTION_TYPES = {
     IS_DANGER: 'ReInit/IS_DANGER',
     IS_SUCCESS: 'ReInit/IS_SUCCESS',
     API_CHECK_LOGIN: 'ReInit/API_CHECK_LOGIN',
-    API_LOGIN: 'ReInit/API_LOGIN'
+    API_LOGIN: 'ReInit/API_LOGIN',
+    IS_LOADING: 'ReInit/IS_LOADING'
 }
 const initialState = {
     resListImage: [],
@@ -22,7 +23,8 @@ const initialState = {
     isSuccess: false,
     isDanger: false,
     resLogin: {},
-    resCheckLogin: {}
+    resCheckLogin: {},
+    isLoading: false
 
 }
 export default (state = initialState, action) => {
@@ -102,6 +104,12 @@ export default (state = initialState, action) => {
                 isSuccess: action.payload
             }
         }
+        case (ACTION_TYPES.IS_LOADING): {
+            return {
+                ...state,
+                isLoading: action.payload
+            }
+        }
         // check login
         case REQUEST(ACTION_TYPES.API_CHECK_LOGIN): {
             return {
@@ -169,6 +177,13 @@ export const reIsDanger = (status) => async dispatch => {
 export const reIsSuccess = (status) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.IS_SUCCESS,
+        payload: status
+    });
+    return result;
+};
+export const reIsLoading = (status) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.IS_LOADING,
         payload: status
     });
     return result;

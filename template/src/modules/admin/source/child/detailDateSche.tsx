@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Editor } from "@tinymce/tinymce-react";
 import { reUpdateDateSche, reListDateSche } from "../reSource";
 import { reIsDanger, reIsSuccess } from "../../../../reducers/init";
+import { BASEURLADMIN } from "../../../../config/const";
 interface Props {
     onclick: any;
     dateSche: any;
@@ -28,8 +29,17 @@ class DetailDateSche extends React.Component<Props, State> {
   componentWillReceiveProps(nextProps){
       if(nextProps.resUpdateDateSche != this.props.resUpdateDateSche){
           if(nextProps.resUpdateDateSche.status === 200){
-              alert('Ok')
-              this.props.reListDateSche(this.props.dateSche.idSche)
+              this.props.reIsSuccess(true);
+            setTimeout(() => {
+              this.props.reIsSuccess(false);
+              window.location.href = BASEURLADMIN+'source/detail-sche/'+this.props.dateSche.idSche
+            }, 2000);
+          } else {
+            this.props.reIsDanger(true);
+            setTimeout(() => {
+              this.props.reIsDanger(false);
+              window.location.href = BASEURLADMIN+'source/detail-sche/'+this.props.dateSche.idSche
+            }, 2000);
           }
       }
   }

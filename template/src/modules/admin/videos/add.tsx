@@ -1,12 +1,15 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { reSetCurrentEditorPhoto, reShowPhotoApp } from "../../../reducers/init";
+import { reSetCurrentEditorPhoto, reShowPhotoApp, reIsSuccess, reIsDanger } from "../../../reducers/init";
 import { reAddVideo } from "./reVideos";
+import { BASEURLADMIN } from "../../../config/const";
 interface Props {
-  reSetCurrentEditorPhoto: (editor: any)=> void,
-  reShowPhotoApp: (status: boolean)=> void,
-  resAddVideo: any,
-  reAddVideo: (form: any)=> void
+  reSetCurrentEditorPhoto: (editor: any)=> void;
+  reShowPhotoApp: (status: boolean)=> void;
+  resAddVideo: any;
+  reAddVideo: (form: any)=> void;
+  reIsSuccess: (status: boolean) => void;
+  reIsDanger: (status: boolean) => void;
 }
 interface State {
   video_name: string,
@@ -22,6 +25,23 @@ class VideoAdd extends React.Component<Props, State> {
       video_uri: '',
       video_cover: '',
       video_status: 0
+    }
+  }
+  componentDidUpdate(preProps){
+    if(preProps.resAddBlog != this.props.resAddVideo){
+      if (this.props.resAddVideo.status === 200) {
+        this.props.reIsSuccess(true);
+        setTimeout(() => {
+          this.props.reIsSuccess(false);
+          window.location.href = BASEURLADMIN+'video'
+        }, 2000);
+      } else {
+        this.props.reIsDanger(true);
+        setTimeout(() => {
+          this.props.reIsDanger(false);
+          window.location.href = BASEURLADMIN+'video'
+        }, 2000);
+      }
     }
   }
   onChange = (e: any)=> {
@@ -116,7 +136,9 @@ const mapStateToProps = storeState => ({
 const mapDispatchToProps = {
   reSetCurrentEditorPhoto,
   reShowPhotoApp,
-  reAddVideo
+  reAddVideo,
+  reIsDanger,
+  reIsSuccess
 };
 export default connect(
   mapStateToProps,

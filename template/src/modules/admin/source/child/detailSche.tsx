@@ -55,6 +55,23 @@ class DetailSche extends React.Component<Props, State> {
             })
         }
     }
+    componentDidUpdate(preProps){
+        if(preProps.resUpdateSche != this.props.resUpdateSche){
+            if (this.props.resUpdateSche.status === 200) {
+                this.props.reIsSuccess(true);
+                setTimeout(() => {
+                  this.props.reIsSuccess(false);
+                  window.location.href = this.props.match.url
+                }, 2000);
+              } else {
+                this.props.reIsDanger(true);
+                setTimeout(() => {
+                  this.props.reIsDanger(false);
+                  window.location.href = this.props.match.url
+                }, 2000);
+              }
+        }
+    }
     componentDidMount(){
         this.props.reDetailSche(this.props.match.params.idSche)
     }

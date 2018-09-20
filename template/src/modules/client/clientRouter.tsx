@@ -9,11 +9,13 @@ import EbookLadingPage from "./ebook/ebook";
 import { connect } from "react-redux";
 import NotifySuccess from "../shared/notifySuccess";
 import NotifyDanger from "../shared/notifyDanger";
+import Loading from "../admin/shared/loading";
 
 interface Props {
     match?: any;
     isDanger: boolean;
     isSuccess: boolean;
+    isLoading: boolean
 }   
 class ClientRouter extends React.Component<Props, {}> {
     constructor(props) {
@@ -41,6 +43,7 @@ class ClientRouter extends React.Component<Props, {}> {
                     {this.props.isSuccess ? <NotifySuccess/> : ''}
                     {this.props.isDanger ? <NotifyDanger/> : ''}
                 </div>
+                {this.props.isLoading ? <Loading/> : ''}
             </div>
         );
     }
@@ -48,7 +51,8 @@ class ClientRouter extends React.Component<Props, {}> {
 
 const mapStateToProps = storeState => ({
     isSuccess: storeState.reInit.isSuccess,
-    isDanger: storeState.reInit.isDanger
+    isDanger: storeState.reInit.isDanger,
+    isLoading: storeState.reInit.isLoading
   });
   const mapDispatchToProps = {
   };

@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { reDetailVideo, reUpdateVideo } from "./reVideos";
 import { IVideoModel } from "../../../models/video";
-import { reSetCurrentEditorPhoto, reShowPhotoApp } from "../../../reducers/init";
+import { reSetCurrentEditorPhoto, reShowPhotoApp, reIsSuccess, reIsDanger } from "../../../reducers/init";
 interface IProps {
   match: any;
   resDetailVideo: IVideoModel;
@@ -11,6 +11,8 @@ interface IProps {
   reUpdateVideo: (form: IVideoModel, idVideo: number) => void;
   reSetCurrentEditorPhoto: (editor: any)=> void;
   reShowPhotoApp: (status: boolean)=> void;
+  reIsSuccess: (status: boolean) => void;
+  reIsDanger: (status: boolean) => void;
 }
 interface IState {
   video: IVideoModel
@@ -38,7 +40,22 @@ class VideoDetail extends React.Component<IProps, IState> {
           video_cover: this.props.resDetailVideo.video_cover,
           video_status: this.props.resDetailVideo.video_status
         }
-      })
+      })      
+    }
+    if(this.props.resUpdateVideo != preProps.resUpdateVideo){
+      if (this.props.resUpdateVideo.status === 200) {
+        this.props.reIsSuccess(true);
+        setTimeout(() => {
+          this.props.reIsSuccess(false);
+          window.location.href = this.props.match.url
+        }, 2000);
+      } else {
+        this.props.reIsDanger(true);
+        setTimeout(() => {
+          this.props.reIsDanger(false);
+          window.location.href = this.props.match.url
+        }, 2000);
+      }
     }
   }
   componentDidMount(){
@@ -142,7 +159,9 @@ const mapDispatchToProps = {
   reDetailVideo,
   reUpdateVideo,
   reSetCurrentEditorPhoto,
-  reShowPhotoApp
+  reShowPhotoApp,
+  reIsDanger,
+  reIsSuccess
 };
 export default connect(
   mapStateToProps,

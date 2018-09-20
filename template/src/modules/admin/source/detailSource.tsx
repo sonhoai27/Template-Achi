@@ -12,6 +12,7 @@ import { reListUI } from "../ui/reUI";
 import { reUpdateSource, reDetailSource } from "./reSource";
 import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
+import { alias } from "../../../utils/alias";
 // import { alias } from "../../../utils/alias";
 interface Props {
   match?: any;
@@ -20,9 +21,11 @@ interface Props {
   resListUI: any;
   reListUI: () => void;
   resDetailSource: any;
+  resUpdateSource: any;
   reDetailSource: (id: number) => void;
   reIsSuccess: (status: boolean) => void;
   reIsDanger: (status: boolean) => void;
+  reUpdateSource: (form, id)=> void
 }
 
 interface State {
@@ -59,6 +62,21 @@ class DetailSource extends React.Component<Props, State> {
         }
       });
     }
+    if(this.props.resUpdateSource != nextProps.resUpdateSource){
+      if (nextProps.resUpdateSource.status === 200) {
+        this.props.reIsSuccess(true);
+        setTimeout(() => {
+          this.props.reIsSuccess(false);
+          this.props.reDetailSource(this.props.match.params.id);
+        }, 2000);
+      } else {
+        this.props.reIsDanger(true);
+        setTimeout(() => {
+          this.props.reIsDanger(false);
+          this.props.reDetailSource(this.props.match.params.id);
+        }, 2000);
+      }
+    }
   }
   componentDidMount() {
     this.props.reListUI();
@@ -84,17 +102,16 @@ class DetailSource extends React.Component<Props, State> {
     return "";
   };
   saveSource = () => {
-    // const tempDomImage: any = document.getElementById('img-cover-blog-preview')
-    // this.props.reAddSource({
-    //   ...this.state.source,
-    //   source_alias: alias(this.state.source.source_title),
-    //   source_cover: tempDomImage.src
-    // })
+    const tempDomImage: any = document.getElementById('img-cover-blog-preview')
+    this.props.reUpdateSource({
+      ...this.state.source,
+      source_alias: alias(this.state.source.source_title),
+      source_cover: tempDomImage.src
+    },this.props.match.params.id)
   };
   onChange = (e: any) => {
     const name = e.target.name;
     const value = e.target.value;
-    // @ts-ignore
     this.setState({
       source: {
         ...this.state.source,
@@ -178,13 +195,25 @@ class DetailSource extends React.Component<Props, State> {
                       <Editor
                         initialValue={this.state.source.source_content}
                         onChange={(e: any) => {
-                          // @ts-ignore
-                          this.setState({
-                            source: {
-                              ...this.state.source,
-                              source_content: e.level.content
-                            }
-                          });
+                          if(e.level.content === null || e.level.content === ""){
+                            let temp = "";
+                            (e.level.fragments).forEach(element => {
+                                temp +=element
+                            });
+                            this.setState({
+                              source: {
+                                ...this.state.source,
+                              source_content: temp
+                              }
+                            })
+                          }else {
+                            this.setState({
+                              source: {
+                                ...this.state.source,
+                                source_content: e.level.content
+                              }
+                            })
+                          }
                         }}
                         apiKey="t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl"
                         init={{

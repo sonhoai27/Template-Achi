@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { reAddSche } from "../reSource";
 import { reIsDanger, reIsSuccess } from "../../../../reducers/init";
+import { BASEURLADMIN } from "../../../../config/const";
 interface Props {
     match: any;
     resAddSche: any;
@@ -44,6 +45,23 @@ class AddSche extends React.Component<Props, State> {
             ...this.state,
             source_sche_id_source: this.props.match.params.idSource
         })
+    }
+    componentDidUpdate(preProps){
+        if(preProps.resAddSche != this.props.resAddSche){
+            if (this.props.resAddSche.status === 200) {
+                this.props.reIsSuccess(true);
+                setTimeout(() => {
+                  this.props.reIsSuccess(false);
+                  window.location.href = BASEURLADMIN+'source/list-sche/'+this.props.match.params.idSource
+                }, 2000);
+              } else {
+                this.props.reIsDanger(true);
+                setTimeout(() => {
+                  this.props.reIsDanger(false);
+                  window.location.href = BASEURLADMIN+'source/list-sche/'+this.props.match.params.idSource
+                }, 2000);
+              }
+        }
     }
     render() {
         return (
