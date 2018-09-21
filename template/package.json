@@ -14,6 +14,7 @@
         "rc-collapse": "^1.10.0",
         "react": "^16.4.2",
         "react-ace": "^6.1.4",
+        "react-color": "^2.14.1",
         "react-date-picker": "^6.12.1",
         "react-dom": "^16.4.2",
         "react-helmet": "^5.2.0",
