@@ -22,7 +22,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1000;
+    z-index: 3000;
     -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     margin: auto;
@@ -98,7 +98,7 @@ body {
     background: #fff;
     overflow: hidden;
     display: none;
-    z-index: 1010;
+    z-index: 3010;
 }
 
 .photo-app-context-menu p {
@@ -114,7 +114,9 @@ body {
     background: #333;
     color: #fff;
 }
-
+#upload-image {
+    z-index: 3050;
+}
 
 /* blog */
 

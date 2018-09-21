@@ -4,6 +4,7 @@ import { reListCategory } from "../reBlog";
 import Header from "../../shared/header";
 import BreadCrumd from "../../shared/breadcrumb";
 import DetailCategory from "./detailCategory";
+import AddCategory from "./addCategory";
 interface IProps {
   reListCategory: () => void;
   resListCategory: any;
@@ -46,6 +47,11 @@ class Category extends React.Component<IProps, IState> {
       })
     })
   }
+  hiddenModalAdd = ()=> {
+    this.setState({
+      isShowingModalAdd: !this.state.isShowingModalAdd
+    })
+  }
   renderListCategory = () => {
     if(this.props.resListCategory.list){
       return this.props.resListCategory.list.map(element => {
@@ -81,7 +87,11 @@ class Category extends React.Component<IProps, IState> {
                   <div className="panel-toolbar">
                     <div className="panel-heading">Danh sách category</div>
                     <div className="panel-action-bar">
-                      <div className="btn btn-xs btn-info">Thêm mới</div>
+                      <div className="btn btn-xs btn-info" onClick={()=> {
+                        this.setState({
+                          isShowingModalAdd: !this.state.isShowingModalAdd
+                        })
+                      }}>Thêm mới</div>
                     </div>
                   </div>
                   <div className="content">
@@ -106,7 +116,10 @@ class Category extends React.Component<IProps, IState> {
           </div>
         </div>
         {
-          this.state.isShowingModalDetail ? <DetailCategory isShowingModal={this.hiddenModalDetail}/> : ''
+          this.state.isShowingModalDetail ? <DetailCategory category={this.state.currentCategory} isShowingModal={this.hiddenModalDetail}/> : ''
+        }
+        {
+          this.state.isShowingModalAdd ? <AddCategory category={this.state.currentCategory} isShowingModal={this.hiddenModalAdd}/> : ''
         }
       </>
     );

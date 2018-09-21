@@ -139,6 +139,41 @@ export default (state = initialState, action) => {
                 resUpdateBlog: action.payload.data
             }
         }
+
+         // update category 
+         case REQUEST(ACTION_TYPES.API_UPDATE_CATEGORY): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_UPDATE_CATEGORY): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_UPDATE_CATEGORY): {
+            return {
+                ...state,
+                resUpdateCategory: action.payload.data
+            }
+        }
+         // update auhtor 
+         case REQUEST(ACTION_TYPES.API_UPDATE_AUTHOR): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_UPDATE_AUTHOR): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_UPDATE_AUTHOR): {
+            return {
+                ...state,
+                resUpdateAuthor: action.payload.data
+            }
+        }
          // delete blog 
          case REQUEST(ACTION_TYPES.API_DELETE_BLOG): {
             return {
