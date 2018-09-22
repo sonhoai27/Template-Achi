@@ -125,14 +125,14 @@ class Header extends React.Component {
                     </a>
                   </li>
                   <li>
-                    <a href={BASEURLADMIN+'blog/add-author'}>
-                      <i className="fa-fw">B</i>
+                    <a href={BASEURLADMIN+'blog/author'}>
+                      <i className="fa-fw">A</i>
                       <span className="hide-menu">Tác giả</span>
                     </a>
                   </li>
                   <li>
-                    <a href={BASEURLADMIN+'blog/add-category'}>
-                      <i className="fa-fw">B</i>
+                    <a href={BASEURLADMIN+'blog/category'}>
+                      <i className="fa-fw">D</i>
                       <span className="hide-menu">Danh mục</span>
                     </a>
                   </li>
@@ -205,6 +205,29 @@ class Header extends React.Component {
                     <a href="javascript:void(0)" className="waves-effect">
                       <i className="ti-desktop fa-fw" />
                       <span className="hide-menu">Thêm mới</span>
+                    </a>
+                    </li>
+                  </ul>
+              </li>
+              <li className="last-nav">
+                <a href="javascript:void(0)" className="waves-effect">
+                  <i className="mdi mdi-apps fa-fw" />
+                  <span className="hide-menu">
+                    Ebook
+                    <span className="fa arrow" />
+                  </span>
+                </a>
+                <ul className="nav nav-second-level collapse">
+                  <li>
+                    <a href="chat.html">
+                      <i className="ti-comments-smiley fa-fw" />
+                      <span className="hide-menu">Danh sách đăng ký</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)" className="waves-effect">
+                      <i className="ti-desktop fa-fw" />
+                      <span className="hide-menu">Quản lý gói</span>
                     </a>
                     </li>
                   </ul>

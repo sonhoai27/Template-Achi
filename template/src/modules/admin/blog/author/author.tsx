@@ -1,35 +1,35 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { reListCategory } from "../reBlog";
-import DetailCategory from "./detailCategory";
-import AddCategory from "./addCategory";
+import { reListAuthor } from "../reBlog";
+import DetailAuthor from "./detailAuthor";
+import AddAuthor from "./addAuthor";
 interface IProps {
-  reListCategory: () => void;
-  resListCategory: any;
+  reListAuthor: () => void;
+  resListAuthor: any;
 }
 interface IState {
   isShowingModalDetail: boolean,
   isShowingModalAdd: boolean,
-  currentCategory: any
+  currentAuthor: any
 }
-class Category extends React.Component<IProps, IState> {
+class Author extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
       isShowingModalAdd: false,
       isShowingModalDetail: false,
-      currentCategory: {}
+      currentAuthor: {}
     }
   }
   componentDidMount() {
-    this.props.reListCategory();
+    this.props.reListAuthor();
   }
   hiddenModalDetail = ()=> {
     this.setState({
       isShowingModalDetail: !this.state.isShowingModalDetail
     }, ()=> {
       this.setState({
-        currentCategory: {}
+        currentAuthor: {}
       })
     })
   }
@@ -38,22 +38,21 @@ class Category extends React.Component<IProps, IState> {
       isShowingModalAdd: !this.state.isShowingModalAdd
     })
   }
-  renderListCategory = () => {
-    if(this.props.resListCategory.list){
-      return this.props.resListCategory.list.map(element => {
+  renderListAuthor = () => {
+    if(this.props.resListAuthor.list){
+      return this.props.resListAuthor.list.map(element => {
         return (
           <tr key={element.category_id}>
             <td onClick={()=> {
               this.setState({
-                currentCategory: element
+                currentAuthor: element
               }, ()=> {
                 this.setState({
                   isShowingModalDetail: !this.state.isShowingModalDetail
                 })
               })
-            }} role="row"><p>{element.category_name}</p></td>
-            <td>{element.category_icon}</td>
-            <td>{element.category_color}</td>
+            }} role="row"><p>{element.author_name}</p></td>
+            <td>{element.author_intro}</td>
         </tr>
         )
       })
@@ -67,7 +66,7 @@ class Category extends React.Component<IProps, IState> {
               <div className="col-md-8">
                 <div className="panel">
                   <div className="panel-toolbar">
-                    <div className="panel-heading">Danh sách category</div>
+                    <div className="panel-heading">Danh sách author</div>
                     <div className="panel-action-bar">
                       <div className="btn btn-xs btn-info" onClick={()=> {
                         this.setState({
@@ -82,12 +81,11 @@ class Category extends React.Component<IProps, IState> {
                       <thead>
                         <tr>
                           <th role="row">Tên</th>
-                          <th>Icon</th>
-                          <th>Mã màu</th>
+                          <th>Intro</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {this.renderListCategory()}
+                        {this.renderListAuthor()}
                       </tbody>
                     </table>
                   </div>
@@ -96,10 +94,10 @@ class Category extends React.Component<IProps, IState> {
               </div>
             </div>
         {
-          this.state.isShowingModalDetail ? <DetailCategory category={this.state.currentCategory} isShowingModal={this.hiddenModalDetail}/> : ''
+          this.state.isShowingModalDetail ? <DetailAuthor author={this.state.currentAuthor} isShowingModal={this.hiddenModalDetail}/> : ''
         }
         {
-          this.state.isShowingModalAdd ? <AddCategory category={this.state.currentCategory} isShowingModal={this.hiddenModalAdd}/> : ''
+          this.state.isShowingModalAdd ? <AddAuthor author={this.state.currentAuthor} isShowingModal={this.hiddenModalAdd}/> : ''
         }
       </>
     );
@@ -107,12 +105,12 @@ class Category extends React.Component<IProps, IState> {
 }
 
 const mapStateToProps = storeState => ({
-  resListCategory: storeState.reBlog.resListCategory
+  resListAuthor: storeState.reBlog.resListAuthor
 });
 const mapDispatchToProps = {
-  reListCategory
+  reListAuthor
 };
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Category);
+)(Author);

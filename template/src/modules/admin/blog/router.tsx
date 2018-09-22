@@ -5,6 +5,8 @@ import Header from "../shared/header";
 import BreadCrumd from "../shared/breadcrumb";
 import BlogList from "./list";
 import BlogDetail from "./detail";
+import Category from "./category/category";
+import Author from "./author/author";
 
 interface Props {
   match?: any;
@@ -39,6 +41,8 @@ class BlogRouter extends React.Component<Props, {}> {
             />
             <Route path={`${this.props.match.url}/add`} component={BlogAdd} />
             <Route path={`${this.props.match.url}/detail/:idBlog`} component={BlogDetail} />
+            <Route path={`${this.props.match.url}/category`} component={Category} />
+            <Route path={`${this.props.match.url}/author`} component={Author} />
           </div>
         </div>
       </>

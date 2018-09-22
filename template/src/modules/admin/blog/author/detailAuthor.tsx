@@ -1,5 +1,4 @@
 import * as React from "react";
-import { SketchPicker } from "react-color";
 import { connect } from "react-redux";
 import {
   reSetCurrentEditorPhoto,
@@ -7,46 +6,37 @@ import {
   reIsDanger,
   reIsSuccess
 } from "../../../../reducers/init";
-import { reUpdateCategory, reListCategory } from "../reBlog";
+import { reUpdateAuthor, reListAuthor } from "../reBlog";
 import { alias } from "../../../../utils/alias";
 interface IProps {
   isShowingModal: any;
   reSetCurrentEditorPhoto: (editor: any) => void;
   reShowPhotoApp: (status: boolean) => void;
-  category: any;
-  resUpdateCategory: any;
-  reUpdateCategory: (form, id)=> void;
+  author: any;
+  resUpdateAuthor: any;
+  reUpdateAuthor: (form, id)=> void;
   reIsSuccess: (status: boolean) => void;
   reIsDanger: (status: boolean) => void;
-  reListCategory: ()=> void;
+  reListAuthor: ()=> void;
 }
 interface IState {
-  category_id: number;
-  category_alias: string;
-  category_name: string;
-  category_color: string;
-  category_icon: string;
+  author_id: number;
+  author_intro: string;
+  author_name: string;
+  author_avatar: string;
+  author_alias: string;
 }
-class DetailCategory extends React.Component<IProps, IState> {
+class DetailAuthor extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      category_alias: this.props.category.category_alias,
-      category_id: this.props.category.category_id,
-      category_name: this.props.category.category_name,
-      category_icon: this.props.category.category_icon,
-      category_color: this.props.category.category_color
+      author_alias: this.props.author.author_alias,
+      author_intro: this.props.author.author_intro,
+      author_name: this.props.author.author_name,
+      author_avatar: this.props.author.author_avatar,
+      author_id: this.props.author.author_id
     }
   }
-  handleChangeComplete = color => {
-   try {
-    this.setState({
-      category_color: color.hex
-    })
-   }catch(e){
-
-   }
-  };
   onChange = (e: any) => {
     // @ts-ignore
     this.setState({
@@ -55,21 +45,21 @@ class DetailCategory extends React.Component<IProps, IState> {
   };
   onUpdate = ()=> {
     const temp: any = document.getElementById('img-cover-blog-preview')
-    this.props.reUpdateCategory({
+    this.props.reUpdateAuthor({
       ...this.state,
-      category_alias: alias(this.state.category_name),
-      category_icon: temp.src,
-    }, this.state.category_id)
+      author_alias: alias(this.state.author_name),
+      author_avatar: temp.src,
+    }, this.state.author_id)
   }
   componentDidUpdate(preProps){
-    console.log(this.props.resUpdateCategory)
-    if(this.props.resUpdateCategory != preProps.resUpdateCategory){
-      if (this.props.resUpdateCategory.status === 200) {
+    console.log(this.props.resUpdateAuthor)
+    if(this.props.resUpdateAuthor != preProps.resUpdateAuthor){
+      if (this.props.resUpdateAuthor.status === 200) {
         this.props.reIsSuccess(true);
         setTimeout(() => {
           this.props.reIsSuccess(false);
           this.props.isShowingModal()
-          this.props.reListCategory()
+          this.props.reListAuthor()
         }, 2000);
       } else {
         this.props.reIsDanger(true);
@@ -105,16 +95,7 @@ class DetailCategory extends React.Component<IProps, IState> {
               </div>
               <div className="modal-body">
                 <div className="row">
-                  <div className="col-sm-4">
-                    <SketchPicker
-                    color={
-                      this.state.category_color === null || this.state.category_color === ""
-                      ? '' : this.state.category_color
-                    }
-                      onChange={this.handleChangeComplete}
-                    />
-                  </div>
-                  <div className="col-sm-8">
+                  <div className="col-sm-12">
                     <div className="row">
                       <div className="form-group col-sm-6">
                         <label className="col-sm-12">Tên</label>
@@ -123,18 +104,18 @@ class DetailCategory extends React.Component<IProps, IState> {
                             onChange={this.onChange}
                             name="category_name"
                             className="form-control"
-                            defaultValue={this.state.category_name}
+                            defaultValue={this.state.author_name}
                           />
                         </div>
                       </div>
                       <div className="form-group col-sm-6">
-                        <label className="col-sm-12">Màu</label>
+                        <label className="col-sm-12">Intro</label>
                         <div className="col-sm-12">
                           <input
                             onChange={this.onChange}
                             name="category_color"
                             className="form-control"
-                            value={this.state.category_color}
+                            value={this.state.author_intro}
                           />
                         </div>
                       </div>
@@ -151,7 +132,7 @@ class DetailCategory extends React.Component<IProps, IState> {
                         >
                           <i className="ti-upload" />
                           <img
-                            src={this.state.category_icon}
+                            src={this.state.author_avatar}
                             id="img-cover-blog-preview"
                             className="img-responsive"
                           />
@@ -189,17 +170,17 @@ class DetailCategory extends React.Component<IProps, IState> {
 }
 const mapStateToProps = storeState => ({
   resListStatus: storeState.reBlog.resListStatus,
-  resUpdateCategory: storeState.reBlog.resUpdateCategory
+  resUpdateAuthor: storeState.reBlog.resUpdateAuthor
 });
 const mapDispatchToProps = {
   reSetCurrentEditorPhoto,
   reShowPhotoApp,
-  reUpdateCategory,
+  reUpdateAuthor,
   reIsDanger,
   reIsSuccess,
-  reListCategory
+  reListAuthor
 };
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(DetailCategory);
+)(DetailAuthor);
