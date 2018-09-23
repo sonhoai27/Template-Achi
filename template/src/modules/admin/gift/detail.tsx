@@ -53,13 +53,13 @@ class GiftDetail extends React.Component<IProps, IState> {
         this.props.reIsSuccess(true);
         setTimeout(() => {
           this.props.reIsSuccess(false);
-          window.location.href = this.props.match.url
+          this.props.reDetailGift(this.props.match.params.idGift)
         }, 2000);
       } else {
         this.props.reIsDanger(true);
         setTimeout(() => {
           this.props.reIsDanger(false);
-          window.location.href = this.props.match.url
+          this.props.reDetailGift(this.props.match.params.idGift)
         }, 2000);
       }
     }

@@ -13,11 +13,13 @@ import NotifyDanger from "../shared/notifyDanger";
 import Helmet from 'react-helmet'
 import { RESOURCE } from "../../config/const";
 import OrderEbookRouter from "./order-ebook/orderEbookRouter";
+import Loading from "./shared/loading";
 interface Props {
-  match?: any,
-  isShowPhotoApp: any,
-  isDanger: boolean,
-  isSuccess: boolean
+  match?: any;
+  isShowPhotoApp: any;
+  isDanger: boolean;
+  isSuccess: boolean;
+  isLoading: boolean
 }
 class AdminRouter extends React.Component<Props, {}> {
   constructor(props) {
@@ -45,6 +47,7 @@ class AdminRouter extends React.Component<Props, {}> {
             {this.props.isSuccess ? <NotifySuccess/> : ''}
             {this.props.isDanger ? <NotifyDanger/> : ''}
         </div>
+        {this.props.isLoading ? <Loading/> : ''}
       </div>
     );
   }
@@ -52,7 +55,8 @@ class AdminRouter extends React.Component<Props, {}> {
 const mapStateToProps = storeState => ({
   isShowPhotoApp: storeState.reInit.isShowPhotoApp,
   isSuccess: storeState.reInit.isSuccess,
-  isDanger: storeState.reInit.isDanger
+  isDanger: storeState.reInit.isDanger,
+  isLoading: storeState.reInit.isLoading
 });
 const mapDispatchToProps = {
 };

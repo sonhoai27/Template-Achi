@@ -94,12 +94,12 @@ class ClientHeader extends React.Component<{}, IState> {
               <ul id="menu-main-nav" className={'nav-link hidden-xs hidden-sm '+(this.state.isShowingMenu ? 'show': '')}>
                 <li className="menu-item">
                   <a title="Ask Tony" href="/ask-tony/">
-                    Ask Tony <i className="fa fa-angle-down" />
+                    Giới thiệu <i className="fa fa-angle-down" />
                   </a>
                   <ul className="menu-sub">
                     <li className="menu-item">
                       <a title="Ask Tony Anything" href="/ask-tony/">
-                        Ask Tony Anything
+                        Về Mr.Share
                       </a>
                     </li>
                   </ul>

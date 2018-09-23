@@ -16,7 +16,10 @@ export const ACTION_TYPES = {
     API_DELETE_CATEGORY: 'ReBlog/API_DELETE_CATEGORY',
     API_UPDATE_AUTHOR: 'ReBlog/API_UPDATE_AUTHOR',
     API_UPDATE_CATEGORY: 'ReBlog/API_UPDATE_CATEGORY',
-    API_STATUS: 'ReBlog/API_STATUS'
+    API_STATUS: 'ReBlog/API_STATUS',
+    
+    API_CLIENT_LIST_BLOG: 'ReBlog/API_STATUS',
+    API_CLIENT_LIST_BLOG_CATEGORY: 'ReBlog/API_CLIENT_LIST_BLOG_CATEGORY'
 }
 
 const initialState = {
@@ -33,7 +36,10 @@ const initialState = {
     resDeleteCategory: {},
     resUpdateAuthor: {},
     resUpdateCategory: {},
-    resListStatus: []
+    resListStatus: [],
+
+    resClientListBlog: [],
+    resCLientListBlogCategory: {}
 }
 
 export default (state = initialState, action) => {
@@ -278,6 +284,43 @@ export default (state = initialState, action) => {
                 resListStatus: action.payload.data
             }
         }
+
+
+         // list client blog
+         case REQUEST(ACTION_TYPES.API_CLIENT_LIST_BLOG): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_CLIENT_LIST_BLOG): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_CLIENT_LIST_BLOG): {
+            return {
+                ...state,
+                resClientListBlog: action.payload.data
+            }
+        }
+
+         // list client blog category
+         case REQUEST(ACTION_TYPES.API_CLIENT_LIST_BLOG_CATEGORY): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_CLIENT_LIST_BLOG_CATEGORY): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_CLIENT_LIST_BLOG_CATEGORY): {
+            return {
+                ...state,
+                resCLientListBlogCategory: action.payload.data
+            }
+        }
         default:
             return state;
     }
@@ -324,6 +367,20 @@ export const reDeleteBlog = (idBlog: string) => async dispatch => {
     return result;
 };
 
+export const reClientListBlog = (page, category) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_CLIENT_LIST_BLOG,
+        payload: axios.post(API_BLOG+"/all/"+page, category)
+    });
+    return result;
+};
+export const reClientListBlogCategory = (idCategory) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_CLIENT_LIST_BLOG_CATEGORY,
+        payload: axios.get(API_BLOG+"/category/"+idCategory)
+    });
+    return result;
+};
 // author category
 // all
 export const reListCategory = () => async dispatch => {

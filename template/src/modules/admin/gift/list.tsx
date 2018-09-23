@@ -5,21 +5,57 @@ import { connect } from "react-redux";
 import { reListGift, reUpdateGift } from "./reGift";
 import Pagination from "../../shared/Pagination";
 import { IGiftModel } from "../../../models/gift";
-
+import { reIsSuccess, reIsDanger } from "../../../reducers/init";
+import ModalSendGift from './modalSendGift'
 interface IProps {
   resListGift: any;
   reListGift: (page: number)=> void;
   reDetailGift: (idGift: number)=> void;
   reUpdateGift: (form: IGiftModel, idGift: number) => void;
+  resUpdateGift: any;
+  reIsSuccess: (status: boolean) => void;
+  reIsDanger: (status: boolean) => void;
 }
-class GiftList extends React.Component<IProps,{}> {
+interface IState {
+  isShowingModalSendGift: boolean,
+}
+class GiftList extends React.Component<IProps,IState> {
   constructor(props) {
     super(props);
+    this.state = {
+      isShowingModalSendGift: false
+    }
   }
   componentDidMount(){
     this.props.reListGift(
       (parseInt(this.makeCurrentPage(), 10) - 1)*20
     )
+  }
+  componentDidUpdate(preProps){
+    if(this.props.resUpdateGift != preProps.resUpdateGift){
+      if (this.props.resUpdateGift.status === 200) {
+        this.props.reIsSuccess(true);
+        setTimeout(() => {
+          this.props.reIsSuccess(false);
+          this.props.reListGift(
+            (parseInt(this.makeCurrentPage(), 10) - 1)*20
+          )
+        }, 2000);
+      } else {
+        this.props.reIsDanger(true);
+        setTimeout(() => {
+          this.props.reIsDanger(false);
+          this.props.reListGift(
+            (parseInt(this.makeCurrentPage(), 10) - 1)*20
+          )
+        }, 2000);
+      }
+    }
+  }
+  hiddenModalSendGift= ()=> {
+    this.setState({
+      isShowingModalSendGift: !this.state.isShowingModalSendGift
+    })
   }
   makeCurrentPage = () => {
     const page = window.location.href.split("page=")[1];
@@ -67,13 +103,21 @@ class GiftList extends React.Component<IProps,{}> {
   }
   render() {
     return (
+      <>
       <div className="row">
         <div className="col-md-12">
           <div className="panel">
             <div className="panel-toolbar">
                 <div className="panel-heading">Quản lí quà tặng</div>
                 <div className="panel-action-bar">
-                    <Link to={BASEURLADMIN+'blog/add'}><div className="btn btn-xs btn-info">Thêm mới</div></Link>
+                    <div className="btn btn-xs btn-info" onClick={()=> {
+                      this.setState({
+                        isShowingModalSendGift: true
+                      })
+                    }} style={{
+                      marginRight: 16
+                    }}><i className="ti-gift"/> Gởi quà</div>
+                    <Link to={BASEURLADMIN+'gift/add'}><div className="btn btn-xs btn-info">Thêm mới</div></Link>
                 </div>
             </div>
             <div className="table-responsive">
@@ -104,6 +148,10 @@ class GiftList extends React.Component<IProps,{}> {
           </div>
         </div>
       </div>
+      {
+        this.state.isShowingModalSendGift ? <ModalSendGift isShowingModal={this.hiddenModalSendGift}/> : ''
+      }
+      </>
     );
   }
 }
@@ -114,7 +162,9 @@ const mapStateToProps = storeState => ({
 });
 const mapDispatchToProps = {
   reListGift,
-  reUpdateGift
+  reUpdateGift,
+  reIsDanger,
+  reIsSuccess
 };
 export default connect(
   mapStateToProps,
