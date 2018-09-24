@@ -1,5 +1,6 @@
 import * as React from "react";
 import SearchBar from "./SearchBar";
+import { BASEURL } from "../../../config/const";
 
 interface IState {
   isShowingMenu: boolean,
@@ -73,7 +74,7 @@ class ClientHeader extends React.Component<{}, IState> {
             </div>
             <ul className="nav-logo">
               <li>
-                <a href="/">
+                <a href={BASEURL}>
                   <img src="https://www.tonyrobbins.com/wp-content/themes/tonyrobbins2016/images/tr-logo-blk-on-wht.svg" />
                 </a>
               </li>
@@ -105,152 +106,62 @@ class ClientHeader extends React.Component<{}, IState> {
                   </ul>
                 </li>
                 <li className="menu-item">
-                  <a title="About" href="/biography/">
-                    About <i className="fa fa-angle-down" />
+                  <a title="About">
+                    Khóa học <i className="fa fa-angle-down" />
                   </a>
                   <ul className="menu-sub">
                     <li className="menu-item">
                       <a
                         title="About Tony Robbins"
-                        href="https://www.tonyrobbins.com/biography/"
+                        href={BASEURL+'page/khoa-hoc'}
                       >
-                        About Tony Robbins
-                      </a>
-                    </li>
-                    <li className="menu-item">
-                      <a title="Company Culture" href="/company-culture/">
-                        Company Culture
-                      </a>
-                    </li>
-                    <li className="menu-item">
-                      <a
-                        title="Contribution"
-                        href="https://www.tonyrobbins.com/giving-back/"
-                      >
-                        Contribution
+                        Tất cả khóa học
                       </a>
                     </li>
                   </ul>
                 </li>
                 <li className="menu-item">
-                  <a title="Store" href="https://store.tonyrobbins.com">
-                    Store <i className="fa fa-angle-down" />
+                  <a title="Store">
+                    Lịch sự kiện
+                  </a>
+                </li>
+                <li className="menu-item">
+                  <a title="Experiences">
+                    Video <i className="fa fa-angle-down" />
                   </a>
                   <ul className="menu-sub">
                     <li className="menu-item">
-                      <a
-                        title="All Products"
-                        href="http://store.tonyrobbins.com/collections/all/"
-                      >
-                        All Products
-                      </a>
-                    </li>
-                    <li className="menu-item">
-                      <a
-                        title="Training Systems"
-                        href="https://store.tonyrobbins.com/collections/breakthrough-app"
-                      >
-                        Training Systems
+                      <a title="All Upcoming Events" href={BASEURL+'page/video'}>
+                        Tất cả video
                       </a>
                     </li>
                   </ul>
                 </li>
                 <li className="menu-item">
-                  <a title="Experiences" href="/events/">
-                    Experiences <i className="fa fa-angle-down" />
+                  <a title="Coaching" href={BASEURL+'page/sach'}>
+                    Cuốn da
                   </a>
-                  <ul className="menu-sub">
-                    <li className="menu-item">
-                      <a title="All Upcoming Events" href="/events/">
-                        All Upcoming Events
-                      </a>
-                    </li>
-                    <li className="menu-item">
-                      <a
-                        title="Unleash the Power Within"
-                        href="/events/unleash-the-power-within/new-york-area-11-08-2018/"
-                      >
-                        Unleash the Power Within
-                      </a>
-                    </li>
-                    <li className="menu-item">
-                      <a
-                        title="Date With Destiny"
-                        href="/events/date-with-destiny/florida-12-07-2018/"
-                      >
-                        Date With Destiny
-                      </a>
-                    </li>
-                    <li className="menu-item">
-                      <a
-                        title="Life & Wealth Mastery"
-                        href="/events/life-wealth-mastery/"
-                      >
-                        Life &amp; Wealth Mastery
-                      </a>
-                    </li>
-                    <li className="menu-item">
-                      <a
-                        title="Leadership Academy"
-                        href="/events/leadership-academy/san-diego-08-26-2018/"
-                      >
-                        Leadership Academy
-                      </a>
-                    </li>
-                    <li className="menu-item">
-                      <a
-                        title="Business Mastery"
-                        href="/events/business-mastery/palm-beach/"
-                      >
-                        Business Mastery
-                      </a>
-                    </li>
-                    <li className="menu-item">
-                      <a
-                        title="Business Results Training"
-                        href="https://www.tonyrobbins.com/business-results-training/"
-                      >
-                        Business Results Training
-                      </a>
-                    </li>
-                    <li className="menu-item">
-                      <a
-                        title="Platinum Partnership"
-                        href="/platinum-partnership/"
-                      >
-                        Platinum Partnership
-                      </a>
-                    </li>
-                    <li className="menu-item">
-                      <a title="Become a Crew Member" href="/community/">
-                        Become a Crew Member
-                      </a>
-                    </li>
-                  </ul>
                 </li>
                 <li className="menu-item">
-                  <a title="Coaching" href="/coaching/">
-                    Coaching <i className="fa fa-angle-down" />
-                  </a>
-                  <ul className="menu-sub">
-                    <li className="menu-item">
-                      <a
-                        title="Results Coaching"
-                        href="/coaching/results-coaching/"
-                      >
-                        Results Coaching
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="menu-item">
-                  <a title="Blog" href="/blog/">
+                  <a title="Blog">
                     Blog <i className="fa fa-angle-down" />
                   </a>
                   <ul className="menu-sub">
                     <li className="menu-item">
-                      <a title="Read All Blogs" href="/blog/">
-                        Read All Blogs
+                      <a title="Read All Blogs" href={BASEURL+'page/blog'}>
+                       Tất cả blog
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li className="menu-item">
+                  <a title="Blog">
+                    Quà tặng <i className="fa fa-angle-down" />
+                  </a>
+                  <ul className="menu-sub">
+                    <li className="menu-item">
+                      <a title="Read All Blogs" href={BASEURL+'page/qua-tang'}>
+                       Tất cả quà tặng
                       </a>
                     </li>
                   </ul>

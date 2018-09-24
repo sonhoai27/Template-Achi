@@ -1,17 +1,23 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { reListBlog } from "../../admin/blog/reBlog";
+import { reClientListBlog, reListCategory } from "../../admin/blog/reBlog";
 import Pagination from "../../shared/Pagination";
 import { Link } from "react-router-dom";
+import Select from "react-select";
+import makeAnimated from "react-select/lib/animated";
+import { BASEURL } from "../../../config/const";
 
 interface IProps {
-  resListBlog: any;
-  reListBlog: (page: number) => void;
+  resClientListBlog: any;
+  resListCategory: any;
+  reClientListBlog: (page: number, category: any) => void;
+  reListCategory: () => void;
   match: any;
 }
 class ClientBlog extends React.Component<IProps, {}> {
   constructor(props) {
     super(props);
+    console.log(this.props.match);
   }
   makeCurrentPage = () => {
     const page = window.location.href.split("page=")[1];
@@ -22,14 +28,30 @@ class ClientBlog extends React.Component<IProps, {}> {
     }
   };
   componentDidMount() {
-    this.props.reListBlog((parseInt(this.makeCurrentPage(), 10) - 1) * 20);
+    this.props.reListCategory();
+    this.props.reClientListBlog(
+      (parseInt(this.makeCurrentPage(), 10) - 1) * 20,
+      this.makeFilter()
+    );
   }
   getMoreBlog = page => {
-    this.props.reListBlog((page - 1) * 20);
+    this.props.reClientListBlog((page - 1) * 20, this.makeFilter());
+  };
+
+  makeFilter = () => {
+    const cate = this.props.match.params.idCategory;
+    if (cate) {
+      return {
+        category: parseInt(cate.split("-")[0], 10)
+      };
+    }
+    return {
+      category: 0
+    };
   };
   renderListBlog = () => {
-    if (this.props.resListBlog.list) {
-      return this.props.resListBlog.list.map((element, index) => {
+    if (this.props.resClientListBlog.list) {
+      return this.props.resClientListBlog.list.map((element, index) => {
         return (
           <div
             className={
@@ -40,7 +62,7 @@ class ClientBlog extends React.Component<IProps, {}> {
               <Link
                 style={{ backgroundImage: "url(" + element.blog_cover + ")" }}
                 className="post-item-image"
-                to={this.props.match.path + "/detail/" + element.blog_id}
+                to={BASEURL+'page/blog' + "/detail/" + element.blog_id}
               >
                 <div className="post-item-container color3">
                   <img
@@ -57,14 +79,14 @@ class ClientBlog extends React.Component<IProps, {}> {
                 />
                 <h4 className="post-title">
                   <Link
-                    to={this.props.match.path + "/detail/" + element.blog_id}
+                     to={BASEURL+'page/blog' + "/detail/" + element.blog_id}
                   >
                     {element.blog_title}
                   </Link>
                 </h4>
 
                 <Link
-                  to={this.props.match.path + "/detail/" + element.blog_id}
+                  to={BASEURL+'page/blog' + "/detail/" + element.blog_id}
                   className="link-more link-more-grey"
                 >
                   Xem thêm
@@ -76,6 +98,14 @@ class ClientBlog extends React.Component<IProps, {}> {
       });
     }
     return <h1>Null</h1>;
+  };
+  options = () => {
+    if (this.props.resListCategory.list) {
+      return this.props.resListCategory.list.map(function(item) {
+        return { value: item.category_id, label: item.category_name, alias: item.category_alias };
+      });
+    }
+    return [];
   };
   render() {
     return (
@@ -134,6 +164,33 @@ class ClientBlog extends React.Component<IProps, {}> {
               </p>
             </div>
           </div>
+          <div className="row">
+            <div className="col-sm-12">
+              <div className="row">
+                <div className="col-sm-9" />
+                <div className="col-sm-3" style={{
+                  marginBottom: 32
+                }}>
+                  <Select
+                    closeMenuOnSelect={false}
+                    components={makeAnimated()}
+                    onChange={item => {
+                      if(item.value !== 0){
+                        window.location.href = BASEURL+'page/blog/danh-muc/'+item.value+'-'+item.alias
+                      }else {
+                        window.location.href = BASEURL+'page/blog'
+                      }
+                    }}
+                    options={[
+                      ...this.options(), {
+                        value: 0, label: 'Tất cả'
+                      }
+                    ]}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="row list-blogs">{this.renderListBlog()}</div>
           <div className="row">
             <div className="col-xs-12">
@@ -141,7 +198,7 @@ class ClientBlog extends React.Component<IProps, {}> {
                 <Pagination
                   initialPage={parseInt(this.makeCurrentPage(), 10)}
                   pageSize={20}
-                  totalItems={this.props.resListBlog.count}
+                  totalItems={this.props.resClientListBlog.count}
                   onChangePage={e => this.getMoreBlog(e.currentPage)}
                 />
               </div>
@@ -153,10 +210,12 @@ class ClientBlog extends React.Component<IProps, {}> {
   }
 }
 const mapStateToProps = storeState => ({
-  resListBlog: storeState.reBlog.resListBlog
+  resClientListBlog: storeState.reBlog.resClientListBlog,
+  resListCategory: storeState.reBlog.resListCategory
 });
 const mapDispatchToProps = {
-  reListBlog
+  reClientListBlog,
+  reListCategory
 };
 export default connect(
   mapStateToProps,

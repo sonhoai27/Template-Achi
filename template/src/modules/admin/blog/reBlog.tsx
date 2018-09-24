@@ -18,7 +18,7 @@ export const ACTION_TYPES = {
     API_UPDATE_CATEGORY: 'ReBlog/API_UPDATE_CATEGORY',
     API_STATUS: 'ReBlog/API_STATUS',
     
-    API_CLIENT_LIST_BLOG: 'ReBlog/API_STATUS',
+    API_CLIENT_LIST_BLOG: 'ReBlog/API_CLIENT_LIST_BLOG',
     API_CLIENT_LIST_BLOG_CATEGORY: 'ReBlog/API_CLIENT_LIST_BLOG_CATEGORY'
 }
 
@@ -39,7 +39,7 @@ const initialState = {
     resListStatus: [],
 
     resClientListBlog: [],
-    resCLientListBlogCategory: {}
+    resClientListBlogCategory: {}
 }
 
 export default (state = initialState, action) => {
@@ -318,7 +318,7 @@ export default (state = initialState, action) => {
         case SUCCESS(ACTION_TYPES.API_CLIENT_LIST_BLOG_CATEGORY): {
             return {
                 ...state,
-                resCLientListBlogCategory: action.payload.data
+                resClientListBlogCategory: action.payload.data
             }
         }
         default:

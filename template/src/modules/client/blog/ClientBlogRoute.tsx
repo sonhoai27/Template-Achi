@@ -17,6 +17,7 @@ class ClientBlogRoute extends React.Component<IProps, {}>{
                 <ClientHeader/>
                 <Route exact path={`${this.props.match.url}`} component={ClientBlog}/>
                 <Route path={`${this.props.match.url}/detail/:idBlog`} component={ClientDetailBlog}/>
+                <Route path={`${this.props.match.url}/danh-muc/:idCategory`} component={ClientBlog}/>
                 <Footer/>
             </>
         )
