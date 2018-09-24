@@ -10,6 +10,7 @@ import CLientFooterBanner from "./ClientFooterBanner";
 import Footer from "../client-shared/Footer";
 import {RESOURCE} from "../../../config/const";
 import {Helmet} from "react-helmet";
+import ClientIntroNMC from "./ClientIntroNMC";
 class ClientHome extends React.Component {
   constructor(props){
     super(props)
@@ -28,6 +29,7 @@ class ClientHome extends React.Component {
         <ClientListTopSen/>
         <ClientFollow/>
         </div>
+        <ClientIntroNMC/>
         <ClientHomeBlog/>
         <ClientHomeSource/>
         <div className="banner">

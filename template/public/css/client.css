@@ -625,8 +625,17 @@ nav ul.nav-link {
 .intro-profile {
   display: -webkit-box;
   text-align: justify;
+  background: #fff;
 }
-
+.intro-profile>.row{
+  padding: 16px;
+}
+.border-letter {
+  background: repeating-linear-gradient(135deg, #83d302 0px,#83d302 25px,#599100 25px,#599100 50px);
+  padding: 14px;
+  transition: all 0.3s ease-out;
+  display: inline-block;
+}
 blockquote {
   border: none!important;
   border-left: none!important;

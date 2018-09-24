@@ -23,6 +23,8 @@ define("BASE_URL", 'http://localhost:8080/Achi/template/public/');
             <style>
                 :root {
                     --admin-primary-color: #096dd9;
+                    font-family: 'Montserrat', sans-serif!important;
+                    font-weight: 500!important;
                 }
 
                 .lds-spinner {
