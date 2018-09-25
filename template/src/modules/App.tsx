@@ -40,7 +40,7 @@ class App extends React.Component<IProps, IState> {
     setTimeout(() => {
       // @ts-ignore
       document.getElementById("ui-loading").style.display = "none";
-    }, 2500);
+    }, 0);
   }
 
   render() {

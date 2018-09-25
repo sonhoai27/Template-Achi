@@ -155,8 +155,14 @@ class ClientDetailBlog extends React.Component<IProps, IState> {
               </div>
             </div>
           </div>
+          <hr />
           <div className="row">
             <div className="container paddingY-64">
+              <div className="row">
+                <div className="col-xs-12">
+                    <h3 style={{marginBottom: 32}}>Bài viết liên quan.</h3>
+                </div>
+              </div>
               <div className="row">{this.renderListBlogCategory()}</div>
             </div>
           </div>

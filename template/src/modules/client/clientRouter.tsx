@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import NotifySuccess from "../shared/notifySuccess";
 import NotifyDanger from "../shared/notifyDanger";
 import Loading from "../admin/shared/loading";
+import ClientVideo from './video/ClientVideo';
 
 interface Props {
     match?: any;
@@ -40,6 +41,7 @@ class ClientRouter extends React.Component<Props, {}> {
                     <Route path={`${this.props.match.url}/blog`} component={ClientBlogRoute} />
                     <Route path={`${this.props.match.url}/khoa-hoc`} component={ClientSourceRoute} />
                     <Route path={`${this.props.match.url}/sach`} component={EbookLadingPage} />
+                    <Route path={`${this.props.match.url}/video`} component={ClientVideo} />
                     <div className="jq-toast-wrap top-right">
                         {this.props.isSuccess ? <NotifySuccess /> : ''}
                         {this.props.isDanger ? <NotifyDanger /> : ''}

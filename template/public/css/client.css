@@ -1724,3 +1724,29 @@ blockquote p:after {
   z-index: 1450;
   transition: 0.6s cubic-bezier(0.645, 0.045, 0.355, 1) top;
 }
+.page-video .item>a{
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+.page-video .item>a:before {
+  position: absolute;
+  left: 0;
+  bottom: -100%;
+  right: 0;
+  content: "\e071";
+  font-family: 'simple-line-icons';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 64px;
+  margin-bottom: 44px;
+  background: #1f908075;
+  transition: all .3s;
+  z-index: 0;
+}
+.page-video .item:hover>a:before {
+  bottom: 9px;
+  top: 0;
+}
