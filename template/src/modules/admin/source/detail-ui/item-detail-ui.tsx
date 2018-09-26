@@ -31,8 +31,23 @@ class ItemDetailUISource extends React.Component<Props, State> {
   generateInfo = () => {
     return (
       <div className="item-block" style={{marginBottom: 0}}>
-        <div className="toolbar">
+        <div className="toolbar" style={{justifyContent: 'left'}}>
           <h3>{this.props.detailUI.element_name}</h3>
+          <input type="text"
+            name="content_element_name"
+            id={this.props.detailUI.detail_ui_random_id+'-name-row'} 
+            defaultValue={this.props.detailUI.content_element_name}
+            className="form-control" style={{
+            width: '10%',
+            marginLeft: '16px',
+            marginRight: '16px'
+          }}/>
+          <div onClick={()=> this.saveContentElement({
+                idVirtualElement: this.props.detailUI.detail_ui_random_id+'-name-row',
+                content_element_id: this.props.detailUI.content_element_id,
+                content_element_id_detail_ui: this.props.detailUI.detail_ui_id,
+                content_element_id_source: this.props.match.params.idSource
+              })} className="btn btn-xs btn-info">Lưu tên</div>
          </div>
         <div className="style">
           <div className="form-group">

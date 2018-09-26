@@ -6,7 +6,7 @@ import Helmet from "react-helmet";
 import { IOrderSourceModel } from "../../../models/orderSource";
 import { reAddOrder } from "../../admin/source/order/reOrder";
 import { reDetailSche } from "../../admin/source/reSource";
-import { BASEURL, RESOURCE } from "../../../config/const";
+import { BASEURL } from "../../../config/const";
 import Footer from "../client-shared/Footer";
 interface IState {
   order: IOrderSourceModel;
@@ -143,7 +143,7 @@ class ClientOrderSource extends React.Component<IProps, IState> {
           <div className="row">
             <div className="col-sm-12">
               <img
-                src={RESOURCE+'images/banner-dk-kh.png'}
+                src={this.state.source.source_banner}
                 alt=""
                 className={"img-responsive"}
                 width={"100%"}

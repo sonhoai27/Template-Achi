@@ -222,9 +222,8 @@ body {
 
 .add-element-to-ui .item-block .toolbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
     align-items: center;
-    margin-bottom: 16px;
 }
 
 .add-element-to-ui .item-block .toolbar .action {

@@ -2,14 +2,14 @@ import * as React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { connect } from "react-redux";
 import { reShowPhotoApp, reSetCurrentEditorPhoto, reIsDanger, reIsSuccess } from "../../../reducers/init";
-import { reListUI } from "../ui/reUI";
+import { reListUIForSource } from "../ui/reUI";
 import { reAddSource } from "./reSource";
 import { alias } from "../../../utils/alias";
 interface Props {
   reSetCurrentEditorPhoto: (editor: any)=> void;
   reShowPhotoApp: (status: boolean)=> void;
   resListUI: any;
-  reListUI: ()=> void;
+  reListUIForSource: ()=> void;
   resAddSource: any;
   reAddSource: (form: any)=> void;
   reIsSuccess: (status: boolean) => void;
@@ -18,11 +18,12 @@ interface Props {
 
 interface State {
   source: {
-    source_title: string,
-    source_promo: string,
-    source_content: any,
-    source_id_ui: number,
-    source_status: number
+    source_title: string;
+    source_promo: string;
+    source_content: any;
+    source_id_ui: number;
+    source_status: number;
+    source_banner: string;
   }
 }
 class AddSource extends React.Component<Props, State> {
@@ -34,12 +35,13 @@ class AddSource extends React.Component<Props, State> {
         source_promo: '',
         source_content: '',
         source_id_ui: 0,
-        source_status: 0
+        source_status: 0,
+        source_banner: ""
       }
     }
   }
   componentDidMount(){
-    this.props.reListUI()
+    this.props.reListUIForSource()
   }
   renderListUI = ()=> {
     if(this.props.resListUI){
@@ -53,10 +55,12 @@ class AddSource extends React.Component<Props, State> {
   }
   addSource = ()=> {
     const tempDomImage: any = document.getElementById('img-cover-blog-preview')
+    const tempDomImageBanner: any = document.getElementById('img-banner-source')
     this.props.reAddSource({
       ...this.state.source,
       source_alias: alias(this.state.source.source_title),
-      source_cover: tempDomImage.src
+      source_cover: tempDomImage.src,
+      source_banner: tempDomImageBanner.src
     })
   }
   onChange = (e: any)=> {
@@ -191,6 +195,18 @@ class AddSource extends React.Component<Props, State> {
                       <img id="img-cover-blog-preview" className="img-responsive" />
                     </div>
                   </div>
+                  <div className="form-group">
+                    <label className="col-sm-12">Hình Banner</label>
+                    <div
+                      onClick={()=> {
+                        this.props.reShowPhotoApp(true)
+                        this.props.reSetCurrentEditorPhoto('img-banner-source')
+                      }}
+                      className="col-sm-12 cover-blog">
+                      <i className="ti-upload" />
+                      <img id="img-banner-source" className="img-responsive" />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -208,7 +224,7 @@ const mapStateToProps = storeState => ({
 const mapDispatchToProps = {
   reSetCurrentEditorPhoto,
   reShowPhotoApp,
-  reListUI,
+  reListUIForSource,
   reAddSource,
   reIsDanger,
   reIsSuccess

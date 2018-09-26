@@ -9,7 +9,10 @@ export const ACTION_TYPES = {
     API_ADD_ELEMENT_TO_UI_DETAIL: 'ReUI/API_ADD_ELEMENT_TO_UI_DETAIL',
     API_DELETE_ELEMENT_DETAIl_UI: 'ReUI/API_DELETE_ELEMENT_DETAIl_UI',
     CURRENT_MATCH_DETAIl_UI: 'ReUI/CURRENT_MATCH_DETAIl_UI',
+    API_LIST_UI_FOR_SOURCE: 'ReUI/API_LIST_UI_FOR_SOURCE',
+    API_LIST_UI_FOR_PAGE: 'ReUI/API_LIST_UI_FOR_PAGE',
     API_LIST_UI: 'ReUI/API_LIST_UI',
+    API_ADD_UI: "ReUI/API_ADD_UI",
     API_ADD_UPDATE_CONTENT_UI_ELEMENT: 'ReUI/API_ADD_UPDATE_CONTENT_UI_ELEMENT',
     API_ADD_CSS: 'ReUI/API_ADD_CSS'
 }
@@ -22,9 +25,12 @@ const initialState = {
     addElementToUIDetail: '',
     deleteElementToUIDetail: '',
     currentMatchDetailUI: '',
+    resListUIForSource: [],
+    resListUIForPage: [],
     resListUI: [],
     resAddUpdateContentElement: {},
-    resAddCss: {}
+    resAddCss: {},
+    resAddUi: {}
 }
 
 export default (state = initialState, action) => {
@@ -64,7 +70,23 @@ export default (state = initialState, action) => {
                 resDetailUI: action.payload.data
             }
         }
-
+        // add ui
+        case REQUEST(ACTION_TYPES.API_ADD_UI): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_ADD_UI): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_ADD_UI): {
+            return {
+                ...state,
+                resAddUi: action.payload.data
+            }
+        }
         // show list element
         case (ACTION_TYPES.SHOW_LIST_ELEMENT): {
             return {
@@ -120,6 +142,42 @@ export default (state = initialState, action) => {
             }
         }
 
+        // list ui source
+        case REQUEST(ACTION_TYPES.API_LIST_UI_FOR_SOURCE): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_LIST_UI_FOR_SOURCE): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_LIST_UI_FOR_SOURCE): {
+            return {
+                ...state,
+                resListUIForSource: action.payload.data.list
+            }
+        }
+
+        // list ui page
+        case REQUEST(ACTION_TYPES.API_LIST_UI_FOR_PAGE): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_LIST_UI_FOR_PAGE): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_LIST_UI_FOR_PAGE): {
+            return {
+                ...state,
+                resListUIForPage: action.payload.data.list
+            }
+        }
+
         // list ui
         case REQUEST(ACTION_TYPES.API_LIST_UI): {
             return {
@@ -137,7 +195,6 @@ export default (state = initialState, action) => {
                 resListUI: action.payload.data.list
             }
         }
-
         // add update content element
         case REQUEST(ACTION_TYPES.API_ADD_UPDATE_CONTENT_UI_ELEMENT): {
             return {
@@ -179,7 +236,10 @@ export default (state = initialState, action) => {
 
 const API_LIST_ELEMENT = API + 'ui/element'
 const API_DETAIL_UI = API + 'ui/detail-ui'
+const API_LIST_UI_FOR_SOURCE = API + 'ui/all-ui-source'
+const API_LIST_UI_FOR_PAGE = API + 'ui/all-ui-page'
 const API_LIST_UI = API + 'ui/all-ui'
+const API_ADD_UI = API + 'ui/add-ui'
 const API_ADD_ELEMENT_DETAIL_UI = API + 'ui/add-element-to-detail-ui'
 const API_DELETE_ELEMENT_DETAIL_UI = API + 'ui/delete-element-of-detail-ui/'
 const API_ADD_UPDATE_CONTENT_UI_ELEMENT = API+'ui/add-update-content-element'
@@ -198,7 +258,13 @@ export const reDetailUI = (idUI) => async dispatch => {
     });
     return result;
 };
-
+export const reAddUI = (form) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_ADD_UI,
+        payload: axios.post(API_ADD_UI, form)
+    });
+    return result;
+};
 export const reShowListElement = (status) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.SHOW_LIST_ELEMENT,
@@ -240,6 +306,20 @@ export const reSetCurrentMatchDetailUI = (match) => async dispatch => {
     return result;
 };
 
+export const reListUIForSource = () => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_LIST_UI_FOR_SOURCE,
+        payload: axios.get(API_LIST_UI_FOR_SOURCE)
+    });
+    return result;
+};
+export const reListUIForPage = () => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_LIST_UI_FOR_PAGE,
+        payload: axios.get(API_LIST_UI_FOR_PAGE)
+    });
+    return result;
+};
 export const reListUI = () => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_LIST_UI,

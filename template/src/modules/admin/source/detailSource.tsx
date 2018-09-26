@@ -7,7 +7,7 @@ import {
   reIsDanger,
   reIsSuccess
 } from "../../../reducers/init";
-import { reListUI } from "../ui/reUI";
+import { reListUIForSource } from "../ui/reUI";
 // declare var $: any;
 import { reUpdateSource, reDetailSource } from "./reSource";
 import { Link } from "react-router-dom";
@@ -18,8 +18,8 @@ interface Props {
   match?: any;
   reSetCurrentEditorPhoto: (editor: any) => void;
   reShowPhotoApp: (status: boolean) => void;
-  resListUI: any;
-  reListUI: () => void;
+  resListUIForSource: any;
+  reListUIForSource: () => void;
   resDetailSource: any;
   resUpdateSource: any;
   reDetailSource: (id: number) => void;
@@ -35,6 +35,7 @@ interface State {
     source_content: any;
     source_id_ui: number;
     source_status: number;
+    source_banner: string;
   };
 }
 class DetailSource extends React.Component<Props, State> {
@@ -46,7 +47,8 @@ class DetailSource extends React.Component<Props, State> {
         source_promo: "",
         source_content: "",
         source_id_ui: 0,
-        source_status: 0
+        source_status: 0,
+        source_banner: ""
       }
     };
   }
@@ -58,7 +60,8 @@ class DetailSource extends React.Component<Props, State> {
           source_promo: nextProps.resDetailSource.source_promo,
           source_content: nextProps.resDetailSource.source_content,
           source_id_ui: nextProps.resDetailSource.source_id_ui,
-          source_status: nextProps.resDetailSource.source_status
+          source_status: nextProps.resDetailSource.source_status,
+          source_banner: nextProps.resDetailSource.source_banner
         }
       });
     }
@@ -78,13 +81,16 @@ class DetailSource extends React.Component<Props, State> {
       }
     }
   }
+  componentDidUpdate(preProps){
+    console.log(this.props.resListUIForSource)
+  }
   componentDidMount() {
-    this.props.reListUI();
+    this.props.reListUIForSource();
     this.props.reDetailSource(this.props.match.params.id);
   }
   renderListUI = () => {
-    if (this.props.resListUI) {
-      return this.props.resListUI.map(element => {
+    if (this.props.resListUIForSource) {
+      return this.props.resListUIForSource.map(element => {
         return (
           <option
             selected={
@@ -103,10 +109,12 @@ class DetailSource extends React.Component<Props, State> {
   };
   saveSource = () => {
     const tempDomImage: any = document.getElementById('img-cover-blog-preview')
+    const tempDomImageBanner: any = document.getElementById('img-banner-source')
     this.props.reUpdateSource({
       ...this.state.source,
       source_alias: alias(this.state.source.source_title),
-      source_cover: tempDomImage.src
+      source_cover: tempDomImage.src,
+      source_banner: tempDomImageBanner.src
     },this.props.match.params.id)
   };
   onChange = (e: any) => {
@@ -307,6 +315,25 @@ class DetailSource extends React.Component<Props, State> {
                       />
                     </div>
                   </div>
+                  <div className="form-group">
+                    <label className="col-sm-12">Banner khóa học</label>
+                    <div
+                      onClick={() => {
+                        this.props.reShowPhotoApp(true);
+                        this.props.reSetCurrentEditorPhoto(
+                          "img-banner-source"
+                        );
+                      }}
+                      className="col-sm-12 cover-blog"
+                    >
+                      <i className="ti-upload" />
+                      <img
+                        id="img-banner-source"
+                        src={this.props.resDetailSource.source_banner}
+                        className="img-responsive"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -318,14 +345,14 @@ class DetailSource extends React.Component<Props, State> {
 }
 
 const mapStateToProps = storeState => ({
-  resListUI: storeState.reUI.resListUI,
+  resListUIForSource: storeState.reUI.resListUIForSource,
   resUpdateSource: storeState.reSource.resUpdateSource,
   resDetailSource: storeState.reSource.resDetailSource
 });
 const mapDispatchToProps = {
   reSetCurrentEditorPhoto,
   reShowPhotoApp,
-  reListUI,
+  reListUIForSource,
   reUpdateSource,
   reDetailSource,
   reIsDanger,

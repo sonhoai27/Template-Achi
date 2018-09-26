@@ -34,7 +34,7 @@ class ItemDetailUI extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
-      detail_ui_css: ''
+      detail_ui_css: this.props.detailUI.detail_ui_css
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -44,7 +44,6 @@ class ItemDetailUI extends React.Component<Props, State> {
     ) {
       this.props.reDetailUI(this.props.currentMatchDetailUI.params.idUi);
     }
-    
   }
   showListElement = (id: number) => {
     this.props.reShowListElement(true);
@@ -53,10 +52,9 @@ class ItemDetailUI extends React.Component<Props, State> {
   addCss = (idDetailUI: number)=> {
     this.props.reAddCss(this.state, idDetailUI)
   }
-  onChangeCss = (e: any)=> {
-    // @ts-ignore
+  onChangeCss = (e: string)=> {
     this.setState({
-      [e.target.name]: e.target.value
+      detail_ui_css: `${e}`
     })
   }
   generateInfo = () => {
@@ -128,7 +126,8 @@ class ItemDetailUI extends React.Component<Props, State> {
                 showPrintMargin={false}
                 showGutter={false}
                 highlightActiveLine={true}
-                value={`.button {color: red;}`}
+                onChange={this.onChangeCss}
+                value={`${this.state.detail_ui_css}`}
                 setOptions={{
                 enableBasicAutocompletion: true,
                 enableLiveAutocompletion: true,

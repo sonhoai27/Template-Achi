@@ -11,6 +11,7 @@ import NotifySuccess from "../shared/notifySuccess";
 import NotifyDanger from "../shared/notifyDanger";
 import Loading from "../admin/shared/loading";
 import ClientVideo from './video/ClientVideo';
+import ClientGift from "./gift";
 
 interface Props {
     match?: any;
@@ -42,6 +43,7 @@ class ClientRouter extends React.Component<Props, {}> {
                     <Route path={`${this.props.match.url}/khoa-hoc`} component={ClientSourceRoute} />
                     <Route path={`${this.props.match.url}/sach`} component={EbookLadingPage} />
                     <Route path={`${this.props.match.url}/video`} component={ClientVideo} />
+                    <Route path={`${this.props.match.url}/qua-tang`} component={ClientGift} />
                     <div className="jq-toast-wrap top-right">
                         {this.props.isSuccess ? <NotifySuccess /> : ''}
                         {this.props.isDanger ? <NotifyDanger /> : ''}

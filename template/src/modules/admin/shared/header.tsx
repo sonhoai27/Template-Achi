@@ -196,15 +196,21 @@ class Header extends React.Component {
                 </a>
                 <ul className="nav nav-second-level collapse">
                   <li>
-                    <a href="chat.html">
+                    <a href={BASEURLADMIN+'ui'} >
                       <i className="ti-comments-smiley fa-fw" />
                       <span className="hide-menu">Danh sách UI</span>
                     </a>
                   </li>
                   <li>
-                    <a href="javascript:void(0)" className="waves-effect">
+                    <a href={BASEURLADMIN+'ui/add'}  className="waves-effect">
                       <i className="ti-desktop fa-fw" />
                       <span className="hide-menu">Thêm mới</span>
+                    </a>
+                    </li>
+                    <li>
+                    <a href={BASEURLADMIN+'ui/page'}  className="waves-effect">
+                      <i className="ti-desktop fa-fw" />
+                      <span className="hide-menu">Trang</span>
                     </a>
                     </li>
                   </ul>
@@ -213,7 +219,7 @@ class Header extends React.Component {
                 <a href="javascript:void(0)" className="waves-effect">
                   <i className="mdi mdi-apps fa-fw" />
                   <span className="hide-menu">
-                    Ebook
+                    Sổ tay
                     <span className="fa arrow" />
                   </span>
                 </a>
