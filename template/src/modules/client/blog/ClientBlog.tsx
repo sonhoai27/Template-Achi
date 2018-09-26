@@ -167,11 +167,12 @@ class ClientBlog extends React.Component<IProps, {}> {
           <div className="row">
             <div className="col-sm-12">
               <div className="row">
-                <div className="col-sm-9" />
-                <div className="col-sm-3" style={{
+                <div className="col-sm-4" />
+                <div className="col-sm-4" style={{
                   marginBottom: 32
                 }}>
                   <Select
+                    className="custom-select-category"
                     closeMenuOnSelect={false}
                     components={makeAnimated()}
                     onChange={item => {
@@ -188,6 +189,7 @@ class ClientBlog extends React.Component<IProps, {}> {
                     ]}
                   />
                 </div>
+                <div className="col-sm-4"></div>
               </div>
             </div>
           </div>

@@ -1750,3 +1750,11 @@ blockquote p:after {
   bottom: 9px;
   top: 0;
 }
+.custom-select-category>div {
+  border: 1px solid;
+}
+.custom-select-category>div:hover,
+.custom-select-category>div:focus {
+  outline: none;
+  border: 1px solid;
+}
