@@ -4,6 +4,8 @@ import Header from "../shared/header";
 import BreadCrumd from "../shared/breadcrumb";
 import UI from "./ui";
 import AddUIDetail from "./add-ui-detail";
+import Page from "../page/page";
+import DetailPage from "../page/detailPage";
 interface Props {
   match?: any;
 }
@@ -42,6 +44,16 @@ class UIRouter extends React.Component<Props, {}> {
             <Route
               path={`${this.props.match.url}/add-detail-ui/:idUi`}
               component={AddUIDetail}
+            />
+            <Route
+              exact
+              path={`${this.props.match.url}/page`}
+              component={Page}
+            />
+            <Route
+              exact
+              path={`${this.props.match.url}/page/detail/:idPage`}
+              component={DetailPage}
             />
           </div>
         </div>

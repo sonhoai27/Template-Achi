@@ -36,7 +36,7 @@ class App extends React.Component<IProps, IState> {
     }
   }
   componentDidMount() {
-    this.props.reCheckLogin();
+    //this.props.reCheckLogin();
     setTimeout(() => {
       // @ts-ignore
       document.getElementById("ui-loading").style.display = "none";
@@ -62,8 +62,12 @@ class App extends React.Component<IProps, IState> {
             ) : (
               <Route path={BASEURL + "login"} component={Error} />
             )}
-            {this.state.user.status ? (
-              <PrivateRouter
+            {/* {this.state.user.status ? (
+            ) : (
+              ""
+            )} */}
+
+            <PrivateRouter
                 resCheckLogin={this.props.resCheckLogin}
                 path={BASEURL + "admin"}
                 component={Loadable({
@@ -72,9 +76,6 @@ class App extends React.Component<IProps, IState> {
                   loading: () => <h1>Loading....</h1>
                 })}
               />
-            ) : (
-              ""
-            )}
           </Switch>
         </Router>
         <div id="ui-loading">

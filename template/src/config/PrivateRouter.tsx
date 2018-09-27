@@ -13,7 +13,7 @@ export const PrivateRouter = ({
 }: IPrivateRouteProps) => {
   return (
     <Route {...rest} render={(props) => (
-      User.status === 202
+      User.status !== 202
             ? <Component {...props} />
             : <Redirect to={BASEURL+'login'} />
     )} />
