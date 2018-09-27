@@ -42,7 +42,6 @@ class App extends React.Component<IProps, IState> {
       document.getElementById("ui-loading").style.display = "none";
     }, 0);
   }
-
   render() {
     return (
       <>
@@ -68,14 +67,14 @@ class App extends React.Component<IProps, IState> {
             )} */}
 
             <PrivateRouter
-                resCheckLogin={this.props.resCheckLogin}
-                path={BASEURL + "admin"}
-                component={Loadable({
-                  loader: () =>
-                    import(/*webpackChunkName: "admin"*/ "./admin/AdminRouter"),
-                  loading: () => <h1>Loading....</h1>
-                })}
-              />
+              resCheckLogin={this.props.resCheckLogin}
+              path={BASEURL + "admin"}
+              component={Loadable({
+                loader: () =>
+                  import(/*webpackChunkName: "admin"*/ "./admin/AdminRouter"),
+                loading: () => <h1>Loading....</h1>
+              })}
+            />
           </Switch>
         </Router>
         <div id="ui-loading">

@@ -4,11 +4,15 @@ import { reListPageUI } from "./rePage";
 import ListElementDetailUIPage from "./detail-ui/detail-ui";
 import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
+import { reIsDanger, reIsSuccess } from "../../../reducers/init";
 
 interface IProps {
   match: any;
   resListPageUI: any;
   reListPageUI: (id: number) => void;
+  resSaveContent: any;
+  reIsSuccess: (status: boolean) => void;
+  reIsDanger: (status: boolean) => void;
 }
 interface IState {}
 class DetailPage extends React.Component<IProps, IState> {
@@ -17,6 +21,23 @@ class DetailPage extends React.Component<IProps, IState> {
   }
   componentDidMount() {
     this.props.reListPageUI(this.props.match.params.idPage);
+  }
+  componentDidUpdate(preProps){
+    if(this.props.resSaveContent != preProps.resSaveContent){
+      if (this.props.resSaveContent.status === 200) {
+        this.props.reIsSuccess(true);
+        setTimeout(() => {
+          this.props.reIsSuccess(false);
+          this.props.reListPageUI(this.props.match.params.idPage);
+        }, 2000);
+      } else {
+        this.props.reIsDanger(true);
+        setTimeout(() => {
+          this.props.reIsDanger(false);
+          this.props.reListPageUI(this.props.match.params.idPage);
+        }, 2000);
+      }
+    }
   }
   render() {
     return (
@@ -40,10 +61,8 @@ class DetailPage extends React.Component<IProps, IState> {
                     target="_blank"
                     to={
                       BASEURLADMIN +
-                      "source/review-landing-page/" +
-                      this.props.match.params.idUI +
-                      "/" +
-                      this.props.match.params.idSource
+                      "ui/page/review/" +
+                      this.props.match.params.idPage
                     }
                   >
                     <div className="btn btn-sm btn-info">
@@ -71,10 +90,13 @@ class DetailPage extends React.Component<IProps, IState> {
 }
 
 const mapStateToProps = storeState => ({
-  resListPageUI: storeState.rePage.resListPageUI
+  resListPageUI: storeState.rePage.resListPageUI,
+  resSaveContent: storeState.rePage.resSaveContent
 });
 const mapDispatchToProps = {
-  reListPageUI
+  reListPageUI,
+  reIsDanger,
+  reIsSuccess
 };
 export default connect(
   mapStateToProps,

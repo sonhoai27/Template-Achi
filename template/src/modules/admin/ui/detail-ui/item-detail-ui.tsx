@@ -117,7 +117,7 @@ class ItemDetailUI extends React.Component<Props, State> {
             <div className="col-md-12">
               {/* <textarea name="detail_ui_css" onChange={this.onChangeCss} className="form-control" defaultValue={this.props.detailUI.detail_ui_css}/> */}
               <AceEditor
-                style={{height: 128}}
+                style={{height: 96}}
                 mode="css"
                 theme="monokai"
                 name="blah2"

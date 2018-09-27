@@ -12,7 +12,7 @@ import NotifyDanger from "../shared/notifyDanger";
 import Loading from "../admin/shared/loading";
 import ClientVideo from './video/ClientVideo';
 import ClientGift from "./gift";
-
+import ClientAboutPage from './About'
 interface Props {
     match?: any;
     isDanger: boolean;
@@ -44,6 +44,7 @@ class ClientRouter extends React.Component<Props, {}> {
                     <Route path={`${this.props.match.url}/sach`} component={EbookLadingPage} />
                     <Route path={`${this.props.match.url}/video`} component={ClientVideo} />
                     <Route path={`${this.props.match.url}/qua-tang`} component={ClientGift} />
+                    <Route path={`${this.props.match.url}/gioi-thieu`} component={ClientAboutPage} />
                     <div className="jq-toast-wrap top-right">
                         {this.props.isSuccess ? <NotifySuccess /> : ''}
                         {this.props.isDanger ? <NotifyDanger /> : ''}

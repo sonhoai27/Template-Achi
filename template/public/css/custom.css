@@ -9,7 +9,25 @@ body {
     margin-right: 8px;
 }
 
-
+.paddingY-64 {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+  
+  .paddingY-128 {
+    padding-top: 128px;
+    padding-bottom: 128px;
+  }
+  
+  .paddingY-16 {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  
+  .paddingY-32 {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
 /* photo */
 
 .photo-app {
@@ -215,8 +233,6 @@ body {
 .add-element-to-ui .item-block {
     display: inline-block;
     width: 100%;
-    margin-bottom: 32px;
-    padding: 8px;
     border: 1px dotted #eee;
 }
 

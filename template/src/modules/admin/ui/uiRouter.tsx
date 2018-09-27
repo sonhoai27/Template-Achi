@@ -6,6 +6,7 @@ import UI from "./ui";
 import AddUIDetail from "./add-ui-detail";
 import Page from "../page/page";
 import DetailPage from "../page/detailPage";
+import ReviewPage from "../page/reviewPage"
 interface Props {
   match?: any;
 }
@@ -54,6 +55,11 @@ class UIRouter extends React.Component<Props, {}> {
               exact
               path={`${this.props.match.url}/page/detail/:idPage`}
               component={DetailPage}
+            />
+            <Route
+              exact
+              path={`${this.props.match.url}/page/review/:idPage`}
+              component={ReviewPage}
             />
           </div>
         </div>

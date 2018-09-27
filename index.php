@@ -16,6 +16,7 @@ define("BASE_URL", 'http://localhost:8080/Achi/template/public/');
         <link href="<?=BASE_URL?>css/jquery.toast.css" rel="stylesheet">
         <link href="<?=BASE_URL?>css/style.css" rel="stylesheet">
         <link href="<?=BASE_URL?>css/megna-dark.css" rel="stylesheet">
+        <link href="<?=BASE_URL?>css/cdn.css" rel="stylesheet">
         <script src="<?=BASE_URL?>js/jquery-3.3.1.slim.min.js"></script>
         <?php
         echo file_get_contents("http://localhost:8080/Achi/api/seo/home");

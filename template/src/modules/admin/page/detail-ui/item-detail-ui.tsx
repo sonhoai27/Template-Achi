@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import ListElementDetailUIPage from "./detail-ui";
 import { reSaveContent } from "../rePage";
+
 interface Props {
   detailUI: any;
   sub?: any;
