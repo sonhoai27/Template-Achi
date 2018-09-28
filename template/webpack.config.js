@@ -5,7 +5,7 @@ module.exports = {
         filename: "[name].bundle.js",
         path: __dirname + "/public"
     },
-    devtool: "cheap-module-source-map",
+    devtool: "",
 
     resolve: {
         extensions: [".ts", ".tsx", ".js", ".json"]
@@ -23,7 +23,9 @@ module.exports = {
                 exclude: ['node_modules']
             },
 
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
+            { enforce: "pre", test: /\.js$/, loader: "source-map-loader", exclude: [
+                path.join(process.cwd(), 'node_modules')
+              ] },
             {
                 test: /\.css$/,
                 use: [ 'style-loader', 'css-loader' ]

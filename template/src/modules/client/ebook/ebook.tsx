@@ -8,6 +8,7 @@ import Collapse from "rc-collapse";
 import Slider from "react-slick";
 import OrderEbook from "./com/orderEbook";
 import Helper from "./com/helper";
+import EbookPreview from "./com/preview";
 var Panel = Collapse.Panel;
 const settings = {
   dots: true,
@@ -277,10 +278,7 @@ class EbookLadingPage extends React.Component<{}, IState> {
               <div className="col-xs-12">
                 <h1 className="text-center white">XEM TRƯỚC</h1>
                 <p className="text-center white">- BEST EBOOK FEATURES -</p>
-                <div className="preview-ebook_action">
-                  <i className="ti-control-play" />
-                  <i className="ti-image" />
-                </div>
+                <EbookPreview/>
               </div>
             </div>
           </div>
