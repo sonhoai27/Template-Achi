@@ -2,11 +2,9 @@ import * as React from "react";
 import { connect } from "react-redux";
 import ItemReviewPage from './item'
 import {Helmet} from "react-helmet";
-const Hello = ()=> {
-    return (<h1>Xin chào!</h1>)
-}
+import EbookPreview from "../../../client/ebook/com/preview";
 const listCom = {
-    HELLO: <Hello/>
+    EBOOKPREVIEW: <EbookPreview/>
 }
 interface Props {
     item: any
