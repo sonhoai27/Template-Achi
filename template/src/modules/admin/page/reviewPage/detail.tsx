@@ -3,8 +3,12 @@ import { connect } from "react-redux";
 import ItemReviewPage from './item'
 import {Helmet} from "react-helmet";
 import EbookPreview from "../../../client/ebook/com/preview";
+import Customer from "../../../client/ebook/com/customer";
+import OptionEbook from "../../../client/ebook/com/optionEbook";
 const listCom = {
-    EBOOKPREVIEW: <EbookPreview/>
+    EBOOKPREVIEW: <EbookPreview/>,
+    CUSTOMER: <Customer/>,
+    ORDEREBOOK: <OptionEbook/>
 }
 interface Props {
     item: any

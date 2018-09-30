@@ -3,17 +3,19 @@ import { connect } from "react-redux";
 import DetailPage from './detail'
 interface Props {
     items: any;
-    component?: any; //list ds neu muont hem cac component vao,json object, key viet in hoa
+    coms?: any; //list ds neu muont hem cac component vao,json object, key viet in hoa
 }
+
 class ItemPage extends React.Component<Props, {}> {
     constructor(props) {
         super(props);
     }
+
     renderListElement = ()=> {
         if(this.props.items){
           return this.props.items.map(element => {
               return <DetailPage
-                component ={this.props.component}
+                coms={this.props.coms}
                 key={element.detail_ui_random_id}
                 item={element}/>
           })

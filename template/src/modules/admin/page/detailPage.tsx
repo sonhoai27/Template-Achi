@@ -5,6 +5,8 @@ import ListElementDetailUIPage from "./detail-ui/detail-ui";
 import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
 import { reIsDanger, reIsSuccess } from "../../../reducers/init";
+import ModalEditContentElement from "../source/detail-ui/ModalEditContentElement";
+import { reShowEditContent } from "../source/reSource";
 
 interface IProps {
   match: any;
@@ -13,6 +15,8 @@ interface IProps {
   resSaveContent: any;
   reIsSuccess: (status: boolean) => void;
   reIsDanger: (status: boolean) => void;
+  reShowEditContent: (status: boolean)=> void;
+  resShowEditContent: any;
 }
 interface IState {}
 class DetailPage extends React.Component<IProps, IState> {
@@ -84,6 +88,7 @@ class DetailPage extends React.Component<IProps, IState> {
             </div>
           </div>
         </div>
+        {this.props.resShowEditContent ? <ModalEditContentElement/> : ''}
       </>
     );
   }
@@ -91,12 +96,14 @@ class DetailPage extends React.Component<IProps, IState> {
 
 const mapStateToProps = storeState => ({
   resListPageUI: storeState.rePage.resListPageUI,
-  resSaveContent: storeState.rePage.resSaveContent
+  resSaveContent: storeState.rePage.resSaveContent,
+  resShowEditContent: storeState.reSource.resShowEditContent
 });
 const mapDispatchToProps = {
   reListPageUI,
   reIsDanger,
-  reIsSuccess
+  reIsSuccess,
+  reShowEditContent
 };
 export default connect(
   mapStateToProps,

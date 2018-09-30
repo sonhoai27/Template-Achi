@@ -10,60 +10,80 @@ import { connect } from "react-redux";
 import NotifySuccess from "../shared/notifySuccess";
 import NotifyDanger from "../shared/notifyDanger";
 import Loading from "../admin/shared/loading";
-import ClientVideo from './video/ClientVideo';
+import ClientVideo from "./video/ClientVideo";
 import ClientGift from "./gift";
-import ClientAboutPage from './About'
+import ClientAboutPage from "./About";
 interface Props {
-    match?: any;
-    isDanger: boolean;
-    isSuccess: boolean;
-    isLoading: boolean
+  match?: any;
+  isDanger: boolean;
+  isSuccess: boolean;
+  isLoading: boolean;
 }
 class ClientRouter extends React.Component<Props, {}> {
-    constructor(props) {
-        super(props);
-        console.log(this.props.match)
-    }
+  constructor(props) {
+    super(props);
+    console.log(this.props.match);
+  }
 
-    componentDidMount() {
-        var doc = document.body;
-        doc.classList.add("client-page");
-    }
-
-    render() {
-        return (
-            <>
-                <div className="margin-top">
-                    <Helmet>
-                        <link rel="stylesheet" href={RESOURCE + "css/client.css"} />
-                        <link rel="stylesheet" href={RESOURCE + "css/mobile.css"} media="screen and (max-width: 769px)" />
-                    </Helmet>
-                    <Route exact path={`${this.props.match.url}`} component={Error} />
-                    <Route path={`${this.props.match.url}/blog`} component={ClientBlogRoute} />
-                    <Route path={`${this.props.match.url}/khoa-hoc`} component={ClientSourceRoute} />
-                    <Route path={`${this.props.match.url}/sach`} component={EbookLadingPage} />
-                    <Route path={`${this.props.match.url}/video`} component={ClientVideo} />
-                    <Route path={`${this.props.match.url}/qua-tang`} component={ClientGift} />
-                    <Route path={`${this.props.match.url}/gioi-thieu`} component={ClientAboutPage} />
-                    <div className="jq-toast-wrap top-right">
-                        {this.props.isSuccess ? <NotifySuccess /> : ''}
-                        {this.props.isDanger ? <NotifyDanger /> : ''}
-                    </div>
-                    {this.props.isLoading ? <Loading /> : ''}
-                </div>
-            </>
-        );
-    }
+  componentDidMount() {
+    var doc = document.body;
+    doc.classList.add("client-page");
+  }
+  render() {
+    return (
+      <>
+        <div className="margin-top">
+          <Helmet>
+            <link rel="stylesheet" href={RESOURCE + "css/client.css"} />
+            <link
+              rel="stylesheet"
+              href={RESOURCE + "css/mobile.css"}
+              media="screen and (max-width: 769px)"
+            />
+          </Helmet>
+          <Route exact path={`${this.props.match.url}`} component={Error} />
+          <Route
+            path={`${this.props.match.url}/blog`}
+            component={ClientBlogRoute}
+          />
+          <Route
+            path={`${this.props.match.url}/khoa-hoc`}
+            component={ClientSourceRoute}
+          />
+          <Route
+            path={`${this.props.match.url}/sach`}
+            component={EbookLadingPage}
+          />
+          <Route
+            path={`${this.props.match.url}/video`}
+            component={ClientVideo}
+          />
+          <Route
+            path={`${this.props.match.url}/qua-tang`}
+            component={ClientGift}
+          />
+          <Route
+            path={`${this.props.match.url}/gioi-thieu`}
+            component={ClientAboutPage}
+          />
+          <div className="jq-toast-wrap top-right">
+            {this.props.isSuccess ? <NotifySuccess /> : ""}
+            {this.props.isDanger ? <NotifyDanger /> : ""}
+          </div>
+          {this.props.isLoading ? <Loading /> : ""}
+        </div>
+      </>
+    );
+  }
 }
 
 const mapStateToProps = storeState => ({
-    isSuccess: storeState.reInit.isSuccess,
-    isDanger: storeState.reInit.isDanger,
-    isLoading: storeState.reInit.isLoading
+  isSuccess: storeState.reInit.isSuccess,
+  isDanger: storeState.reInit.isDanger,
+  isLoading: storeState.reInit.isLoading
 });
-const mapDispatchToProps = {
-};
+const mapDispatchToProps = {};
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(ClientRouter);

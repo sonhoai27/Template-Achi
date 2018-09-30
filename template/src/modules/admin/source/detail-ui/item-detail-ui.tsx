@@ -28,6 +28,9 @@ class ItemDetailUISource extends React.Component<Props, State> {
       [tempDom.name]: tempDom.value
     })
   }
+  saveContentElementByTiny = ()=> {
+    
+  }
   generateInfo = () => {
     return (
       <div className="item-block" style={{marginBottom: 0}}>

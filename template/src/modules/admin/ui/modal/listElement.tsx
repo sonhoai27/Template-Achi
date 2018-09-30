@@ -41,7 +41,6 @@ class ListElement extends React.Component<Props, {}> {
               element.element_id, element.element_real_id
             )
             setTimeout(()=> {
-              this.props.reShowListElement(false)
               document.body.style.overflowY = 'auto'
             }, 1000)
           }}>

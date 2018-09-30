@@ -4,7 +4,7 @@ import ItemPage from './item'
 import {Helmet} from "react-helmet";
 interface Props {
     item: any;
-    component?: any;
+    coms?: any;
 }
 class DetailPage extends React.Component<Props, {}> {
     constructor(props) {
@@ -30,10 +30,10 @@ class DetailPage extends React.Component<Props, {}> {
     }
     makeSub = ()=> {
         if(this.props.item.child){
-            return [<ItemPage items={this.props.item.child} />]
+            return [<ItemPage coms={this.props.coms} items={this.props.item.child} />]
         }else {
             if(this.props.item.element_type === "2"){
-                return [this.props.component[this.props.item.content_page_attribute]]
+                return [this.props.coms[this.props.item.content_page_attribute]]
             }else {
                 return this.props.item.content_page_data
             }

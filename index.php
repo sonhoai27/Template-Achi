@@ -19,6 +19,8 @@ define("BASE_URL", 'http://localhost:8080/Achi/template/public/');
         <link href="<?=BASE_URL?>css/swiper.min.css" rel="stylesheet">
         <script src="<?=BASE_URL?>js/jquery-3.3.1.slim.min.js"></script>
         <link href="<?=BASE_URL?>css/cdn.css" rel="stylesheet">
+        <meta name="robots" content="noindex, nofollow">
+        <script src="https://cdn.ckeditor.com/4.10.1/full/ckeditor.js"></script>
         <?php
         echo file_get_contents("http://localhost:8080/Achi/api/seo/home");
     ?>

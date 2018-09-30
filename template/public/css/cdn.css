@@ -25,13 +25,18 @@
 .collapsible.active:after {
   content: "\2212";
 }
-
-.collapsible-content {
+.collapsible.active + .collapsible-content {
+  padding: 18px;
+}
+.collapsible + .collapsible-content {
   padding: 0 18px;
+  transition: all .3s;
+}
+.collapsible-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.2s ease-out;
-  background-color: #f1f1f1;
+  transition: max-height 0.5s ease-out;
+  background-color: rgba(241, 241, 241, 0.2);
 }
 
 .swiper-container {

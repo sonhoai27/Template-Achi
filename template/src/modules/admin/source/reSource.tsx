@@ -14,7 +14,9 @@ export const ACTION_TYPES = {
     API_UPDATE_DATE_SCHE: 'ReSource/API_UPDATE_DATE_SCHE',
     API_UPDATE_SCHE: 'ReSource/API_UPDATE_SCHE',
     API_DETAIL_SCHE: 'ReSource/API_DETAIL_SCHE',
-    API_LIST_CONTENT_UI_SOURCE: 'ReSource/API_LIST_CONTENT_UI_SOURCE'
+    API_LIST_CONTENT_UI_SOURCE: 'ReSource/API_LIST_CONTENT_UI_SOURCE',
+    API_SHOW_EDIT_CONTENT: 'ReSource/API_SHOW_EDIT_CONTENT',
+    SET_CONTENT_ELEMENT: 'ReSource/SET_CONTENT_ELEMENT'
 }
 const initialState = {
     resDetailSource: [],
@@ -28,7 +30,9 @@ const initialState = {
     resUpdateDateSche: {},
     resUpdateSche: {},
     resDetailSche: {},
-    resListContentUISource: []
+    resListContentUISource: [],
+    resShowEditContent: false,
+    resContentElement: ""
 }
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -237,6 +241,18 @@ export default (state = initialState, action) => {
                 resListContentUISource: action.payload.data
             }
         }
+        case (ACTION_TYPES.API_SHOW_EDIT_CONTENT): {
+            return {
+                ...state,
+                resShowEditContent: action.payload
+            }
+        }
+        case (ACTION_TYPES.SET_CONTENT_ELEMENT): {
+            return {
+                ...state,
+                resContentElement: action.payload
+            }
+        }
         default:
             return state;
     }
@@ -324,6 +340,22 @@ export const reListContentUISource = (idUI, idSource) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_LIST_CONTENT_UI_SOURCE,
         payload: axios.get(API_UI+'detail-ui-source/'+idUI+'/'+idSource)
+    });
+    return result;
+};
+
+export const reShowEditContent = (status) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_SHOW_EDIT_CONTENT,
+        payload: status
+    });
+    return result;
+};
+
+export const reSetContentElement = (content) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.SET_CONTENT_ELEMENT,
+        payload: content
     });
     return result;
 };

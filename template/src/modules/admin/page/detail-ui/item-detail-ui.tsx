@@ -2,12 +2,15 @@ import * as React from "react";
 import { connect } from "react-redux";
 import ListElementDetailUIPage from "./detail-ui";
 import { reSaveContent } from "../rePage";
+import { reShowEditContent, reSetContentElement } from "../../source/reSource";
 
 interface Props {
   detailUI: any;
   sub?: any;
   match: any,
-  reSaveContent: (form: any)=> void
+  reSaveContent: (form: any)=> void;
+  reShowEditContent: (status: boolean)=> void;
+  reSetContentElement: (content: any)=> void;
 }
 interface State {
   content_page_attribute: string,
@@ -53,21 +56,14 @@ class ItemDetailUIPage extends React.Component<Props, State> {
           <div className="form-group">
             <label className="col-md-12">
               <span className="help"> Nội dung của đối tượng</span>
-              <div onClick={()=> this.saveContentPage({
-                idVirtualElement: this.props.detailUI.detail_ui_random_id+'-content',
-                content_page_id: this.props.detailUI.content_page_id,
-                content_page_id_detail_ui: this.props.detailUI.detail_ui_id
-              })} className="btn btn-xs btn-info">
-                <i className=" icon-doc" /> Lưu
+              <div onClick={()=> {
+                  this.props.reShowEditContent(true)
+                  this.props.reSetContentElement(this.props.detailUI)
+                }} className="btn btn-xs btn-primary">
+                <i className=" icon-doc" /> sửa
               </div>
             </label>
-            <div className="col-md-12">
-              <textarea 
-              defaultValue={this.state.content_page_data} 
-              name="content_page_data" 
-              id={this.props.detailUI.detail_ui_random_id+'-content'} 
-              className="form-control" style={{height: 50}}/>
-            </div>
+            <p>Nhấn vào "sửa" để thêm hoặc sửa.</p>
           </div>
           <div className="form-group">
             <label className="col-md-12">
@@ -163,6 +159,8 @@ const mapStateToProps = storeState => ({
 });
 const mapDispatchToProps = {
   reSaveContent,
+  reShowEditContent,
+  reSetContentElement
 };
 export default connect(
   mapStateToProps,

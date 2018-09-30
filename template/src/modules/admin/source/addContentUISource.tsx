@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { reListContentUISource } from "./reSource";
+import { reListContentUISource, reShowEditContent } from "./reSource";
 import ListElementDetailUISource from "./detail-ui/detail-ui";
 import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
@@ -12,6 +12,8 @@ interface Props {
   reListContentUISource: (idUI: number, idSource: number)=> void;
   reIsSuccess: (status: boolean) => void;
   reIsDanger: (status: boolean) => void;
+  reShowEditContent: (status: boolean)=> void;
+  resShowEditContent: any;
 }
 class AddContentUISource extends React.Component<Props, {}> {
   constructor(props) {
@@ -65,12 +67,14 @@ class AddContentUISource extends React.Component<Props, {}> {
 }
 const mapStateToProps = storeState => ({
   resListContentUISource: storeState.reSource.resListContentUISource,
-  resAddUpdateContentElement: storeState.reUI.resAddUpdateContentElement
+  resAddUpdateContentElement: storeState.reUI.resAddUpdateContentElement,
+  resShowEditContent: storeState.reSource.resShowEditContent
 });
 const mapDispatchToProps = {
   reListContentUISource,
   reIsDanger,
-  reIsSuccess
+  reIsSuccess,
+  reShowEditContent
 };
 export default connect(
   mapStateToProps,
