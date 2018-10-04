@@ -4,7 +4,7 @@ import { API } from "../../../config/const";
 
 export const ACTION_TYPES = {
     API_DETAIL_SOURCE: 'ReSource/API_DETAIL_SOURCE',
-    API_ADD_SOURCE: 'ReSource/API_DETAIL_SOURCE',
+    API_ADD_SOURCE: 'ReSource/API_ADD_SOURCE',
     API_ADD_DATE_SCHE: 'ReSource/API_ADD_DATE_SCHE',
     API_ADD_SCHE: 'ReSource/API_ADD_SCHE',
     API_LIST_SOURCE: 'ReSource/API_LIST_SOURCE',
@@ -16,7 +16,12 @@ export const ACTION_TYPES = {
     API_DETAIL_SCHE: 'ReSource/API_DETAIL_SCHE',
     API_LIST_CONTENT_UI_SOURCE: 'ReSource/API_LIST_CONTENT_UI_SOURCE',
     API_SHOW_EDIT_CONTENT: 'ReSource/API_SHOW_EDIT_CONTENT',
-    SET_CONTENT_ELEMENT: 'ReSource/SET_CONTENT_ELEMENT'
+    SET_CONTENT_ELEMENT: 'ReSource/SET_CONTENT_ELEMENT',
+    API_LIST_SOURCE_BY_0: 'ReSource/API_LIST_SOURCE_BY_0',
+    API_LIST_SOURCE_BY_1: 'ReSource/API_LIST_SOURCE_BY_1',
+    API_ADD_CONTACT: 'ReSource/API_ADD_CONTACT',
+    API_FILTER_CONTACT: 'ReSource/API_ADD_CONTACT',
+    API_LIST_CONTACT_PAGING: 'ReSource/API_LIST_CONTACT_PAGING'
 }
 const initialState = {
     resDetailSource: [],
@@ -32,7 +37,12 @@ const initialState = {
     resDetailSche: {},
     resListContentUISource: [],
     resShowEditContent: false,
-    resContentElement: ""
+    resContentElement: "",
+    resListSourceBy0: [],
+    resListSourceBy1: [],
+    resAddContact: {},
+    resFilterContact: [],
+    resListContactPaging: []
 }
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -241,13 +251,98 @@ export default (state = initialState, action) => {
                 resListContentUISource: action.payload.data
             }
         }
-        case (ACTION_TYPES.API_SHOW_EDIT_CONTENT): {
+        //list source by type
+        case REQUEST(ACTION_TYPES.API_LIST_SOURCE_BY_0): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_LIST_SOURCE_BY_0): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_LIST_SOURCE_BY_0): {
+            return {
+                ...state,
+                resListSourceBy0: action.payload.data
+            }
+        }
+        //list source by type
+        case REQUEST(ACTION_TYPES.API_LIST_SOURCE_BY_1): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_LIST_SOURCE_BY_1): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_LIST_SOURCE_BY_1): {
+            return {
+                ...state,
+                resListSourceBy1: action.payload.data
+            }
+        }
+        //add contact
+        case REQUEST(ACTION_TYPES.API_ADD_CONTACT): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_ADD_CONTACT): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_ADD_CONTACT): {
+            return {
+                ...state,
+                resAddContact: action.payload.data
+            }
+        }
+         //filter contact
+         case REQUEST(ACTION_TYPES.API_FILTER_CONTACT): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_FILTER_CONTACT): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_FILTER_CONTACT): {
+            return {
+                ...state,
+                resFilterContact: action.payload.data
+            }
+        }
+         //list contact
+         case REQUEST(ACTION_TYPES.API_LIST_CONTACT_PAGING): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_LIST_CONTACT_PAGING): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_LIST_CONTACT_PAGING): {
+            return {
+                ...state,
+                resListContactPaging: action.payload.data
+            }
+        }
+        case ACTION_TYPES.API_SHOW_EDIT_CONTENT: {
             return {
                 ...state,
                 resShowEditContent: action.payload
             }
         }
-        case (ACTION_TYPES.SET_CONTENT_ELEMENT): {
+        case ACTION_TYPES.SET_CONTENT_ELEMENT: {
             return {
                 ...state,
                 resContentElement: action.payload
@@ -259,6 +354,7 @@ export default (state = initialState, action) => {
 }
 const API_SOURCE = API+'source/'
 const API_UI = API+'ui/'
+const API_CONTACT = API + "contact";
 export const reDetailSource = (id) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_DETAIL_SOURCE,
@@ -293,6 +389,21 @@ export const reListSource = (page) => async dispatch => {
         payload: axios.get(API_SOURCE+'all-source'+"/"+page)
     });
     return result;
+};
+export const reListSourceByType = (type) => async dispatch => {
+    if(type=== 0){
+        const result = await dispatch({
+            type: ACTION_TYPES.API_LIST_SOURCE_BY_0,
+            payload: axios.get(API_SOURCE+'filter-source'+"/"+type)
+        });
+        return result;
+    }else {
+        const result = await dispatch({
+            type: ACTION_TYPES.API_LIST_SOURCE_BY_1,
+            payload: axios.get(API_SOURCE+'filter-source'+"/"+type)
+        });
+        return result;
+    }
 };
 export const reUpdateSource = (form, id) => async dispatch => {
     const result = await dispatch({
@@ -356,6 +467,20 @@ export const reSetContentElement = (content) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.SET_CONTENT_ELEMENT,
         payload: content
+    });
+    return result;
+};
+export const reAddContact = (form: any) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_ADD_CONTACT,
+        payload: axios.post(API_CONTACT, form)
+    });
+    return result;
+};
+export const reListContactPaging = (page: number) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_LIST_CONTACT_PAGING,
+        payload: axios.get(API_CONTACT+'/all/'+page)
     });
     return result;
 };

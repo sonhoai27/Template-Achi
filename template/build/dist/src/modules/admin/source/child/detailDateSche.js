@@ -26,6 +26,8 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Editor } from "@tinymce/tinymce-react";
 import { reUpdateDateSche, reListDateSche } from "../reSource";
+import { reIsDanger, reIsSuccess } from "../../../../reducers/init";
+import { BASEURLADMIN } from "../../../../config/const";
 var DetailDateSche = /** @class */ (function (_super) {
     __extends(DetailDateSche, _super);
     function DetailDateSche(props) {
@@ -50,10 +52,21 @@ var DetailDateSche = /** @class */ (function (_super) {
         return _this;
     }
     DetailDateSche.prototype.componentWillReceiveProps = function (nextProps) {
+        var _this = this;
         if (nextProps.resUpdateDateSche != this.props.resUpdateDateSche) {
             if (nextProps.resUpdateDateSche.status === 200) {
-                alert('Ok');
-                this.props.reListDateSche(this.props.dateSche.idSche);
+                this.props.reIsSuccess(true);
+                setTimeout(function () {
+                    _this.props.reIsSuccess(false);
+                    window.location.href = BASEURLADMIN + 'source/detail-sche/' + _this.props.dateSche.idSche;
+                }, 2000);
+            }
+            else {
+                this.props.reIsDanger(true);
+                setTimeout(function () {
+                    _this.props.reIsDanger(false);
+                    window.location.href = BASEURLADMIN + 'source/detail-sche/' + _this.props.dateSche.idSche;
+                }, 2000);
             }
         }
     };
@@ -79,7 +92,7 @@ var DetailDateSche = /** @class */ (function (_super) {
                                                 selector: "textarea",
                                                 height: 100,
                                                 theme: "modern",
-                                                plugins: "print preview fullpage powerpaste searchreplace autolink directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount tinymcespellchecker a11ychecker imagetools mediaembed  linkchecker contextmenu colorpicker textpattern help",
+                                                plugins: "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
                                                 toolbar1: "fontsizeselect formatselect | bold italic strikethrough forecolor backcolor | link blockquote | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat",
                                                 fontsize_formats: "10pt 11pt 12pt 14pt 16pt 18pt 20pt 24pt 26pt 28pt 36pt 48pt 72pt",
                                             } }))),
@@ -98,7 +111,9 @@ var mapStateToProps = function (storeState) { return ({
 }); };
 var mapDispatchToProps = {
     reUpdateDateSche: reUpdateDateSche,
-    reListDateSche: reListDateSche
+    reListDateSche: reListDateSche,
+    reIsDanger: reIsDanger,
+    reIsSuccess: reIsSuccess
 };
 export default connect(mapStateToProps, mapDispatchToProps)(DetailDateSche);
 //# sourceMappingURL=detailDateSche.js.map

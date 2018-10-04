@@ -6,6 +6,10 @@ import reBlog from '../modules/admin/blog/reBlog';
 import reOrder from '../modules/admin/source/order/reOrder';
 import reVideos from '../modules/admin/videos/reVideos';
 import reGift from '../modules/admin/gift/reGift';
+import reOrderEbook from '../modules/client/ebook/reEbook';
+import reOrderEbookAdmin from '../modules/admin/order-ebook/reOrderEbook';
+import rePage from '../modules/admin/page/rePage';
+import reVideoSource from "../modules/admin/video-source/reVideoSource";
 export default combineReducers({
     reUI: reUI,
     reInit: reInit,
@@ -13,6 +17,10 @@ export default combineReducers({
     reBlog: reBlog,
     reOrder: reOrder,
     reVideos: reVideos,
-    reGift: reGift
+    reGift: reGift,
+    reOrderEbook: reOrderEbook,
+    reOrderEbookAdmin: reOrderEbookAdmin,
+    rePage: rePage,
+    reVideoSource: reVideoSource
 });
 //# sourceMappingURL=index.js.map

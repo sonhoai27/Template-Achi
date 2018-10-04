@@ -55,9 +55,10 @@ export var ACTION_TYPES = {
     CURRENT_EDITOR_PHOTO: 'ReInit/CURRENT_EDITOR_PHOTO',
     IS_SHOWING_PHOTO_APP: 'ReInit/IS_SHOWING_PHOTO_APP',
     IS_DANGER: 'ReInit/IS_DANGER',
-    IS_SUCCESS: 'ReInit/IS_DANGER',
+    IS_SUCCESS: 'ReInit/IS_SUCCESS',
     API_CHECK_LOGIN: 'ReInit/API_CHECK_LOGIN',
-    API_LOGIN: 'ReInit/API_LOGIN'
+    API_LOGIN: 'ReInit/API_LOGIN',
+    IS_LOADING: 'ReInit/IS_LOADING'
 };
 var initialState = {
     resListImage: [],
@@ -68,7 +69,8 @@ var initialState = {
     isSuccess: false,
     isDanger: false,
     resLogin: {},
-    resCheckLogin: {}
+    resCheckLogin: {},
+    isLoading: false
 };
 export default (function (state, action) {
     if (state === void 0) { state = initialState; }
@@ -114,6 +116,9 @@ export default (function (state, action) {
         }
         case (ACTION_TYPES.IS_SUCCESS): {
             return __assign({}, state, { isSuccess: action.payload });
+        }
+        case (ACTION_TYPES.IS_LOADING): {
+            return __assign({}, state, { isLoading: action.payload });
         }
         // check login
         case REQUEST(ACTION_TYPES.API_CHECK_LOGIN): {
@@ -220,6 +225,20 @@ export var reIsSuccess = function (status) { return function (dispatch) { return
         switch (_a.label) {
             case 0: return [4 /*yield*/, dispatch({
                     type: ACTION_TYPES.IS_SUCCESS,
+                    payload: status
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reIsLoading = function (status) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.IS_LOADING,
                     payload: status
                 })];
             case 1:

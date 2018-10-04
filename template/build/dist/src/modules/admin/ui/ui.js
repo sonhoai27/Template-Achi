@@ -14,11 +14,40 @@ var __extends = (this && this.__extends) || (function () {
 import * as React from "react";
 import { BASEURLADMIN } from "../../../config/const";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { reIsSuccess, reIsDanger } from "../../../reducers/init";
+import { reListUI } from "./reUI";
+import AddUi from "./addUi";
 var UI = /** @class */ (function (_super) {
     __extends(UI, _super);
     function UI(props) {
-        return _super.call(this, props) || this;
+        var _this = _super.call(this, props) || this;
+        _this.showHide = function () {
+            _this.setState({
+                isShowingModal: !_this.state.isShowingModal
+            });
+        };
+        _this.renderListUI = function () {
+            if (_this.props.resListUI) {
+                return _this.props.resListUI.map(function (element) {
+                    return (React.createElement("tr", null,
+                        React.createElement("td", { className: "text-center" }, element.ui_id),
+                        React.createElement("td", null,
+                            React.createElement(Link, { to: BASEURLADMIN + "ui/add-detail-ui/" + element.ui_id },
+                                React.createElement("span", { className: "text-muted" }, element.ui_name))),
+                        React.createElement("td", null, element.ui_type == 0 ? "Khóa học" : "Trang")));
+                });
+            }
+            return null;
+        };
+        _this.state = {
+            isShowingModal: false
+        };
+        return _this;
     }
+    UI.prototype.componentDidMount = function () {
+        this.props.reListUI();
+    };
     UI.prototype.render = function () {
         return (React.createElement("div", { className: "row" },
             React.createElement("div", { className: "col-md-8" },
@@ -26,25 +55,26 @@ var UI = /** @class */ (function (_super) {
                     React.createElement("div", { className: "panel-toolbar" },
                         React.createElement("div", { className: "panel-heading" }, "Danh s\u00E1ch UI"),
                         React.createElement("div", { className: "panel-action-bar" },
-                            React.createElement(Link, { to: BASEURLADMIN + 'ui/add-ui' },
-                                React.createElement("div", { className: "btn btn-xs btn-info" }, "Th\u00EAm m\u1EDBi")))),
+                            React.createElement("div", { className: "btn btn-xs btn-info", onClick: this.showHide }, "Th\u00EAm m\u1EDBi"))),
                     React.createElement("div", { className: "table-responsive" },
                         React.createElement("table", { className: "table table-hover manage-u-table" },
                             React.createElement("thead", null,
                                 React.createElement("tr", null,
                                     React.createElement("th", { className: "text-center" }, "#"),
                                     React.createElement("th", null, "T\u00EAn"),
-                                    React.createElement("th", null, "Ng\u00E0y t\u1EA1o"))),
-                            React.createElement("tbody", null,
-                                React.createElement("tr", null,
-                                    React.createElement("td", { className: "text-center" }, "1"),
-                                    React.createElement("td", null,
-                                        React.createElement(Link, { to: BASEURLADMIN + "ui/add-detail-ui/1" },
-                                            React.createElement("span", { className: "text-muted" }, "Texas, Unitedd states"))),
-                                    React.createElement("td", null,
-                                        React.createElement("span", { className: "text-muted" }, "Past : teacher"))))))))));
+                                    React.createElement("td", null, "Lo\u1EA1i"))),
+                            React.createElement("tbody", null, this.renderListUI()))))),
+            this.state.isShowingModal ? React.createElement(AddUi, { showHide: this.showHide }) : ''));
     };
     return UI;
 }(React.Component));
-export default UI;
+var mapStateToProps = function (storeState) { return ({
+    resListUI: storeState.reUI.resListUI
+}); };
+var mapDispatchToProps = {
+    reListUI: reListUI,
+    reIsDanger: reIsDanger,
+    reIsSuccess: reIsSuccess
+};
+export default connect(mapStateToProps, mapDispatchToProps)(UI);
 //# sourceMappingURL=ui.js.map

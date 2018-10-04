@@ -26,7 +26,7 @@ import * as React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { BASEURLADMIN } from "../../../config/const";
 import { connect } from "react-redux";
-import { reShowPhotoApp, reSetCurrentEditorPhoto } from "../../../reducers/init";
+import { reShowPhotoApp, reSetCurrentEditorPhoto, reIsDanger, reIsSuccess } from "../../../reducers/init";
 import { reAddBlog, reListStatus, reListAuthor, reListCategory } from "./reBlog";
 import { alias } from "../../../utils/alias";
 var BlogAdd = /** @class */ (function (_super) {
@@ -85,8 +85,22 @@ var BlogAdd = /** @class */ (function (_super) {
         this.props.reListStatus();
     };
     BlogAdd.prototype.componentDidUpdate = function (preProps) {
+        var _this = this;
         if (preProps.resAddBlog != this.props.resAddBlog) {
-            console.log(this.props.resAddBlog);
+            if (this.props.resAddBlog.status === 200) {
+                this.props.reIsSuccess(true);
+                setTimeout(function () {
+                    _this.props.reIsSuccess(false);
+                    window.location.href = BASEURLADMIN + 'blog';
+                }, 2000);
+            }
+            else {
+                this.props.reIsDanger(true);
+                setTimeout(function () {
+                    _this.props.reIsDanger(false);
+                    window.location.href = BASEURLADMIN + 'blog';
+                }, 2000);
+            }
         }
     };
     BlogAdd.prototype.render = function () {
@@ -116,13 +130,22 @@ var BlogAdd = /** @class */ (function (_super) {
                                 React.createElement("div", { className: "form-group" },
                                     React.createElement("div", { className: "col-md-12" },
                                         React.createElement(Editor, { onChange: function (e) {
-                                                _this.setState(__assign({}, _this.state, { blog_content: e.level.content }));
-                                            }, apiKey: "t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl", init: {
+                                                if (e.level.content === null || e.level.content === "") {
+                                                    var temp_1 = "";
+                                                    (e.level.fragments).forEach(function (element) {
+                                                        temp_1 += element;
+                                                    });
+                                                    _this.setState(__assign({}, _this.state, { blog_content: temp_1 }));
+                                                }
+                                                else {
+                                                    _this.setState(__assign({}, _this.state, { blog_content: e.level.content }));
+                                                }
+                                            }, cloudChannel: 'dev', apiKey: "t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl", init: {
                                                 selector: "textarea",
                                                 spellchecker_language: 'vi-VN',
                                                 height: 500,
                                                 theme: "modern",
-                                                plugins: "print preview fullpage powerpaste searchreplace autolink directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount tinymcespellchecker a11ychecker imagetools mediaembed  linkchecker contextmenu colorpicker textpattern help",
+                                                plugins: "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
                                                 toolbar1: "fontsizeselect formatselect | bold italic strikethrough forecolor backcolor | link addImage blockquote | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat",
                                                 fontsize_formats: "10pt 11pt 12pt 14pt 16pt 18pt 20pt 24pt 26pt 28pt 36pt 48pt 72pt",
                                                 setup: function (editor) {
@@ -186,7 +209,9 @@ var mapDispatchToProps = {
     reAddBlog: reAddBlog,
     reListCategory: reListCategory,
     reListAuthor: reListAuthor,
-    reListStatus: reListStatus
+    reListStatus: reListStatus,
+    reIsDanger: reIsDanger,
+    reIsSuccess: reIsSuccess
 };
 export default connect(mapStateToProps, mapDispatchToProps)(BlogAdd);
 //# sourceMappingURL=add.js.map

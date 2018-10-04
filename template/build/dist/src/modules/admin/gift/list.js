@@ -28,10 +28,17 @@ import { BASEURLADMIN } from "../../../config/const";
 import { connect } from "react-redux";
 import { reListGift, reUpdateGift } from "./reGift";
 import Pagination from "../../shared/Pagination";
+import { reIsSuccess, reIsDanger } from "../../../reducers/init";
+import ModalSendGift from './modalSendGift';
 var GiftList = /** @class */ (function (_super) {
     __extends(GiftList, _super);
     function GiftList(props) {
         var _this = _super.call(this, props) || this;
+        _this.hiddenModalSendGift = function () {
+            _this.setState({
+                isShowingModalSendGift: !_this.state.isShowingModalSendGift
+            });
+        };
         _this.makeCurrentPage = function () {
             var page = window.location.href.split("page=")[1];
             if (page != undefined || page != null) {
@@ -62,32 +69,65 @@ var GiftList = /** @class */ (function (_super) {
             }
             return '';
         };
+        _this.state = {
+            isShowingModalSendGift: false
+        };
         return _this;
     }
     GiftList.prototype.componentDidMount = function () {
         this.props.reListGift((parseInt(this.makeCurrentPage(), 10) - 1) * 20);
     };
+    GiftList.prototype.componentDidUpdate = function (preProps) {
+        var _this = this;
+        if (this.props.resUpdateGift != preProps.resUpdateGift) {
+            if (this.props.resUpdateGift.status === 200) {
+                this.props.reIsSuccess(true);
+                setTimeout(function () {
+                    _this.props.reIsSuccess(false);
+                    _this.props.reListGift((parseInt(_this.makeCurrentPage(), 10) - 1) * 20);
+                }, 2000);
+            }
+            else {
+                this.props.reIsDanger(true);
+                setTimeout(function () {
+                    _this.props.reIsDanger(false);
+                    _this.props.reListGift((parseInt(_this.makeCurrentPage(), 10) - 1) * 20);
+                }, 2000);
+            }
+        }
+    };
     GiftList.prototype.render = function () {
         var _this = this;
-        return (React.createElement("div", { className: "row" },
-            React.createElement("div", { className: "col-md-12" },
-                React.createElement("div", { className: "panel" },
-                    React.createElement("div", { className: "panel-toolbar" },
-                        React.createElement("div", { className: "panel-heading" }, "Qu\u1EA3n l\u00ED qu\u00E0 t\u1EB7ng"),
-                        React.createElement("div", { className: "panel-action-bar" },
-                            React.createElement(Link, { to: BASEURLADMIN + 'blog/add' },
-                                React.createElement("div", { className: "btn btn-xs btn-info" }, "Th\u00EAm m\u1EDBi")))),
-                    React.createElement("div", { className: "table-responsive" },
-                        React.createElement("table", { className: "table table-hover manage-u-table" },
-                            React.createElement("thead", null,
-                                React.createElement("tr", null,
-                                    React.createElement("th", { className: "text-center" }, "#"),
-                                    React.createElement("th", null, "T\u00EAn"),
-                                    React.createElement("th", null, "File"),
-                                    React.createElement("th", null, "\u01AFu ti\u00EAn"))),
-                            React.createElement("tbody", null, this.renderListGifts()))),
-                    React.createElement("div", { className: "pg" },
-                        React.createElement(Pagination, { initialPage: parseInt(this.makeCurrentPage(), 10), pageSize: 20, totalItems: this.props.resListGift.count, onChangePage: function (e) { return _this.getMoreGift(e.currentPage); } }))))));
+        return (React.createElement(React.Fragment, null,
+            React.createElement("div", { className: "row" },
+                React.createElement("div", { className: "col-md-12" },
+                    React.createElement("div", { className: "panel" },
+                        React.createElement("div", { className: "panel-toolbar" },
+                            React.createElement("div", { className: "panel-heading" }, "Qu\u1EA3n l\u00ED qu\u00E0 t\u1EB7ng"),
+                            React.createElement("div", { className: "panel-action-bar" },
+                                React.createElement("div", { className: "btn btn-xs btn-info", onClick: function () {
+                                        _this.setState({
+                                            isShowingModalSendGift: true
+                                        });
+                                    }, style: {
+                                        marginRight: 16
+                                    } },
+                                    React.createElement("i", { className: "ti-gift" }),
+                                    " G\u1EDFi qu\u00E0"),
+                                React.createElement(Link, { to: BASEURLADMIN + 'gift/add' },
+                                    React.createElement("div", { className: "btn btn-xs btn-info" }, "Th\u00EAm m\u1EDBi")))),
+                        React.createElement("div", { className: "table-responsive" },
+                            React.createElement("table", { className: "table table-hover manage-u-table" },
+                                React.createElement("thead", null,
+                                    React.createElement("tr", null,
+                                        React.createElement("th", { className: "text-center" }, "#"),
+                                        React.createElement("th", null, "T\u00EAn"),
+                                        React.createElement("th", null, "File"),
+                                        React.createElement("th", null, "\u01AFu ti\u00EAn"))),
+                                React.createElement("tbody", null, this.renderListGifts()))),
+                        React.createElement("div", { className: "pg" },
+                            React.createElement(Pagination, { initialPage: parseInt(this.makeCurrentPage(), 10), pageSize: 20, totalItems: this.props.resListGift.count, onChangePage: function (e) { return _this.getMoreGift(e.currentPage); } }))))),
+            this.state.isShowingModalSendGift ? React.createElement(ModalSendGift, { isShowingModal: this.hiddenModalSendGift }) : ''));
     };
     return GiftList;
 }(React.Component));
@@ -97,7 +137,9 @@ var mapStateToProps = function (storeState) { return ({
 }); };
 var mapDispatchToProps = {
     reListGift: reListGift,
-    reUpdateGift: reUpdateGift
+    reUpdateGift: reUpdateGift,
+    reIsDanger: reIsDanger,
+    reIsSuccess: reIsSuccess
 };
 export default connect(mapStateToProps, mapDispatchToProps)(GiftList);
 //# sourceMappingURL=list.js.map

@@ -25,7 +25,7 @@ var __assign = (this && this.__assign) || function () {
 import * as React from "react";
 import { connect } from "react-redux";
 import { reDetailVideo, reUpdateVideo } from "./reVideos";
-import { reSetCurrentEditorPhoto, reShowPhotoApp } from "../../../reducers/init";
+import { reSetCurrentEditorPhoto, reShowPhotoApp, reIsSuccess, reIsDanger } from "../../../reducers/init";
 var VideoDetail = /** @class */ (function (_super) {
     __extends(VideoDetail, _super);
     function VideoDetail(props) {
@@ -52,6 +52,7 @@ var VideoDetail = /** @class */ (function (_super) {
         return _this;
     }
     VideoDetail.prototype.componentDidUpdate = function (preProps) {
+        var _this = this;
         if (this.props.resDetailVideo != preProps.resDetailVideo) {
             this.setState({
                 video: {
@@ -62,6 +63,22 @@ var VideoDetail = /** @class */ (function (_super) {
                     video_status: this.props.resDetailVideo.video_status
                 }
             });
+        }
+        if (this.props.resUpdateVideo != preProps.resUpdateVideo) {
+            if (this.props.resUpdateVideo.status === 200) {
+                this.props.reIsSuccess(true);
+                setTimeout(function () {
+                    _this.props.reIsSuccess(false);
+                    window.location.href = _this.props.match.url;
+                }, 2000);
+            }
+            else {
+                this.props.reIsDanger(true);
+                setTimeout(function () {
+                    _this.props.reIsDanger(false);
+                    window.location.href = _this.props.match.url;
+                }, 2000);
+            }
         }
     };
     VideoDetail.prototype.componentDidMount = function () {
@@ -117,7 +134,9 @@ var mapDispatchToProps = {
     reDetailVideo: reDetailVideo,
     reUpdateVideo: reUpdateVideo,
     reSetCurrentEditorPhoto: reSetCurrentEditorPhoto,
-    reShowPhotoApp: reShowPhotoApp
+    reShowPhotoApp: reShowPhotoApp,
+    reIsDanger: reIsDanger,
+    reIsSuccess: reIsSuccess
 };
 export default connect(mapStateToProps, mapDispatchToProps)(VideoDetail);
 //# sourceMappingURL=detail.js.map

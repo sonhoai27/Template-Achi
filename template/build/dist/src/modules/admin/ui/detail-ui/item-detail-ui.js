@@ -32,11 +32,9 @@ var ItemDetailUI = /** @class */ (function (_super) {
             _this.props.reAddCss(_this.state, idDetailUI);
         };
         _this.onChangeCss = function (e) {
-            var _a;
-            // @ts-ignore
-            _this.setState((_a = {},
-                _a[e.target.name] = e.target.value,
-                _a));
+            _this.setState({
+                detail_ui_css: "" + e
+            });
         };
         _this.generateInfo = function () {
             return (React.createElement("div", { className: "item-block" },
@@ -69,7 +67,7 @@ var ItemDetailUI = /** @class */ (function (_super) {
                                 React.createElement("i", { className: " icon-doc" }),
                                 " L\u01B0u")),
                         React.createElement("div", { className: "col-md-12" },
-                            React.createElement(AceEditor, { style: { height: 128 }, mode: "css", theme: "monokai", name: "blah2", fontSize: 14, editorProps: { $blockScrolling: true }, showPrintMargin: false, showGutter: false, highlightActiveLine: true, value: ".button {color: red;}", setOptions: {
+                            React.createElement(AceEditor, { style: { height: 96 }, mode: "css", theme: "monokai", name: "blah2", fontSize: 14, editorProps: { $blockScrolling: true }, showPrintMargin: false, showGutter: false, highlightActiveLine: true, onChange: _this.onChangeCss, value: "" + _this.state.detail_ui_css, setOptions: {
                                     enableBasicAutocompletion: true,
                                     enableLiveAutocompletion: true,
                                     enableSnippets: true,
@@ -88,7 +86,7 @@ var ItemDetailUI = /** @class */ (function (_super) {
             return (React.createElement(ListElementOnDetailUI, { sub: "child", detail: _this.props.detailUI.child }));
         };
         _this.state = {
-            detail_ui_css: ''
+            detail_ui_css: _this.props.detailUI.detail_ui_css
         };
         return _this;
     }

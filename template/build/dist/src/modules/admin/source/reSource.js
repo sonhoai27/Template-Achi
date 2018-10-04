@@ -50,17 +50,24 @@ import { REQUEST, FAILURE, SUCCESS } from "../../../utils/action-type-util";
 import { API } from "../../../config/const";
 export var ACTION_TYPES = {
     API_DETAIL_SOURCE: 'ReSource/API_DETAIL_SOURCE',
-    API_ADD_SOURCE: 'ReSource/API_DETAIL_SOURCE',
+    API_ADD_SOURCE: 'ReSource/API_ADD_SOURCE',
     API_ADD_DATE_SCHE: 'ReSource/API_ADD_DATE_SCHE',
     API_ADD_SCHE: 'ReSource/API_ADD_SCHE',
     API_LIST_SOURCE: 'ReSource/API_LIST_SOURCE',
     API_LIST_SCHE: 'ReSource/API_LIST_SCHE',
     API_LIST_DATE_SCHE: 'ReSource/API_LIST_DATE_SCHE',
-    API_UPDATE_SOURCE: 'ReSource/API_LIST_SOURCE',
+    API_UPDATE_SOURCE: 'ReSource/API_UPDATE_SOURCE',
     API_UPDATE_DATE_SCHE: 'ReSource/API_UPDATE_DATE_SCHE',
     API_UPDATE_SCHE: 'ReSource/API_UPDATE_SCHE',
     API_DETAIL_SCHE: 'ReSource/API_DETAIL_SCHE',
-    API_LIST_CONTENT_UI_SOURCE: 'ReSource/API_LIST_CONTENT_UI_SOURCE'
+    API_LIST_CONTENT_UI_SOURCE: 'ReSource/API_LIST_CONTENT_UI_SOURCE',
+    API_SHOW_EDIT_CONTENT: 'ReSource/API_SHOW_EDIT_CONTENT',
+    SET_CONTENT_ELEMENT: 'ReSource/SET_CONTENT_ELEMENT',
+    API_LIST_SOURCE_BY_0: 'ReSource/API_LIST_SOURCE_BY_0',
+    API_LIST_SOURCE_BY_1: 'ReSource/API_LIST_SOURCE_BY_1',
+    API_ADD_CONTACT: 'ReSource/API_ADD_CONTACT',
+    API_FILTER_CONTACT: 'ReSource/API_ADD_CONTACT',
+    API_LIST_CONTACT_PAGING: 'ReSource/API_LIST_CONTACT_PAGING'
 };
 var initialState = {
     resDetailSource: [],
@@ -74,7 +81,14 @@ var initialState = {
     resUpdateDateSche: {},
     resUpdateSche: {},
     resDetailSche: {},
-    resListContentUISource: []
+    resListContentUISource: [],
+    resShowEditContent: false,
+    resContentElement: "",
+    resListSourceBy0: [],
+    resListSourceBy1: [],
+    resAddContact: {},
+    resFilterContact: [],
+    resListContactPaging: []
 };
 export default (function (state, action) {
     if (state === void 0) { state = initialState; }
@@ -177,7 +191,7 @@ export default (function (state, action) {
             return __assign({}, state);
         }
         case SUCCESS(ACTION_TYPES.API_DETAIL_SCHE): {
-            return __assign({}, state, { resDetailSche: action.payload.data.list });
+            return __assign({}, state, { resDetailSche: action.payload.data });
         }
         // list date sche
         case REQUEST(ACTION_TYPES.API_LIST_DATE_SCHE): {
@@ -199,12 +213,69 @@ export default (function (state, action) {
         case SUCCESS(ACTION_TYPES.API_LIST_CONTENT_UI_SOURCE): {
             return __assign({}, state, { resListContentUISource: action.payload.data });
         }
+        //list source by type
+        case REQUEST(ACTION_TYPES.API_LIST_SOURCE_BY_0): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_LIST_SOURCE_BY_0): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_LIST_SOURCE_BY_0): {
+            return __assign({}, state, { resListSourceBy0: action.payload.data });
+        }
+        //list source by type
+        case REQUEST(ACTION_TYPES.API_LIST_SOURCE_BY_1): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_LIST_SOURCE_BY_1): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_LIST_SOURCE_BY_1): {
+            return __assign({}, state, { resListSourceBy1: action.payload.data });
+        }
+        //add contact
+        case REQUEST(ACTION_TYPES.API_ADD_CONTACT): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_ADD_CONTACT): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_ADD_CONTACT): {
+            return __assign({}, state, { resAddContact: action.payload.data });
+        }
+        //filter contact
+        case REQUEST(ACTION_TYPES.API_FILTER_CONTACT): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_FILTER_CONTACT): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_FILTER_CONTACT): {
+            return __assign({}, state, { resFilterContact: action.payload.data });
+        }
+        //list contact
+        case REQUEST(ACTION_TYPES.API_LIST_CONTACT_PAGING): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_LIST_CONTACT_PAGING): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_LIST_CONTACT_PAGING): {
+            return __assign({}, state, { resListContactPaging: action.payload.data });
+        }
+        case ACTION_TYPES.API_SHOW_EDIT_CONTENT: {
+            return __assign({}, state, { resShowEditContent: action.payload });
+        }
+        case ACTION_TYPES.SET_CONTENT_ELEMENT: {
+            return __assign({}, state, { resContentElement: action.payload });
+        }
         default:
             return state;
     }
 });
 var API_SOURCE = API + 'source/';
 var API_UI = API + 'ui/';
+var API_CONTACT = API + "contact";
 export var reDetailSource = function (id) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
     var result;
     return __generator(this, function (_a) {
@@ -270,6 +341,29 @@ export var reListSource = function (page) { return function (dispatch) { return 
                     payload: axios.get(API_SOURCE + 'all-source' + "/" + page)
                 })];
             case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reListSourceByType = function (type) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result, result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                if (!(type === 0)) return [3 /*break*/, 2];
+                return [4 /*yield*/, dispatch({
+                        type: ACTION_TYPES.API_LIST_SOURCE_BY_0,
+                        payload: axios.get(API_SOURCE + 'filter-source' + "/" + type)
+                    })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+            case 2: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.API_LIST_SOURCE_BY_1,
+                    payload: axios.get(API_SOURCE + 'filter-source' + "/" + type)
+                })];
+            case 3:
                 result = _a.sent();
                 return [2 /*return*/, result];
         }
@@ -366,6 +460,62 @@ export var reListContentUISource = function (idUI, idSource) { return function (
             case 0: return [4 /*yield*/, dispatch({
                     type: ACTION_TYPES.API_LIST_CONTENT_UI_SOURCE,
                     payload: axios.get(API_UI + 'detail-ui-source/' + idUI + '/' + idSource)
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reShowEditContent = function (status) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.API_SHOW_EDIT_CONTENT,
+                    payload: status
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reSetContentElement = function (content) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.SET_CONTENT_ELEMENT,
+                    payload: content
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reAddContact = function (form) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.API_ADD_CONTACT,
+                    payload: axios.post(API_CONTACT, form)
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reListContactPaging = function (page) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.API_LIST_CONTACT_PAGING,
+                    payload: axios.get(API_CONTACT + '/all/' + page)
                 })];
             case 1:
                 result = _a.sent();

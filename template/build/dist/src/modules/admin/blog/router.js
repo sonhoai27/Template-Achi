@@ -18,6 +18,8 @@ import Header from "../shared/header";
 import BreadCrumd from "../shared/breadcrumb";
 import BlogList from "./list";
 import BlogDetail from "./detail";
+import Category from "./category/category";
+import Author from "./author/author";
 var breadCrumb = [
     {
         title: "Admin",
@@ -43,7 +45,9 @@ var BlogRouter = /** @class */ (function (_super) {
                     React.createElement(BreadCrumd, { uri: breadCrumb, title: "B\u00E0i vi\u1EBFt" }),
                     React.createElement(Route, { exact: true, path: "" + this.props.match.url, component: BlogList }),
                     React.createElement(Route, { path: this.props.match.url + "/add", component: BlogAdd }),
-                    React.createElement(Route, { path: this.props.match.url + "/detail/:idBlog", component: BlogDetail })))));
+                    React.createElement(Route, { path: this.props.match.url + "/detail/:idBlog", component: BlogDetail }),
+                    React.createElement(Route, { path: this.props.match.url + "/category", component: Category }),
+                    React.createElement(Route, { path: this.props.match.url + "/author", component: Author })))));
     };
     return BlogRouter;
 }(React.Component));

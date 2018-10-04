@@ -19,6 +19,13 @@ import Error from "../admin/shared/error";
 import ClientBlogRoute from "./blog/ClientBlogRoute";
 import ClientSourceRoute from "./source/ClientSourceRoute";
 import EbookLadingPage from "./ebook/ebook";
+import { connect } from "react-redux";
+import NotifySuccess from "../shared/notifySuccess";
+import NotifyDanger from "../shared/notifyDanger";
+import Loading from "../admin/shared/loading";
+import ClientVideo from "./video/ClientVideo";
+import ClientGift from "./gift";
+import ClientAboutPage from "./About";
 var ClientRouter = /** @class */ (function (_super) {
     __extends(ClientRouter, _super);
     function ClientRouter(props) {
@@ -31,16 +38,30 @@ var ClientRouter = /** @class */ (function (_super) {
         doc.classList.add("client-page");
     };
     ClientRouter.prototype.render = function () {
-        return (React.createElement("div", { className: "margin-top" },
-            React.createElement(Helmet, null,
-                React.createElement("link", { rel: "stylesheet", href: RESOURCE + "css/client.css" }),
-                React.createElement("link", { rel: "stylesheet", href: RESOURCE + "css/mobile.css", media: "screen and (max-width: 769px)" })),
-            React.createElement(Route, { exact: true, path: "" + this.props.match.url, component: Error }),
-            React.createElement(Route, { path: this.props.match.url + "/blog", component: ClientBlogRoute }),
-            React.createElement(Route, { path: this.props.match.url + "/khoa-hoc", component: ClientSourceRoute }),
-            React.createElement(Route, { path: this.props.match.url + "/sach", component: EbookLadingPage })));
+        return (React.createElement(React.Fragment, null,
+            React.createElement("div", { className: "margin-top" },
+                React.createElement(Helmet, null,
+                    React.createElement("link", { rel: "stylesheet", href: RESOURCE + "css/client.css" }),
+                    React.createElement("link", { rel: "stylesheet", href: RESOURCE + "css/mobile.css", media: "screen and (max-width: 769px)" })),
+                React.createElement(Route, { exact: true, path: "" + this.props.match.url, component: Error }),
+                React.createElement(Route, { path: this.props.match.url + "/blog", component: ClientBlogRoute }),
+                React.createElement(Route, { path: this.props.match.url + "/khoa-hoc", component: ClientSourceRoute }),
+                React.createElement(Route, { path: this.props.match.url + "/sach", component: EbookLadingPage }),
+                React.createElement(Route, { path: this.props.match.url + "/video", component: ClientVideo }),
+                React.createElement(Route, { path: this.props.match.url + "/qua-tang", component: ClientGift }),
+                React.createElement(Route, { path: this.props.match.url + "/gioi-thieu", component: ClientAboutPage }),
+                React.createElement("div", { className: "jq-toast-wrap top-right" },
+                    this.props.isSuccess ? React.createElement(NotifySuccess, null) : "",
+                    this.props.isDanger ? React.createElement(NotifyDanger, null) : ""),
+                this.props.isLoading ? React.createElement(Loading, null) : "")));
     };
     return ClientRouter;
 }(React.Component));
-export default ClientRouter;
+var mapStateToProps = function (storeState) { return ({
+    isSuccess: storeState.reInit.isSuccess,
+    isDanger: storeState.reInit.isDanger,
+    isLoading: storeState.reInit.isLoading
+}); };
+var mapDispatchToProps = {};
+export default connect(mapStateToProps, mapDispatchToProps)(ClientRouter);
 //# sourceMappingURL=clientRouter.js.map

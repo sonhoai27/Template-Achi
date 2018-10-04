@@ -5,6 +5,7 @@ import ListElementDetailUISource from "./detail-ui/detail-ui";
 import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
 import { reIsDanger, reIsSuccess } from "../../../reducers/init";
+import ModalEditContentElement from "./detail-ui/ModalEditContentElement";
 interface Props {
   match: any;
   resListContentUISource: any;
@@ -25,15 +26,28 @@ class AddContentUISource extends React.Component<Props, {}> {
       this.props.match.params.idSource
     );
   }
-  componentWillReceiveProps(nextProps){
-    if(nextProps.resAddUpdateContentElement != this.props.resAddUpdateContentElement){
-      if(nextProps.resAddUpdateContentElement.list){
-        this.props.reListContentUISource(
-          this.props.match.params.idUI,
-          this.props.match.params.idSource
-        );
+  componentDidUpdate(preProps){
+      if(this.props.resAddUpdateContentElement != preProps.resAddUpdateContentElement){
+          if (this.props.resAddUpdateContentElement.status === 200) {
+              this.props.reIsSuccess(true);
+              setTimeout(() => {
+                  this.props.reIsSuccess(false);
+                  this.props.reListContentUISource(
+                      this.props.match.params.idUI,
+                      this.props.match.params.idSource
+                  );
+              }, 2000);
+          } else {
+              this.props.reIsDanger(true);
+              setTimeout(() => {
+                  this.props.reIsDanger(false);
+                  this.props.reListContentUISource(
+                      this.props.match.params.idUI,
+                      this.props.match.params.idSource
+                  );
+              }, 2000);
+          }
       }
-    }
   }
   render() {
     return (
@@ -61,6 +75,7 @@ class AddContentUISource extends React.Component<Props, {}> {
             </div>
           </div>
         </div>
+          {this.props.resShowEditContent ? <ModalEditContentElement/> : ''}
       </div>
     );
   }

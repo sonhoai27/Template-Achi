@@ -25,8 +25,9 @@ var __assign = (this && this.__assign) || function () {
 import * as React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { connect } from "react-redux";
-import { reSetCurrentEditorPhoto, reShowPhotoApp } from "../../../reducers/init";
+import { reSetCurrentEditorPhoto, reShowPhotoApp, reIsDanger, reIsSuccess } from "../../../reducers/init";
 import { reAddGift } from "./reGift";
+import { BASEURLADMIN } from "../../../config/const";
 var GiftAdd = /** @class */ (function (_super) {
     __extends(GiftAdd, _super);
     function GiftAdd(props) {
@@ -55,6 +56,25 @@ var GiftAdd = /** @class */ (function (_super) {
         };
         return _this;
     }
+    GiftAdd.prototype.componentDidUpdate = function (preProps) {
+        var _this = this;
+        if (this.props.resAddGift != preProps.resAddGift) {
+            if (this.props.resAddGift.status === 200) {
+                this.props.reIsSuccess(true);
+                setTimeout(function () {
+                    _this.props.reIsSuccess(false);
+                    window.location.href = BASEURLADMIN + 'gift';
+                }, 2000);
+            }
+            else {
+                this.props.reIsDanger(true);
+                setTimeout(function () {
+                    _this.props.reIsDanger(false);
+                    window.location.href = BASEURLADMIN + 'gift';
+                }, 2000);
+            }
+        }
+    };
     GiftAdd.prototype.render = function () {
         var _this = this;
         return (React.createElement("div", { className: "row" },
@@ -91,7 +111,7 @@ var GiftAdd = /** @class */ (function (_super) {
                                                 spellchecker_language: 'vi-VN',
                                                 height: 500,
                                                 theme: "modern",
-                                                plugins: "print preview fullpage powerpaste searchreplace autolink directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount tinymcespellchecker a11ychecker imagetools mediaembed  linkchecker contextmenu colorpicker textpattern help",
+                                                plugins: "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
                                                 toolbar1: "fontsizeselect formatselect | bold italic strikethrough forecolor backcolor | link addImage blockquote | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat",
                                                 fontsize_formats: "10pt 11pt 12pt 14pt 16pt 18pt 20pt 24pt 26pt 28pt 36pt 48pt 72pt",
                                                 setup: function (editor) {
@@ -129,7 +149,9 @@ var mapStateToProps = function (storeState) { return ({
 var mapDispatchToProps = {
     reSetCurrentEditorPhoto: reSetCurrentEditorPhoto,
     reShowPhotoApp: reShowPhotoApp,
-    reAddGift: reAddGift
+    reAddGift: reAddGift,
+    reIsDanger: reIsDanger,
+    reIsSuccess: reIsSuccess
 };
 export default connect(mapStateToProps, mapDispatchToProps)(GiftAdd);
 //# sourceMappingURL=add.js.map

@@ -25,6 +25,8 @@ var __assign = (this && this.__assign) || function () {
 import * as React from "react";
 import { connect } from "react-redux";
 import { reAddSche } from "../reSource";
+import { reIsDanger, reIsSuccess } from "../../../../reducers/init";
+import { BASEURLADMIN } from "../../../../config/const";
 var AddSche = /** @class */ (function (_super) {
     __extends(AddSche, _super);
     function AddSche(props) {
@@ -52,6 +54,25 @@ var AddSche = /** @class */ (function (_super) {
         };
         return _this;
     }
+    AddSche.prototype.componentDidUpdate = function (preProps) {
+        var _this = this;
+        if (preProps.resAddSche != this.props.resAddSche) {
+            if (this.props.resAddSche.status === 200) {
+                this.props.reIsSuccess(true);
+                setTimeout(function () {
+                    _this.props.reIsSuccess(false);
+                    window.location.href = BASEURLADMIN + 'source/list-sche/' + _this.props.match.params.idSource;
+                }, 2000);
+            }
+            else {
+                this.props.reIsDanger(true);
+                setTimeout(function () {
+                    _this.props.reIsDanger(false);
+                    window.location.href = BASEURLADMIN + 'source/list-sche/' + _this.props.match.params.idSource;
+                }, 2000);
+            }
+        }
+    };
     AddSche.prototype.render = function () {
         return (React.createElement("div", { className: "row" },
             React.createElement("div", { className: "col-md-12" },
@@ -108,7 +129,9 @@ var mapStateToProps = function (storeState) { return ({
     resAddSche: storeState.reSource.resAddSche
 }); };
 var mapDispatchToProps = {
-    reAddSche: reAddSche
+    reAddSche: reAddSche,
+    reIsDanger: reIsDanger,
+    reIsSuccess: reIsSuccess
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AddSche);
 //# sourceMappingURL=addSche.js.map

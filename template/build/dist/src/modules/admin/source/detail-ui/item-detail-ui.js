@@ -26,6 +26,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import ListElementDetailUISource from "./detail-ui";
 import { reAddUpdateContentElement } from "../../ui/reUI";
+import { reSetContentElement, reShowEditContent } from "../reSource";
 var ItemDetailUISource = /** @class */ (function (_super) {
     __extends(ItemDetailUISource, _super);
     function ItemDetailUISource() {
@@ -41,24 +42,34 @@ var ItemDetailUISource = /** @class */ (function (_super) {
             var tempDom = document.getElementById(obj.idVirtualElement);
             _this.props.reAddUpdateContentElement(__assign({}, obj, (_a = {}, _a[tempDom.name] = tempDom.value, _a)));
         };
+        _this.saveContentElementByTiny = function () {
+        };
         _this.generateInfo = function () {
             return (React.createElement("div", { className: "item-block", style: { marginBottom: 0 } },
-                React.createElement("div", { className: "toolbar" },
-                    React.createElement("h3", null, _this.props.detailUI.element_name)),
+                React.createElement("div", { className: "toolbar", style: { justifyContent: 'left' } },
+                    React.createElement("h3", null, _this.props.detailUI.element_name),
+                    React.createElement("input", { type: "text", name: "content_element_name", id: _this.props.detailUI.detail_ui_random_id + '-name-row', defaultValue: _this.props.detailUI.content_element_name, className: "form-control", style: {
+                            width: '10%',
+                            marginLeft: '16px',
+                            marginRight: '16px'
+                        } }),
+                    React.createElement("div", { onClick: function () { return _this.saveContentElement({
+                            idVirtualElement: _this.props.detailUI.detail_ui_random_id + '-name-row',
+                            content_element_id: _this.props.detailUI.content_element_id,
+                            content_element_id_detail_ui: _this.props.detailUI.detail_ui_id,
+                            content_element_id_source: _this.props.match.params.idSource
+                        }); }, className: "btn btn-xs btn-info" }, "L\u01B0u t\u00EAn")),
                 React.createElement("div", { className: "style" },
                     React.createElement("div", { className: "form-group" },
                         React.createElement("label", { className: "col-md-12" },
                             React.createElement("span", { className: "help" }, " N\u1ED9i dung c\u1EE7a \u0111\u1ED1i t\u01B0\u1EE3ng"),
-                            React.createElement("div", { onClick: function () { return _this.saveContentElement({
-                                    idVirtualElement: _this.props.detailUI.detail_ui_random_id + '-content',
-                                    content_element_id: _this.props.detailUI.content_element_id,
-                                    content_element_id_detail_ui: _this.props.detailUI.detail_ui_id,
-                                    content_element_id_source: _this.props.match.params.idSource
-                                }); }, className: "btn btn-xs btn-info" },
+                            React.createElement("div", { onClick: function () {
+                                    _this.props.reShowEditContent(true);
+                                    _this.props.reSetContentElement(__assign({}, _this.props.detailUI, { idSource: _this.props.match.params.idSource }));
+                                }, className: "btn btn-xs btn-primary" },
                                 React.createElement("i", { className: " icon-doc" }),
-                                " L\u01B0u")),
-                        React.createElement("div", { className: "col-md-12" },
-                            React.createElement("textarea", { defaultValue: _this.state.content_element_data, name: "content_element_data", id: _this.props.detailUI.detail_ui_random_id + '-content', className: "form-control", style: { height: 50 } }))),
+                                " S\u1EEDa"),
+                            React.createElement("p", null, "Nh\u1EA5n v\u00E0o \"s\u1EEDa\" \u0111\u1EC3 th\u00EAm ho\u1EB7c s\u1EEDa."))),
                     React.createElement("div", { className: "form-group" },
                         React.createElement("label", { className: "col-md-12" },
                             React.createElement("span", { className: "help" }, " Class c\u1EE7a \u0111\u1ED1i t\u01B0\u1EE3ng"),
@@ -117,9 +128,17 @@ var ItemDetailUISource = /** @class */ (function (_super) {
     };
     return ItemDetailUISource;
 }(React.Component));
+// () => this.saveContentElement({
+//     idVirtualElement: this.props.detailUI.detail_ui_random_id + '-content',
+//     content_element_id: this.props.detailUI.content_element_id,
+//     content_element_id_detail_ui: this.props.detailUI.detail_ui_id,
+//     content_element_id_source: this.props.match.params.idSource
+// })
 var mapStateToProps = function (storeState) { return ({}); };
 var mapDispatchToProps = {
     reAddUpdateContentElement: reAddUpdateContentElement,
+    reShowEditContent: reShowEditContent,
+    reSetContentElement: reSetContentElement
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ItemDetailUISource);
 //# sourceMappingURL=item-detail-ui.js.map

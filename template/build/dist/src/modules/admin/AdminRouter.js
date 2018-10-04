@@ -25,6 +25,8 @@ import NotifySuccess from "../shared/notifySuccess";
 import NotifyDanger from "../shared/notifyDanger";
 import Helmet from 'react-helmet';
 import { RESOURCE } from "../../config/const";
+import OrderEbookRouter from "./order-ebook/orderEbookRouter";
+import Loading from "./shared/loading";
 var AdminRouter = /** @class */ (function (_super) {
     __extends(AdminRouter, _super);
     function AdminRouter(props) {
@@ -44,17 +46,20 @@ var AdminRouter = /** @class */ (function (_super) {
             React.createElement(Route, { path: this.props.match.url + "/gift", component: GiftRouter }),
             React.createElement(Route, { path: this.props.match.url + "/ui", component: UIRouter }),
             React.createElement(Route, { path: this.props.match.url + "/source", component: SourceRouter }),
+            React.createElement(Route, { path: this.props.match.url + "/order-ebook", component: OrderEbookRouter }),
             this.props.isShowPhotoApp ? React.createElement(Photo, null) : '',
             React.createElement("div", { className: "jq-toast-wrap top-right" },
                 this.props.isSuccess ? React.createElement(NotifySuccess, null) : '',
-                this.props.isDanger ? React.createElement(NotifyDanger, null) : '')));
+                this.props.isDanger ? React.createElement(NotifyDanger, null) : ''),
+            this.props.isLoading ? React.createElement(Loading, null) : ''));
     };
     return AdminRouter;
 }(React.Component));
 var mapStateToProps = function (storeState) { return ({
     isShowPhotoApp: storeState.reInit.isShowPhotoApp,
     isSuccess: storeState.reInit.isSuccess,
-    isDanger: storeState.reInit.isDanger
+    isDanger: storeState.reInit.isDanger,
+    isLoading: storeState.reInit.isLoading
 }); };
 var mapDispatchToProps = {};
 export default connect(mapStateToProps, mapDispatchToProps)(AdminRouter);

@@ -23,6 +23,7 @@ import CLientFooterBanner from "./ClientFooterBanner";
 import Footer from "../client-shared/Footer";
 import { RESOURCE } from "../../../config/const";
 import { Helmet } from "react-helmet";
+import ClientIntroNMC from "./ClientIntroNMC";
 var ClientHome = /** @class */ (function (_super) {
     __extends(ClientHome, _super);
     function ClientHome(props) {
@@ -39,6 +40,7 @@ var ClientHome = /** @class */ (function (_super) {
             React.createElement("div", { className: "bg-gradient-grey" },
                 React.createElement(ClientListTopSen, null),
                 React.createElement(ClientFollow, null)),
+            React.createElement(ClientIntroNMC, null),
             React.createElement(ClientHomeBlog, null),
             React.createElement(ClientHomeSource, null),
             React.createElement("div", { className: "banner" },

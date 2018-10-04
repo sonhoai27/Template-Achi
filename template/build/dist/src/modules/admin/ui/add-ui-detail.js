@@ -16,6 +16,7 @@ import ListElement from "./modal/listElement";
 import { reDetailUI, reShowListElement, reSetCurrentMatchDetailUI, reSetCurrentIdElement } from "./reUI";
 import { connect } from "react-redux";
 import ListElementOnDetailUI from "./detail-ui/detail-ui";
+import { reIsDanger, reIsSuccess } from "../../../reducers/init";
 var AddUIDetail = /** @class */ (function (_super) {
     __extends(AddUIDetail, _super);
     function AddUIDetail(props) {
@@ -66,7 +67,9 @@ var mapDispatchToProps = {
     reDetailUI: reDetailUI,
     reShowListElement: reShowListElement,
     reSetCurrentIdElement: reSetCurrentIdElement,
-    reSetCurrentMatchDetailUI: reSetCurrentMatchDetailUI
+    reSetCurrentMatchDetailUI: reSetCurrentMatchDetailUI,
+    reIsDanger: reIsDanger,
+    reIsSuccess: reIsSuccess
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AddUIDetail);
 //# sourceMappingURL=add-ui-detail.js.map

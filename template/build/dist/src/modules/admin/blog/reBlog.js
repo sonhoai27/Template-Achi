@@ -62,7 +62,9 @@ export var ACTION_TYPES = {
     API_DELETE_CATEGORY: 'ReBlog/API_DELETE_CATEGORY',
     API_UPDATE_AUTHOR: 'ReBlog/API_UPDATE_AUTHOR',
     API_UPDATE_CATEGORY: 'ReBlog/API_UPDATE_CATEGORY',
-    API_STATUS: 'ReBlog/API_STATUS'
+    API_STATUS: 'ReBlog/API_STATUS',
+    API_CLIENT_LIST_BLOG: 'ReBlog/API_CLIENT_LIST_BLOG',
+    API_CLIENT_LIST_BLOG_CATEGORY: 'ReBlog/API_CLIENT_LIST_BLOG_CATEGORY'
 };
 var initialState = {
     resAddBlog: {},
@@ -78,7 +80,9 @@ var initialState = {
     resDeleteCategory: {},
     resUpdateAuthor: {},
     resUpdateCategory: {},
-    resListStatus: []
+    resListStatus: [],
+    resClientListBlog: [],
+    resClientListBlogCategory: {}
 };
 export default (function (state, action) {
     if (state === void 0) { state = initialState; }
@@ -140,6 +144,26 @@ export default (function (state, action) {
         case SUCCESS(ACTION_TYPES.API_UPDATE_BLOG): {
             return __assign({}, state, { resUpdateBlog: action.payload.data });
         }
+        // update category 
+        case REQUEST(ACTION_TYPES.API_UPDATE_CATEGORY): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_UPDATE_CATEGORY): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_UPDATE_CATEGORY): {
+            return __assign({}, state, { resUpdateCategory: action.payload.data });
+        }
+        // update auhtor 
+        case REQUEST(ACTION_TYPES.API_UPDATE_AUTHOR): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_UPDATE_AUTHOR): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_UPDATE_AUTHOR): {
+            return __assign({}, state, { resUpdateAuthor: action.payload.data });
+        }
         // delete blog 
         case REQUEST(ACTION_TYPES.API_DELETE_BLOG): {
             return __assign({}, state);
@@ -199,6 +223,26 @@ export default (function (state, action) {
         }
         case SUCCESS(ACTION_TYPES.API_STATUS): {
             return __assign({}, state, { resListStatus: action.payload.data });
+        }
+        // list client blog
+        case REQUEST(ACTION_TYPES.API_CLIENT_LIST_BLOG): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_CLIENT_LIST_BLOG): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_CLIENT_LIST_BLOG): {
+            return __assign({}, state, { resClientListBlog: action.payload.data });
+        }
+        // list client blog category
+        case REQUEST(ACTION_TYPES.API_CLIENT_LIST_BLOG_CATEGORY): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_CLIENT_LIST_BLOG_CATEGORY): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_CLIENT_LIST_BLOG_CATEGORY): {
+            return __assign({}, state, { resClientListBlogCategory: action.payload.data });
         }
         default:
             return state;
@@ -271,6 +315,34 @@ export var reDeleteBlog = function (idBlog) { return function (dispatch) { retur
             case 0: return [4 /*yield*/, dispatch({
                     type: ACTION_TYPES.API_DELETE_BLOG,
                     payload: axios.delete(API_BLOG + "/" + idBlog)
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reClientListBlog = function (page, category) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.API_CLIENT_LIST_BLOG,
+                    payload: axios.post(API_BLOG + "/all/" + page, category)
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reClientListBlogCategory = function (idCategory) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.API_CLIENT_LIST_BLOG_CATEGORY,
+                    payload: axios.get(API_BLOG + "/category/" + idCategory)
                 })];
             case 1:
                 result = _a.sent();

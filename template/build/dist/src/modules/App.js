@@ -21,6 +21,7 @@ import Login from "./admin/shared/login";
 import Error from "./admin/shared/error";
 import { BASEURL } from "../config/const";
 import ClientHome from "./client/home/ClientHome";
+import { LoadingPage } from "./client/client-shared/LoadingPage";
 var App = /** @class */ (function (_super) {
     __extends(App, _super);
     function App(props) {
@@ -38,25 +39,32 @@ var App = /** @class */ (function (_super) {
         }
     };
     App.prototype.componentDidMount = function () {
-        this.props.reCheckLogin();
+        //this.props.reCheckLogin();
+        setTimeout(function () {
+            // @ts-ignore
+            document.getElementById("ui-loading").style.display = "none";
+        }, 0);
     };
     App.prototype.render = function () {
-        return (React.createElement(Router, null,
-            React.createElement(Switch, null,
-                React.createElement(Route, { exact: true, path: BASEURL, component: ClientHome }),
-                React.createElement(Route, { path: BASEURL + 'page', component: Loadable({
-                        loader: function () {
-                            return import(/*webpackChunkName: "client"*/ "./client/clientRouter");
-                        },
-                        loading: function () { return React.createElement("h1", null, "Loading...."); }
-                    }) }),
-                this.state.user.status === 404 ? (React.createElement(Route, { path: BASEURL + 'login', component: Login })) : (React.createElement(Route, { path: BASEURL + 'login', component: Error })),
-                this.state.user.status ? (React.createElement(PrivateRouter, { resCheckLogin: this.props.resCheckLogin, path: BASEURL + "admin", component: Loadable({
-                        loader: function () {
-                            return import(/*webpackChunkName: "admin"*/ "./admin/AdminRouter");
-                        },
-                        loading: function () { return React.createElement("h1", null, "Loading...."); }
-                    }) })) : (""))));
+        return (React.createElement(React.Fragment, null,
+            React.createElement(Router, null,
+                React.createElement(Switch, null,
+                    React.createElement(Route, { exact: true, path: BASEURL, component: ClientHome }),
+                    React.createElement(Route, { path: BASEURL + "page", component: Loadable({
+                            loader: function () {
+                                return import(/*webpackChunkName: "client"*/ "./client/clientRouter");
+                            },
+                            loading: function () { return React.createElement("h1", null, "Loading...."); }
+                        }) }),
+                    this.state.user.status === 404 ? (React.createElement(Route, { path: BASEURL + "login", component: Login })) : (React.createElement(Route, { path: BASEURL + "login", component: Error })),
+                    React.createElement(PrivateRouter, { resCheckLogin: this.props.resCheckLogin, path: BASEURL + "admin", component: Loadable({
+                            loader: function () {
+                                return import(/*webpackChunkName: "admin"*/ "./admin/AdminRouter");
+                            },
+                            loading: function () { return React.createElement("h1", null, "Loading...."); }
+                        }) }))),
+            React.createElement("div", { id: "ui-loading" },
+                React.createElement(LoadingPage, null))));
     };
     return App;
 }(React.Component));

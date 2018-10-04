@@ -25,7 +25,7 @@ var __assign = (this && this.__assign) || function () {
 import * as React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { connect } from "react-redux";
-import { reSetCurrentEditorPhoto, reShowPhotoApp } from "../../../reducers/init";
+import { reSetCurrentEditorPhoto, reShowPhotoApp, reIsDanger, reIsSuccess } from "../../../reducers/init";
 import { reDetailGift, reUpdateGift } from "./reGift";
 var GiftDetail = /** @class */ (function (_super) {
     __extends(GiftDetail, _super);
@@ -56,6 +56,7 @@ var GiftDetail = /** @class */ (function (_super) {
         return _this;
     }
     GiftDetail.prototype.componentDidUpdate = function (preProps) {
+        var _this = this;
         if (preProps.resDetailGift != this.props.resDetailGift) {
             this.setState({
                 gift: {
@@ -67,6 +68,22 @@ var GiftDetail = /** @class */ (function (_super) {
                     gift_uri_file: this.props.resDetailGift.list.gift_uri_file
                 }
             });
+        }
+        if (this.props.resUpdateGift != preProps.resUpdateGift) {
+            if (this.props.resUpdateGift.status === 200) {
+                this.props.reIsSuccess(true);
+                setTimeout(function () {
+                    _this.props.reIsSuccess(false);
+                    _this.props.reDetailGift(_this.props.match.params.idGift);
+                }, 2000);
+            }
+            else {
+                this.props.reIsDanger(true);
+                setTimeout(function () {
+                    _this.props.reIsDanger(false);
+                    _this.props.reDetailGift(_this.props.match.params.idGift);
+                }, 2000);
+            }
         }
     };
     GiftDetail.prototype.componentDidMount = function () {
@@ -108,7 +125,7 @@ var GiftDetail = /** @class */ (function (_super) {
                                                 spellchecker_language: 'vi-VN',
                                                 height: 500,
                                                 theme: "modern",
-                                                plugins: "print preview fullpage powerpaste searchreplace autolink directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount tinymcespellchecker a11ychecker imagetools mediaembed  linkchecker contextmenu colorpicker textpattern help",
+                                                plugins: "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
                                                 toolbar1: "fontsizeselect formatselect | bold italic strikethrough forecolor backcolor | link addImage blockquote | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat",
                                                 fontsize_formats: "10pt 11pt 12pt 14pt 16pt 18pt 20pt 24pt 26pt 28pt 36pt 48pt 72pt",
                                                 setup: function (editor) {
@@ -148,7 +165,9 @@ var mapDispatchToProps = {
     reSetCurrentEditorPhoto: reSetCurrentEditorPhoto,
     reShowPhotoApp: reShowPhotoApp,
     reDetailGift: reDetailGift,
-    reUpdateGift: reUpdateGift
+    reUpdateGift: reUpdateGift,
+    reIsDanger: reIsDanger,
+    reIsSuccess: reIsSuccess
 };
 export default connect(mapStateToProps, mapDispatchToProps)(GiftDetail);
 //# sourceMappingURL=detail.js.map

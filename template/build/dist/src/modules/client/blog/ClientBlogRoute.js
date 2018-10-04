@@ -27,6 +27,7 @@ var ClientBlogRoute = /** @class */ (function (_super) {
             React.createElement(ClientHeader, null),
             React.createElement(Route, { exact: true, path: "" + this.props.match.url, component: ClientBlog }),
             React.createElement(Route, { path: this.props.match.url + "/detail/:idBlog", component: ClientDetailBlog }),
+            React.createElement(Route, { path: this.props.match.url + "/danh-muc/:idCategory", component: ClientBlog }),
             React.createElement(Footer, null)));
     };
     return ClientBlogRoute;

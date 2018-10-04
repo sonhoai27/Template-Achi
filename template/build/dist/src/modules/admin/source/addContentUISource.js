@@ -13,10 +13,12 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import * as React from "react";
 import { connect } from "react-redux";
-import { reListContentUISource } from "./reSource";
+import { reListContentUISource, reShowEditContent } from "./reSource";
 import ListElementDetailUISource from "./detail-ui/detail-ui";
 import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
+import { reIsDanger, reIsSuccess } from "../../../reducers/init";
+import ModalEditContentElement from "./detail-ui/ModalEditContentElement";
 var AddContentUISource = /** @class */ (function (_super) {
     __extends(AddContentUISource, _super);
     function AddContentUISource(props) {
@@ -25,10 +27,22 @@ var AddContentUISource = /** @class */ (function (_super) {
     AddContentUISource.prototype.componentDidMount = function () {
         this.props.reListContentUISource(this.props.match.params.idUI, this.props.match.params.idSource);
     };
-    AddContentUISource.prototype.componentWillReceiveProps = function (nextProps) {
-        if (nextProps.resAddUpdateContentElement != this.props.resAddUpdateContentElement) {
-            if (nextProps.resAddUpdateContentElement.list) {
-                this.props.reListContentUISource(this.props.match.params.idUI, this.props.match.params.idSource);
+    AddContentUISource.prototype.componentDidUpdate = function (preProps) {
+        var _this = this;
+        if (this.props.resAddUpdateContentElement != preProps.resAddUpdateContentElement) {
+            if (this.props.resAddUpdateContentElement.status === 200) {
+                this.props.reIsSuccess(true);
+                setTimeout(function () {
+                    _this.props.reIsSuccess(false);
+                    _this.props.reListContentUISource(_this.props.match.params.idUI, _this.props.match.params.idSource);
+                }, 2000);
+            }
+            else {
+                this.props.reIsDanger(true);
+                setTimeout(function () {
+                    _this.props.reIsDanger(false);
+                    _this.props.reListContentUISource(_this.props.match.params.idUI, _this.props.match.params.idSource);
+                }, 2000);
             }
         }
     };
@@ -48,16 +62,21 @@ var AddContentUISource = /** @class */ (function (_super) {
                                     React.createElement("i", { className: "ti-eye" }),
                                     " Xem th\u1EED")))),
                     React.createElement("div", { className: "content" },
-                        React.createElement(ListElementDetailUISource, { match: this.props.match, detail: this.props.resListContentUISource.list }))))));
+                        React.createElement(ListElementDetailUISource, { match: this.props.match, detail: this.props.resListContentUISource.list })))),
+            this.props.resShowEditContent ? React.createElement(ModalEditContentElement, null) : ''));
     };
     return AddContentUISource;
 }(React.Component));
 var mapStateToProps = function (storeState) { return ({
     resListContentUISource: storeState.reSource.resListContentUISource,
-    resAddUpdateContentElement: storeState.reUI.resAddUpdateContentElement
+    resAddUpdateContentElement: storeState.reUI.resAddUpdateContentElement,
+    resShowEditContent: storeState.reSource.resShowEditContent
 }); };
 var mapDispatchToProps = {
-    reListContentUISource: reListContentUISource
+    reListContentUISource: reListContentUISource,
+    reIsDanger: reIsDanger,
+    reIsSuccess: reIsSuccess,
+    reShowEditContent: reShowEditContent
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AddContentUISource);
 //# sourceMappingURL=addContentUISource.js.map

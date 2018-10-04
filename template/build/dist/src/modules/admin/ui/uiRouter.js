@@ -17,6 +17,9 @@ import Header from "../shared/header";
 import BreadCrumd from "../shared/breadcrumb";
 import UI from "./ui";
 import AddUIDetail from "./add-ui-detail";
+import Page from "../page/page";
+import DetailPage from "../page/detailPage";
+import ReviewPage from "../page/reviewPage";
 var breadCrumb = [
     {
         title: "Admin",
@@ -45,7 +48,10 @@ var UIRouter = /** @class */ (function (_super) {
                 React.createElement("div", { className: "container-fluid" },
                     React.createElement(BreadCrumd, { uri: breadCrumb, title: "UI" }),
                     React.createElement(Route, { exact: true, path: "" + this.props.match.url, component: UI }),
-                    React.createElement(Route, { path: this.props.match.url + "/add-detail-ui/:idUi", component: AddUIDetail })))));
+                    React.createElement(Route, { path: this.props.match.url + "/add-detail-ui/:idUi", component: AddUIDetail }),
+                    React.createElement(Route, { exact: true, path: this.props.match.url + "/page", component: Page }),
+                    React.createElement(Route, { exact: true, path: this.props.match.url + "/page/detail/:idPage", component: DetailPage }),
+                    React.createElement(Route, { exact: true, path: this.props.match.url + "/page/review/:idPage", component: ReviewPage })))));
     };
     return UIRouter;
 }(React.Component));

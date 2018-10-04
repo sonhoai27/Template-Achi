@@ -25,7 +25,7 @@ var __assign = (this && this.__assign) || function () {
 import * as React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { connect } from "react-redux";
-import { reShowPhotoApp, reSetCurrentEditorPhoto } from "../../../reducers/init";
+import { reShowPhotoApp, reSetCurrentEditorPhoto, reIsDanger, reIsSuccess } from "../../../reducers/init";
 import { reDetailBlog, reUpdateBlog, reListAuthor, reListCategory, reListStatus } from "./reBlog";
 var BlogDetail = /** @class */ (function (_super) {
     __extends(BlogDetail, _super);
@@ -84,6 +84,7 @@ var BlogDetail = /** @class */ (function (_super) {
         this.props.reListStatus();
     };
     BlogDetail.prototype.componentDidUpdate = function (preProps) {
+        var _this = this;
         if (preProps.resDetailBlog != this.props.resDetailBlog) {
             this.setState({
                 blog_id_category: this.props.resDetailBlog.list.blog_id_category,
@@ -97,6 +98,18 @@ var BlogDetail = /** @class */ (function (_super) {
         }
         if (preProps.resUpdateBlog != this.props.resUpdateBlog) {
             this.props.reDetailBlog(this.props.match.params.idBlog);
+            if (this.props.resUpdateBlog.status === 200) {
+                this.props.reIsSuccess(true);
+                setTimeout(function () {
+                    _this.props.reIsSuccess(false);
+                }, 2000);
+            }
+            else {
+                this.props.reIsDanger(true);
+                setTimeout(function () {
+                    _this.props.reIsDanger(false);
+                }, 2000);
+            }
         }
     };
     BlogDetail.prototype.render = function () {
@@ -115,21 +128,30 @@ var BlogDetail = /** @class */ (function (_super) {
                                     React.createElement("label", { className: "col-md-12" },
                                         React.createElement("span", { className: "help" }, " Ti\u00EAu \u0111\u1EC1")),
                                     React.createElement("div", { className: "col-md-12" },
-                                        React.createElement("input", { onChange: this.onChange, type: "text", className: "form-control", defaultValue: this.state.blog_title }))),
+                                        React.createElement("input", { onChange: this.onChange, type: "text", name: "blog_title", className: "form-control", defaultValue: this.state.blog_title }))),
                                 React.createElement("div", { className: "form-group" },
                                     React.createElement("label", { className: "col-md-12" },
                                         React.createElement("span", { className: "help" }, " T\u00F3m t\u1EAFt")),
                                     React.createElement("div", { className: "col-md-12" },
-                                        React.createElement("input", { onChange: this.onChange, type: "text", className: "form-control", defaultValue: this.state.blog_promo }))),
+                                        React.createElement("input", { onChange: this.onChange, type: "text", name: "blog_promo", className: "form-control", defaultValue: this.state.blog_promo }))),
                                 React.createElement("div", { className: "form-group" },
                                     React.createElement("div", { className: "col-md-12" },
                                         React.createElement(Editor, { initialValue: this.state.blog_content, onChange: function (e) {
-                                                _this.setState(__assign({}, _this.state, { blog_content: e.level.content }));
+                                                if (e.level.content === null || e.level.content === "") {
+                                                    var temp_1 = "";
+                                                    (e.level.fragments).forEach(function (element) {
+                                                        temp_1 += element;
+                                                    });
+                                                    _this.setState(__assign({}, _this.state, { blog_content: temp_1 }));
+                                                }
+                                                else {
+                                                    _this.setState(__assign({}, _this.state, { blog_content: e.level.content }));
+                                                }
                                             }, apiKey: "t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl", init: {
                                                 selector: "textarea",
                                                 height: 500,
                                                 theme: "modern",
-                                                plugins: "print preview fullpage powerpaste searchreplace autolink directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount tinymcespellchecker a11ychecker imagetools mediaembed  linkchecker contextmenu colorpicker textpattern help",
+                                                plugins: "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
                                                 toolbar1: "fontsizeselect formatselect | bold italic strikethrough forecolor backcolor | link addImage blockquote | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat",
                                                 fontsize_formats: "10pt 11pt 12pt 14pt 16pt 18pt 20pt 24pt 26pt 28pt 36pt 48pt 72pt",
                                                 setup: function (editor) {
@@ -137,7 +159,8 @@ var BlogDetail = /** @class */ (function (_super) {
                                                         icon: "image",
                                                         tooltip: "Add Image",
                                                         onclick: function () {
-                                                            alert("KAKKA");
+                                                            _this.props.reShowPhotoApp(true);
+                                                            _this.props.reSetCurrentEditorPhoto(editor);
                                                         }
                                                     });
                                                 }
@@ -160,13 +183,13 @@ var BlogDetail = /** @class */ (function (_super) {
                                 React.createElement("div", { className: "form-group" },
                                     React.createElement("label", { className: "col-sm-12" }, "T\u00E1c gi\u1EA3"),
                                     React.createElement("div", { className: "col-sm-12" },
-                                        React.createElement("select", { onChange: this.onChange, className: "form-control" },
+                                        React.createElement("select", { onChange: this.onChange, name: "blog_id_author", className: "form-control" },
                                             React.createElement("option", null, "Ch\u1ECDn"),
                                             this.renderListAuthor()))),
                                 React.createElement("div", { className: "form-group" },
                                     React.createElement("label", { className: "col-sm-12" }, "Danh m\u1EE5c"),
                                     React.createElement("div", { className: "col-sm-12" },
-                                        React.createElement("select", { onChange: this.onChange, className: "form-control" },
+                                        React.createElement("select", { onChange: this.onChange, name: "blog_id_category", className: "form-control" },
                                             React.createElement("option", null, "Ch\u1ECDn"),
                                             this.renderListCategory()))))))))));
     };
@@ -188,7 +211,9 @@ var mapDispatchToProps = {
     reDetailBlog: reDetailBlog,
     reListCategory: reListCategory,
     reListAuthor: reListAuthor,
-    reListStatus: reListStatus
+    reListStatus: reListStatus,
+    reIsDanger: reIsDanger,
+    reIsSuccess: reIsSuccess
 };
 export default connect(mapStateToProps, mapDispatchToProps)(BlogDetail);
 //# sourceMappingURL=detail.js.map

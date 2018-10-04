@@ -24,6 +24,8 @@ import ListSche from "./child/listSche";
 import AddSche from "./child/addSche";
 import detailSche from "./child/detailSche";
 import ListOrder from "./order/ListOrder";
+import VideoSource from "../video-source/VideoSource";
+import Contact from './contact/Contact';
 var breadCrumb = [
     {
         title: "Admin",
@@ -59,7 +61,9 @@ var SourceRouter = /** @class */ (function (_super) {
                     React.createElement(Route, { path: this.props.match.url + "/add-sche/:idSource", component: AddSche }),
                     React.createElement(Route, { path: this.props.match.url + "/list-sche/:idSource", component: ListSche }),
                     React.createElement(Route, { path: this.props.match.url + "/detail-sche/:idSche", component: detailSche }),
-                    React.createElement(Route, { path: this.props.match.url + "/order", component: ListOrder })))));
+                    React.createElement(Route, { path: this.props.match.url + "/order", component: ListOrder }),
+                    React.createElement(Route, { path: this.props.match.url + "/detail-source-video/:idSource", component: VideoSource }),
+                    React.createElement(Route, { path: this.props.match.url + "/contact", component: Contact })))));
     };
     return SourceRouter;
 }(React.Component));

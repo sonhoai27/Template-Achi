@@ -5,7 +5,7 @@ import ListElementDetailUIPage from "./detail-ui/detail-ui";
 import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
 import { reIsDanger, reIsSuccess } from "../../../reducers/init";
-import ModalEditContentElement from "../source/detail-ui/ModalEditContentElement";
+import ModalEditContentElement from "./detail-ui/ModalEditContentElement";
 import { reShowEditContent } from "../source/reSource";
 
 interface IProps {

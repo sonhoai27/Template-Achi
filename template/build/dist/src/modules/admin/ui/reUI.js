@@ -56,7 +56,10 @@ export var ACTION_TYPES = {
     API_ADD_ELEMENT_TO_UI_DETAIL: 'ReUI/API_ADD_ELEMENT_TO_UI_DETAIL',
     API_DELETE_ELEMENT_DETAIl_UI: 'ReUI/API_DELETE_ELEMENT_DETAIl_UI',
     CURRENT_MATCH_DETAIl_UI: 'ReUI/CURRENT_MATCH_DETAIl_UI',
+    API_LIST_UI_FOR_SOURCE: 'ReUI/API_LIST_UI_FOR_SOURCE',
+    API_LIST_UI_FOR_PAGE: 'ReUI/API_LIST_UI_FOR_PAGE',
     API_LIST_UI: 'ReUI/API_LIST_UI',
+    API_ADD_UI: "ReUI/API_ADD_UI",
     API_ADD_UPDATE_CONTENT_UI_ELEMENT: 'ReUI/API_ADD_UPDATE_CONTENT_UI_ELEMENT',
     API_ADD_CSS: 'ReUI/API_ADD_CSS'
 };
@@ -68,9 +71,12 @@ var initialState = {
     addElementToUIDetail: '',
     deleteElementToUIDetail: '',
     currentMatchDetailUI: '',
+    resListUIForSource: [],
+    resListUIForPage: [],
     resListUI: [],
     resAddUpdateContentElement: {},
-    resAddCss: {}
+    resAddCss: {},
+    resAddUi: {}
 };
 export default (function (state, action) {
     if (state === void 0) { state = initialState; }
@@ -94,6 +100,16 @@ export default (function (state, action) {
         }
         case SUCCESS(ACTION_TYPES.API_DETAIL_UI): {
             return __assign({}, state, { resDetailUI: action.payload.data });
+        }
+        // add ui
+        case REQUEST(ACTION_TYPES.API_ADD_UI): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_ADD_UI): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_ADD_UI): {
+            return __assign({}, state, { resAddUi: action.payload.data });
         }
         // show list element
         case (ACTION_TYPES.SHOW_LIST_ELEMENT): {
@@ -125,6 +141,26 @@ export default (function (state, action) {
         }
         case (ACTION_TYPES.CURRENT_MATCH_DETAIl_UI): {
             return __assign({}, state, { currentMatchDetailUI: action.payload });
+        }
+        // list ui source
+        case REQUEST(ACTION_TYPES.API_LIST_UI_FOR_SOURCE): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_LIST_UI_FOR_SOURCE): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_LIST_UI_FOR_SOURCE): {
+            return __assign({}, state, { resListUIForSource: action.payload.data.list });
+        }
+        // list ui page
+        case REQUEST(ACTION_TYPES.API_LIST_UI_FOR_PAGE): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_LIST_UI_FOR_PAGE): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_LIST_UI_FOR_PAGE): {
+            return __assign({}, state, { resListUIForPage: action.payload.data.list });
         }
         // list ui
         case REQUEST(ACTION_TYPES.API_LIST_UI): {
@@ -162,7 +198,10 @@ export default (function (state, action) {
 });
 var API_LIST_ELEMENT = API + 'ui/element';
 var API_DETAIL_UI = API + 'ui/detail-ui';
+var API_LIST_UI_FOR_SOURCE = API + 'ui/all-ui-source';
+var API_LIST_UI_FOR_PAGE = API + 'ui/all-ui-page';
 var API_LIST_UI = API + 'ui/all-ui';
+var API_ADD_UI = API + 'ui/add-ui';
 var API_ADD_ELEMENT_DETAIL_UI = API + 'ui/add-element-to-detail-ui';
 var API_DELETE_ELEMENT_DETAIL_UI = API + 'ui/delete-element-of-detail-ui/';
 var API_ADD_UPDATE_CONTENT_UI_ELEMENT = API + 'ui/add-update-content-element';
@@ -188,6 +227,20 @@ export var reDetailUI = function (idUI) { return function (dispatch) { return __
             case 0: return [4 /*yield*/, dispatch({
                     type: ACTION_TYPES.API_DETAIL_UI,
                     payload: axios.get(API_DETAIL_UI + '/' + idUI)
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reAddUI = function (form) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.API_ADD_UI,
+                    payload: axios.post(API_ADD_UI, form)
                 })];
             case 1:
                 result = _a.sent();
@@ -262,6 +315,34 @@ export var reSetCurrentMatchDetailUI = function (match) { return function (dispa
             case 0: return [4 /*yield*/, dispatch({
                     type: ACTION_TYPES.CURRENT_MATCH_DETAIl_UI,
                     payload: match
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reListUIForSource = function () { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.API_LIST_UI_FOR_SOURCE,
+                    payload: axios.get(API_LIST_UI_FOR_SOURCE)
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reListUIForPage = function () { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.API_LIST_UI_FOR_PAGE,
+                    payload: axios.get(API_LIST_UI_FOR_PAGE)
                 })];
             case 1:
                 result = _a.sent();

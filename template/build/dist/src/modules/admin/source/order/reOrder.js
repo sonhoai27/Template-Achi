@@ -52,13 +52,15 @@ export var ACTION_TYPES = {
     API_ORDER: 'ReOrder/API_ORDER',
     API_LIST_SCHE_ORDER: 'ReOrder/API_LIST_SCHE_ORDER',
     IS_SHOWING_MODAL_EXPORT: 'ReOrder/IS_SHOWING_MODAL_EXPORT',
-    API_LIST_ORDER_BY_SCHE: 'ReOrder/API_LIST_ORDER_BY_SCHE'
+    API_LIST_ORDER_BY_SCHE: 'ReOrder/API_LIST_ORDER_BY_SCHE',
+    API_ADD_ORDER: 'ReOrder/API_ADD_ORDER',
 };
 var initialState = {
     resListOrder: {},
     resListScheOrder: [],
     isShowingModalExport: false,
-    resListOrderBySche: {}
+    resListOrderBySche: {},
+    resAddOrder: {}
 };
 export default (function (state, action) {
     if (state === void 0) { state = initialState; }
@@ -94,6 +96,16 @@ export default (function (state, action) {
         }
         case SUCCESS(ACTION_TYPES.API_LIST_ORDER_BY_SCHE): {
             return __assign({}, state, { resListOrderBySche: action.payload.data });
+        }
+        // add order
+        case REQUEST(ACTION_TYPES.API_ADD_ORDER): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_ADD_ORDER): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_ADD_ORDER): {
+            return __assign({}, state, { resAddOrder: action.payload.data });
         }
         default:
             return state;
@@ -151,6 +163,20 @@ export var reListOrderBySche = function (idSche) { return function (dispatch) { 
             case 0: return [4 /*yield*/, dispatch({
                     type: ACTION_TYPES.API_LIST_ORDER_BY_SCHE,
                     payload: axios.get(API_LIST_ORDER_BY_SCHE + idSche)
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reAddOrder = function (form) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.API_ADD_ORDER,
+                    payload: axios.post(API_ORDER, form)
                 })];
             case 1:
                 result = _a.sent();

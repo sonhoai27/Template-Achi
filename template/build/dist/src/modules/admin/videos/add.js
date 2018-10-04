@@ -24,8 +24,9 @@ var __assign = (this && this.__assign) || function () {
 };
 import * as React from "react";
 import { connect } from "react-redux";
-import { reSetCurrentEditorPhoto, reShowPhotoApp } from "../../../reducers/init";
+import { reSetCurrentEditorPhoto, reShowPhotoApp, reIsSuccess, reIsDanger } from "../../../reducers/init";
 import { reAddVideo } from "./reVideos";
+import { BASEURLADMIN } from "../../../config/const";
 var VideoAdd = /** @class */ (function (_super) {
     __extends(VideoAdd, _super);
     function VideoAdd(props) {
@@ -49,6 +50,25 @@ var VideoAdd = /** @class */ (function (_super) {
         };
         return _this;
     }
+    VideoAdd.prototype.componentDidUpdate = function (preProps) {
+        var _this = this;
+        if (preProps.resAddBlog != this.props.resAddVideo) {
+            if (this.props.resAddVideo.status === 200) {
+                this.props.reIsSuccess(true);
+                setTimeout(function () {
+                    _this.props.reIsSuccess(false);
+                    window.location.href = BASEURLADMIN + 'video';
+                }, 2000);
+            }
+            else {
+                this.props.reIsDanger(true);
+                setTimeout(function () {
+                    _this.props.reIsDanger(false);
+                    window.location.href = BASEURLADMIN + 'video';
+                }, 2000);
+            }
+        }
+    };
     VideoAdd.prototype.render = function () {
         var _this = this;
         return (React.createElement("div", { className: "row" },
@@ -98,7 +118,9 @@ var mapStateToProps = function (storeState) { return ({
 var mapDispatchToProps = {
     reSetCurrentEditorPhoto: reSetCurrentEditorPhoto,
     reShowPhotoApp: reShowPhotoApp,
-    reAddVideo: reAddVideo
+    reAddVideo: reAddVideo,
+    reIsDanger: reIsDanger,
+    reIsSuccess: reIsSuccess
 };
 export default connect(mapStateToProps, mapDispatchToProps)(VideoAdd);
 //# sourceMappingURL=add.js.map

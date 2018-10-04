@@ -32,7 +32,6 @@ var ListElement = /** @class */ (function (_super) {
                     React.createElement("span", { onClick: function () {
                             _this.addElementToDetailUI(element.element_id, element.element_real_id);
                             setTimeout(function () {
-                                _this.props.reShowListElement(false);
                                 document.body.style.overflowY = 'auto';
                             }, 1000);
                         } }, element.element_name)));

@@ -25,10 +25,11 @@ var Source = /** @class */ (function (_super) {
                 return _this.props.reslistSource.list.map(function (element, index) {
                     return (React.createElement("tr", null,
                         React.createElement("td", { className: "text-center" }, index + 1),
-                        React.createElement("td", null,
+                        React.createElement("td", null, element.source_is_video == 0 ?
                             React.createElement(Link, { to: BASEURLADMIN + "source/detail-source/" + element.source_id },
-                                React.createElement("span", { className: "text-muted" }, element.source_title))),
-                        React.createElement("td", null, element.source_price),
+                                React.createElement("span", { className: "text-muted" }, element.source_title)) : React.createElement(Link, { to: BASEURLADMIN + "source/detail-source-video/" + element.source_id },
+                            React.createElement("span", { className: "text-muted" }, element.source_title))),
+                        React.createElement("td", null, element.source_is_video == 0 ? 'Khóa học' : 'Video học online'),
                         React.createElement("td", null,
                             React.createElement("span", { className: "text-muted" }, element.source_created_date))));
                 });
@@ -58,7 +59,7 @@ var Source = /** @class */ (function (_super) {
                                 React.createElement("tr", null,
                                     React.createElement("th", { className: "text-center" }, "#"),
                                     React.createElement("th", null, "T\u00EAn"),
-                                    React.createElement("th", null, "Gi\u00E1"),
+                                    React.createElement("th", null, "Lo\u1EA1i"),
                                     React.createElement("th", null, "Ng\u00E0y t\u1EA1o"))),
                             React.createElement("tbody", null, this.renderListSource())))))));
     };

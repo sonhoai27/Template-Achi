@@ -12,13 +12,58 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import * as React from "react";
+import ClientHeader from "../client-shared/Header";
+import Footer from "../client-shared/Footer";
+import { reListSourceByType } from "../../admin/source/reSource";
+import { connect } from "react-redux";
+import AutofitImage from "../../shared/CropImage";
+import { BASEURL } from "../../../config/const";
+import { Link } from "react-router-dom";
 var ClientSourceHome = /** @class */ (function (_super) {
     __extends(ClientSourceHome, _super);
     function ClientSourceHome(props) {
-        return _super.call(this, props) || this;
+        var _this = _super.call(this, props) || this;
+        _this.renderListSources = function () {
+            if (_this.props.resListSourceBy0.list) {
+                return _this.props.resListSourceBy0.list.map(function (element) {
+                    return (React.createElement("div", { className: "col-sm-4" },
+                        React.createElement("div", { className: "panel sales-page-listing" },
+                            React.createElement(AutofitImage, { frameWidth: "100%", frameHeight: "400px", imgSrc: element.source_cover }),
+                            React.createElement("div", { className: "panel-body" },
+                                React.createElement("h3", { className: "title text-dark" }, element.source_is_page == 1 ?
+                                    React.createElement("a", { target: 'blank', href: element.source_page_url }, element.source_title) : React.createElement(Link, { to: BASEURL + 'page/khoa-hoc/video/' + element.source_id + '.' + element.source_alias }, element.source_title)),
+                                React.createElement("p", { className: "desc", style: { fontSize: 15 } }, element.source_promo),
+                                element.source_is_page == 1 ?
+                                    React.createElement("a", { target: 'blank', className: "btn btn-primary learn-more", href: element.source_page_url }, "Xem") :
+                                    React.createElement(Link, { className: "btn btn-primary learn-more", to: BASEURL + 'page/khoa-hoc/video/' + element.source_id + '.' + element.source_alias }, "Xem")))));
+                });
+            }
+            return React.createElement("h1", null, "Kh\u00F4ng c\u00F3.");
+        };
+        _this.renderListVideos = function () {
+            if (_this.props.resListSourceBy1.list) {
+                return _this.props.resListSourceBy1.list.map(function (element) {
+                    return (React.createElement("div", { className: "col-sm-4" },
+                        React.createElement("div", { className: "panel sales-page-listing" },
+                            React.createElement(AutofitImage, { frameWidth: "100%", frameHeight: "400px", imgSrc: element.source_cover }),
+                            React.createElement("div", { className: "panel-body" },
+                                React.createElement("h3", { className: "title text-dark" },
+                                    React.createElement(Link, { to: BASEURL + 'page/khoa-hoc/video/' + element.source_id + '.' + element.source_alias }, element.source_title)),
+                                React.createElement("p", { className: "desc", style: { fontSize: 15 } }, element.source_promo),
+                                React.createElement(Link, { className: "btn btn-primary learn-more", to: BASEURL + 'page/khoa-hoc/video/' + element.source_id + '.' + element.source_alias, "kjb-settings-id": "language_learn_more" }, "Xem")))));
+                });
+            }
+            return React.createElement("h1", null, "Kh\u00F4ng c\u00F3.");
+        };
+        return _this;
     }
+    ClientSourceHome.prototype.componentDidMount = function () {
+        this.props.reListSourceByType(0);
+        this.props.reListSourceByType(1);
+    };
     ClientSourceHome.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
+            React.createElement(ClientHeader, null),
             React.createElement("div", { className: "col-xs-12 page-source" },
                 React.createElement("div", { className: "row page-source_banner" },
                     React.createElement("div", { className: "container" },
@@ -34,61 +79,23 @@ var ClientSourceHome = /** @class */ (function (_super) {
                                 React.createElement("h2", { style: {} },
                                     React.createElement("b", null, "C\u00F3 ph\u00ED")),
                                 React.createElement("hr", { style: { background: "#444" } })),
-                            React.createElement("div", { className: "col-sm-4" },
-                                React.createElement("div", { className: "panel sales-page-listing" },
-                                    React.createElement("img", { className: "thumb", src: "https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/site/10/images/xQtMXUjkR52oNAxgxzEF_HPMP_new.png" }),
-                                    React.createElement("div", { className: "panel-body" },
-                                        React.createElement("h3", { className: "title text-dark" },
-                                            React.createElement("a", { href: "" }, "High Performance Academy Master's Course")),
-                                        React.createElement("p", { className: "desc" }, "Advanced online training +\u00A0personal development coaching program: Reclaim your\u00A0vibrancy, purpose + success!"),
-                                        React.createElement("a", { className: "btn btn-primary learn-more", href: "/store/mpSe8ToF", "kjb-settings-id": "language_learn_more" }, "Learn More")))),
-                            React.createElement("div", { className: "col-sm-4" },
-                                React.createElement("div", { className: "panel sales-page-listing" },
-                                    React.createElement("img", { className: "thumb", src: "https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/site/10/images/xQtMXUjkR52oNAxgxzEF_HPMP_new.png" }),
-                                    React.createElement("div", { className: "panel-body" },
-                                        React.createElement("h3", { className: "title text-dark" },
-                                            React.createElement("a", { href: "" }, "High Performance Academy Master's Course")),
-                                        React.createElement("p", { className: "desc" }, "Advanced online training +\u00A0personal development coaching program: Reclaim your\u00A0vibrancy, purpose + success!"),
-                                        React.createElement("a", { className: "btn btn-primary learn-more", href: "/store/mpSe8ToF", "kjb-settings-id": "language_learn_more" }, "Learn More")))),
-                            React.createElement("div", { className: "col-sm-4" },
-                                React.createElement("div", { className: "panel sales-page-listing" },
-                                    React.createElement("img", { className: "thumb", src: "https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/site/10/images/xQtMXUjkR52oNAxgxzEF_HPMP_new.png" }),
-                                    React.createElement("div", { className: "panel-body" },
-                                        React.createElement("h3", { className: "title text-dark" },
-                                            React.createElement("a", { href: "" }, "High Performance Academy Master's Course")),
-                                        React.createElement("p", { className: "desc" }, "Advanced online training +\u00A0personal development coaching program: Reclaim your\u00A0vibrancy, purpose + success!"),
-                                        React.createElement("a", { className: "btn btn-primary learn-more", href: "/store/mpSe8ToF", "kjb-settings-id": "language_learn_more" }, "Learn More"))))),
+                            this.renderListSources()),
                         React.createElement("div", { className: "row" },
                             React.createElement("div", { className: "col-xs-12 page-source_title" },
                                 React.createElement("h2", null,
-                                    React.createElement("b", null, "H\u1ED9i th\u1EA3o")),
+                                    React.createElement("b", null, "H\u1ECDc online")),
                                 React.createElement("hr", { style: { background: "#444" } })),
-                            React.createElement("div", { className: "col-sm-4" },
-                                React.createElement("div", { className: "panel sales-page-listing" },
-                                    React.createElement("img", { className: "thumb", src: "https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/site/10/images/xQtMXUjkR52oNAxgxzEF_HPMP_new.png" }),
-                                    React.createElement("div", { className: "panel-body" },
-                                        React.createElement("h3", { className: "title text-dark" },
-                                            React.createElement("a", { href: "" }, "High Performance Academy Master's Course")),
-                                        React.createElement("p", { className: "desc" }, "Advanced online training +\u00A0personal development coaching program: Reclaim your\u00A0vibrancy, purpose + success!"),
-                                        React.createElement("a", { className: "btn btn-primary learn-more", href: "/store/mpSe8ToF", "kjb-settings-id": "language_learn_more" }, "Learn More")))),
-                            React.createElement("div", { className: "col-sm-4" },
-                                React.createElement("div", { className: "panel sales-page-listing" },
-                                    React.createElement("img", { className: "thumb", src: "https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/site/10/images/xQtMXUjkR52oNAxgxzEF_HPMP_new.png" }),
-                                    React.createElement("div", { className: "panel-body" },
-                                        React.createElement("h3", { className: "title text-dark" },
-                                            React.createElement("a", { href: "" }, "High Performance Academy Master's Course")),
-                                        React.createElement("p", { className: "desc" }, "Advanced online training +\u00A0personal development coaching program: Reclaim your\u00A0vibrancy, purpose + success!"),
-                                        React.createElement("a", { className: "btn btn-primary learn-more", href: "/store/mpSe8ToF", "kjb-settings-id": "language_learn_more" }, "Learn More")))),
-                            React.createElement("div", { className: "col-sm-4" },
-                                React.createElement("div", { className: "panel sales-page-listing" },
-                                    React.createElement("img", { className: "thumb", src: "https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/site/10/images/xQtMXUjkR52oNAxgxzEF_HPMP_new.png" }),
-                                    React.createElement("div", { className: "panel-body" },
-                                        React.createElement("h3", { className: "title text-dark" },
-                                            React.createElement("a", { href: "" }, "High Performance Academy Master's Course")),
-                                        React.createElement("p", { className: "desc" }, "Advanced online training +\u00A0personal development coaching program: Reclaim your\u00A0vibrancy, purpose + success!"),
-                                        React.createElement("a", { className: "btn btn-primary learn-more", href: "/store/mpSe8ToF", "kjb-settings-id": "language_learn_more" }, "Learn More"))))))))));
+                            this.renderListVideos())))),
+            React.createElement(Footer, null)));
     };
     return ClientSourceHome;
 }(React.Component));
-export default ClientSourceHome;
+var mapStateToProps = function (storeState) { return ({
+    resListSourceBy1: storeState.reSource.resListSourceBy1,
+    resListSourceBy0: storeState.reSource.resListSourceBy0
+}); };
+var mapDispatchToProps = {
+    reListSourceByType: reListSourceByType
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ClientSourceHome);
 //# sourceMappingURL=ClientSourceHome.js.map

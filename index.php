@@ -21,6 +21,7 @@ define("BASE_URL", 'http://localhost:8080/Achi/template/public/');
         <link href="<?=BASE_URL?>css/cdn.css" rel="stylesheet">
         <meta name="robots" content="noindex, nofollow">
         <script src="https://cdn.ckeditor.com/4.10.1/full/ckeditor.js"></script>
+        <script>CKEDITOR.dtd.$removeEmpty['span'] = false;</script>
         <?php
         echo file_get_contents("http://localhost:8080/Achi/api/seo/home");
     ?>

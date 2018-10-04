@@ -16,6 +16,7 @@ import { connect } from "react-redux";
 import { reDetailSche, reUpdateSche } from "../reSource";
 import ListDateSche from "./listDateSche";
 import AddDateSche from "./addDateSche";
+import { reIsDanger, reIsSuccess } from "../../../../reducers/init";
 var DetailSche = /** @class */ (function (_super) {
     __extends(DetailSche, _super);
     function DetailSche(props) {
@@ -48,16 +49,35 @@ var DetailSche = /** @class */ (function (_super) {
     DetailSche.prototype.componentWillReceiveProps = function (nextProps) {
         if (nextProps.resDetailSche != this.props.resDetailSche) {
             this.setState({
-                source_sche_id: nextProps.resDetailSche.source_sche_id,
-                source_sche_id_source: nextProps.resDetailSche.source_sche_id_source,
-                source_sche_number: nextProps.resDetailSche.source_sche_number,
-                source_sche_price: nextProps.resDetailSche.source_sche_price,
-                source_sche_sale: nextProps.resDetailSche.source_sche_sale,
-                source_sche_address: nextProps.resDetailSche.source_sche_address,
-                source_sche_teacher: nextProps.resDetailSche.source_sche_teacher,
-                source_sche_status: nextProps.resDetailSche.source_sche_status,
-                source_sche_khoa: nextProps.resDetailSche.source_sche_khoa
+                source_sche_id: nextProps.resDetailSche.list.source_sche_id,
+                source_sche_id_source: nextProps.resDetailSche.list.source_sche_id_source,
+                source_sche_number: nextProps.resDetailSche.list.source_sche_number,
+                source_sche_price: nextProps.resDetailSche.list.source_sche_price,
+                source_sche_sale: nextProps.resDetailSche.list.source_sche_sale,
+                source_sche_address: nextProps.resDetailSche.list.source_sche_address,
+                source_sche_teacher: nextProps.resDetailSche.list.source_sche_teacher,
+                source_sche_status: nextProps.resDetailSche.list.source_sche_status,
+                source_sche_khoa: nextProps.resDetailSche.list.source_sche_khoa
             });
+        }
+    };
+    DetailSche.prototype.componentDidUpdate = function (preProps) {
+        var _this = this;
+        if (preProps.resUpdateSche != this.props.resUpdateSche) {
+            if (this.props.resUpdateSche.status === 200) {
+                this.props.reIsSuccess(true);
+                setTimeout(function () {
+                    _this.props.reIsSuccess(false);
+                    window.location.href = _this.props.match.url;
+                }, 2000);
+            }
+            else {
+                this.props.reIsDanger(true);
+                setTimeout(function () {
+                    _this.props.reIsDanger(false);
+                    window.location.href = _this.props.match.url;
+                }, 2000);
+            }
         }
     };
     DetailSche.prototype.componentDidMount = function () {
@@ -130,7 +150,9 @@ var mapStateToProps = function (storeState) { return ({
 }); };
 var mapDispatchToProps = {
     reDetailSche: reDetailSche,
-    reUpdateSche: reUpdateSche
+    reUpdateSche: reUpdateSche,
+    reIsDanger: reIsDanger,
+    reIsSuccess: reIsSuccess
 };
 export default connect(mapStateToProps, mapDispatchToProps)(DetailSche);
 //# sourceMappingURL=detailSche.js.map

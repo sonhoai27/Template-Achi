@@ -9,6 +9,7 @@ import reGift from '../modules/admin/gift/reGift';
 import reOrderEbook  from '../modules/client/ebook/reEbook';
 import reOrderEbookAdmin from '../modules/admin/order-ebook/reOrderEbook'
 import rePage from '../modules/admin/page/rePage';
+import reVideoSource from "../modules/admin/video-source/reVideoSource";
 export default combineReducers({
     reUI,
     reInit,
@@ -19,5 +20,6 @@ export default combineReducers({
     reGift,
     reOrderEbook,
     reOrderEbookAdmin,
-    rePage
+    rePage,
+    reVideoSource
 })

@@ -12,7 +12,6 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import * as React from "react";
-import CLientFooterBanner from "./ClientFooterBanner";
 var ClientBanner = /** @class */ (function (_super) {
     __extends(ClientBanner, _super);
     function ClientBanner() {
@@ -23,8 +22,7 @@ var ClientBanner = /** @class */ (function (_super) {
             React.createElement("div", { className: "home-banner-video" },
                 React.createElement("h1", null, "HEADLINE T300X"),
                 React.createElement("video", { autoPlay: true, loop: true, id: "video-background", poster: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/148422/screencap-wheel.png", muted: true },
-                    React.createElement("source", { src: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/148422/Vienna-SD.mp4", type: "video/mp4" }))),
-            React.createElement(CLientFooterBanner, null)));
+                    React.createElement("source", { src: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/148422/Vienna-SD.mp4", type: "video/mp4" })))));
     };
     return ClientBanner;
 }(React.Component));

@@ -45,22 +45,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var _this = this;
-import axios from 'axios';
-import { REQUEST, FAILURE, SUCCESS } from '../../../utils/action-type-util';
-import { API } from '../../../config/const';
+import axios from "axios";
+import { REQUEST, FAILURE, SUCCESS } from "../../../utils/action-type-util";
+import { API } from "../../../config/const";
 export var ACTION_TYPES = {
-    API_LIST_GIFT: 'ReGift/API_LIST_GIFT',
-    API_ADD_GIFT: 'ReGift/API_ADD_GIFT',
-    API_UPDATE_GIFT: 'ReGift/API_UPDATE_GIFT',
-    API_DELETE_GIFT: 'ReGift/API_DELETE_GIFT',
-    API_DETAIL_GIFT: 'ReGift/API_DETAIL_GIFT'
+    API_LIST_GIFT: "ReGift/API_LIST_GIFT",
+    API_ADD_GIFT: "ReGift/API_ADD_GIFT",
+    API_UPDATE_GIFT: "ReGift/API_UPDATE_GIFT",
+    API_DELETE_GIFT: "ReGift/API_DELETE_GIFT",
+    API_DETAIL_GIFT: "ReGift/API_DETAIL_GIFT",
+    API_LIST_CONTACT: "ReGift/API_LIST_CONTACT",
+    API_SEND_GIFT: "ReGift/API_SEND_GIFT"
 };
 var initialState = {
     resListGift: [],
     resAddGift: {},
     resUpdateGift: {},
     resDeleteGift: {},
-    resDetailGift: {}
+    resDetailGift: {},
+    resListContact: [],
+    resSendGift: {}
 };
 export default (function (state, action) {
     if (state === void 0) { state = initialState; }
@@ -114,18 +118,40 @@ export default (function (state, action) {
         case SUCCESS(ACTION_TYPES.API_DETAIL_GIFT): {
             return __assign({}, state, { resDetailGift: action.payload.data });
         }
+        // list contact
+        case REQUEST(ACTION_TYPES.API_LIST_CONTACT): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_LIST_CONTACT): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_LIST_CONTACT): {
+            return __assign({}, state, { resListContact: action.payload.data });
+        }
+        // send gift
+        case REQUEST(ACTION_TYPES.API_SEND_GIFT): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_SEND_GIFT): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_SEND_GIFT): {
+            return __assign({}, state, { resSendGift: action.payload.data });
+        }
         default:
             return state;
     }
 });
-var API_GIFT = API + 'gift';
+var API_GIFT = API + "gift";
+var API_SEND_GIFT = API + "send-gift";
+var API_CONTACT = API + "contact";
 export var reListGift = function (page) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
     var result;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, dispatch({
                     type: ACTION_TYPES.API_LIST_GIFT,
-                    payload: axios.get(API_GIFT + '/all/' + page)
+                    payload: axios.get(API_GIFT + "/all/" + page)
                 })];
             case 1:
                 result = _a.sent();
@@ -153,7 +179,7 @@ export var reUpdateGift = function (form, idGift) { return function (dispatch) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, dispatch({
                     type: ACTION_TYPES.API_UPDATE_GIFT,
-                    payload: axios.put(API_GIFT + '/' + idGift, form)
+                    payload: axios.put(API_GIFT + "/" + idGift, form)
                 })];
             case 1:
                 result = _a.sent();
@@ -167,7 +193,7 @@ export var reDeleteGift = function (idGift) { return function (dispatch) { retur
         switch (_a.label) {
             case 0: return [4 /*yield*/, dispatch({
                     type: ACTION_TYPES.API_DELETE_GIFT,
-                    payload: axios.delete(API_GIFT + '/' + idGift)
+                    payload: axios.delete(API_GIFT + "/" + idGift)
                 })];
             case 1:
                 result = _a.sent();
@@ -181,7 +207,35 @@ export var reDetailGift = function (idGift) { return function (dispatch) { retur
         switch (_a.label) {
             case 0: return [4 /*yield*/, dispatch({
                     type: ACTION_TYPES.API_DETAIL_GIFT,
-                    payload: axios.get(API_GIFT + '/' + idGift)
+                    payload: axios.get(API_GIFT + "/" + idGift)
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reSendGift = function (form) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.API_SEND_GIFT,
+                    payload: axios.post(API_SEND_GIFT, form)
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reListContact = function () { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.API_LIST_CONTACT,
+                    payload: axios.get(API_CONTACT + '/without-page')
                 })];
             case 1:
                 result = _a.sent();
