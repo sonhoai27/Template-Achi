@@ -18,6 +18,8 @@ import Footer from "../client-shared/Footer";
 import { reDetailSource } from "../../admin/source/reSource";
 import { reIsDanger, reIsSuccess } from "../../../reducers/init";
 import { apiListVideoSource } from "../../admin/video-source/reVideoSource";
+import { Storage } from "../../../utils/storage-util";
+import ModalContact from "../../shared/Contact";
 var ClientVideoSource = /** @class */ (function (_super) {
     __extends(ClientVideoSource, _super);
     function ClientVideoSource(props) {
@@ -41,7 +43,8 @@ var ClientVideoSource = /** @class */ (function (_super) {
         };
         _this.state = {
             currentVideo: "",
-            isShowingPlayer: false
+            isShowingPlayer: false,
+            isShowingModalContact: false
         };
         return _this;
     }
@@ -56,6 +59,11 @@ var ClientVideoSource = /** @class */ (function (_super) {
     ClientVideoSource.prototype.componentDidUpdate = function (preProps) {
         if (preProps.resDetailSource != this.props.resDetailSource) {
             this.forceUpdate();
+            if (!Storage.local.get('user_info')) {
+                this.setState({
+                    isShowingModalContact: !this.state.isShowingModalContact
+                });
+            }
         }
         if (preProps.resListVideoSource != this.props.resListVideoSource) {
             this.setState({
@@ -64,6 +72,7 @@ var ClientVideoSource = /** @class */ (function (_super) {
         }
     };
     ClientVideoSource.prototype.render = function () {
+        var _this = this;
         var detail = this.props.resDetailSource;
         // @ts-ignore
         // @ts-ignore
@@ -99,7 +108,12 @@ var ClientVideoSource = /** @class */ (function (_super) {
                             React.createElement("div", { className: "col-xs-12" },
                                 React.createElement("h2", { style: { fontWeight: 700 } }, "Danh s\u00E1ch video"),
                                 React.createElement("ul", null, this.renderListVideo())))))),
-            React.createElement(Footer, null)));
+            React.createElement(Footer, null),
+            this.state.isShowingModalContact ? React.createElement(ModalContact, { showHide: function () {
+                    _this.setState({
+                        isShowingModalContact: !_this.state.isShowingModalContact
+                    });
+                }, name_click: '' }) : ''));
     };
     return ClientVideoSource;
 }(React.Component));

@@ -57,7 +57,11 @@ class Contact extends React.Component<IProps, IState> {
               <div className="panel-toolbar">
                 <div className="panel-heading">Quản lí liên hệ</div>
                 <div className="panel-action-bar">
-                  <div className="btn btn-sm btn-info">Xuất file</div>
+                  <div onClick={()=> {
+                    this.setState({
+                        isShowingModal: !this.state.isShowingModal
+                    })
+                  }} className="btn btn-sm btn-info">Xuất file</div>
                 </div>
               </div>
               <div className="content">

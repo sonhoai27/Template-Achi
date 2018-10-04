@@ -60,7 +60,11 @@ var Contact = /** @class */ (function (_super) {
                         React.createElement("div", { className: "panel-toolbar" },
                             React.createElement("div", { className: "panel-heading" }, "Qu\u1EA3n l\u00ED li\u00EAn h\u1EC7"),
                             React.createElement("div", { className: "panel-action-bar" },
-                                React.createElement("div", { className: "btn btn-sm btn-info" }, "Xu\u1EA5t file"))),
+                                React.createElement("div", { onClick: function () {
+                                        _this.setState({
+                                            isShowingModal: !_this.state.isShowingModal
+                                        });
+                                    }, className: "btn btn-sm btn-info" }, "Xu\u1EA5t file"))),
                         React.createElement("div", { className: "content" },
                             React.createElement("div", { className: "table-responsive" },
                                 React.createElement("table", { className: "table table-hover" },

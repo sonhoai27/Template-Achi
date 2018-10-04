@@ -5,6 +5,8 @@ import Footer from "../client-shared/Footer";
 import {reDetailSource} from "../../admin/source/reSource";
 import {reIsDanger, reIsSuccess} from "../../../reducers/init";
 import {apiListVideoSource} from "../../admin/video-source/reVideoSource";
+import {Storage} from "../../../utils/storage-util";
+import ModalContact from "../../shared/Contact";
 
 interface IProps {
     match?: any;
@@ -19,6 +21,7 @@ interface IProps {
 interface IState {
     currentVideo: any;
     isShowingPlayer: boolean;
+    isShowingModalContact: boolean;
 }
 
 class ClientVideoSource extends React.Component<IProps, IState> {
@@ -26,7 +29,8 @@ class ClientVideoSource extends React.Component<IProps, IState> {
         super(props)
         this.state = {
             currentVideo: "",
-            isShowingPlayer: false
+            isShowingPlayer: false,
+            isShowingModalContact: false
         }
     }
 
@@ -42,6 +46,12 @@ class ClientVideoSource extends React.Component<IProps, IState> {
     componentDidUpdate(preProps) {
         if (preProps.resDetailSource != this.props.resDetailSource) {
             this.forceUpdate()
+            if(!Storage.local.get('user_info')){
+
+                this.setState({
+                    isShowingModalContact: !this.state.isShowingModalContact
+                })
+            }
         }
         if (preProps.resListVideoSource != this.props.resListVideoSource) {
             this.setState({
@@ -131,6 +141,13 @@ class ClientVideoSource extends React.Component<IProps, IState> {
                     </div>
                 </div>
                 <Footer/>
+                {
+                    this.state.isShowingModalContact ? <ModalContact showHide={()=> {
+                        this.setState({
+                            isShowingModalContact: !this.state.isShowingModalContact
+                        })
+                    }} name_click={''}/> : ''
+                }
             </>
         )
     }
