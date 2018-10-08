@@ -5,6 +5,7 @@ import ClientHeader from "../client-shared/Header";
 import { reListContentUISource } from "../../admin/source/reSource";
 import ItemPage from '../../DynamicPage/source/item'
 import MainSche from './../../DynamicPage/sche/MainSche';
+import { reSetCurrentMatch } from "../../../reducers/init";
 const listCom = {
     tks: <MainSche />,
     tks2: <MainSche />,
@@ -13,6 +14,7 @@ interface IProps {
     match: any;
     resListContentUISource: any;
     reListContentUISource: (idUI: number, idSource: number)=> void;
+    reSetCurrentMatch: (match: any)=> void;
   }
 class ClientSourceDetail extends React.Component<IProps, {}> {
     constructor(props) {
@@ -24,6 +26,7 @@ class ClientSourceDetail extends React.Component<IProps, {}> {
         const idUI = tempArr[tempArr.length - 2]
         const idSource = tempArr[tempArr.length - 1]
         this.props.reListContentUISource(idUI, idSource)
+        this.props.reSetCurrentMatch(this.props.match)
     }
     componentDidUpdate(preProps){
     }
@@ -44,7 +47,8 @@ const mapStateToProps = storeState => ({
     resListContentUISource: storeState.reSource.resListContentUISource
 });
 const mapDispatchToProps = {
-    reListContentUISource
+    reListContentUISource,
+    reSetCurrentMatch
 };
 export default connect(
     mapStateToProps,

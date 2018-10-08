@@ -5,13 +5,10 @@ import { API } from "../../../config/const";
 export const ACTION_TYPES = {
     API_DETAIL_SOURCE: 'ReSource/API_DETAIL_SOURCE',
     API_ADD_SOURCE: 'ReSource/API_ADD_SOURCE',
-    API_ADD_DATE_SCHE: 'ReSource/API_ADD_DATE_SCHE',
     API_ADD_SCHE: 'ReSource/API_ADD_SCHE',
     API_LIST_SOURCE: 'ReSource/API_LIST_SOURCE',
     API_LIST_SCHE: 'ReSource/API_LIST_SCHE',
-    API_LIST_DATE_SCHE: 'ReSource/API_LIST_DATE_SCHE',
     API_UPDATE_SOURCE: 'ReSource/API_UPDATE_SOURCE',
-    API_UPDATE_DATE_SCHE: 'ReSource/API_UPDATE_DATE_SCHE',
     API_UPDATE_SCHE: 'ReSource/API_UPDATE_SCHE',
     API_DETAIL_SCHE: 'ReSource/API_DETAIL_SCHE',
     API_LIST_CONTENT_UI_SOURCE: 'ReSource/API_LIST_CONTENT_UI_SOURCE',
@@ -23,19 +20,15 @@ export const ACTION_TYPES = {
     API_FILTER_CONTACT: 'ReSource/API_ADD_CONTACT',
     API_LIST_CONTACT_PAGING: 'ReSource/API_LIST_CONTACT_PAGING',
 
-    API_DELETE_DATE_SCHE: 'ReSource/API_DELETE_DATE_SCHE',
     API_DELETE_SCHE: 'ReSource/API_DELETE_SCHE',
 }
 const initialState = {
     resDetailSource: [],
     resAddSource: [],
-    resAddDateSche: '',
     resAddSche: '',
     reslistSource: {},
     resListSche: [],
-    resListDateSche: [],
     resUpdateSource: {},
-    resUpdateDateSche: {},
     resUpdateSche: {},
     resDetailSche: {},
     resListContentUISource: [],
@@ -46,8 +39,6 @@ const initialState = {
     resAddContact: {},
     resFilterContact: [],
     resListContactPaging: [],
-
-    resDeleteDateSche: {},
     resDeleteSche: {}
 }
 export default (state = initialState, action) => {
@@ -103,23 +94,7 @@ export default (state = initialState, action) => {
                 resAddSche: action.payload.data.list
             }
         }
-        // add type sche
-        case REQUEST(ACTION_TYPES.API_ADD_DATE_SCHE): {
-            return {
-                ...state
-            }
-        }
-        case FAILURE(ACTION_TYPES.API_ADD_DATE_SCHE): {
-            return {
-                ...state
-            }
-        }
-        case SUCCESS(ACTION_TYPES.API_ADD_DATE_SCHE): {
-            return {
-                ...state,
-                resAddDateSche: action.payload.data
-            }
-        }
+       
         // list source
         case REQUEST(ACTION_TYPES.API_LIST_SOURCE): {
             return {
@@ -154,23 +129,7 @@ export default (state = initialState, action) => {
                 resUpdateSource: action.payload.data
             }
         }
-        // update typesche
-        case REQUEST(ACTION_TYPES.API_UPDATE_DATE_SCHE): {
-            return {
-                ...state
-            }
-        }
-        case FAILURE(ACTION_TYPES.API_UPDATE_DATE_SCHE): {
-            return {
-                ...state
-            }
-        }
-        case SUCCESS(ACTION_TYPES.API_UPDATE_DATE_SCHE): {
-            return {
-                ...state,
-                resUpdateDateSche: action.payload.data
-            }
-        }
+       
         // update sche
         case REQUEST(ACTION_TYPES.API_UPDATE_SCHE): {
             return {
@@ -222,24 +181,7 @@ export default (state = initialState, action) => {
                 resDetailSche: action.payload.data
             }
         }
-        // list date sche
-        case REQUEST(ACTION_TYPES.API_LIST_DATE_SCHE): {
-            return {
-                ...state
-            }
-        }
-        case FAILURE(ACTION_TYPES.API_LIST_DATE_SCHE): {
-            return {
-                ...state
-            }
-        }
-        case SUCCESS(ACTION_TYPES.API_LIST_DATE_SCHE): {
-            return {
-                ...state,
-                resListDateSche: action.payload.data
-            }
-        }
-
+    
         //list content ui source
         case REQUEST(ACTION_TYPES.API_LIST_CONTENT_UI_SOURCE): {
             return {
@@ -359,23 +301,7 @@ export default (state = initialState, action) => {
                 resDeleteSche: action.payload.data
             }
         }
-        //delete date sche
-        case REQUEST(ACTION_TYPES.API_DELETE_DATE_SCHE): {
-            return {
-                ...state
-            }
-        }
-        case FAILURE(ACTION_TYPES.API_DELETE_DATE_SCHE): {
-            return {
-                ...state
-            }
-        }
-        case SUCCESS(ACTION_TYPES.API_DELETE_DATE_SCHE): {
-            return {
-                ...state,
-                resDeleteDateSche: action.payload.data
-            }
-        }
+        
         case ACTION_TYPES.API_SHOW_EDIT_CONTENT: {
             return {
                 ...state,
@@ -416,13 +342,6 @@ export const reAddSche = (form) => async dispatch => {
     });
     return result;
 };
-export const reAddDateSche = (form) => async dispatch => {
-    const result = await dispatch({
-        type: ACTION_TYPES.API_ADD_DATE_SCHE,
-        payload: axios.post(API_SOURCE+'add-date-sche', form)
-    });
-    return result;
-};
 export const reListSource = (page) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_LIST_SOURCE,
@@ -452,13 +371,6 @@ export const reUpdateSource = (form, id) => async dispatch => {
     });
     return result;
 };
-export const reUpdateDateSche = (form, id) => async dispatch => {
-    const result = await dispatch({
-        type: ACTION_TYPES.API_UPDATE_DATE_SCHE,
-        payload: axios.put(API_SOURCE+'update-date-sche'+"/"+id, form)
-    });
-    return result;
-};
 export const reUpdateSche = (form, id) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_UPDATE_SCHE,
@@ -477,13 +389,6 @@ export const reDetailSche = (id) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_DETAIL_SCHE,
         payload: axios.get(API_SOURCE+'detail-sche/'+id)
-    });
-    return result;
-};
-export const reListDateSche = (id) => async dispatch => {
-    const result = await dispatch({
-        type: ACTION_TYPES.API_LIST_DATE_SCHE,
-        payload: axios.get(API_SOURCE+'all-date-sche/'+id)
     });
     return result;
 };
@@ -529,13 +434,6 @@ export const reDeleteSche = (idSche: number) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_DELETE_SCHE,
         payload: axios.delete(API_SOURCE+'delete-sche/'+idSche)
-    });
-    return result;
-};
-export const reDeleteDateSche = (idDateSche: number) => async dispatch => {
-    const result = await dispatch({
-        type: ACTION_TYPES.API_DELETE_DATE_SCHE,
-        payload: axios.delete(API_SOURCE+'delete-date-sche/'+idDateSche)
     });
     return result;
 };

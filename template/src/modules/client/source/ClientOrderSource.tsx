@@ -36,7 +36,8 @@ class ClientOrderSource extends React.Component<IProps, IState> {
         source_order_number_phone: "",
         source_order_ho: "",
         source_order_gender: "",
-        source_order_price: 0
+        source_order_price: 0,
+        source_date_sche: ""
       },
       source: {}
     };
@@ -100,17 +101,6 @@ class ClientOrderSource extends React.Component<IProps, IState> {
    }else {
     this.props.reAddOrder(this.state.order)
    }
-  };
-  renderListdate = () => {
-    if (this.props.resDetailSche.sche) {
-      return this.props.resDetailSche.sche.map(element => {
-        return (
-          <p dangerouslySetInnerHTML={{ __html: element.date_source_time }} />
-        );
-      });
-    } else {
-      return <h1>null</h1>;
-    }
   };
   handleDayClick = (day: any) =>{
     // const date = new Date(day)
@@ -182,7 +172,7 @@ class ClientOrderSource extends React.Component<IProps, IState> {
                 </li>
                 <li>
                   <p>Thời gian: </p>
-                  <p>{this.renderListdate()}</p>
+                  <p dangerouslySetInnerHTML={{__html: this.state.source.source_date_sche}}/>
                 </li>
               </ul>
               <ul>

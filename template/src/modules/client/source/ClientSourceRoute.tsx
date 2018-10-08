@@ -15,9 +15,9 @@ class ClientSourceRoute extends React.Component<IProps> {
         return (
             <>
                 <Route exact path={`${this.props.match.url}`} component={ClientSourceHome}/>
-                <Route path={`${this.props.match.url}/:idSource`} component={ClientSourceDetail}/>
-                <Route path={`${this.props.match.url}/video/:idSource`} component={ClientVideoSource}/>
-                <Route path={`${this.props.match.url}/dang-ky/:idSche`} component={ClientOrderSource}/>
+                <Route exact path={`${this.props.match.url}/:idSource`} component={ClientSourceDetail}/>
+                <Route exact path={`${this.props.match.url}/video/:idSource`} component={ClientVideoSource}/>
+                <Route exact path={`${this.props.match.url}/dang-ky/:idSche`} component={ClientOrderSource}/>
             </>
         )
     }

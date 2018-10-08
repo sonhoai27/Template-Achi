@@ -26,8 +26,8 @@ class CLientFooterBanner extends React.Component {
               <div className="col-sm-3">
               <div className="form-get-access">
                   <input type="text" placeholder="Họ và tên" />
-                  <input type="email" placeholder="email" />
-                  <div className="get-access btn btn-sm btn-info">Đăng ký <i className="ti-angle-right"/></div>
+                  <input type="email" placeholder="Email" />
+                  <div className="get-access btn btn-sm btn-info">Nhận quà <i className="ti-angle-right"/></div>
                 </div>
               </div>
             </div>

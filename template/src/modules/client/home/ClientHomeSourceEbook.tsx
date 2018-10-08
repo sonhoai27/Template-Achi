@@ -1,6 +1,6 @@
 import * as React from "react";
 import { RESOURCE } from "../../../config/const";
-import { BASEURL } from './../../../config/const';
+import { BASEURL } from "./../../../config/const";
 
 class ClientHomeSource extends React.Component {
   constructor(props) {
@@ -43,8 +43,8 @@ class ClientHomeSource extends React.Component {
               <h4>
                 <i>
                   <b>
-                    Hãy để bạn sống nhật nhiệt huyết, có một tuổi trẻ đầy say mê
-                    và kiến tạo những kiệt tác cho riêng cuộc đời mình.
+                    Để bạn sống nhiệt huyết, có một tuổi trẻ đầy say mê và kiến
+                    tạo những kiệt tác cho riêng cuộc đời mình.
                   </b>
                 </i>
               </h4>
@@ -63,7 +63,7 @@ class ClientHomeSource extends React.Component {
                 className="get-link btn"
                 style={{ marginTop: 32, float: "right" }}
               >
-                <a href={'http://songxungdang.com'}>Xem thêm</a>
+                <a href={"http://songxungdang.com"}>Xem thêm</a>
               </div>
             </div>
           </div>
@@ -80,7 +80,6 @@ class ClientHomeSource extends React.Component {
               </h2>
               <h4>
                 <i>
-                  {" "}
                   <b>
                     Chìa khóa vàng để làm chủ những nguyên tắc trình bày lôi
                     cuốn đám đông.
@@ -88,19 +87,21 @@ class ClientHomeSource extends React.Component {
                 </i>
               </h4>
               <p>
-                Bạn đã bao giờ muốn trình bày một cách lôi cuốn trước đông,
-                nhưng bạn vẫn chưa hài lòng với khả năng trình bày của mình. Có
-                những bí mật trên con đường nói trước đám đông lôi cuốn, nếu ai
-                đó nói với bạn sớm hơn, thì chắc hẳn bạn sẽ trở thành một người
-                trình bày lôi cuốn. Nếu bạn đã nỗ lực nhiều lần mà chưa cải
-                thiện được kỹ năng trình bày.{" "}
-                <i> Rất có thể bạn đã tìm được nơi phù hợp ngay tại đây.</i>
+                Bạn đã bao giờ muốn trình bày lôi cuốn trước đám đông, nhưng bạn
+                vẫn chưa hài lòng với khả năng hiện tại của mình. Có những bí
+                mật trên con đường nói trước đám đông, nếu ai đó nói với bạn sớm
+                hơn, thì chắc chắn bạn sẽ đi nhanh hơn trên hành trình trở thành
+                một người trình bày tự tin và thu hút mọi ánh nhìn. Nếu bạn đã
+                nỗ lực nhiều lần mà chưa cải thiện được kỹ năng này.{" "}
+                <i>Rất có thể bạn đã tìm được nơi phù hợp khi đang ở đây.</i>
               </p>
               <div
                 className="get-link btn"
                 style={{ marginTop: 32, float: "right" }}
               >
-                <a href={BASEURL+'page/khoa-hoc/nguoi-chia-se-9-7'}>Xem thêm</a>
+                <a href={BASEURL + "page/khoa-hoc/nguoi-chia-se-9-7"}>
+                  Xem thêm
+                </a>
               </div>
             </div>
           </div>
@@ -118,8 +119,8 @@ class ClientHomeSource extends React.Component {
               <h4>
                 <i>
                   <b>
-                    Đánh thức nội lực mạnh mẽ để hành động xứng đáng như một
-                    chiến binh vô địch.
+                    Đánh thức nội lực mạnh mẽ, hành động xứng đáng như một chiến
+                    binh vô địch.
                   </b>
                 </i>
               </h4>
@@ -128,17 +129,20 @@ class ClientHomeSource extends React.Component {
                 cảnh nào của cuộc sống, nhưng bạn chưa “bắt lửa” được nói nó,
                 sức mạnh thực sự của bạn đang bị “giam cầm”, nó cần được giải
                 thoát để bạn có đủ sức mạnh thực hiện bất kỳ nhiệm vụ nào trong
-                cuộc đời. <i>
-                Làm thế nào cởi bỏ xiềng xích dẫn dắt cuộc sống quyết
-                liệt, nhiệt tình làm cho những tháng năm rực rỡ của tuổi trẻ
-                thật đáng giá?
+                cuộc đời.
+                <i>
+                  Làm thế nào cởi bỏ xiềng xích dẫn dắt cuộc sống quyết liệt,
+                  nhiệt tình làm cho những tháng năm rực rỡ của tuổi trẻ thật
+                  đáng giá?
                 </i>
               </p>
               <div
                 className="get-link btn"
                 style={{ marginTop: 32, float: "right" }}
               >
-                <a href={BASEURL+'page/khoa-hoc/trai-chien-binh-vo-dich-8-9'}>Xem thêm</a>
+                <a href={BASEURL + "page/khoa-hoc/trai-chien-binh-vo-dich-8-9"}>
+                  Xem thêm
+                </a>
               </div>
             </div>
           </div>
@@ -165,15 +169,20 @@ class ClientHomeSource extends React.Component {
                 Chắc hẳn bạn cũng biết tuổi trẻ là tuổi tươi đẹp nhất của ước
                 mơ. Tuổi đôi mươi là giai đoạn thể lực và tinh thần của con
                 người dồi dào nhất để nuôi dưỡng hoài bão, khát vọng để rồi ta
-                sẽ dấn thân trên con đường sự nghiệp của cả đời người. <i>Tìm ra
-                phiên bản tốt nhất cuộc đời mình thông qua công việc ý nghĩa để
-                chuẩn bị sẵn sàng cho sự nghiệp ngay khi còn là sinh viên.</i>
+                sẽ dấn thân trên con đường sự nghiệp của cả đời người.{" "}
+                <i>
+                  Tìm ra phiên bản tốt nhất cuộc đời mình thông qua công việc ý
+                  nghĩa để chuẩn bị sẵn sàng cho sự nghiệp ngay khi còn là sinh
+                  viên.
+                </i>
               </p>
               <div
                 className="get-link btn"
                 style={{ marginTop: 32, float: "right" }}
               >
-                <a href={BASEURL+'page/khoa-hoc/trai-chien-binh-vo-dich-8-9'}>Xem thêm</a>
+                <a href={BASEURL + "page/khoa-hoc/trai-chien-binh-vo-dich-8-9"}>
+                  Xem thêm
+                </a>
               </div>
             </div>
           </div>
@@ -301,12 +310,12 @@ class ClientHomeSource extends React.Component {
                 <b>Cuốn da Sống xứng đáng</b>
               </h2>
               <h4>
-                <i>
-                  <b>
-                    <i>Người bạn tin cậy đồng hành cùng bạn sống xứng đáng và tạo
-                    nên những thành tựu riêng cuộc đời mình</i>
-                  </b>
-                </i>
+                <b>
+                  <i>
+                    Người bạn tin cậy đồng hành cùng bạn sống xứng đáng và tạo
+                    nên những thành tựu riêng cuộc đời mình
+                  </i>
+                </b>
               </h4>
               <p>
                 <i>
@@ -319,15 +328,17 @@ class ClientHomeSource extends React.Component {
                 tưởng.
                 <b>Mọi thành tựu đều bắt đầu từ một hành động nhỏ.</b>
                 <br />
-                <i><b>Chỉ cần vài phút mỗi ngày</b> đồng hành cùng cuốn da này
-                bạn, đã từng bước đi trên chặng hành trình sống xứng đáng và tạo
-                nên những thành tựu của riêng cuộc đời mình.</i>
+                <i>
+                  <b>Chỉ cần vài phút mỗi ngày đồng hành cùng cuốn da này </b>
+                   bạn, đã từng bước đi trên chặng hành trình sống xứng đáng và
+                  tạo nên những thành tựu của riêng cuộc đời mình.
+                </i>
               </p>
               <div
                 className="get-link btn"
                 style={{ marginTop: 32, float: "right" }}
               >
-                <a href={'http://sotay.songxungdang.com'}>Xem thêm</a>
+                <a href={"http://sotay.songxungdang.com"}>Xem thêm</a>
               </div>
             </div>
           </div>

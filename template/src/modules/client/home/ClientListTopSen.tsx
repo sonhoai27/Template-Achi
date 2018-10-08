@@ -56,7 +56,7 @@ class ClientListTopSen extends React.Component {
                 vượt qua chông gai và sống tích cực hơn. Tuổi trẻ là học hỏi,
                 trải nghiệm để "lớn" hơn từng ngày. Chúc anh luôn nhiệt huyết
                 hết lòng với thế hệ trẻ, dùng cái tâm sáng của mình để cho đi,
-                để đánh thức nhiều bạn trẻ Việt sống xứng đáng”.
+                để đánh thức nhiều bạn trẻ Việt sống xứng đáng”
               </p>
             </blockquote>
             <div className="quote-source">
@@ -98,9 +98,15 @@ class ClientListTopSen extends React.Component {
           <div className="col-sm-8">
             <blockquote>
               <p>
-              <h1>“Tôi chắc chắn với bạn rằng, bạn sẽ không sở hữu cuốn sổ nào quan trọng và xứng đáng hơn cuốn sổ này”.</h1>
+              <h1>“Tôi chắc chắn với bạn rằng, bạn sẽ không sở hữu cuốn sổ nào quan trọng và xứng đáng hơn cuốn sổ này”</h1>
               </p>
             </blockquote>
+            <div
+                className="get-link btn"
+                style={{ marginTop: 32, float: "right" }}
+              >
+                <a href={"http://sotay.songxungdang.com"}>Xem thêm</a>
+              </div>
             {/* <div className="quote-source">
               Phạm Thị Ngọc Diễm - SV DH Tài chính Marketing /HR Manager Anh ngữ
               Max Power.

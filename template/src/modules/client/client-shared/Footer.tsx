@@ -32,6 +32,13 @@ class Footer extends React.Component {
               <div className="row footer-intro" style={{marginTop: 32}}>
                 <div className="col-sm-3">
                   <h3>Điều quan trọng</h3>
+                  <ul>
+                    <li><a href=""><i className="fa fa-chevron-right"/> Đọc Blog</a></li>
+                    <li><a href=""><i className="fa fa-chevron-right"/> Video</a></li>
+                    <li><a href=""><i className="fa fa-chevron-right"/> Quàn Tặng</a></li>
+                    <li><a href=""><i className="fa fa-chevron-right"/> Sổ Tay</a></li>
+                    <li><a href=""><i className="fa fa-chevron-right"/> Các </a></li>
+                  </ul>
                 </div>
                 <div className="col-sm-3">
                   <h3>Bài viết hay</h3>
@@ -47,7 +54,7 @@ class Footer extends React.Component {
                 <div className="col-sm-3">
                   <h3>Địa chỉ</h3>
                   <ul className="list-icons-address">
-                    <li><i className="ti-email"/> yoloschoolvn@gmail.com</li>
+                    <li><i className="ti-email"/> info.songxungdang@gmail.com</li>
                     <li><i className="icon-phone"/> 097 7545 374</li>
                     <li><i className="icon-compass"/> 26/3 Phan Chu Trinh, Phường Hiệp Phú, Quận 9, Hồ Chí Minh</li>
                   </ul>

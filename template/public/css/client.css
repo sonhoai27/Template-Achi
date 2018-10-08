@@ -15,9 +15,6 @@ body {
 b {
   font-weight: 700 !important;
 }
-.orange {
-  color: #ff3300!important;
-}
 .border-bottom:after {
   display: block;
   content: "";
@@ -632,6 +629,7 @@ nav ul.nav-link {
   position: absolute;
   top: -50px;
   z-index: 1;
+  border: 8px solid;
 }
 
 .get-access.btn {
@@ -723,17 +721,6 @@ blockquote p:after {
   position: absolute;
 }
 
-blockquote p:before {
-  content: "“";
-  margin-left: -0.7em;
-  top: 0.2em;
-}
-
-blockquote p:after {
-  content: "”";
-  padding-left: 0.2em;
-  bottom: -0.1em;
-}
 
 .quote-source {
   font-family: "Bebas Neue Regular", "Helvetica Neue", "Helvetica", Arial,
@@ -2075,4 +2062,11 @@ blockquote p:after {
 }
 .gioi-thieu__one  img{
   width: 40%;
+}
+.footer-intro ul {
+  padding: 0;
+  list-style: none;
+}
+.footer-intro li {
+
 }

@@ -12,7 +12,8 @@ export const ACTION_TYPES = {
     IS_SUCCESS: 'ReInit/IS_SUCCESS',
     API_CHECK_LOGIN: 'ReInit/API_CHECK_LOGIN',
     API_LOGIN: 'ReInit/API_LOGIN',
-    IS_LOADING: 'ReInit/IS_LOADING'
+    IS_LOADING: 'ReInit/IS_LOADING',
+    CURRENT_MATCH: 'ReInit/CURRENT_MATCH'
 }
 const initialState = {
     resListImage: [],
@@ -24,7 +25,8 @@ const initialState = {
     isDanger: false,
     resLogin: {},
     resCheckLogin: {},
-    isLoading: false
+    isLoading: false,
+    currentMatch: {}
 
 }
 export default (state = initialState, action) => {
@@ -110,6 +112,12 @@ export default (state = initialState, action) => {
                 isLoading: action.payload
             }
         }
+        case (ACTION_TYPES.CURRENT_MATCH): {
+            return {
+                ...state,
+                currentMatch: action.payload
+            }
+        }
         // check login
         case REQUEST(ACTION_TYPES.API_CHECK_LOGIN): {
             return {
@@ -192,6 +200,13 @@ export const reCheckLogin = () => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_CHECK_LOGIN,
         payload: axios.get(API+'auth/check')
+    });
+    return result;
+};
+export const reSetCurrentMatch = (match) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.CURRENT_MATCH,
+        payload: match
     });
     return result;
 };
