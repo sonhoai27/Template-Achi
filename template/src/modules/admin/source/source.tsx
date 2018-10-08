@@ -1,9 +1,9 @@
 import * as React from "react";
-import {BASEURLADMIN} from "../../../config/const";
+import {BASEURLADMIN, API} from "../../../config/const";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {reListSource} from "./reSource";
-
+import axios from 'axios'
 interface Props {
     reListSource: (page: number) => void;
     reslistSource: any;
@@ -42,6 +42,18 @@ class Source extends React.Component<Props, {}> {
                         <td>
                             <span className="text-muted">{element.source_created_date}</span>
                         </td>
+                        <td>
+                            <div
+                            onClick={()=> {
+                            axios.get(API+'source/get-list-id-sche/'+element.source_id)
+                            .then(result => {
+                                alert('Bạn không có quyền xóa: '+result.data.list)
+                            })
+                            }}
+                            className="btn btn-sm btn-danger">
+                                Xóa
+                            </div>
+                        </td>
                     </tr>
                 );
             });
@@ -70,6 +82,7 @@ class Source extends React.Component<Props, {}> {
                                     <th>Tên</th>
                                     <th>Loại</th>
                                     <th>Ngày tạo</th>
+                                    <th>Hành động</th>
                                 </tr>
                                 </thead>
                                 <tbody>

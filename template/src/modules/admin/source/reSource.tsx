@@ -21,7 +21,10 @@ export const ACTION_TYPES = {
     API_LIST_SOURCE_BY_1: 'ReSource/API_LIST_SOURCE_BY_1',
     API_ADD_CONTACT: 'ReSource/API_ADD_CONTACT',
     API_FILTER_CONTACT: 'ReSource/API_ADD_CONTACT',
-    API_LIST_CONTACT_PAGING: 'ReSource/API_LIST_CONTACT_PAGING'
+    API_LIST_CONTACT_PAGING: 'ReSource/API_LIST_CONTACT_PAGING',
+
+    API_DELETE_DATE_SCHE: 'ReSource/API_DELETE_DATE_SCHE',
+    API_DELETE_SCHE: 'ReSource/API_DELETE_SCHE',
 }
 const initialState = {
     resDetailSource: [],
@@ -42,7 +45,10 @@ const initialState = {
     resListSourceBy1: [],
     resAddContact: {},
     resFilterContact: [],
-    resListContactPaging: []
+    resListContactPaging: [],
+
+    resDeleteDateSche: {},
+    resDeleteSche: {}
 }
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -77,7 +83,7 @@ export default (state = initialState, action) => {
         case SUCCESS(ACTION_TYPES.API_ADD_SOURCE): {
             return {
                 ...state,
-                resAddSource: action.payload.data.list
+                resAddSource: action.payload.data
             }
         }
         // add sche
@@ -336,6 +342,40 @@ export default (state = initialState, action) => {
                 resListContactPaging: action.payload.data
             }
         }
+         //delete sche
+         case REQUEST(ACTION_TYPES.API_DELETE_SCHE): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_DELETE_SCHE): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_DELETE_SCHE): {
+            return {
+                ...state,
+                resDeleteSche: action.payload.data
+            }
+        }
+        //delete date sche
+        case REQUEST(ACTION_TYPES.API_DELETE_DATE_SCHE): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_DELETE_DATE_SCHE): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_DELETE_DATE_SCHE): {
+            return {
+                ...state,
+                resDeleteDateSche: action.payload.data
+            }
+        }
         case ACTION_TYPES.API_SHOW_EDIT_CONTENT: {
             return {
                 ...state,
@@ -481,6 +521,21 @@ export const reListContactPaging = (page: number) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_LIST_CONTACT_PAGING,
         payload: axios.get(API_CONTACT+'/all/'+page)
+    });
+    return result;
+};
+
+export const reDeleteSche = (idSche: number) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_DELETE_SCHE,
+        payload: axios.delete(API_SOURCE+'delete-sche/'+idSche)
+    });
+    return result;
+};
+export const reDeleteDateSche = (idDateSche: number) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_DELETE_DATE_SCHE,
+        payload: axios.delete(API_SOURCE+'delete-date-sche/'+idDateSche)
     });
     return result;
 };

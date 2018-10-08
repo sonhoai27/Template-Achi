@@ -1,7 +1,9 @@
 body {
     background: #fff;
 }
-
+.flex-ver {
+  display: block;
+}
 #header-bar-desktop {
     display: none;
 }
@@ -210,4 +212,17 @@ body {
 }
 .order-source .time>ul:first-child>li>p:last-child {
   flex: 3;
+}
+.calendar .responsive-table .tbody>ul {
+    display: block!important;
+}
+.calendar .responsive-table .thead{
+    display: none;
+}
+.calendar .responsive-table .tbody>ul>li {
+    width: 100%!important;
+    margin-bottom: 15px;
+}
+.calendar .responsive-table .tbody>ul>li {
+    padding: 0px!important;
 }

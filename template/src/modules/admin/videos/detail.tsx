@@ -84,7 +84,6 @@ class VideoDetail extends React.Component<IProps, IState> {
             <div className="panel-toolbar">
               <div className="panel-heading">Thêm video</div>
               <div className="panel-action-bar">
-                <div className="btn btn-xs btn-danger">Xóa</div>
                 <div className="btn btn-xs btn-info" onClick={this.updateVideo}>Lưu</div>
               </div>
             </div>

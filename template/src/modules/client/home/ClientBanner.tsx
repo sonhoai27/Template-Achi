@@ -1,4 +1,5 @@
 import * as React from "react";
+import CLientFooterBanner from "./ClientFooterBanner";
 
 class ClientBanner extends React.Component {
   render() {
@@ -19,7 +20,7 @@ class ClientBanner extends React.Component {
             />
           </video>
         </div>
-        {/* <CLientFooterBanner/> */}
+        <CLientFooterBanner/>
       </div>
     );
   }

@@ -5,6 +5,7 @@ import {reShowPhotoApp, reSetCurrentEditorPhoto, reIsDanger, reIsSuccess} from "
 import {reListUIForSource} from "../ui/reUI";
 import {reAddSource} from "./reSource";
 import {alias} from "../../../utils/alias";
+import { BASEURLADMIN } from "../../../config/const";
 
 interface Props {
     reSetCurrentEditorPhoto: (editor: any) => void;
@@ -85,7 +86,21 @@ class AddSource extends React.Component<Props, State> {
         })
     }
     componentDidUpdate(preProps){
-
+        if(preProps.resAddSource != this.props.resAddSource){
+            if (this.props.resAddSource.status === 200) {
+              this.props.reIsSuccess(true);
+              setTimeout(() => {
+                this.props.reIsSuccess(false);
+                window.location.href = BASEURLADMIN+'source'
+              }, 2000);
+            } else {
+              this.props.reIsDanger(true);
+              setTimeout(() => {
+                this.props.reIsDanger(false);
+                window.location.href = BASEURLADMIN+'source'
+              }, 2000);
+            }
+          }
     }
     render() {
         return (

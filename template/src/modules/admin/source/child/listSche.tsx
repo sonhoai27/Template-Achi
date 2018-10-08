@@ -2,12 +2,14 @@ import * as React from "react";
 import { BASEURLADMIN } from "../../../../config/const";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { reListSche } from "../reSource";
+import { reListSche, reDeleteSche } from "../reSource";
 
 interface Props {
-    match: any,
-    resListSche: any,
-    reListSche: (id: number)=> void,
+    match: any;
+    resListSche: any;
+    reListSche: (id: number)=> void;
+    resDeleteSche: any;
+    reDeleteSche: (idSche: number)=> void;
 }
 class ListSche extends React.Component<Props, {}> {
   constructor(props) {
@@ -35,11 +37,29 @@ class ListSche extends React.Component<Props, {}> {
                     <td>
                         {element.source_sche_number}
                     </td>
+                    <td>
+                      <div
+                        onClick={()=> {
+                            this.props.reDeleteSche(element.source_sche_id)
+                        }}
+                        className="btn btn-sm btn-danger">
+                        Xóa
+                      </div>
+                    </td>
                 </tr>
             )
         })
       }
       return ''
+  }
+  componentDidUpdate(preProps){
+    if (preProps.resDeleteSche != this.props.resDeleteSche) {
+      if (this.props.resDeleteSche.status === 200) {
+        this.props.reListSche(this.props.match.params.idSource)
+      } else {
+        this.props.reListSche(this.props.match.params.idSource)
+      }
+  }
   }
   render() {
     return (
@@ -65,6 +85,7 @@ class ListSche extends React.Component<Props, {}> {
                           <th>Tên</th>
                           <th>Giá</th>
                           <th>Số lượng</th>
+                          <th>Hành động</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -82,10 +103,12 @@ class ListSche extends React.Component<Props, {}> {
   }
 }
 const mapStateToProps = storeState => ({
-    resListSche: storeState.reSource.resListSche
+    resListSche: storeState.reSource.resListSche,
+    resDeleteSche: storeState.reSource.resDeleteSche
 });
 const mapDispatchToProps = {
-    reListSche
+    reListSche,
+    reDeleteSche
 };
 export default connect(
     mapStateToProps,

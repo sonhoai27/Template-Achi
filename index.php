@@ -20,6 +20,8 @@ define("BASE_URL", 'http://localhost:8080/Achi/template/public/');
         <script src="<?=BASE_URL?>js/jquery-3.3.1.slim.min.js"></script>
         <link href="<?=BASE_URL?>css/cdn.css" rel="stylesheet">
         <meta name="robots" content="noindex, nofollow">
+        <link href="<?=BASE_URL?>css/style_2.css" rel="stylesheet">
+        <link href="<?=BASE_URL?>css/style_3.css" rel="stylesheet">
         <script src="https://cdn.ckeditor.com/4.10.1/full/ckeditor.js"></script>
         <script>CKEDITOR.dtd.$removeEmpty['span'] = false;</script>
         <?php

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import {reDetailSche, reUpdateSche } from "../reSource";
+import {reDetailSche, reUpdateSche, reListDateSche } from "../reSource";
 import ListDateSche from "./listDateSche";
 import AddDateSche from "./addDateSche";
 import { reIsDanger, reIsSuccess } from "../../../../reducers/init";
@@ -12,6 +12,8 @@ interface Props {
     resUpdateSche: any;
     reIsSuccess: (status: boolean) => void;
     reIsDanger: (status: boolean) => void;
+    resDeleteDateSche: any;
+    reListDateSche: (id: number)=> void;
 
 }
 interface State {
@@ -70,6 +72,13 @@ class DetailSche extends React.Component<Props, State> {
                   window.location.href = this.props.match.url
                 }, 2000);
               }
+        }
+        if (preProps.resDeleteDateSche != this.props.resDeleteDateSche) {
+            if (this.props.resDeleteDateSche.status === 200) {
+              this.props.reListDateSche(this.props.match.params.idSche)
+            } else {
+              this.props.reListDateSche(this.props.match.params.idSche)
+            }
         }
     }
     componentDidMount(){
@@ -231,13 +240,15 @@ class DetailSche extends React.Component<Props, State> {
 }
 const mapStateToProps = storeState => ({
     resDetailSche: storeState.reSource.resDetailSche,
-    resUpdateSche: storeState.reSource.resUpdateSche
+    resUpdateSche: storeState.reSource.resUpdateSche,
+  resDeleteDateSche: storeState.reSource.resDeleteDateSche
 });
 const mapDispatchToProps = {
     reDetailSche,
     reUpdateSche,
     reIsDanger,
-    reIsSuccess
+    reIsSuccess,
+    reListDateSche
 };
 export default connect(
     mapStateToProps,

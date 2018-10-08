@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Select from "react-select";
 import makeAnimated from "react-select/lib/animated";
 import { BASEURL } from "../../../config/const";
-
+import Helmet from "react-helmet";
 interface IProps {
   resClientListBlog: any;
   resListCategory: any;
@@ -53,47 +53,61 @@ class ClientBlog extends React.Component<IProps, {}> {
     if (this.props.resClientListBlog.list) {
       return this.props.resClientListBlog.list.map((element, index) => {
         return (
-          <div
-            className={
-              index + 1 === 1 || (index + 1) % 6 === 0 ? "col-sm-8" : "col-sm-4"
-            }
-          >
-            <div className="post">
-              <Link
-                style={{ backgroundImage: "url(" + element.blog_cover + ")" }}
-                className="post-item-image"
-                to={BASEURL+'page/blog' + "/detail/" + element.blog_id}
-              >
-                <div className="post-item-container color3">
-                  <img
-                    className="ico-handshake cat-icon"
-                    src="https://cdnwp.tonyrobbins.com/wp-content/uploads/2017/09/white-outlined_health-and-vitality.png"
-                  />
-                </div>
-              </Link>
-              <div className="post-content">
-                <h6 className="micro">{element.category_name}</h6>
-                <div
-                  className="archive_cat_line"
-                  style={{ backgroundColor: "#6d166d" }}
-                />
-                <h4 className="post-title">
-                  <Link
-                     to={BASEURL+'page/blog' + "/detail/" + element.blog_id}
-                  >
-                    {element.blog_title}
-                  </Link>
-                </h4>
-
+          <>
+            <Helmet
+              style={[
+                {
+                  cssText: `
+                  .list-blogs .post.post-${index} div.post-item-container:hover:before{
+                    background: ${element.category_color}
+                  }`
+                }
+              ]}
+            />
+            <div
+              className={
+                index + 1 === 1 || (index + 1) % 6 === 0
+                  ? "col-sm-8"
+                  : "col-sm-4"
+              }
+            >
+              <div className={ `post post-${index}`}>
                 <Link
-                  to={BASEURL+'page/blog' + "/detail/" + element.blog_id}
-                  className="link-more link-more-grey"
+                  style={{ backgroundImage: "url(" + element.blog_cover + ")" }}
+                  className="post-item-image"
+                  to={BASEURL + "page/blog" + "/detail/" + element.blog_id}
                 >
-                  Xem thêm
+                  <div className="post-item-container color3">
+                    <img
+                      className="ico-handshake cat-icon"
+                      src={element.category_icon}
+                    />
+                  </div>
                 </Link>
+                <div className="post-content">
+                  <h6 className="micro">{element.category_name}</h6>
+                  <div
+                    className="archive_cat_line"
+                    style={{ backgroundColor: "#6d166d" }}
+                  />
+                  <h4 className="post-title">
+                    <Link
+                      to={BASEURL + "page/blog" + "/detail/" + element.blog_id}
+                    >
+                      {element.blog_title}
+                    </Link>
+                  </h4>
+
+                  <Link
+                    to={BASEURL + "page/blog" + "/detail/" + element.blog_id}
+                    className="link-more link-more-grey"
+                  >
+                    Xem thêm
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
+          </>
         );
       });
     }
@@ -102,7 +116,11 @@ class ClientBlog extends React.Component<IProps, {}> {
   options = () => {
     if (this.props.resListCategory.list) {
       return this.props.resListCategory.list.map(function(item) {
-        return { value: item.category_id, label: item.category_name, alias: item.category_alias };
+        return {
+          value: item.category_id,
+          label: item.category_name,
+          alias: item.category_alias
+        };
       });
     }
     return [];
@@ -168,28 +186,38 @@ class ClientBlog extends React.Component<IProps, {}> {
             <div className="col-sm-12">
               <div className="row">
                 <div className="col-sm-4" />
-                <div className="col-sm-4" style={{
-                  marginBottom: 32
-                }}>
+                <div
+                  className="col-sm-4"
+                  style={{
+                    marginBottom: 32
+                  }}
+                >
                   <Select
                     className="custom-select-category"
                     closeMenuOnSelect={false}
                     components={makeAnimated()}
                     onChange={item => {
-                      if(item.value !== 0){
-                        window.location.href = BASEURL+'page/blog/danh-muc/'+item.value+'-'+item.alias
-                      }else {
-                        window.location.href = BASEURL+'page/blog'
+                      if (item.value !== 0) {
+                        window.location.href =
+                          BASEURL +
+                          "page/blog/danh-muc/" +
+                          item.value +
+                          "-" +
+                          item.alias;
+                      } else {
+                        window.location.href = BASEURL + "page/blog";
                       }
                     }}
                     options={[
-                      ...this.options(), {
-                        value: 0, label: 'Tất cả'
+                      ...this.options(),
+                      {
+                        value: 0,
+                        label: "Tất cả"
                       }
                     ]}
                   />
                 </div>
-                <div className="col-sm-4"></div>
+                <div className="col-sm-4" />
               </div>
             </div>
           </div>

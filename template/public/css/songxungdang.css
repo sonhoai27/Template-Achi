@@ -1,0 +1,29 @@
+:root {
+  --sxd-primary-color:#94c240;
+  --sxd-second-color:#012846;
+}
+.size-16 {
+  font-size: 16px;
+}
+.size-18 {
+  font-size: 18px;
+}
+.size-20 {
+  font-size: 20px;
+}
+.size-32 {
+  font-size: 32px;
+}
+.size-24 {
+  font-size: 24px;
+}
+.size-64 {
+  font-size: 64px;
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+.head-row {
+  background: var(--sxd-primary-color);
+  color: var(--sxd-second-color);
+}

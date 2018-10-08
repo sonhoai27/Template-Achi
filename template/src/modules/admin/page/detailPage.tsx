@@ -4,7 +4,7 @@ import { reListPageUI } from "./rePage";
 import ListElementDetailUIPage from "./detail-ui/detail-ui";
 import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
-import { reIsDanger, reIsSuccess } from "../../../reducers/init";
+import { reIsDanger, reIsSuccess, reSetCurrentEditorPhoto, reShowPhotoApp } from "../../../reducers/init";
 import ModalEditContentElement from "./detail-ui/ModalEditContentElement";
 import { reShowEditContent } from "../source/reSource";
 
@@ -17,6 +17,8 @@ interface IProps {
   reIsDanger: (status: boolean) => void;
   reShowEditContent: (status: boolean)=> void;
   resShowEditContent: any;
+  reSetCurrentEditorPhoto: (editor: any)=> void;
+  reShowPhotoApp: (status: boolean)=> void;
 }
 interface IState {}
 class DetailPage extends React.Component<IProps, IState> {
@@ -89,6 +91,12 @@ class DetailPage extends React.Component<IProps, IState> {
           </div>
         </div>
         {this.props.resShowEditContent ? <ModalEditContentElement/> : ''}
+        <div className="btn btn-sm btn-primary insert-image" onClick={()=> {
+          this.props.reShowPhotoApp(true)
+          this.props.reSetCurrentEditorPhoto('')
+        }}>
+          <i className="fa fa-file-image-o"/>
+        </div>
       </>
     );
   }
@@ -103,7 +111,9 @@ const mapDispatchToProps = {
   reListPageUI,
   reIsDanger,
   reIsSuccess,
-  reShowEditContent
+  reShowEditContent,
+  reSetCurrentEditorPhoto,
+  reShowPhotoApp,
 };
 export default connect(
   mapStateToProps,

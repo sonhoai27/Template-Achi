@@ -1,6 +1,6 @@
 import * as React from "react";
 import SearchBar from "./SearchBar";
-import { BASEURL } from "../../../config/const";
+import { BASEURL, RESOURCE } from "../../../config/const";
 
 interface IState {
   isShowingMenu: boolean,
@@ -31,21 +31,21 @@ class ClientHeader extends React.Component<{}, IState> {
           <div className="header-container">
             <div className="header-socials">
               <p className="phone">
-                <a href="tel://1-800-488-6040" className="phonenumber">
-                  <span className="mm-phone-number">1-800-488-6040</span>
+                <a href="mailto://info.songxungdang@gmail.com" className="phonenumber">
+                  <span className="mm-phone-number">info.songxungdang@gmail.com</span>
                 </a>
               </p>
               <ul>
                 <li>
                   <a
-                    href="https://www.facebook.com/TonyRobbins/"
+                    href="https://www.facebook.com/NguyenMinhChi.MrShare/"
                     target="_blank"
                   >
                     <i className="icon-social-facebook" />
                   </a>
                 </li>
                 <li>
-                  <a href="https://twitter.com/tonyrobbins" target="_blank">
+                  <a href="https://www.youtube.com/channel/UCHCeMi9tGx9VCMSHHbscrLg?sub_confirmation=1" target="_blank">
                     <i className=" icon-social-youtube" />
                   </a>
                 </li>
@@ -53,10 +53,8 @@ class ClientHeader extends React.Component<{}, IState> {
             </div>
             <div className="nav-utilities">
               <ul>
-                <li className="nav-item hidden-xs hidden-sm" id="login">
-                  <a href="#" className="login-trigger" id="members-portal">
-                    Login
-                  </a>
+                <li className="nav-item hidden-xs hidden-sm white" id="login">
+                PHỤNG SỰ TUỔI TRẺ VIỆT
                 </li>
               </ul>
             </div>
@@ -75,7 +73,7 @@ class ClientHeader extends React.Component<{}, IState> {
             <ul className="nav-logo">
               <li>
                 <a href={BASEURL}>
-                  <img src="https://www.tonyrobbins.com/wp-content/themes/tonyrobbins2016/images/tr-logo-blk-on-wht.svg" />
+                  <img src={RESOURCE+'images/home/1-logo-mrshare.png'} />
                 </a>
               </li>
             </ul>

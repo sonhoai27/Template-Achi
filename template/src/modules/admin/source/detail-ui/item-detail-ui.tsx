@@ -72,7 +72,6 @@ class ItemDetailUISource extends React.Component<Props, State> {
                             }} className="btn btn-xs btn-primary">
                                 <i className=" icon-doc"/> Sửa
                             </div>
-                            <p>Nhấn vào "sửa" để thêm hoặc sửa.</p>
                         </label>
                         {/*<div className="col-md-12">*/}
               {/*<textarea*/}
@@ -84,7 +83,7 @@ class ItemDetailUISource extends React.Component<Props, State> {
                     </div>
                     <div className="form-group">
                         <label className="col-md-12">
-                            <span className="help"> Class của đối tượng</span>
+                            <span className="help"> Class</span>
                             <div onClick={() => this.saveContentElement({
                                 idVirtualElement: this.props.detailUI.detail_ui_random_id + '-class',
                                 content_element_id: this.props.detailUI.content_element_id,
@@ -108,7 +107,7 @@ class ItemDetailUISource extends React.Component<Props, State> {
                 <div className="noi-dung">
                     <div className="form-group">
                         <label className="col-md-12">
-                            <span className="help"> Attribute của đối tượng</span>
+                            <span className="help"> Attribute</span>
                             <div onClick={() => this.saveContentElement({
                                 idVirtualElement: this.props.detailUI.detail_ui_random_id + '-attr',
                                 content_element_id: this.props.detailUI.content_element_id,
@@ -128,7 +127,7 @@ class ItemDetailUISource extends React.Component<Props, State> {
                     </div>
                     <div className="form-group">
                         <label className="col-md-12">
-                            <span className="help"> Content Attribute của đối tượng</span>
+                            <span className="help"> Content Attribute</span>
                             <div onClick={() => this.saveContentElement({
                                 idVirtualElement: this.props.detailUI.detail_ui_random_id + '-content-attr',
                                 content_element_id: this.props.detailUI.content_element_id,

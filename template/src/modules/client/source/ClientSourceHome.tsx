@@ -27,14 +27,14 @@ class ClientSourceHome extends React.Component<IProps, {}> {
         if (this.props.resListSourceBy0.list) {
             return this.props.resListSourceBy0.list.map(element => {
                 return (
-                    <div className="col-sm-4">
+                    <div className="col-sm-3">
                         <div className="panel sales-page-listing">
-                            <AutofitImage frameWidth="100%" frameHeight="400px" imgSrc={element.source_cover}/>
+                            <AutofitImage frameWidth="100%" frameHeight="300px" imgSrc={element.source_cover}/>
                             <div className="panel-body">
                                 <h3 className="title text-dark">
                                     {element.source_is_page == 1 ?
                                         <a target={'blank'} href={element.source_page_url}>{element.source_title}</a> : <Link
-                                            to={BASEURL + 'page/khoa-hoc/video/' + element.source_id + '.' + element.source_alias}>{element.source_title}</Link>}
+                                            to={BASEURL + 'page/khoa-hoc/' + element.source_alias+'-'+element.source_id_ui+'-'+ element.source_id}>{element.source_title}</Link>}
                                 </h3>
                                 <p className="desc" style={{fontSize: 15}}>
                                     {element.source_promo}
@@ -42,7 +42,7 @@ class ClientSourceHome extends React.Component<IProps, {}> {
                                 {element.source_is_page == 1 ?
                                     <a target={'blank'} className="btn btn-primary learn-more" href={element.source_page_url}>Xem</a> :
                                     <Link className="btn btn-primary learn-more"
-                                        to={BASEURL + 'page/khoa-hoc/video/' + element.source_id + '.' + element.source_alias}>Xem</Link>}
+                                        to={BASEURL + 'page/khoa-hoc/'+ element.source_alias+'-'+element.source_id_ui+'-' + element.source_id }>Xem</Link>}
                             </div>
                         </div>
                     </div>
@@ -55,20 +55,20 @@ class ClientSourceHome extends React.Component<IProps, {}> {
         if (this.props.resListSourceBy1.list) {
             return this.props.resListSourceBy1.list.map(element => {
                 return (
-                    <div className="col-sm-4">
+                    <div className="col-sm-3">
                         <div className="panel sales-page-listing">
-                            <AutofitImage frameWidth="100%" frameHeight="400px" imgSrc={element.source_cover}/>
+                            <AutofitImage frameWidth="100%" frameHeight="300px" imgSrc={element.source_cover}/>
                             <div className="panel-body">
                                 <h3 className="title text-dark">
                                     <Link
-                                        to={BASEURL + 'page/khoa-hoc/video/' + element.source_id + '.' + element.source_alias}>{element.source_title}</Link>
+                                        to={BASEURL + 'page/khoa-hoc/video/' + element.source_id + '-' + element.source_alias}>{element.source_title}</Link>
                                 </h3>
                                 <p className="desc" style={{fontSize: 15}}>
                                     {element.source_promo}
                                 </p>
                                 <Link
                                     className="btn btn-primary learn-more"
-                                    to={BASEURL + 'page/khoa-hoc/video/' + element.source_id + '.' + element.source_alias}
+                                    to={BASEURL + 'page/khoa-hoc/video/' + element.source_id + '-' + element.source_alias}
                                     kjb-settings-id="language_learn_more"
                                 >
                                     Xem

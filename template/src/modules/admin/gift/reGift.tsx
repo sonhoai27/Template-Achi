@@ -8,7 +8,8 @@ export const ACTION_TYPES = {
   API_DELETE_GIFT: "ReGift/API_DELETE_GIFT",
   API_DETAIL_GIFT: "ReGift/API_DETAIL_GIFT",
   API_LIST_CONTACT: "ReGift/API_LIST_CONTACT",
-  API_SEND_GIFT: "ReGift/API_SEND_GIFT"
+  API_SEND_GIFT: "ReGift/API_SEND_GIFT",
+  API_SEND_GIFT_BY_USER: 'ReGift/API_SEND_GIFT_BY_USER'
 };
 
 const initialState = {
@@ -18,7 +19,8 @@ const initialState = {
   resDeleteGift: {},
   resDetailGift: {},
   resListContact: [],
-  resSendGift: {}
+  resSendGift: {},
+  resSendGiftByUser: {}
 };
 
 export default (state = initialState, action) => {

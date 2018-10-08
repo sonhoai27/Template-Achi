@@ -1,11 +1,13 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import axios from 'axios'
+import AutofitImage from "../../shared/CropImage";
 import {
   reDetailBlog,
   reClientListBlogCategory
 } from "../../admin/blog/reBlog";
 import Helmet from "react-helmet";
-import { BASEURL } from "../../../config/const";
+import { BASEURL, API } from "../../../config/const";
 interface IProps {
   match?: any;
   resDetailBlog: any;
@@ -36,6 +38,7 @@ class ClientDetailBlog extends React.Component<IProps, IState> {
   componentDidMount() {
     window.scrollTo(0, 0);
     this.props.reDetailBlog(this.props.match.params.idBlog);
+    axios.put(API+'blog/views/'+this.props.match.params.idBlog)
   }
   renderListBlogCategory = () => {
     if (this.props.resClientListBlogCategory.list) {
@@ -43,10 +46,9 @@ class ClientDetailBlog extends React.Component<IProps, IState> {
         return (
           <div className="col-sm-3">
             <a href={BASEURL+'page/blog/detail/'+element.blog_id}>
-            <img src={element.blog_cover} alt="" className="img-responsive" />
-            <h3>{element.blog_title}</h3>
+            <AutofitImage clasName="img-responsive" frameWidth="100%" frameHeight="200px" imgSrc={element.blog_cover}/>
+            <h4>{element.blog_title}</h4>
             </a>
-            <p>{element.blog_promo}</p>
           </div>
         );
       });
@@ -105,7 +107,8 @@ class ClientDetailBlog extends React.Component<IProps, IState> {
                     }}
                   />
                   <span className="article-author">
-                    Posted by <b>{this.state.blog.author_name}</b>
+                    Đăng bởi: <b>{this.state.blog.author_name}</b><br/>
+                    Lượt xem: <b>{this.state.blog.blog_views}</b>
                   </span>
                 </div>
                 <div

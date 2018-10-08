@@ -1,9 +1,17 @@
 import * as React from "react";
 import {Storage} from "../../utils/storage-util";
+import { connect } from "react-redux";
+import { reIsDanger, reIsSuccess } from "../../reducers/init";
+import { reAddContact } from "../admin/source/reSource";
 var CryptoJS = require("crypto-js");
 interface IProps {
     showHide: any;
-    name_click: string;
+    code: any;
+    name: any;
+    resAddContact: any;
+    reAddContact: (form: any)=> void;
+    reIsSuccess: (status: boolean) => void;
+    reIsDanger: (status: boolean) => void;
 }
 
 interface IState {
@@ -23,6 +31,11 @@ class ModalContact extends React.Component<IProps, IState> {
             email_phone: ''
         }
     }
+    componentDidMount(){
+        this.setState({
+            email_name_click: this.props.name
+        })
+    }
     onchange = (e)=> {
         // @ts-ignore
         this.setState({
@@ -30,7 +43,28 @@ class ModalContact extends React.Component<IProps, IState> {
         })
     }
     submit = ()=> {
-        Storage.local.set('user_info',CryptoJS.AES.encrypt(JSON.stringify(this.state), 'NGUYENMINHCHI@1234567890987654321!@#$%^&*()').toString())
+        const enc = CryptoJS.AES.encrypt(JSON.stringify(this.state), 'NGUYENMINHCHI@1234567890987654321!@#$%^&*()').toString()
+        Storage.local.set('user_info', {
+            ...Storage.local.get('user_info'),
+            [this.props.code]: enc
+        })
+        this.props.reAddContact(this.state)
+    }
+    componentDidUpdate(preProps){
+        if (preProps.resAddContact != this.props.resAddContact) {
+            if (this.props.resAddContact.status === 200) {
+              this.props.reIsSuccess(true);
+              setTimeout(() => {
+                this.props.reIsSuccess(false);
+                this.props.showHide()
+              }, 2000);
+            } else {
+              this.props.reIsDanger(true);
+              setTimeout(() => {
+                this.props.reIsDanger(false);
+              }, 2000);
+            }
+          }
     }
     render() {
         return (
@@ -90,13 +124,21 @@ class ModalContact extends React.Component<IProps, IState> {
                         </div>
                     </div>
                 </div>
-                <div className="modal-backdrop fade in" style={{
-                    opacity: 1,
-                    backgroundColor: '#1F9080'
-                }}/>
+                <div className="modal-backdrop fade in" />
             </>
         );
     }
 }
 
-export default ModalContact;
+const mapStateToProps = storeState => ({
+    resAddContact: storeState.reSource.resAddContact
+});
+const mapDispatchToProps = {
+    reIsDanger,
+    reIsSuccess,
+    reAddContact
+};
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ModalContact);

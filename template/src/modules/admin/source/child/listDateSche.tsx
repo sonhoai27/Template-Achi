@@ -1,11 +1,13 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { reListDateSche } from "../reSource";
+import { reListDateSche, reDeleteDateSche } from "../reSource";
 import DetailDateSche from "./detailDateSche";
 interface Props {
-  currentIdSche: any,
-  reListDateSche: (id: number)=> void,
-  resListDateSche: any
+  currentIdSche: any;
+  reListDateSche: (id: number)=> void;
+  resListDateSche: any;
+  reDeleteDateSche: (idDateSche: number)=> void;
+  resDeleteDateSche: any;
 }
 interface State {
   showModelUpdateDateSche: boolean,
@@ -22,6 +24,7 @@ class ListDateSche extends React.Component<Props, State> {
   componentDidMount(){
     this.props.reListDateSche(this.props.currentIdSche)
   }
+
   hiddenModalDetailDateSche = ()=> {
     this.setState({
       currentDateSche: '',
@@ -41,6 +44,13 @@ class ListDateSche extends React.Component<Props, State> {
                 })
               }}>
                 <div dangerouslySetInnerHTML={{ __html: element.date_source_time }}/>
+              </td>
+              <td>
+                <div
+                  onClick={()=> this.props.reDeleteDateSche(element.date_source_id)}
+                  className="btn btn-sm btn-danger">
+                  Xóa
+                </div>
               </td>
             </tr>
         )
@@ -74,7 +84,8 @@ const mapStateToProps = storeState => ({
   resListDateSche: storeState.reSource.resListDateSche
 });
 const mapDispatchToProps = {
-  reListDateSche
+  reListDateSche,
+  reDeleteDateSche
 };
 export default connect(
   mapStateToProps,

@@ -22,6 +22,8 @@ interface IState {
     currentVideo: any;
     isShowingPlayer: boolean;
     isShowingModalContact: boolean;
+    currentCode: any;
+    currentName: any;
 }
 
 class ClientVideoSource extends React.Component<IProps, IState> {
@@ -30,13 +32,15 @@ class ClientVideoSource extends React.Component<IProps, IState> {
         this.state = {
             currentVideo: "",
             isShowingPlayer: false,
-            isShowingModalContact: false
+            isShowingModalContact: false,
+            currentCode: {},
+            currentName: {}
         }
     }
 
     componentDidMount() {
         const url = this.props.match.params.idSource
-        const tempArr = url.split('.')
+        const tempArr = url.split('-')
         const idSource = tempArr[0]
         this.props.reDetailSource(idSource)
         this.props.apiListVideoSource(idSource)
@@ -46,10 +50,11 @@ class ClientVideoSource extends React.Component<IProps, IState> {
     componentDidUpdate(preProps) {
         if (preProps.resDetailSource != this.props.resDetailSource) {
             this.forceUpdate()
-            if(!Storage.local.get('user_info')){
-
+            if(!Storage.local.get('user_info') || Storage.local.get('user_info')[this.props.resDetailSource.source_alias] == undefined){
                 this.setState({
-                    isShowingModalContact: !this.state.isShowingModalContact
+                    isShowingModalContact: !this.state.isShowingModalContact,
+                    currentCode: this.props.resDetailSource.source_alias,
+                    currentName: this.props.resDetailSource.source_title
                 })
             }
         }
@@ -80,6 +85,14 @@ class ClientVideoSource extends React.Component<IProps, IState> {
         }
         return <li>Không có</li>
     }
+    makeIframe = (link: string)=> {
+        return (
+          <iframe width={853} height={480}
+            src={"https://www.youtube.com/embed/" + (link !== "" ? link.split('v=')[1] : '')}
+          // @ts-ignore
+            frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen/>
+        )
+      }
     render() {
         const detail = this.props.resDetailSource
         // @ts-ignore
@@ -103,7 +116,7 @@ class ClientVideoSource extends React.Component<IProps, IState> {
                             </div>
                         </div>
                     </div>
-                    <div className="row">
+                    {/* <div className="row">
                         <div className="container">
                             <div className="row">
                                 <div className="col-sm-3"></div>
@@ -118,7 +131,7 @@ class ClientVideoSource extends React.Component<IProps, IState> {
                                 <div className="col-sm-3"></div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="row paddingY-32 detail-video__main">
                         <div className="container">
                             <div className="row">
@@ -142,12 +155,50 @@ class ClientVideoSource extends React.Component<IProps, IState> {
                 </div>
                 <Footer/>
                 {
-                    this.state.isShowingModalContact ? <ModalContact showHide={()=> {
+                    this.state.isShowingModalContact ? <ModalContact code={this.state.currentCode} name={this.state.currentName} showHide={()=> {
                         this.setState({
                             isShowingModalContact: !this.state.isShowingModalContact
                         })
-                    }} name_click={''}/> : ''
+                    }}/> : ''
                 }
+                {
+          this.state.isShowingPlayer ? (
+            <>
+            <div
+            style={{display: "block"}}
+            className="modal fade in play-video"
+            role="dialog"
+            aria-hidden="true"
+        >
+            <div className="modal-dialog modal-lg">
+                <div className="modal-content">
+                    <div className="modal-header">
+                      <button
+                          onClick={()=> {
+                            this.setState({
+                                isShowingPlayer: !this.state.isShowingPlayer
+                            })
+                          }}
+                          type="button"
+                          className="close"
+                          data-dismiss="modal"
+                          aria-hidden="true"
+                      >
+                          ×
+                      </button>
+                    </div>
+                    <div className="modal-body">
+                        <div className="video-container">
+                          {this.makeIframe(this.state.currentVideo.source_video_url)}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div className="modal-backdrop fade in"/>
+            </>
+          ) : ''
+        }
             </>
         )
     }

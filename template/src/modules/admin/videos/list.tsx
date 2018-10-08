@@ -2,11 +2,16 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
 import { connect } from "react-redux";
-import { reListVideo } from "./reVideos";
+import { reListVideo, reDeleteVideo } from "./reVideos";
 import Pagination from "../../shared/Pagination";
+import { reIsSuccess, reIsDanger } from "../../../reducers/init";
 interface Props {
-  resListVideo: any,
-  reListVideo: (page: number)=> void
+  resListVideo: any;
+  reListVideo: (page: number)=> void;
+  reIsSuccess: (status: boolean) => void;
+  reIsDanger: (status: boolean) => void;
+  resDeleteVideo: any;
+  reDeleteVideo: (id: number)=> void;
 }
 class VideoList extends React.Component<Props, {}> {
   constructor(props) {
@@ -43,13 +48,40 @@ class VideoList extends React.Component<Props, {}> {
                 <a href={element.video_uri} target="_blank">{element.video_uri}</a>
               </td>
               <td>
-                <img width="10%" src={element.video_cover} className="img-responsive"/>
+                <div
+                  onClick={()=> {
+                    this.props.reDeleteVideo(element.video_id)
+                  }}
+                  className="btn btn-sm btn-danger">
+                  Xóa
+                </div>
               </td>
             </tr>
         )
       })
     }
     return ''
+  }
+  componentDidUpdate(preProps){
+    if(this.props.resDeleteVideo != preProps.resDeleteVideo){
+      if (this.props.resDeleteVideo.status === 200) {
+        this.props.reIsSuccess(true);
+        setTimeout(() => {
+          this.props.reIsSuccess(false);
+          this.props.reListVideo(
+            (parseInt(this.makeCurrentPage(), 10) - 1)*20
+          )
+        }, 2000);
+      } else {
+        this.props.reIsDanger(true);
+        setTimeout(() => {
+          this.props.reIsDanger(false);
+          this.props.reListVideo(
+            (parseInt(this.makeCurrentPage(), 10) - 1)*20
+          )
+        }, 2000);
+      }
+    }
   }
   render() {
     return (
@@ -72,7 +104,7 @@ class VideoList extends React.Component<Props, {}> {
                       </th>
                       <th>Tên</th>
                       <th>Video</th>
-                      <th>Cover</th>
+                      <th>Hành động</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -97,10 +129,14 @@ class VideoList extends React.Component<Props, {}> {
 }
 
 const mapStateToProps = storeState => ({
-  resListVideo: storeState.reVideos.resListVideo
+  resListVideo: storeState.reVideos.resListVideo,
+  resDeleteVideo: storeState.reVideos.resDeleteVideo
 });
 const mapDispatchToProps = {
-  reListVideo
+  reListVideo,
+  reIsDanger,
+  reIsSuccess,
+  reDeleteVideo
 };
 export default connect(
   mapStateToProps,

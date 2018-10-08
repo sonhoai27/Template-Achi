@@ -3,6 +3,7 @@ import {Route} from "react-router";
 import ClientSourceHome from "./ClientSourceHome";
 import ClientOrderSource from "./ClientOrderSource";
 import ClientVideoSource from "./ClientVideoSource";
+import ClientSourceDetail from "./ClientSourceDetail";
 interface IProps {
     match?: any
 }
@@ -14,7 +15,7 @@ class ClientSourceRoute extends React.Component<IProps> {
         return (
             <>
                 <Route exact path={`${this.props.match.url}`} component={ClientSourceHome}/>
-                <Route path={`${this.props.match.url}/chi-tiet/:idSource`} component={ClientSourceHome}/>
+                <Route path={`${this.props.match.url}/:idSource`} component={ClientSourceDetail}/>
                 <Route path={`${this.props.match.url}/video/:idSource`} component={ClientVideoSource}/>
                 <Route path={`${this.props.match.url}/dang-ky/:idSche`} component={ClientOrderSource}/>
             </>

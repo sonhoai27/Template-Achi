@@ -1,4 +1,5 @@
 import * as React from "react";
+import { RESOURCE } from './../../../config/const';
 
 class CLientFooterBanner extends React.Component {
   constructor(props){
@@ -11,18 +12,19 @@ class CLientFooterBanner extends React.Component {
             <div className="row">
               <div className="col-sm-3 footer-banner-img">
                 <img
-                  src="https://brendon.com/wp-content/uploads/2018/02/Brendon-Burchard-Four-Breakthroughs_tablet.png"
+                  src={RESOURCE+'images/home/keys.jpg'}
                   alt=""
                   className="img-responsive"
                 />
               </div>
-              <div className="col-sm-9">
-                <h2>Free Access to Brendon’s “Four Breakthroughs”:</h2>
+              <div className="col-sm-6">
+                <h2>Nhận miễn phí: 7 chìa khóa vàng để sống xứng đáng với những “tháng năm rực rỡ”.</h2>
                 <h4>
-                  Join 2 million subscribers! Get 4 new strategies every week on
-                  how to be more productive, confident, and happy.
+                Hơn 3.000 nghìn người đã đăng ký nhận để sở hữu cuộc sống xứng đáng với tuổi trẻ của mình.
                 </h4>
-                <div className="form-get-access">
+              </div>
+              <div className="col-sm-3">
+              <div className="form-get-access">
                   <input type="text" placeholder="Họ và tên" />
                   <input type="email" placeholder="email" />
                   <div className="get-access btn btn-sm btn-info">Đăng ký <i className="ti-angle-right"/></div>

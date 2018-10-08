@@ -1,0 +1,43 @@
+.flex-ver {
+  display: flex;
+  align-items: center;
+}
+.style-2__head {
+  background: #111;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 24px;
+}
+.style-2__image {
+  margin: auto;
+}
+.style-2__trainer {
+  position: relative;
+}
+.style-2__trainer .container{
+  background: #111;
+  margin-top: 32px;
+}
+.style-2__trainer--info {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.style-2__help__row-one {
+  margin-bottom: 64px;
+}
+.style-2__help{
+  margin-top: 32px;
+}
+.style-2__trainer .container:before {
+    position: absolute;
+    top: 23%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    content: '';
+    background: #111;
+    width: 100%;
+    display: block;
+    z-index: -1;
+}

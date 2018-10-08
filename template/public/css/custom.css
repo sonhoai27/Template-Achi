@@ -380,3 +380,14 @@ body {
     justify-content: center;
     z-index: 3000;
   }
+  .insert-image {
+    position: fixed;
+    top: 2%;
+    right: 32px;
+    z-index: 1000;
+    padding: 8px 10px;
+    border-radius: 100%;
+  }
+  .insert-image i {
+      font-size: 24px;
+  }
