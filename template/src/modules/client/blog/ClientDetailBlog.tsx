@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import axios from 'axios'
+import axios from "axios";
 import AutofitImage from "../../shared/CropImage";
 import {
   reDetailBlog,
@@ -8,6 +8,7 @@ import {
 } from "../../admin/blog/reBlog";
 import Helmet from "react-helmet";
 import { BASEURL, API } from "../../../config/const";
+import CLientFooterBanner from "../home/ClientFooterBanner";
 interface IProps {
   match?: any;
   resDetailBlog: any;
@@ -38,16 +39,21 @@ class ClientDetailBlog extends React.Component<IProps, IState> {
   componentDidMount() {
     window.scrollTo(0, 0);
     this.props.reDetailBlog(this.props.match.params.idBlog);
-    axios.put(API+'blog/views/'+this.props.match.params.idBlog)
+    axios.put(API + "blog/views/" + this.props.match.params.idBlog);
   }
   renderListBlogCategory = () => {
     if (this.props.resClientListBlogCategory.list) {
       return this.props.resClientListBlogCategory.list.map(element => {
         return (
           <div className="col-sm-3">
-            <a href={BASEURL+'page/blog/detail/'+element.blog_id}>
-            <AutofitImage clasName="img-responsive" frameWidth="100%" frameHeight="200px" imgSrc={element.blog_cover}/>
-            <h4>{element.blog_title}</h4>
+            <a href={BASEURL + "page/blog/detail/" + element.blog_id}>
+              <AutofitImage
+                clasName="img-responsive"
+                frameWidth="100%"
+                frameHeight="200px"
+                imgSrc={element.blog_cover}
+              />
+              <h4>{element.blog_title}</h4>
             </a>
           </div>
         );
@@ -73,28 +79,8 @@ class ClientDetailBlog extends React.Component<IProps, IState> {
               backgroundSize: "cover"
             }}
           />
-          <div
-            className="row"
-            style={{
-              background: "#f5f5f5 none repeat scroll 0 0",
-              fontSize: "25px",
-              padding: "38px 0 37px",
-              textAlign: "center"
-            }}
-          >
-            <div
-              className="container-fluid"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between"
-              }}
-            >
-              <p>Ready to take the initiative &amp; join our newsletter?</p>
-              <a href="#" className="btn btn-info newsletter">
-                Sign Up Now
-              </a>
-            </div>
+          <div className="row">
+            <CLientFooterBanner />
           </div>
           <div className="row page-detail-blog_content paddingY-128">
             <div className="container">
@@ -107,7 +93,8 @@ class ClientDetailBlog extends React.Component<IProps, IState> {
                     }}
                   />
                   <span className="article-author">
-                    Đăng bởi: <b>{this.state.blog.author_name}</b><br/>
+                    Đăng bởi: <b>{this.state.blog.author_name}</b>
+                    <br />
                     Lượt xem: <b>{this.state.blog.blog_views}</b>
                   </span>
                 </div>
@@ -163,7 +150,7 @@ class ClientDetailBlog extends React.Component<IProps, IState> {
             <div className="container paddingY-64">
               <div className="row">
                 <div className="col-xs-12">
-                    <h3 style={{marginBottom: 32}}>Bài viết liên quan</h3>
+                  <h3 style={{ marginBottom: 32 }}>Bài viết liên quan</h3>
                 </div>
               </div>
               <div className="row">{this.renderListBlogCategory()}</div>

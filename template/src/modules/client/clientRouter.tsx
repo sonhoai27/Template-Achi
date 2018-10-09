@@ -13,6 +13,7 @@ import Loading from "../admin/shared/loading";
 import ClientVideo from "./video/ClientVideo";
 import ClientGift from "./gift";
 import ClientAboutPage from "./About";
+import ScheEvents from "./ScheEvents";
 interface Props {
   match?: any;
   isDanger: boolean;
@@ -65,6 +66,10 @@ class ClientRouter extends React.Component<Props, {}> {
           <Route
             path={`${this.props.match.url}/gioi-thieu`}
             component={ClientAboutPage}
+          />
+          <Route
+            path={`${this.props.match.url}/lich-su-kien`}
+            component={ScheEvents}
           />
           <div className="jq-toast-wrap top-right">
             {this.props.isSuccess ? <NotifySuccess /> : ""}

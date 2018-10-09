@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import AutofitImage from "../../shared/CropImage";
 import {BASEURL} from "../../../config/const";
 import {Link} from "react-router-dom";
+import CLientFooterBanner from "../home/ClientFooterBanner";
 
 interface IProps {
     reListSourceByType: (type: number) => void;
@@ -29,7 +30,7 @@ class ClientSourceHome extends React.Component<IProps, {}> {
                 return (
                     <div className="col-sm-3">
                         <div className="panel sales-page-listing">
-                            <AutofitImage frameWidth="100%" frameHeight="300px" imgSrc={element.source_cover}/>
+                            <AutofitImage frameWidth="100%" frameHeight="150px" imgSrc={element.source_cover}/>
                             <div className="panel-body">
                                 <h3 className="title text-dark">
                                     {element.source_is_page == 1 ?
@@ -57,7 +58,7 @@ class ClientSourceHome extends React.Component<IProps, {}> {
                 return (
                     <div className="col-sm-3">
                         <div className="panel sales-page-listing">
-                            <AutofitImage frameWidth="100%" frameHeight="300px" imgSrc={element.source_cover}/>
+                            <AutofitImage frameWidth="100%" frameHeight="150px" imgSrc={element.source_cover}/>
                             <div className="panel-body">
                                 <h3 className="title text-dark">
                                     <Link
@@ -91,12 +92,12 @@ class ClientSourceHome extends React.Component<IProps, {}> {
                         <div className="container">
                             <div className="row">
                                 <div className="col-sm-6">
-                                    <h1 className="white" style={{marginBottom: 64}}>
+                                    <h2 className="white" style={{marginBottom: 64}}>
                                         <b>
                                             FROM A HISTORY-MAKING STANLEY CUP FINALS TO BUILDING A
                                             PERSONAL AI
                                         </b>
-                                    </h1>
+                                    </h2>
                                     <p className="white">
                                         Where has Tony been recently – and what in the world is he
                                         up to? Below is the latest edition of the Tony Tracker,
@@ -109,12 +110,15 @@ class ClientSourceHome extends React.Component<IProps, {}> {
                             </div>
                         </div>
                     </div>
+                    <div className="row">
+                    <CLientFooterBanner/>
+                    </div>
                     <div className="row page-source_list-source">
-                        <div className="container paddingY-128">
+                        <div className="container paddingY-64">
                             <div className="row">
                                 <div className="col-xs-12 page-source_title">
                                     <h2 style={{}}>
-                                        <b>Có phí</b>
+                                        <b>Khóa học đầy tự hào</b>
                                     </h2>
                                     <hr style={{background: "#444"}}/>
                                 </div>
@@ -123,7 +127,7 @@ class ClientSourceHome extends React.Component<IProps, {}> {
                             <div className="row">
                                 <div className="col-xs-12 page-source_title">
                                     <h2>
-                                        <b>Học online</b>
+                                        <b>Khóa học online</b>
                                     </h2>
                                     <hr style={{background: "#444"}}/>
                                 </div>

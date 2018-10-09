@@ -1,10 +1,12 @@
 import * as React from "react";
 import { RESOURCE } from "../../../config/const";
 import { BASEURL } from "./../../../config/const";
-
 class ClientHomeSource extends React.Component {
   constructor(props) {
     super(props);
+  }
+  componentDidMount(){
+
   }
   render() {
     return (
@@ -30,7 +32,7 @@ class ClientHomeSource extends React.Component {
         </div>
         <div className="container" style={{ marginBottom: 64, marginTop: 64 }}>
           <div className="row list-courses__item" style={{ marginBottom: 32 }}>
-            <div className="col-sm-4">
+            <div className="col-sm-4 wow bounceInLeft" data-wow-duration="1s">
               <img
                 src={RESOURCE + "images/home/10-khoa-song-xung-dang.png"}
                 className="img-responsive"
@@ -68,7 +70,7 @@ class ClientHomeSource extends React.Component {
             </div>
           </div>
           <div className="row list-courses__item" style={{ marginBottom: 32 }}>
-            <div className="col-sm-4">
+            <div className="col-sm-4 wow bounceInLeft" data-wow-duration="1s">
               <img
                 src={RESOURCE + "images/home/11-nguoi-chia-se.png"}
                 className="img-responsive"
@@ -106,7 +108,7 @@ class ClientHomeSource extends React.Component {
             </div>
           </div>
           <div className="row list-courses__item" style={{ marginBottom: 32 }}>
-            <div className="col-sm-4">
+            <div className="col-sm-4 wow bounceInLeft" data-wow-duration="1s">
               <img
                 src={RESOURCE + "images/home/12-trai-chien-binh-vo-dich.png"}
                 className="img-responsive"
@@ -147,7 +149,7 @@ class ClientHomeSource extends React.Component {
             </div>
           </div>
           <div className="row list-courses__item" style={{ marginBottom: 32 }}>
-            <div className="col-sm-4">
+            <div className="col-sm-4 wow bounceInLeft" data-wow-duration="1s">
               <img
                 src={RESOURCE + "images/home/13-G2B.png"}
                 className="img-responsive"
@@ -208,7 +210,7 @@ class ClientHomeSource extends React.Component {
         </div>
         <div className="container" style={{ marginBottom: 64, marginTop: 64 }}>
           <div className="row list-courses__item" style={{ marginBottom: 32 }}>
-            <div className="col-sm-4">
+            <div className="col-sm-4 wow bounceInLeft" data-wow-duration="1s">
               <img
                 src={RESOURCE + "images/home/14-bo-ky-nang-the-ky-21.png"}
                 className="img-responsive"
@@ -243,7 +245,7 @@ class ClientHomeSource extends React.Component {
             </div>
           </div>
           <div className="row list-courses__item" style={{ marginBottom: 32 }}>
-            <div className="col-sm-4">
+            <div className="col-sm-4 wow bounceInLeft" data-wow-duration="1s">
               <img
                 src={
                   RESOURCE + "images/home/15-mindmap-phat-trien-ban-than.png"
@@ -299,7 +301,7 @@ class ClientHomeSource extends React.Component {
           style={{ marginBottom: 64, marginTop: 64 }}
         >
           <div className="row item" style={{ marginBottom: 32 }}>
-            <div className="col-sm-4">
+            <div className="col-sm-4 wow bounceInLeft" data-wow-duration="1s">
               <img
                 src={RESOURCE + "images/home/8-so-tay.png"}
                 className="img-responsive"

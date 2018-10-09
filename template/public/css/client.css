@@ -214,6 +214,7 @@ b {
   margin: 0 auto;
   padding: 0;
   text-align: right;
+  font-size: 15px;
 }
 
 .nav-utilities ul li a {
@@ -629,7 +630,9 @@ nav ul.nav-link {
   position: absolute;
   top: -50px;
   z-index: 1;
-  border: 8px solid;
+  border: 18px solid;
+  border-radius: 30px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
 }
 
 .get-access.btn {
@@ -814,11 +817,25 @@ blockquote p:after {
 }
 
 .client-footer {
-  background-color: #252525;
   border-top: 7px solid #237277;
   color: #939e9d;
+  background: url(../images/client/footer.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
 }
-
+.client-footer::before {
+  position: absolute;
+  content: '';
+  background: rgba(0, 0, 0, 0.78);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 0;
+}
 .client-footer {
   padding-top: 64px;
   padding-bottom: 0;
@@ -873,7 +890,7 @@ blockquote p:after {
 }
 
 .list-icons-social li i {
-  font-size: 18px;
+  font-size: 18px!important;
 }
 
 .list-icons-social li a:hover {
@@ -927,7 +944,7 @@ blockquote p:after {
 }
 
 .list-blogs h4.post-title {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.4;
   letter-spacing: 0.05em;
@@ -938,9 +955,9 @@ blockquote p:after {
 
 .list-blogs h4.post-title a {
   color: #000;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+  /* text-overflow: ellipsis; */
+  /* overflow: hidden; */
+  /* white-space: nowrap; */
 }
 
 .list-blogs h4.post-title:before {
@@ -1822,30 +1839,6 @@ blockquote p:after {
   overflow: hidden;
   display: inline-block;
 }
-
-.page-video .item > a:before {
-  position: absolute;
-  left: 0;
-  bottom: -100%;
-  right: 0;
-  content: "\e071";
-  font-family: "simple-line-icons";
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 64px;
-  margin-bottom: 44px;
-  background: #1f908075;
-  transition: all 0.3s;
-  z-index: 0;
-}
-
-.page-video .item:hover > a:before {
-  bottom: 17px;
-  top: 0;
-}
-
 .custom-select-category > div {
   border: 1px solid;
 }
@@ -2067,6 +2060,12 @@ blockquote p:after {
   padding: 0;
   list-style: none;
 }
-.footer-intro li {
-
+.footer-intro li a{
+  color: #e6e6e6;
+  font-weight: 400;
+  font-size: 18px;
+}
+.footer-intro li i {
+  font-size: 14px;
+  font-weight: 300;
 }

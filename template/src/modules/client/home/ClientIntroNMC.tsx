@@ -19,13 +19,13 @@ class ClientIntroNMC extends React.Component {
               </div>
             </div>
             <div className="col-sm-6">
-              <h1 style={{ fontWeight: 700 }} className="text-center">
-                VỀ NGUYỄN MINH CHÍ - MR.SHARE
+              <h1 style={{ fontWeight: 700, fontSize: 30 }} className="text-center">
+                NGUYỄN MINH CHÍ - MR.SHARE
               </h1>
               <h3 style={{ fontWeight: 700 }} className="text-center">
                 Chuyên gia Đào tạo bạn trẻ sống xứng đáng
               </h3>
-              <p>
+              <p style={{textAlign: 'justify'}}>
                 Mr.Share - Nguyễn Minh Chí hiện là <b>chủ tịch của 2 công ty</b>: Học
                 viện Đào tạo thế hệ Sống xứng đáng, trung tâm anh ngữ Max Power.
                 <b>Tác giả</b> của cuốn da Sống xứng đáng. Chinh phục <b>full marathon

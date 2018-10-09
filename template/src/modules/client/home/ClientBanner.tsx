@@ -6,7 +6,6 @@ class ClientBanner extends React.Component {
     return (
       <div className="banner">
         <div className="home-banner-video">
-          <h1>HEADLINE T300X</h1>
           <video
             autoPlay
             loop

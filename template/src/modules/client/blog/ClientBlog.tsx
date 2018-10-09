@@ -7,6 +7,7 @@ import Select from "react-select";
 import makeAnimated from "react-select/lib/animated";
 import { BASEURL } from "../../../config/const";
 import Helmet from "react-helmet";
+import CLientFooterBanner from "../home/ClientFooterBanner";
 interface IProps {
   resClientListBlog: any;
   resListCategory: any;
@@ -71,7 +72,7 @@ class ClientBlog extends React.Component<IProps, {}> {
                   : "col-sm-4"
               }
             >
-              <div className={ `post post-${index}`}>
+              <div className={`post post-${index}`}>
                 <Link
                   style={{ backgroundImage: "url(" + element.blog_cover + ")" }}
                   className="post-item-image"
@@ -150,6 +151,9 @@ class ClientBlog extends React.Component<IProps, {}> {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="row">
+            <CLientFooterBanner />
           </div>
         </div>
         <div className="container">

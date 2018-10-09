@@ -32,7 +32,7 @@ class ClientHomeBlog extends React.Component<{}, IState> {
           <div className="item col-sm-4">
               <div className="social-callout">
                 <AutofitImage frameWidth="100%" frameHeight="200px" imgSrc={element.blog_cover}/>
-                <h4 style={{marginTop: 32}}>
+                <h4 style={{marginTop: 32, fontWeight: 600}}>
                   <a title={element.blog_title} href={BASEURL+'page/blog/detail/'+element.blog_id}>{element.blog_title}</a>
                 </h4>
               </div>

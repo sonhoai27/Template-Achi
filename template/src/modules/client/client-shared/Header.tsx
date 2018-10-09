@@ -54,7 +54,7 @@ class ClientHeader extends React.Component<{}, IState> {
             <div className="nav-utilities">
               <ul>
                 <li className="nav-item hidden-xs hidden-sm white" id="login">
-                PHỤNG SỰ TUỔI TRẺ VIỆT
+                Phụng sự tuổi trẻ việt
                 </li>
               </ul>
             </div>
@@ -104,13 +104,13 @@ class ClientHeader extends React.Component<{}, IState> {
                   </ul>
                 </li>
                 <li className="menu-item">
-                  <a title="About">
+                  <a title="Khóa học">
                     Khóa học <i className="fa fa-angle-down" />
                   </a>
                   <ul className="menu-sub">
                     <li className="menu-item">
                       <a
-                        title="About Tony Robbins"
+                        title="Tất cả khóa học"
                         href={BASEURL+'page/khoa-hoc'}
                       >
                         Tất cả khóa học
@@ -119,24 +119,24 @@ class ClientHeader extends React.Component<{}, IState> {
                   </ul>
                 </li>
                 <li className="menu-item">
-                  <a title="Store">
+                  <a title="Lịch sự kiện" href={BASEURL+'page/lich-su-kien'}>
                     Lịch sự kiện
                   </a>
                 </li>
                 <li className="menu-item">
-                  <a title="Experiences">
+                  <a title="Video">
                     Video <i className="fa fa-angle-down" />
                   </a>
                   <ul className="menu-sub">
                     <li className="menu-item">
-                      <a title="All Upcoming Events" href={BASEURL+'page/video'}>
+                      <a title="Tất cả video" href={BASEURL+'page/video'}>
                         Tất cả video
                       </a>
                     </li>
                   </ul>
                 </li>
                 <li className="menu-item">
-                  <a title="Coaching" href={BASEURL+'page/sach'}>
+                  <a title="Sổ tay" href={BASEURL+'page/sach'}>
                     Sổ tay
                   </a>
                 </li>
@@ -146,19 +146,19 @@ class ClientHeader extends React.Component<{}, IState> {
                   </a>
                   <ul className="menu-sub">
                     <li className="menu-item">
-                      <a title="Read All Blogs" href={BASEURL+'page/blog'}>
+                      <a title="Tất cả blog" href={BASEURL+'page/blog'}>
                        Tất cả blog
                       </a>
                     </li>
                   </ul>
                 </li>
                 <li className="menu-item">
-                  <a title="Blog">
+                  <a title="Quà tặng">
                     Quà tặng <i className="fa fa-angle-down" />
                   </a>
                   <ul className="menu-sub">
                     <li className="menu-item">
-                      <a title="Read All Blogs" href={BASEURL+'page/qua-tang'}>
+                      <a title="Tất cả quà tặng" href={BASEURL+'page/qua-tang'}>
                        Tất cả quà tặng
                       </a>
                     </li>

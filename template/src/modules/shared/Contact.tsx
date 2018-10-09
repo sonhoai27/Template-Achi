@@ -43,12 +43,20 @@ class ModalContact extends React.Component<IProps, IState> {
         })
     }
     submit = ()=> {
-        const enc = CryptoJS.AES.encrypt(JSON.stringify(this.state), 'NGUYENMINHCHI@1234567890987654321!@#$%^&*()').toString()
-        Storage.local.set('user_info', {
-            ...Storage.local.get('user_info'),
-            [this.props.code]: enc
-        })
-        this.props.reAddContact(this.state)
+        const {email_email, email_name,email_phone} = this.state
+        if(email_email !== "" && email_phone !== "" && email_name !== ""){
+            const enc = CryptoJS.AES.encrypt(JSON.stringify(this.state), 'NGUYENMINHCHI@1234567890987654321!@#$%^&*()').toString()
+            this.props.reAddContact(this.state)
+            Storage.local.set('user_info', {
+                ...Storage.local.get('user_info'),
+                [this.props.code]: enc
+            })
+        }else {
+            this.props.reIsDanger(true)
+            setTimeout(()=> {
+                this.props.reIsDanger(false)
+            }, 1000)
+        }
     }
     componentDidUpdate(preProps){
         if (preProps.resAddContact != this.props.resAddContact) {
@@ -78,7 +86,7 @@ class ModalContact extends React.Component<IProps, IState> {
                     <div className="modal-dialog modal-sm">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h4>Nhập thông tin trước khi xem</h4>
+                                <h4>Thông tin đăng ký</h4>
                             </div>
                             <div className="modal-body">
                                 <div className="form-group">
@@ -118,13 +126,16 @@ class ModalContact extends React.Component<IProps, IState> {
                                     type="button"
                                     className="btn btn-danger waves-effect waves-light"
                                 >
-                                    Lưu
+                                    Đăng ký
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="modal-backdrop fade in" />
+                <div className="modal-backdrop fade in" style={{
+                    background: '#009688',
+                    opacity: 1
+                }}/>
             </>
         );
     }

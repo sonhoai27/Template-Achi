@@ -62,3 +62,35 @@
   -webkit-align-items: center;
   align-items: center;
 }
+
+.margin-t-16 {
+  margin-top: 16px;
+}
+.margin-t-32 {
+  margin-top: 32px;
+}
+.margin-t-64 {
+  margin-top: 64px;
+}
+.margin-t-72 {
+  margin-top: 72px;
+}
+.margin-t-80 {
+  margin-top: 80px;
+}
+
+.margin-b-16 {
+  margin-bottom: 16px;
+}
+.margin-b-32 {
+  margin-bottom: 32px;
+}
+.margin-b-64 {
+  margin-bottom: 64px;
+}
+.margin-b-72 {
+  margin-bottom: 72px;
+}
+.margin-b-80 {
+  margin-bottom: 80px;
+}

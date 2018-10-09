@@ -6,6 +6,7 @@ import Pagination from "../../shared/Pagination";
 import Footer from "../client-shared/Footer";
 import ClientFollow from "../home/ClientFollow";
 import AutofitImage from "../../shared/CropImage";
+import CLientFooterBanner from "../home/ClientFooterBanner";
 interface IProps {
   resListVideo: any;
   reListVideo: (page: number) => void;
@@ -64,29 +65,61 @@ class ClientVideo extends React.Component<IProps, IState> {
   }
   renderListVideo = () => {
     if (this.props.resListVideo.list) {
+      let dem = 1;
+      let list = []
       return this.props.resListVideo.list.map((element, index) => {
-        return (
-          <div className="col-sm-3">
-            <div className="item">
-              <a onClick={()=>this.onPlay(element)} style={{width: '100%'}}>
-                <AutofitImage clasName="img-responsive" frameWidth="100%" frameHeight="200px" imgSrc={element.video_cover}/>
-                <p
-                  style={{
-                    marginTop: "16px",
-                    fontSize: "18px",
-                    color: "#333"
-                  }}
-                >
-                  {element.video_name}
-                </p>
-              </a>
-            </div>
-          </div>
-        );
+        if(index === 0){
+          // @ts-ignore
+          list = [...list, this.itemVideo(element)]
+        }else
+        if(dem <= 2) {
+          console.log(dem)
+          // @ts-ignore
+          list = [...list, this.itemVideo(element)]
+          dem = dem + 1;
+          console.log(list)
+        }else {
+          console.log('a', dem)
+          dem = 1
+              // @ts-ignore
+          list = [...list, this.itemVideo(element)]
+          const tempList = [...[], ...list]
+          list = []
+          console.log(list)
+          return React.createElement(
+            'div',
+            {
+              classname: 'row'
+            },
+            [...tempList]
+          )
+        }
+        return ""
       });
     }
     return "";
   };
+  itemVideo = (element: any)=> {
+    return (
+      <div className="col-sm-4 margin-b-32">
+        <div className="item">
+          <a onClick={()=>this.onPlay(element)} style={{width: '100%'}}>
+            <AutofitImage clasName="img-responsive" frameWidth="100%" frameHeight="200px" imgSrc={element.video_cover}/>
+            <p
+              style={{
+                marginTop: "16px",
+                fontSize: "18px",
+                color: "#333",
+                textAlign: 'center'
+              }}
+            >
+              {element.video_name}
+            </p>
+          </a>
+        </div>
+      </div>
+    )
+  }
   render() {
     return (
       <>
@@ -114,16 +147,18 @@ class ClientVideo extends React.Component<IProps, IState> {
               </div>
             </div>
           </div>
+          <div className="row">
+          <CLientFooterBanner/>
+          </div>
           <div className="row paddingY-32">
-            <h1 className="text-center" style={{marginTop: 64}}>Subscribe to Brendon Burchard’s YouTube Channel</h1>
+            <h1 className="text-center" style={{marginTop: 64}}>Subscribe to Minh Chi Nguyen’s YouTube Channel</h1>
             <div className="col-sm-4"></div>
             <div className="col-sm-4">
             <div className="social-callout" style={{
               marginTop: 64
             }}>
-              <h3 className="text-center">Watch Brendon's Show</h3>
-              <iframe  style={{position: 'static', top: 0, width: 123, margin: 0, borderStyle: 'none', left: 0, visibility: 'visible', height: 24}} tabIndex={0} width="100%" id="I0_1536682088055" name="I0_1536682088055"
-              src="https://www.youtube.com/subscribe_embed?usegapi=1&channel=BrendonBurchard&origin=https%3A%2F%2Fbrendon.com&gsrc=3p&ic=1&jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.vi.ersgHZm_IgE.O%2Fam%3DwQ%2Frt%3Dj%2Fd%3D1%2Frs%3DAGLTcCMduhp3YkUaSrrUHYCwgzlg4Y8r_w%2Fm%3D__features__#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh%2Conload&id=I0_1536682088055&_gfid=I0_1536682088055&parent=https%3A%2F%2Fbrendon.com&pfname=&rpctoken=21758127" data-gapiattached="true" />
+               <h3 className="text-center">Kênh Youtube bài học</h3>
+              <div className="g-ytsubscribe" data-channelid="UCHCeMi9tGx9VCMSHHbscrLg" data-layout="default" data-count="default"></div>
             </div>
           </div>
           <div className="col-sm-4"></div>

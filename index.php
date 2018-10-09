@@ -23,6 +23,8 @@ define("BASE_URL", 'http://localhost:8080/Achi/template/public/');
         <link href="<?=BASE_URL?>css/style_2.css" rel="stylesheet">
         <link href="<?=BASE_URL?>css/style_3.css" rel="stylesheet">
         <script src="https://cdn.ckeditor.com/4.10.1/full/ckeditor.js"></script>
+        <script src="https://apis.google.com/js/platform.js"></script>
+        <script src="<?=BASE_URL?>js/wow.min.js"></script>
         <script>CKEDITOR.dtd.$removeEmpty['span'] = false;</script>
         <?php
         echo file_get_contents("http://localhost:8080/Achi/api/seo/home");
@@ -139,6 +141,23 @@ define("BASE_URL", 'http://localhost:8080/Achi/template/public/');
         <script src="<?=BASE_URL?>admin.bundle.js" type="text/javascript" charset="utf-8"></script>
         <script src="<?=BASE_URL?>client.bundle.js" type="text/javascript" charset="utf-8"></script>
         <script src="<?=BASE_URL?>js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="https://apis.google.com/js/platform.js"></script>
+        <script>
+            var wow = new WOW(
+            {
+                boxClass:     'wow',
+                animateClass: 'animated',
+                offset:       0,
+                mobile:       true,
+                live:         true,
+                callback:     function(box) {
+                },
+                scrollContainer: null,
+                resetAnimation: true, 
+            }
+            );
+            wow.init();
+        </script>
     </body>
 
 </html>
