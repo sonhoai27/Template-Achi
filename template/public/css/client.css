@@ -632,7 +632,7 @@ nav ul.nav-link {
   z-index: 1;
   border: 18px solid;
   border-radius: 30px;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
 }
 
 .get-access.btn {
@@ -2068,4 +2068,22 @@ blockquote p:after {
 .footer-intro li i {
   font-size: 14px;
   font-weight: 300;
+}
+
+
+
+/* quà tặng */
+.qua-tang .page-source_banner{
+  position: relative;
+}
+.qua-tang .page-source_banner:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: '';
+  background: rgba(0, 0, 0, 0.33);
+  z-index: 0;
+  display: block;
 }
