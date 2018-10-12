@@ -118,7 +118,7 @@ class ModalSendGift extends React.Component<IProps, IState> {
                   <div className="col-sm-12">
                     <div className="row">
                       <div className="form-group col-sm-12">
-                        <label className="col-sm-12">Danh sách email</label>
+                        <label className="col-sm-12">Số lần đã gởi</label>
                         <div className="col-sm-12">
                         <Select
                           closeMenuOnSelect={false}

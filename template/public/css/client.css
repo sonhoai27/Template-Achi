@@ -2087,3 +2087,19 @@ blockquote p:after {
   z-index: 0;
   display: block;
 }
+
+
+/* gift */
+.gift-body {
+  background: #fff;
+  padding: 32px;
+  border-radius: 18px;
+}
+.form-send-gift {
+  padding-top: 228px;
+}
+
+.form-send-gift .btn {
+  background: #009688;
+  color: #fff;
+}

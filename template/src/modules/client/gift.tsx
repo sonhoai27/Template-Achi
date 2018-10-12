@@ -125,7 +125,7 @@ class ClientGift extends React.Component<IProps, IState> {
             </div>
           </div>
           <div
-            className="row paddingY-128"
+            className="row paddingY-128 form-send-gift"
             style={{
               backgroundImage:
                 "url(https://eraweb.co/attachment/images/bg/install-bg.jpg)"
@@ -135,10 +135,7 @@ class ClientGift extends React.Component<IProps, IState> {
               <div className="row">
                 <div className="col-sm-3" />
                 <div className="col-sm-6">
-                  <div className="modal-header">
-                    <h4>Thông tin đăng ký</h4>
-                  </div>
-                  <div className="modal-body">
+                  <div className="gift-body">
                     <div className="form-group">
                       <label className="control-label">Họ và tên</label>
                       <input
@@ -169,6 +166,7 @@ class ClientGift extends React.Component<IProps, IState> {
                         placeholder={"Thư điện tử"}
                       />
                     </div>
+                    <div className="text-center"><div className="btn">Nhận quà</div></div>
                   </div>
                 </div>
                 <div className="col-sm-6" />

@@ -41,9 +41,9 @@ class ClientSourceHome extends React.Component<IProps, {}> {
                                     {element.source_promo}
                                 </p>
                                 {element.source_is_page == 1 ?
-                                    <a target={'blank'} className="btn btn-primary learn-more" href={element.source_page_url}>Xem</a> :
+                                    <a target={'blank'} className="btn btn-primary learn-more" href={element.source_page_url}>Xem thêm</a> :
                                     <Link className="btn btn-primary learn-more"
-                                        to={BASEURL + 'page/khoa-hoc/'+ element.source_alias+'-'+element.source_id_ui+'-' + element.source_id }>Xem</Link>}
+                                        to={BASEURL + 'page/khoa-hoc/'+ element.source_alias+'-'+element.source_id_ui+'-' + element.source_id }>Xem thêm</Link>}
                             </div>
                         </div>
                     </div>
@@ -72,7 +72,7 @@ class ClientSourceHome extends React.Component<IProps, {}> {
                                     to={BASEURL + 'page/khoa-hoc/video/' + element.source_id + '-' + element.source_alias}
                                     kjb-settings-id="language_learn_more"
                                 >
-                                    Xem
+                                    Xem thêm
                                 </Link>
                             </div>
                         </div>
