@@ -17,7 +17,7 @@ import { reListPageUI } from "./rePage";
 import ListElementDetailUIPage from "./detail-ui/detail-ui";
 import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
-import { reIsDanger, reIsSuccess } from "../../../reducers/init";
+import { reIsDanger, reIsSuccess, reSetCurrentEditorPhoto, reShowPhotoApp } from "../../../reducers/init";
 import ModalEditContentElement from "./detail-ui/ModalEditContentElement";
 import { reShowEditContent } from "../source/reSource";
 var DetailPage = /** @class */ (function (_super) {
@@ -48,6 +48,7 @@ var DetailPage = /** @class */ (function (_super) {
         }
     };
     DetailPage.prototype.render = function () {
+        var _this = this;
         return (React.createElement(React.Fragment, null,
             React.createElement("div", { className: "row add-element-to-ui add-content-ui-source" },
                 React.createElement("div", { className: "col-md-12" },
@@ -66,7 +67,12 @@ var DetailPage = /** @class */ (function (_super) {
                                         React.createElement("i", { className: "ti-eye" }),
                                         " Xem th\u1EED")))),
                         React.createElement("div", { className: "content" }, this.props.resListPageUI.list ? (React.createElement(ListElementDetailUIPage, { match: this.props.match, detail: this.props.resListPageUI.list })) : (""))))),
-            this.props.resShowEditContent ? React.createElement(ModalEditContentElement, null) : ''));
+            this.props.resShowEditContent ? React.createElement(ModalEditContentElement, null) : '',
+            React.createElement("div", { className: "btn btn-sm btn-primary insert-image", onClick: function () {
+                    _this.props.reShowPhotoApp(true);
+                    _this.props.reSetCurrentEditorPhoto('');
+                } },
+                React.createElement("i", { className: "fa fa-file-image-o" }))));
     };
     return DetailPage;
 }(React.Component));
@@ -79,7 +85,9 @@ var mapDispatchToProps = {
     reListPageUI: reListPageUI,
     reIsDanger: reIsDanger,
     reIsSuccess: reIsSuccess,
-    reShowEditContent: reShowEditContent
+    reShowEditContent: reShowEditContent,
+    reSetCurrentEditorPhoto: reSetCurrentEditorPhoto,
+    reShowPhotoApp: reShowPhotoApp,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(DetailPage);
 //# sourceMappingURL=detailPage.js.map

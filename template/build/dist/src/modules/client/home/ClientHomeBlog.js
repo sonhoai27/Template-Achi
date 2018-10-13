@@ -12,11 +12,44 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import * as React from "react";
+import axios from 'axios';
+import { API } from "../../../config/const";
+import { BASEURL } from './../../../config/const';
+import AutofitImage from "../../shared/CropImage";
 var ClientHomeBlog = /** @class */ (function (_super) {
     __extends(ClientHomeBlog, _super);
-    function ClientHomeBlog() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function ClientHomeBlog(props) {
+        var _this = _super.call(this, props) || this;
+        _this.renderListBlogs = function () {
+            if (_this.state.blogs.list) {
+                return _this.state.blogs.list.map(function (element) {
+                    return (React.createElement("div", { className: "item col-sm-4" },
+                        React.createElement("div", { className: "social-callout" },
+                            React.createElement(AutofitImage, { frameWidth: "100%", frameHeight: "200px", imgSrc: element.blog_cover }),
+                            React.createElement("h4", { style: { marginTop: 32, fontWeight: 600 } },
+                                React.createElement("a", { title: element.blog_title, href: BASEURL + 'page/blog/detail/' + element.blog_id }, element.blog_title)))));
+                });
+            }
+            return '';
+        };
+        _this.state = {
+            blogs: []
+        };
+        return _this;
     }
+    ClientHomeBlog.prototype.componentDidMount = function () {
+        var _this = this;
+        axios.get(API + 'blog/all/home')
+            .then(function (result) {
+            console.log(result.data);
+            _this.setState({
+                blogs: result.data
+            });
+        })
+            .catch(function (err) {
+            console.log(err);
+        });
+    };
     ClientHomeBlog.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
             React.createElement("div", { className: "row section-heading" },
@@ -25,33 +58,9 @@ var ClientHomeBlog = /** @class */ (function (_super) {
                         React.createElement("div", { className: "col-sm-3" },
                             React.createElement("h2", { style: { marginBottom: 0, fontWeight: 600, color: "#fff" } }, "Blog")),
                         React.createElement("div", { className: "col-sm-9" },
-                            React.createElement("h2", { className: "text-center", style: { marginBottom: 0, fontWeight: 600, color: "#fff" } }, "Featured Posts by Brendon Burchard"))))),
+                            React.createElement("h2", { className: "text-center", style: { marginBottom: 0, fontWeight: 600, color: "#fff" } }, "BLOG C\u1EE6A MR.SHARE"))))),
             React.createElement("div", { className: "container list-blog", style: { marginTop: 64, marginBottom: 64 } },
-                React.createElement("div", { className: "row" },
-                    React.createElement("div", { className: "item col-sm-4" },
-                        React.createElement("div", { className: "social-callout" },
-                            React.createElement("img", { src: "https://brendon.com/wp-content/uploads/2018/08/24-Scared-To-Start-My-Dream-Thumbnail-01-500x281.png", alt: "", className: "img-responsive" }),
-                            React.createElement("h3", null, "Scared to Start My Dream"))),
-                    React.createElement("div", { className: "item col-sm-4" },
-                        React.createElement("div", { className: "social-callout" },
-                            React.createElement("img", { src: "https://brendon.com/wp-content/uploads/2018/08/24-Scared-To-Start-My-Dream-Thumbnail-01-500x281.png", alt: "", className: "img-responsive" }),
-                            React.createElement("h3", null, "Scared to Start My Dream"))),
-                    React.createElement("div", { className: "item col-sm-4" },
-                        React.createElement("div", { className: "social-callout" },
-                            React.createElement("img", { src: "https://brendon.com/wp-content/uploads/2018/08/24-Scared-To-Start-My-Dream-Thumbnail-01-500x281.png", alt: "", className: "img-responsive" }),
-                            React.createElement("h3", null, "Scared to Start My Dream"))),
-                    React.createElement("div", { className: "item col-sm-4" },
-                        React.createElement("div", { className: "social-callout" },
-                            React.createElement("img", { src: "https://brendon.com/wp-content/uploads/2018/08/24-Scared-To-Start-My-Dream-Thumbnail-01-500x281.png", alt: "", className: "img-responsive" }),
-                            React.createElement("h3", null, "Scared to Start My Dream"))),
-                    React.createElement("div", { className: "item col-sm-4" },
-                        React.createElement("div", { className: "social-callout" },
-                            React.createElement("img", { src: "https://brendon.com/wp-content/uploads/2018/08/24-Scared-To-Start-My-Dream-Thumbnail-01-500x281.png", alt: "", className: "img-responsive" }),
-                            React.createElement("h3", null, "Scared to Start My Dream"))),
-                    React.createElement("div", { className: "item col-sm-4" },
-                        React.createElement("div", { className: "social-callout" },
-                            React.createElement("img", { src: "https://brendon.com/wp-content/uploads/2018/08/24-Scared-To-Start-My-Dream-Thumbnail-01-500x281.png", alt: "", className: "img-responsive" }),
-                            React.createElement("h3", null, "Scared to Start My Dream")))))));
+                React.createElement("div", { className: "row" }, this.renderListBlogs()))));
     };
     return ClientHomeBlog;
 }(React.Component));

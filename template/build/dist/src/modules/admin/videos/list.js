@@ -15,8 +15,9 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
 import { connect } from "react-redux";
-import { reListVideo } from "./reVideos";
+import { reListVideo, reDeleteVideo } from "./reVideos";
 import Pagination from "../../shared/Pagination";
+import { reIsSuccess, reIsDanger } from "../../../reducers/init";
 var VideoList = /** @class */ (function (_super) {
     __extends(VideoList, _super);
     function VideoList(props) {
@@ -44,7 +45,9 @@ var VideoList = /** @class */ (function (_super) {
                         React.createElement("td", null,
                             React.createElement("a", { href: element.video_uri, target: "_blank" }, element.video_uri)),
                         React.createElement("td", null,
-                            React.createElement("img", { width: "10%", src: element.video_cover, className: "img-responsive" }))));
+                            React.createElement("div", { onClick: function () {
+                                    _this.props.reDeleteVideo(element.video_id);
+                                }, className: "btn btn-sm btn-danger" }, "X\u00F3a"))));
                 });
             }
             return '';
@@ -53,6 +56,25 @@ var VideoList = /** @class */ (function (_super) {
     }
     VideoList.prototype.componentDidMount = function () {
         this.props.reListVideo((parseInt(this.makeCurrentPage(), 10) - 1) * 20);
+    };
+    VideoList.prototype.componentDidUpdate = function (preProps) {
+        var _this = this;
+        if (this.props.resDeleteVideo != preProps.resDeleteVideo) {
+            if (this.props.resDeleteVideo.status === 200) {
+                this.props.reIsSuccess(true);
+                setTimeout(function () {
+                    _this.props.reIsSuccess(false);
+                    _this.props.reListVideo((parseInt(_this.makeCurrentPage(), 10) - 1) * 20);
+                }, 2000);
+            }
+            else {
+                this.props.reIsDanger(true);
+                setTimeout(function () {
+                    _this.props.reIsDanger(false);
+                    _this.props.reListVideo((parseInt(_this.makeCurrentPage(), 10) - 1) * 20);
+                }, 2000);
+            }
+        }
     };
     VideoList.prototype.render = function () {
         var _this = this;
@@ -72,7 +94,7 @@ var VideoList = /** @class */ (function (_super) {
                                         React.createElement("th", { className: "text-center" }, "#"),
                                         React.createElement("th", null, "T\u00EAn"),
                                         React.createElement("th", null, "Video"),
-                                        React.createElement("th", null, "Cover"))),
+                                        React.createElement("th", null, "H\u00E0nh \u0111\u1ED9ng"))),
                                 React.createElement("tbody", null, this.renderListVideo()))),
                         React.createElement("div", { className: "pg" },
                             React.createElement(Pagination, { initialPage: parseInt(this.makeCurrentPage(), 10), pageSize: 20, totalItems: this.props.resListVideo.count, onChangePage: function (e) { return _this.getMoreVideo(e.currentPage); } })))))));
@@ -80,10 +102,14 @@ var VideoList = /** @class */ (function (_super) {
     return VideoList;
 }(React.Component));
 var mapStateToProps = function (storeState) { return ({
-    resListVideo: storeState.reVideos.resListVideo
+    resListVideo: storeState.reVideos.resListVideo,
+    resDeleteVideo: storeState.reVideos.resDeleteVideo
 }); };
 var mapDispatchToProps = {
-    reListVideo: reListVideo
+    reListVideo: reListVideo,
+    reIsDanger: reIsDanger,
+    reIsSuccess: reIsSuccess,
+    reDeleteVideo: reDeleteVideo
 };
 export default connect(mapStateToProps, mapDispatchToProps)(VideoList);
 //# sourceMappingURL=list.js.map

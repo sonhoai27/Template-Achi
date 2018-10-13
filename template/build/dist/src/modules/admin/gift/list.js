@@ -29,7 +29,7 @@ import { connect } from "react-redux";
 import { reListGift, reUpdateGift } from "./reGift";
 import Pagination from "../../shared/Pagination";
 import { reIsSuccess, reIsDanger } from "../../../reducers/init";
-import ModalSendGift from './modalSendGift';
+import ModalSendGift from "./modalSendGift";
 var GiftList = /** @class */ (function (_super) {
     __extends(GiftList, _super);
     function GiftList(props) {
@@ -52,22 +52,24 @@ var GiftList = /** @class */ (function (_super) {
             _this.props.reListGift((page - 1) * 20);
         };
         _this.setActiveGift = function (gift) {
-            _this.props.reUpdateGift(__assign({}, gift, { gift_active: (gift.gift_active == 1 ? 0 : 1) }), gift.gift_id);
+            _this.props.reUpdateGift(__assign({}, gift, { gift_active: gift.gift_active == 1 ? 0 : 1 }), gift.gift_id);
         };
         _this.renderListGifts = function () {
             if (_this.props.resListGift.list) {
                 return _this.props.resListGift.list.map(function (element, index) {
-                    return (React.createElement("tr", null,
+                    return (React.createElement("tr", { key: element.gift_name },
                         React.createElement("td", { className: "text-center" }, index + 1),
                         React.createElement("td", null,
-                            React.createElement(Link, { to: BASEURLADMIN + 'gift/detail/' + element.gift_id },
+                            React.createElement(Link, { to: BASEURLADMIN + "gift/detail/" + element.gift_id },
                                 React.createElement("h4", null, element.gift_name))),
                         React.createElement("td", null, element.gift_uri_file),
                         React.createElement("td", null,
-                            React.createElement("div", { className: 'btn btn-xs ' + (element.gift_active == 0 ? 'btn-info' : 'btn-danger'), onClick: function () { return _this.setActiveGift(element); } }, element.gift_active == 0 ? 'Ưu tiên' : 'Hủy ưu tiên'))));
+                            React.createElement("div", { className: "btn btn-xs " +
+                                    (element.gift_active == 0 ? "btn-info" : "btn-danger"), onClick: function () { return _this.setActiveGift(element); } }, element.gift_active == 0 ? "Ưu tiên" : "Hủy ưu tiên"))));
                 });
             }
-            return '';
+            return React.createElement("tr", null,
+                React.createElement("td", null));
         };
         _this.state = {
             isShowingModalSendGift: false
@@ -112,9 +114,18 @@ var GiftList = /** @class */ (function (_super) {
                                     }, style: {
                                         marginRight: 16
                                     } },
+                                    React.createElement("i", { className: "icon-printer" }),
+                                    " Xu\u1EA5t d\u1EEF li\u1EC7u"),
+                                React.createElement("div", { className: "btn btn-xs btn-info", onClick: function () {
+                                        _this.setState({
+                                            isShowingModalSendGift: true
+                                        });
+                                    }, style: {
+                                        marginRight: 16
+                                    } },
                                     React.createElement("i", { className: "ti-gift" }),
                                     " G\u1EDFi qu\u00E0"),
-                                React.createElement(Link, { to: BASEURLADMIN + 'gift/add' },
+                                React.createElement(Link, { to: BASEURLADMIN + "gift/add" },
                                     React.createElement("div", { className: "btn btn-xs btn-info" }, "Th\u00EAm m\u1EDBi")))),
                         React.createElement("div", { className: "table-responsive" },
                             React.createElement("table", { className: "table table-hover manage-u-table" },
@@ -127,7 +138,7 @@ var GiftList = /** @class */ (function (_super) {
                                 React.createElement("tbody", null, this.renderListGifts()))),
                         React.createElement("div", { className: "pg" },
                             React.createElement(Pagination, { initialPage: parseInt(this.makeCurrentPage(), 10), pageSize: 20, totalItems: this.props.resListGift.count, onChangePage: function (e) { return _this.getMoreGift(e.currentPage); } }))))),
-            this.state.isShowingModalSendGift ? React.createElement(ModalSendGift, { isShowingModal: this.hiddenModalSendGift }) : ''));
+            this.state.isShowingModalSendGift ? (React.createElement(ModalSendGift, { isShowingModal: this.hiddenModalSendGift })) : ("")));
     };
     return GiftList;
 }(React.Component));

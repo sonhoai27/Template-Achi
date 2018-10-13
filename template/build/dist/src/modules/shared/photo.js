@@ -14,7 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 import * as React from "react";
 import Image from "./image";
 import { connect } from "react-redux";
-import axios from 'axios';
+import axios from "axios";
 import { reShowPhotoApp, reSetCurrentEditorPhoto, reDeleteImage, reAddImage, reListImage } from "../../reducers/init";
 import { API } from "../../config/const";
 var Photo = /** @class */ (function (_super) {
@@ -46,12 +46,20 @@ var Photo = /** @class */ (function (_super) {
         };
         _this.handleInsert = function () {
             var uri = _this.state.dataImage;
-            if (typeof _this.props.currentEditorPhoto === "object") {
+            if (typeof _this.props.currentEditorPhoto === "object" &&
+                !_this.props.currentEditorPhoto.type) {
                 _this.props.currentEditorPhoto.insertContent("<img src=\"" + uri.uri + "\" class=\"img-responsive\"/>");
             }
+            else if (typeof _this.props.currentEditorPhoto === "object" &&
+                _this.props.currentEditorPhoto.type === "ck") {
+                _this.props.currentEditorPhoto.editor.insertHtml("<img src=\"" + uri.uri + "\" class=\"img-responsive\"/>");
+            }
             else {
-                var tempDom = document.getElementById(_this.props.currentEditorPhoto);
-                tempDom.src = uri.uri;
+                try {
+                    var tempDom = document.getElementById(_this.props.currentEditorPhoto);
+                    tempDom.src = uri.uri;
+                }
+                catch (e) { }
             }
             _this.props.reSetCurrentEditorPhoto("");
             _this.props.reShowPhotoApp(false);
@@ -71,7 +79,19 @@ var Photo = /** @class */ (function (_super) {
                             }), onClick: function (e) { return _this._contextMenu(e); }, src: element.uri, width: 150, height: 150 })));
                 });
             }
-            return '';
+            return "";
+        };
+        _this.handleCopy = function () {
+            var uri = _this.state.dataImage;
+            var el = document.createElement("textarea");
+            el.value = uri.uri;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand("copy");
+            document.body.removeChild(el);
+            _this.props.reSetCurrentEditorPhoto("");
+            _this.props.reShowPhotoApp(false);
+            document.body.style.overflowY = "auto";
         };
         _this.state = {
             dataImage: {},
@@ -118,6 +138,9 @@ var Photo = /** @class */ (function (_super) {
                 React.createElement("p", { onClick: this.handleInsert },
                     React.createElement("i", { className: "ti-link" }),
                     " Ch\u00E8n"),
+                React.createElement("p", { onClick: this.handleCopy },
+                    React.createElement("i", { className: "icon-layers" }),
+                    " Copy link"),
                 React.createElement("p", { onClick: this.handleDelete },
                     React.createElement("i", { className: "ti-trash" }),
                     " X\u00F3a")),
@@ -134,7 +157,7 @@ var Photo = /** @class */ (function (_super) {
                                     // data.append('upload-image', e.target.files[0]);
                                     var reader = new FileReader();
                                     reader.onload = function (event) {
-                                        var tempDomImage = document.getElementById('review-image-before-upload');
+                                        var tempDomImage = document.getElementById("review-image-before-upload");
                                         tempDomImage.src = event.target.result;
                                     };
                                     reader.readAsDataURL(e.target.files[0]);
@@ -142,15 +165,16 @@ var Photo = /** @class */ (function (_super) {
                                         imageChoose: e.target.files[0]
                                     });
                                 }, name: "file", id: "photo-app-choose-file", type: "file", placeholder: "Ch\u1ECDn h\u00ECnh", accept: "image/png, image/jpeg" }),
-                            React.createElement("img", { id: "review-image-before-upload", className: "img-responsive", width: '100%', height: '50' })),
+                            React.createElement("img", { id: "review-image-before-upload", className: "img-responsive", width: "100%", height: "50" })),
                         React.createElement("div", { className: "modal-footer" },
                             React.createElement("button", { onClick: function () {
                                     var data = new FormData();
-                                    data.append('upload-image', _this.state.imageChoose);
-                                    axios.post(API + 'file/upload/photo', data)
+                                    data.append("upload-image", _this.state.imageChoose);
+                                    axios
+                                        .post(API + "file/upload/photo", data)
                                         .then(function (result) {
                                         if (result.status === 200) {
-                                            $('#upload-image').modal('hide');
+                                            $("#upload-image").modal("hide");
                                             _this.props.reListImage();
                                         }
                                     })

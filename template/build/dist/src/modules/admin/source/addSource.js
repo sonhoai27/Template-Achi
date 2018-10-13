@@ -29,6 +29,7 @@ import { reShowPhotoApp, reSetCurrentEditorPhoto, reIsDanger, reIsSuccess } from
 import { reListUIForSource } from "../ui/reUI";
 import { reAddSource } from "./reSource";
 import { alias } from "../../../utils/alias";
+import { BASEURLADMIN } from "../../../config/const";
 var AddSource = /** @class */ (function (_super) {
     __extends(AddSource, _super);
     function AddSource(props) {
@@ -74,6 +75,23 @@ var AddSource = /** @class */ (function (_super) {
         this.props.reListUIForSource();
     };
     AddSource.prototype.componentDidUpdate = function (preProps) {
+        var _this = this;
+        if (preProps.resAddSource != this.props.resAddSource) {
+            if (this.props.resAddSource.status === 200) {
+                this.props.reIsSuccess(true);
+                setTimeout(function () {
+                    _this.props.reIsSuccess(false);
+                    window.location.href = BASEURLADMIN + 'source';
+                }, 2000);
+            }
+            else {
+                this.props.reIsDanger(true);
+                setTimeout(function () {
+                    _this.props.reIsDanger(false);
+                    window.location.href = BASEURLADMIN + 'source';
+                }, 2000);
+            }
+        }
     };
     AddSource.prototype.render = function () {
         var _this = this;

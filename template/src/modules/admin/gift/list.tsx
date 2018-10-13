@@ -80,7 +80,7 @@ class GiftList extends React.Component<IProps, IState> {
       return this.props.resListGift.list.map(
         (element: IGiftModel, index: number) => {
           return (
-            <tr>
+            <tr key={element.gift_name}>
               <td className="text-center">{index + 1}</td>
               <td>
                 <Link to={BASEURLADMIN + "gift/detail/" + element.gift_id}>
@@ -104,7 +104,7 @@ class GiftList extends React.Component<IProps, IState> {
         }
       );
     }
-    return "";
+    return <tr><td></td></tr>;
   };
   render() {
     return (

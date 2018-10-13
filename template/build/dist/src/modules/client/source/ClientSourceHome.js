@@ -19,6 +19,7 @@ import { connect } from "react-redux";
 import AutofitImage from "../../shared/CropImage";
 import { BASEURL } from "../../../config/const";
 import { Link } from "react-router-dom";
+import CLientFooterBanner from "../home/ClientFooterBanner";
 var ClientSourceHome = /** @class */ (function (_super) {
     __extends(ClientSourceHome, _super);
     function ClientSourceHome(props) {
@@ -26,16 +27,16 @@ var ClientSourceHome = /** @class */ (function (_super) {
         _this.renderListSources = function () {
             if (_this.props.resListSourceBy0.list) {
                 return _this.props.resListSourceBy0.list.map(function (element) {
-                    return (React.createElement("div", { className: "col-sm-4" },
+                    return (React.createElement("div", { className: "col-sm-3" },
                         React.createElement("div", { className: "panel sales-page-listing" },
-                            React.createElement(AutofitImage, { frameWidth: "100%", frameHeight: "400px", imgSrc: element.source_cover }),
+                            React.createElement(AutofitImage, { frameWidth: "100%", frameHeight: "150px", imgSrc: element.source_cover }),
                             React.createElement("div", { className: "panel-body" },
                                 React.createElement("h3", { className: "title text-dark" }, element.source_is_page == 1 ?
-                                    React.createElement("a", { target: 'blank', href: element.source_page_url }, element.source_title) : React.createElement(Link, { to: BASEURL + 'page/khoa-hoc/video/' + element.source_id + '.' + element.source_alias }, element.source_title)),
+                                    React.createElement("a", { target: 'blank', href: element.source_page_url }, element.source_title) : React.createElement(Link, { to: BASEURL + 'page/khoa-hoc/' + element.source_alias + '-' + element.source_id_ui + '-' + element.source_id }, element.source_title)),
                                 React.createElement("p", { className: "desc", style: { fontSize: 15 } }, element.source_promo),
                                 element.source_is_page == 1 ?
-                                    React.createElement("a", { target: 'blank', className: "btn btn-primary learn-more", href: element.source_page_url }, "Xem") :
-                                    React.createElement(Link, { className: "btn btn-primary learn-more", to: BASEURL + 'page/khoa-hoc/video/' + element.source_id + '.' + element.source_alias }, "Xem")))));
+                                    React.createElement("a", { target: 'blank', className: "btn btn-primary learn-more", href: element.source_page_url }, "Xem th\u00EAm") :
+                                    React.createElement(Link, { className: "btn btn-primary learn-more", to: BASEURL + 'page/khoa-hoc/' + element.source_alias + '-' + element.source_id_ui + '-' + element.source_id }, "Xem th\u00EAm")))));
                 });
             }
             return React.createElement("h1", null, "Kh\u00F4ng c\u00F3.");
@@ -43,14 +44,14 @@ var ClientSourceHome = /** @class */ (function (_super) {
         _this.renderListVideos = function () {
             if (_this.props.resListSourceBy1.list) {
                 return _this.props.resListSourceBy1.list.map(function (element) {
-                    return (React.createElement("div", { className: "col-sm-4" },
+                    return (React.createElement("div", { className: "col-sm-3" },
                         React.createElement("div", { className: "panel sales-page-listing" },
-                            React.createElement(AutofitImage, { frameWidth: "100%", frameHeight: "400px", imgSrc: element.source_cover }),
+                            React.createElement(AutofitImage, { frameWidth: "100%", frameHeight: "150px", imgSrc: element.source_cover }),
                             React.createElement("div", { className: "panel-body" },
                                 React.createElement("h3", { className: "title text-dark" },
-                                    React.createElement(Link, { to: BASEURL + 'page/khoa-hoc/video/' + element.source_id + '.' + element.source_alias }, element.source_title)),
+                                    React.createElement(Link, { to: BASEURL + 'page/khoa-hoc/video/' + element.source_id + '-' + element.source_alias }, element.source_title)),
                                 React.createElement("p", { className: "desc", style: { fontSize: 15 } }, element.source_promo),
-                                React.createElement(Link, { className: "btn btn-primary learn-more", to: BASEURL + 'page/khoa-hoc/video/' + element.source_id + '.' + element.source_alias, "kjb-settings-id": "language_learn_more" }, "Xem")))));
+                                React.createElement(Link, { className: "btn btn-primary learn-more", to: BASEURL + 'page/khoa-hoc/video/' + element.source_id + '-' + element.source_alias, "kjb-settings-id": "language_learn_more" }, "Xem th\u00EAm")))));
                 });
             }
             return React.createElement("h1", null, "Kh\u00F4ng c\u00F3.");
@@ -69,21 +70,23 @@ var ClientSourceHome = /** @class */ (function (_super) {
                     React.createElement("div", { className: "container" },
                         React.createElement("div", { className: "row" },
                             React.createElement("div", { className: "col-sm-6" },
-                                React.createElement("h1", { className: "white", style: { marginBottom: 64 } },
+                                React.createElement("h2", { className: "white", style: { marginBottom: 64 } },
                                     React.createElement("b", null, "FROM A HISTORY-MAKING STANLEY CUP FINALS TO BUILDING A PERSONAL AI")),
                                 React.createElement("p", { className: "white" }, "Where has Tony been recently \u2013 and what in the world is he up to? Below is the latest edition of the Tony Tracker, where you can see highlights from his journeys and read his narration of some of his favorite experiences. Watching history being made at the Stanley Cup Finals TONIGHT\u2019S GAME IS ONE"))))),
+                React.createElement("div", { className: "row" },
+                    React.createElement(CLientFooterBanner, null)),
                 React.createElement("div", { className: "row page-source_list-source" },
-                    React.createElement("div", { className: "container paddingY-128" },
+                    React.createElement("div", { className: "container paddingY-64" },
                         React.createElement("div", { className: "row" },
                             React.createElement("div", { className: "col-xs-12 page-source_title" },
                                 React.createElement("h2", { style: {} },
-                                    React.createElement("b", null, "C\u00F3 ph\u00ED")),
+                                    React.createElement("b", null, "Kh\u00F3a h\u1ECDc \u0111\u1EA7y t\u1EF1 h\u00E0o")),
                                 React.createElement("hr", { style: { background: "#444" } })),
                             this.renderListSources()),
                         React.createElement("div", { className: "row" },
                             React.createElement("div", { className: "col-xs-12 page-source_title" },
                                 React.createElement("h2", null,
-                                    React.createElement("b", null, "H\u1ECDc online")),
+                                    React.createElement("b", null, "Kh\u00F3a h\u1ECDc online")),
                                 React.createElement("hr", { style: { background: "#444" } })),
                             this.renderListVideos())))),
             React.createElement(Footer, null)));

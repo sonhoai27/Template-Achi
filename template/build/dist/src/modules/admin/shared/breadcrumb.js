@@ -18,7 +18,7 @@ var BreadCrumd = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.renderListUri = function () {
             return _this.props.uri.map(function (element) {
-                return (React.createElement("li", { className: element.active ? 'active' : '' }, element.active ? element.title : React.createElement("a", { href: element.uri }, element.title)));
+                return (React.createElement("li", { key: element.title, className: element.active ? 'active' : '' }, element.active ? element.title : React.createElement("a", { href: element.uri }, element.title)));
             });
         };
         return _this;

@@ -52,7 +52,7 @@ var VideoAdd = /** @class */ (function (_super) {
     }
     VideoAdd.prototype.componentDidUpdate = function (preProps) {
         var _this = this;
-        if (preProps.resAddBlog != this.props.resAddVideo) {
+        if (preProps.resAddVideo != this.props.resAddVideo) {
             if (this.props.resAddVideo.status === 200) {
                 this.props.reIsSuccess(true);
                 setTimeout(function () {

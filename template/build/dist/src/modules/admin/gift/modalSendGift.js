@@ -14,10 +14,9 @@ var __extends = (this && this.__extends) || (function () {
 import * as React from "react";
 import { connect } from "react-redux";
 import { reIsSuccess, reIsDanger, reIsLoading } from "../../../reducers/init";
-import { reListGift, reListContact, reSendGift } from "./reGift";
+import { reListGift } from "./reGift";
 import { Editor } from "@tinymce/tinymce-react";
-import Select from 'react-select';
-import makeAnimated from 'react-select/lib/animated';
+import { reAddSendGift, reListCounter } from "./send-gift/reSendGift";
 var ModalSendGift = /** @class */ (function (_super) {
     __extends(ModalSendGift, _super);
     function ModalSendGift(props) {
@@ -25,59 +24,55 @@ var ModalSendGift = /** @class */ (function (_super) {
         _this.renderListGifts = function () {
             if (_this.props.resListGift.list) {
                 return _this.props.resListGift.list.map(function (element) {
-                    return (React.createElement("option", { value: element.gift_uri_file }, element.gift_name));
+                    return (React.createElement("option", { key: element.gift_uri_file, value: element.gift_uri_file }, element.gift_name));
                 });
             }
             return null;
         };
         _this.options = function () {
-            if (_this.props.resListContact.list) {
-                return _this.props.resListContact.list.map(function (item) {
-                    return { value: item.email_email, label: item.email_email, name: item.email_name };
+            if (_this.props.resListCounter.list) {
+                return _this.props.resListCounter.list.map(function (element) {
+                    return (React.createElement("option", { key: element.send_gift_counter, value: element.send_gift_counter }, element.send_gift_counter));
                 });
             }
-            return [];
+            return null;
         };
         _this.send = function () {
-            _this.props.reIsLoading(!_this.props.isLoading);
-            _this.props.reSendGift({
-                listEmails: _this.state.listEmail,
-                content: _this.state.content,
-                name: _this.state.name
-            });
+            // this.props.reIsLoading(!this.props.isLoading)
+            console.log(_this.state);
         };
         _this.state = {
             listEmail: [],
             content: "",
             editor: {},
-            name: ''
+            name: '',
+            count: 0,
+            nameGift: ""
         };
         return _this;
     }
     ModalSendGift.prototype.componentDidMount = function () {
-        this.props.reListContact();
+        this.props.reListCounter();
     };
     ModalSendGift.prototype.componentDidUpdate = function (preProps) {
-        var _this = this;
-        if (this.props.resSendGift != preProps.resSendGift) {
-            console.log(this.props.resSendGift.status);
-            if (this.props.resSendGift.status === 200) {
-                this.props.reIsSuccess(true);
-                setTimeout(function () {
-                    _this.props.reIsSuccess(false);
-                    _this.props.reIsLoading(!_this.props.isLoading);
-                    _this.props.isShowingModal();
-                }, 2000);
-            }
-            else {
-                this.props.reIsDanger(true);
-                setTimeout(function () {
-                    _this.props.reIsDanger(false);
-                    _this.props.reIsLoading(!_this.props.isLoading);
-                    _this.props.isShowingModal();
-                }, 2000);
-            }
-        }
+        // if (this.props.resSendGift != preProps.resSendGift) {
+        //   console.log(this.props.resSendGift.status);
+        //   if (this.props.resSendGift.status === 200) {
+        //     this.props.reIsSuccess(true);
+        //     setTimeout(() => {
+        //       this.props.reIsSuccess(false);
+        //       this.props.reIsLoading(!this.props.isLoading)
+        //       this.props.isShowingModal()
+        //     }, 2000);
+        //   } else {
+        //     this.props.reIsDanger(true);
+        //     setTimeout(() => {
+        //       this.props.reIsDanger(false);
+        //       this.props.reIsLoading(!this.props.isLoading)
+        //       this.props.isShowingModal()
+        //     }, 2000);
+        //   }
+        // }
     };
     ModalSendGift.prototype.render = function () {
         var _this = this;
@@ -93,20 +88,23 @@ var ModalSendGift = /** @class */ (function (_super) {
                                 React.createElement("div", { className: "col-sm-12" },
                                     React.createElement("div", { className: "row" },
                                         React.createElement("div", { className: "form-group col-sm-12" },
-                                            React.createElement("label", { className: "col-sm-12" }, "Danh s\u00E1ch email"),
+                                            React.createElement("label", { className: "col-sm-12" }, "S\u1ED1 l\u1EA7n \u0111\u00E3 g\u1EDFi"),
                                             React.createElement("div", { className: "col-sm-12" },
-                                                React.createElement(Select, { closeMenuOnSelect: false, components: makeAnimated(), isMulti: true, onChange: function (item) {
+                                                React.createElement("select", { className: 'form-control', onChange: function (e) {
                                                         _this.setState({
-                                                            listEmail: item
+                                                            count: e.target.value
                                                         });
-                                                    }, options: this.options() }))),
+                                                    } }, this.options()))),
                                         React.createElement("div", { className: "form-group col-sm-6" },
                                             React.createElement("label", { className: "col-sm-12" }, "Danh s\u00E1ch qu\u00E0"),
                                             React.createElement("div", { className: "col-sm-12" },
                                                 React.createElement("select", { onChange: function (e) {
+                                                        _this.setState({
+                                                            nameGift: e.options[e.selectedIndex].text
+                                                        });
                                                         _this.state.editor.insertContent("<a href=\"" + e.target.value + ("\">" + e.target.textContent + "</a>"));
                                                     }, className: "form-control" },
-                                                    React.createElement("option", null, "Ch\u1ECDn qu\u00E0"),
+                                                    React.createElement("option", { value: '', selected: true }, "Ch\u1ECDn qu\u00E0"),
                                                     this.renderListGifts()))),
                                         React.createElement("div", { className: "form-group col-sm-6" },
                                             React.createElement("label", { className: "col-sm-12" }, "Ti\u00EAu \u0111\u1EC1"),
@@ -157,8 +155,9 @@ var ModalSendGift = /** @class */ (function (_super) {
     return ModalSendGift;
 }(React.Component));
 var mapStateToProps = function (storeState) { return ({
-    resSendGift: storeState.reGift.resSendGift,
-    resListContact: storeState.reGift.resListContact,
+    resAddSendGift: storeState.reSendGift.resAddSendGift,
+    resListCounter: storeState.reSendGift.resListCounter,
+    resListContact: storeState.reSendGift.resListContact,
     resListGift: storeState.reGift.resListGift,
     isLoading: storeState.reInit.isLoading
 }); };
@@ -166,9 +165,9 @@ var mapDispatchToProps = {
     reListGift: reListGift,
     reIsDanger: reIsDanger,
     reIsSuccess: reIsSuccess,
-    reListContact: reListContact,
-    reSendGift: reSendGift,
-    reIsLoading: reIsLoading
+    reIsLoading: reIsLoading,
+    reAddSendGift: reAddSendGift,
+    reListCounter: reListCounter
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ModalSendGift);
 //# sourceMappingURL=modalSendGift.js.map

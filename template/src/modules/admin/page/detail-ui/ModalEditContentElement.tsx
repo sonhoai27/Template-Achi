@@ -1,5 +1,5 @@
 import * as React from "react";
-import { reIsDanger, reIsSuccess } from "../../../../reducers/init";
+import { reIsDanger, reIsSuccess, reShowPhotoApp, reSetCurrentEditorPhoto } from "../../../../reducers/init";
 import { reShowEditContent, reSetContentElement } from "../../source/reSource";
 import { connect } from "react-redux";
 import { reSaveContent } from "../rePage";
@@ -12,6 +12,8 @@ interface Props {
   resContentElement: any;
   reSaveContent: (form: any)=> void;
   resSaveContent: any;
+  reSetCurrentEditorPhoto: (editor: any) => void;
+  reShowPhotoApp: (status: boolean) => void;
 }
 interface IState {
   content_element: any;
@@ -24,6 +26,28 @@ class ModalEditContentElement extends React.Component<Props, IState> {
     })
   }
   componentDidMount(){
+    try {
+      CKEDITOR.plugins.add("insertimage", {
+        init: editor => {
+          editor.addCommand("insertImage", {
+            exec: editor => {
+              this.props.reShowPhotoApp(true);
+              this.props.reSetCurrentEditorPhoto({
+                type: "ck",
+                editor: editor
+              });
+              // var timestamp = new Date();
+              // editor.insertHtml( 'The current date and time is: <em>' + timestamp.toString() + '</em>' );
+            }
+          });
+          editor.ui.addButton("insertimage", {
+            label: "Insert Image",
+            command: "insertImage",
+            icon: RESOURCE + "images/icon/picture-24.png"
+          });
+        }
+      });
+    } catch (e) {}
     this.setState({
       content_element: this.props.resContentElement.content_page_data
     })
@@ -37,12 +61,11 @@ class ModalEditContentElement extends React.Component<Props, IState> {
 				{ "name": 'paragraph', "groups": [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
 				{ "name": 'links', "items": [ 'Link', 'Unlink', 'Anchor'] },
         { "name": 'insert', "items": ['Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
-        { "name": 'FontAwesome', "items": ['FontAwesome']}
+        { "name": 'FontAwesome', "items": ['FontAwesome', "insertimage", "Image"]}
       ],
       extraAllowedContent: 'i;span;ul;li;table;td;style;*[id];*(*);*{*}',
       allowedContent: true,
-      extraPlugins: 'fontawesome',
-      removeButtons: 'Image',
+      extraPlugins: 'fontawesome,insertimage',
       htmlEncodeOutput: false,
       entities: false,
       contentsCss: RESOURCE+'ckeditor/plugins/fontawesome/css/font-awesome.min.css'
@@ -151,7 +174,9 @@ const mapDispatchToProps = {
   reIsSuccess,
   reShowEditContent,
   reSetContentElement,
-  reSaveContent
+  reSaveContent,
+  reSetCurrentEditorPhoto,
+  reShowPhotoApp
 };
 export default connect(
   mapStateToProps,

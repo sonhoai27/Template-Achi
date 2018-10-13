@@ -15,7 +15,7 @@ import * as React from "react";
 import { BASEURLADMIN } from "../../../../config/const";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { reListSche } from "../reSource";
+import { reListSche, reDeleteSche } from "../reSource";
 var ListSche = /** @class */ (function (_super) {
     __extends(ListSche, _super);
     function ListSche(props) {
@@ -32,7 +32,11 @@ var ListSche = /** @class */ (function (_super) {
                                     " - ",
                                     element.source_sche_khoa))),
                         React.createElement("td", null, element.source_sche_price),
-                        React.createElement("td", null, element.source_sche_number)));
+                        React.createElement("td", null, element.source_sche_number),
+                        React.createElement("td", null,
+                            React.createElement("div", { onClick: function () {
+                                    _this.props.reDeleteSche(element.source_sche_id);
+                                }, className: "btn btn-sm btn-danger" }, "X\u00F3a"))));
                 });
             }
             return '';
@@ -41,6 +45,16 @@ var ListSche = /** @class */ (function (_super) {
     }
     ListSche.prototype.componentDidMount = function () {
         this.props.reListSche(this.props.match.params.idSource);
+    };
+    ListSche.prototype.componentDidUpdate = function (preProps) {
+        if (preProps.resDeleteSche != this.props.resDeleteSche) {
+            if (this.props.resDeleteSche.status === 200) {
+                this.props.reListSche(this.props.match.params.idSource);
+            }
+            else {
+                this.props.reListSche(this.props.match.params.idSource);
+            }
+        }
     };
     ListSche.prototype.render = function () {
         return (React.createElement("div", { className: "row" },
@@ -61,16 +75,19 @@ var ListSche = /** @class */ (function (_super) {
                                                 React.createElement("th", { className: "text-center" }, "#"),
                                                 React.createElement("th", null, "T\u00EAn"),
                                                 React.createElement("th", null, "Gi\u00E1"),
-                                                React.createElement("th", null, "S\u1ED1 l\u01B0\u1EE3ng"))),
+                                                React.createElement("th", null, "S\u1ED1 l\u01B0\u1EE3ng"),
+                                                React.createElement("th", null, "H\u00E0nh \u0111\u1ED9ng"))),
                                         React.createElement("tbody", null, this.renderListSche()))))))))));
     };
     return ListSche;
 }(React.Component));
 var mapStateToProps = function (storeState) { return ({
-    resListSche: storeState.reSource.resListSche
+    resListSche: storeState.reSource.resListSche,
+    resDeleteSche: storeState.reSource.resDeleteSche
 }); };
 var mapDispatchToProps = {
-    reListSche: reListSche
+    reListSche: reListSche,
+    reDeleteSche: reDeleteSche
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ListSche);
 //# sourceMappingURL=listSche.js.map

@@ -59,16 +59,6 @@ var ClientOrderSource = /** @class */ (function (_super) {
                 _this.props.reAddOrder(_this.state.order);
             }
         };
-        _this.renderListdate = function () {
-            if (_this.props.resDetailSche.sche) {
-                return _this.props.resDetailSche.sche.map(function (element) {
-                    return (React.createElement("p", { dangerouslySetInnerHTML: { __html: element.date_source_time } }));
-                });
-            }
-            else {
-                return React.createElement("h1", null, "null");
-            }
-        };
         _this.handleDayClick = function (day) {
             // const date = new Date(day)
             // date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()
@@ -89,7 +79,8 @@ var ClientOrderSource = /** @class */ (function (_super) {
                 source_order_number_phone: "",
                 source_order_ho: "",
                 source_order_gender: "",
-                source_order_price: 0
+                source_order_price: 0,
+                source_date_sche: ""
             },
             source: {}
         };
@@ -163,7 +154,7 @@ var ClientOrderSource = /** @class */ (function (_super) {
                                 React.createElement("p", null, this.state.source.source_sche_sale)),
                             React.createElement("li", null,
                                 React.createElement("p", null, "Th\u1EDDi gian: "),
-                                React.createElement("p", null, this.renderListdate()))),
+                                React.createElement("p", { dangerouslySetInnerHTML: { __html: this.state.source.source_date_sche } }))),
                         React.createElement("ul", null,
                             React.createElement("li", null, "\u0110\u1EC3 \u0111\u01B0\u1EE3c h\u1ED7 tr\u1EE3 th\u00EAm, b\u1EA1n c\u00F3 th\u1EC3 g\u1ECDi hotline 24/7 c\u1EE7a ch\u00FAng t\u00F4i b\u1EB1ng c\u00E1ch b\u1EA5m v\u00E0o \u0111\u00E2y."),
                             React.createElement("li", null, "M\u1ED7i m\u1EE9c \u01B0u \u0111\u00E3i h\u1ECDc ph\u00ED \u0111\u1EC1u ch\u1EC9 c\u00F3 m\u1ED9t s\u1ED1 l\u01B0\u1EE3ng su\u1EA5t \u0111\u0103ng k\u00FD nh\u1EA5t \u0111\u1ECBnh.")),

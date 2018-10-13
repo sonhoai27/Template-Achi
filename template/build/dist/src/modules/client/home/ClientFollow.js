@@ -20,16 +20,19 @@ var ClientFollow = /** @class */ (function (_super) {
     ClientFollow.prototype.render = function () {
         return (React.createElement("div", { className: "container follow paddingY-64" },
             React.createElement("div", { className: "row" },
-                React.createElement("div", { className: "col-sm-2" }),
                 React.createElement("div", { className: "col-sm-4" },
                     React.createElement("div", { className: "social-callout" },
-                        React.createElement("h3", { className: "text-center" }, "Get Daily Motivation"),
-                        React.createElement("iframe", { src: "//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FBrendon-Burchard-Live-Love-Matter%2F141502009216768&layout=standard&show_faces=false&width=200&action=like&colorscheme=light&height=30", style: { border: 'none', overflow: 'hidden', width: '200px', height: '30px' } }))),
+                        React.createElement("h3", { className: "text-center" }, "Nh\u1EADn b\u00E0i \u0111\u1ED9ng l\u1EF1c h\u00E0ng ng\u00E0y"),
+                        React.createElement("iframe", { src: "https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FNguyenMinhChi.MrShare%2F&width=84&layout=button_count&action=like&size=small&show_faces=false&share=false&height=21&appId=1440913602698681", width: 84, height: 21, style: { border: "none", overflow: "hidden" }, scrolling: "no", frameBorder: 0, allowTransparency: true }))),
                 React.createElement("div", { className: "col-sm-4" },
                     React.createElement("div", { className: "social-callout" },
-                        React.createElement("h3", { className: "text-center" }, "Watch Brendon's Show"),
-                        React.createElement("iframe", { style: { position: 'static', top: 0, width: 123, margin: 0, borderStyle: 'none', left: 0, visibility: 'visible', height: 24 }, tabIndex: 0, width: "100%", id: "I0_1536682088055", name: "I0_1536682088055", src: "https://www.youtube.com/subscribe_embed?usegapi=1&channel=BrendonBurchard&origin=https%3A%2F%2Fbrendon.com&gsrc=3p&ic=1&jsh=m%3B%2F_%2Fscs%2Fapps-static%2F_%2Fjs%2Fk%3Doz.gapi.vi.ersgHZm_IgE.O%2Fam%3DwQ%2Frt%3Dj%2Fd%3D1%2Frs%3DAGLTcCMduhp3YkUaSrrUHYCwgzlg4Y8r_w%2Fm%3D__features__#_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe%2C_renderstart%2Concircled%2Cdrefresh%2Cerefresh%2Conload&id=I0_1536682088055&_gfid=I0_1536682088055&parent=https%3A%2F%2Fbrendon.com&pfname=&rpctoken=21758127", "data-gapiattached": "true" }))),
-                React.createElement("div", { className: "col-sm-2" }))));
+                        React.createElement("h3", { className: "text-center" }, "K\u00EAnh Youtube b\u00E0i h\u1ECDc"),
+                        React.createElement("div", { className: "g-ytsubscribe", "data-channelid": "UCHCeMi9tGx9VCMSHHbscrLg", "data-layout": "default", "data-count": "default" }))),
+                React.createElement("div", { className: "col-sm-4" },
+                    React.createElement("div", { className: "social-callout" },
+                        React.createElement("h3", { className: "text-center" }, "Nh\u00F3m ph\u00E1t tri\u1EC3n b\u1EA3n th\u00E2n"),
+                        React.createElement("a", { href: "https://www.facebook.com/groups/MatMaThoiSinhVien/", target: "_blank" },
+                            React.createElement("div", { className: "btn btn-sm btn-info" }, "Group Facebook")))))));
     };
     return ClientFollow;
 }(React.Component));

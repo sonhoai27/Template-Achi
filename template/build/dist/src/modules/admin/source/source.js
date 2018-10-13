@@ -12,10 +12,11 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import * as React from "react";
-import { BASEURLADMIN } from "../../../config/const";
+import { BASEURLADMIN, API } from "../../../config/const";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { reListSource } from "./reSource";
+import axios from 'axios';
 var Source = /** @class */ (function (_super) {
     __extends(Source, _super);
     function Source(props) {
@@ -31,7 +32,14 @@ var Source = /** @class */ (function (_super) {
                             React.createElement("span", { className: "text-muted" }, element.source_title))),
                         React.createElement("td", null, element.source_is_video == 0 ? 'Khóa học' : 'Video học online'),
                         React.createElement("td", null,
-                            React.createElement("span", { className: "text-muted" }, element.source_created_date))));
+                            React.createElement("span", { className: "text-muted" }, element.source_created_date)),
+                        React.createElement("td", null,
+                            React.createElement("div", { onClick: function () {
+                                    axios.get(API + 'source/get-list-id-sche/' + element.source_id)
+                                        .then(function (result) {
+                                        alert('Bạn không có quyền xóa: ' + result.data.list);
+                                    });
+                                }, className: "btn btn-sm btn-danger" }, "X\u00F3a"))));
                 });
             }
             return '';
@@ -60,7 +68,8 @@ var Source = /** @class */ (function (_super) {
                                     React.createElement("th", { className: "text-center" }, "#"),
                                     React.createElement("th", null, "T\u00EAn"),
                                     React.createElement("th", null, "Lo\u1EA1i"),
-                                    React.createElement("th", null, "Ng\u00E0y t\u1EA1o"))),
+                                    React.createElement("th", null, "Ng\u00E0y t\u1EA1o"),
+                                    React.createElement("th", null, "H\u00E0nh \u0111\u1ED9ng"))),
                             React.createElement("tbody", null, this.renderListSource())))))));
     };
     return Source;

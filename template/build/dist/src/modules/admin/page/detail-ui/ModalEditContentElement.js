@@ -23,7 +23,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import * as React from "react";
-import { reIsDanger, reIsSuccess } from "../../../../reducers/init";
+import { reIsDanger, reIsSuccess, reShowPhotoApp, reSetCurrentEditorPhoto } from "../../../../reducers/init";
 import { reShowEditContent, reSetContentElement } from "../../source/reSource";
 import { connect } from "react-redux";
 import { reSaveContent } from "../rePage";
@@ -42,6 +42,30 @@ var ModalEditContentElement = /** @class */ (function (_super) {
         return _this;
     }
     ModalEditContentElement.prototype.componentDidMount = function () {
+        var _this = this;
+        try {
+            CKEDITOR.plugins.add("insertimage", {
+                init: function (editor) {
+                    editor.addCommand("insertImage", {
+                        exec: function (editor) {
+                            _this.props.reShowPhotoApp(true);
+                            _this.props.reSetCurrentEditorPhoto({
+                                type: "ck",
+                                editor: editor
+                            });
+                            // var timestamp = new Date();
+                            // editor.insertHtml( 'The current date and time is: <em>' + timestamp.toString() + '</em>' );
+                        }
+                    });
+                    editor.ui.addButton("insertimage", {
+                        label: "Insert Image",
+                        command: "insertImage",
+                        icon: RESOURCE + "images/icon/picture-24.png"
+                    });
+                }
+            });
+        }
+        catch (e) { }
         this.setState({
             content_element: this.props.resContentElement.content_page_data
         });
@@ -55,12 +79,11 @@ var ModalEditContentElement = /** @class */ (function (_super) {
                 { "name": 'paragraph', "groups": ['list', 'indent', 'blocks', 'align', 'bidi'], items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language'] },
                 { "name": 'links', "items": ['Link', 'Unlink', 'Anchor'] },
                 { "name": 'insert', "items": ['Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe'] },
-                { "name": 'FontAwesome', "items": ['FontAwesome'] }
+                { "name": 'FontAwesome', "items": ['FontAwesome', "insertimage", "Image"] }
             ],
             extraAllowedContent: 'i;span;ul;li;table;td;style;*[id];*(*);*{*}',
             allowedContent: true,
-            extraPlugins: 'fontawesome',
-            removeButtons: 'Image',
+            extraPlugins: 'fontawesome,insertimage',
             htmlEncodeOutput: false,
             entities: false,
             contentsCss: RESOURCE + 'ckeditor/plugins/fontawesome/css/font-awesome.min.css'
@@ -103,7 +126,9 @@ var mapDispatchToProps = {
     reIsSuccess: reIsSuccess,
     reShowEditContent: reShowEditContent,
     reSetContentElement: reSetContentElement,
-    reSaveContent: reSaveContent
+    reSaveContent: reSaveContent,
+    reSetCurrentEditorPhoto: reSetCurrentEditorPhoto,
+    reShowPhotoApp: reShowPhotoApp
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ModalEditContentElement);
 //# sourceMappingURL=ModalEditContentElement.js.map

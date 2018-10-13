@@ -16,6 +16,7 @@ import { Route } from "react-router";
 import ClientSourceHome from "./ClientSourceHome";
 import ClientOrderSource from "./ClientOrderSource";
 import ClientVideoSource from "./ClientVideoSource";
+import ClientSourceDetail from "./ClientSourceDetail";
 var ClientSourceRoute = /** @class */ (function (_super) {
     __extends(ClientSourceRoute, _super);
     function ClientSourceRoute(props) {
@@ -24,9 +25,9 @@ var ClientSourceRoute = /** @class */ (function (_super) {
     ClientSourceRoute.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
             React.createElement(Route, { exact: true, path: "" + this.props.match.url, component: ClientSourceHome }),
-            React.createElement(Route, { path: this.props.match.url + "/chi-tiet/:idSource", component: ClientSourceHome }),
-            React.createElement(Route, { path: this.props.match.url + "/video/:idSource", component: ClientVideoSource }),
-            React.createElement(Route, { path: this.props.match.url + "/dang-ky/:idSche", component: ClientOrderSource })));
+            React.createElement(Route, { exact: true, path: this.props.match.url + "/:idSource", component: ClientSourceDetail }),
+            React.createElement(Route, { exact: true, path: this.props.match.url + "/video/:idSource", component: ClientVideoSource }),
+            React.createElement(Route, { exact: true, path: this.props.match.url + "/dang-ky/:idSche", component: ClientOrderSource })));
     };
     return ClientSourceRoute;
 }(React.Component));

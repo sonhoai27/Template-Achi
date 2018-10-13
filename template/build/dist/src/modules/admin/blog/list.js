@@ -15,8 +15,9 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { BASEURLADMIN } from "../../../config/const";
 import { connect } from "react-redux";
-import { reListBlog } from "./reBlog";
+import { reListBlog, reDeleteBlog } from "./reBlog";
 import Pagination from "../../shared/Pagination";
+import { reIsDanger, reIsSuccess } from "../../../reducers/init";
 var BlogList = /** @class */ (function (_super) {
     __extends(BlogList, _super);
     function BlogList(props) {
@@ -39,9 +40,13 @@ var BlogList = /** @class */ (function (_super) {
                     return (React.createElement("tr", { key: element.blog_id },
                         React.createElement("td", { className: "text-center", role: "row" }, index + 1),
                         React.createElement("td", null,
-                            React.createElement(Link, { to: BASEURLADMIN + 'blog/detail/' + element.blog_id }, element.blog_title)),
+                            React.createElement(Link, { to: BASEURLADMIN + "blog/detail/" + element.blog_id }, element.blog_title)),
                         React.createElement("td", null, element.blog_promo),
-                        React.createElement("td", null, element.blog_created_date)));
+                        React.createElement("td", null, element.blog_created_date),
+                        React.createElement("td", null,
+                            React.createElement("div", { onClick: function () {
+                                    _this.props.reDeleteBlog(element.blog_id);
+                                }, className: "btn btn-sm btn-danger" }, "X\u00F3a"))));
                 });
             }
             return React.createElement("h1", null, "Null");
@@ -51,6 +56,25 @@ var BlogList = /** @class */ (function (_super) {
     BlogList.prototype.componentDidMount = function () {
         this.props.reListBlog((parseInt(this.makeCurrentPage(), 10) - 1) * 20);
     };
+    BlogList.prototype.componentDidUpdate = function (preProps) {
+        var _this = this;
+        if (preProps.resDeleteBlog != this.props.resDeleteBlog) {
+            if (this.props.resDeleteBlog.status === 200) {
+                this.props.reIsSuccess(true);
+                setTimeout(function () {
+                    _this.props.reIsSuccess(false);
+                    _this.props.reListBlog((parseInt(_this.makeCurrentPage(), 10) - 1) * 20);
+                }, 2000);
+            }
+            else {
+                this.props.reIsDanger(true);
+                setTimeout(function () {
+                    _this.props.reIsDanger(false);
+                    _this.props.reListBlog((parseInt(_this.makeCurrentPage(), 10) - 1) * 20);
+                }, 2000);
+            }
+        }
+    };
     BlogList.prototype.render = function () {
         var _this = this;
         return (React.createElement("div", { className: "row" },
@@ -59,7 +83,7 @@ var BlogList = /** @class */ (function (_super) {
                     React.createElement("div", { className: "panel-toolbar" },
                         React.createElement("div", { className: "panel-heading" }, "Qu\u1EA3n l\u00ED b\u00E0i vi\u1EBFt"),
                         React.createElement("div", { className: "panel-action-bar" },
-                            React.createElement(Link, { to: BASEURLADMIN + 'blog/add' },
+                            React.createElement(Link, { to: BASEURLADMIN + "blog/add" },
                                 React.createElement("div", { className: "btn btn-xs btn-info" }, "Th\u00EAm m\u1EDBi")))),
                     React.createElement("div", { className: "content" },
                         React.createElement("div", { className: "table-responsive" },
@@ -69,7 +93,8 @@ var BlogList = /** @class */ (function (_super) {
                                         React.createElement("th", { className: "text-center", role: "row" }, "#"),
                                         React.createElement("th", null, "T\u00EAn"),
                                         React.createElement("th", null, "Promo"),
-                                        React.createElement("th", null, "Ng\u00E0y t\u1EA1o"))),
+                                        React.createElement("th", null, "Ng\u00E0y t\u1EA1o"),
+                                        React.createElement("th", null, "Action"))),
                                 React.createElement("tbody", null, this.renderListBlog())))),
                     React.createElement("div", { className: "pg" },
                         React.createElement(Pagination, { initialPage: parseInt(this.makeCurrentPage(), 10), pageSize: 20, totalItems: this.props.resListBlog.count, onChangePage: function (e) { return _this.getMoreBlog(e.currentPage); } }))))));
@@ -77,10 +102,14 @@ var BlogList = /** @class */ (function (_super) {
     return BlogList;
 }(React.Component));
 var mapStateToProps = function (storeState) { return ({
-    resListBlog: storeState.reBlog.resListBlog
+    resListBlog: storeState.reBlog.resListBlog,
+    resDeleteBlog: storeState.reBlog.resDeleteBlog
 }); };
 var mapDispatchToProps = {
-    reListBlog: reListBlog
+    reListBlog: reListBlog,
+    reDeleteBlog: reDeleteBlog,
+    reIsDanger: reIsDanger,
+    reIsSuccess: reIsSuccess
 };
 export default connect(mapStateToProps, mapDispatchToProps)(BlogList);
 //# sourceMappingURL=list.js.map

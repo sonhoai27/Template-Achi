@@ -10,6 +10,7 @@ import reOrderEbook from '../modules/client/ebook/reEbook';
 import reOrderEbookAdmin from '../modules/admin/order-ebook/reOrderEbook';
 import rePage from '../modules/admin/page/rePage';
 import reVideoSource from "../modules/admin/video-source/reVideoSource";
+import reSendGift from "../modules/admin/gift/send-gift/reSendGift";
 export default combineReducers({
     reUI: reUI,
     reInit: reInit,
@@ -21,6 +22,7 @@ export default combineReducers({
     reOrderEbook: reOrderEbook,
     reOrderEbookAdmin: reOrderEbookAdmin,
     rePage: rePage,
-    reVideoSource: reVideoSource
+    reVideoSource: reVideoSource,
+    reSendGift: reSendGift
 });
 //# sourceMappingURL=index.js.map

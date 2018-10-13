@@ -23,7 +23,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 import * as React from "react";
-import { reIsDanger, reIsSuccess } from "../../../../reducers/init";
+import { reIsDanger, reIsSuccess, reShowPhotoApp, reSetCurrentEditorPhoto } from "../../../../reducers/init";
 import { reShowEditContent, reSetContentElement } from "../../source/reSource";
 import { connect } from "react-redux";
 import { RESOURCE } from "../../../../config/const";
@@ -36,49 +36,107 @@ var ModalEditContentElement = /** @class */ (function (_super) {
             var data = CKEDITOR.instances.editor1.getData();
             _this.props.reAddUpdateContentElement(__assign({}, obj, { content_element_data: data }));
         };
-        _this.setState({
-            content_element: _this.props.resContentElement.content_element_data
-        });
         return _this;
     }
     ModalEditContentElement.prototype.componentDidMount = function () {
-        this.setState({
-            content_element: this.props.resContentElement.content_element_data
-        });
-        CKEDITOR.plugins.addExternal('fontawesome', RESOURCE + 'ckeditor/plugins/fontawesome/', 'plugin.js');
-        CKEDITOR.replace('editor1', {
+        var _this = this;
+        try {
+            CKEDITOR.plugins.add("insertimage", {
+                init: function (editor) {
+                    editor.addCommand("insertImage", {
+                        exec: function (editor) {
+                            _this.props.reShowPhotoApp(true);
+                            _this.props.reSetCurrentEditorPhoto({
+                                type: "ck",
+                                editor: editor
+                            });
+                            // var timestamp = new Date();
+                            // editor.insertHtml( 'The current date and time is: <em>' + timestamp.toString() + '</em>' );
+                        }
+                    });
+                    editor.ui.addButton("insertimage", {
+                        label: "Insert Image",
+                        command: "insertImage",
+                        icon: RESOURCE + "images/icon/picture-24.png"
+                    });
+                }
+            });
+        }
+        catch (e) { }
+        CKEDITOR.plugins.addExternal("fontawesome", RESOURCE + "ckeditor/plugins/fontawesome/", "plugin.js");
+        CKEDITOR.replace("editor1", {
             toolbar: [
-                { "name": 'document', "groups": ['mode', 'document', 'doctools'], items: ['Source'] },
                 {
-                    "name": 'basicstyles',
-                    "groups": ['basicstyles', 'cleanup'],
-                    items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat']
+                    name: "document",
+                    groups: ["mode", "document", "doctools"],
+                    items: ["Source"]
                 },
-                { "name": 'styles', "items": ['Styles', 'Format', 'Font', 'FontSize'] },
-                { "name": 'colors', "items": ['TextColor', 'BGColor'] },
                 {
-                    "name": 'paragraph',
-                    "groups": ['list', 'indent', 'blocks', 'align', 'bidi'],
-                    items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language']
+                    name: "basicstyles",
+                    groups: ["basicstyles", "cleanup"],
+                    items: [
+                        "Bold",
+                        "Italic",
+                        "Underline",
+                        "Strike",
+                        "Subscript",
+                        "Superscript",
+                        "-",
+                        "CopyFormatting",
+                        "RemoveFormat"
+                    ]
                 },
-                { "name": 'links', "items": ['Link', 'Unlink', 'Anchor'] },
+                { name: "styles", items: ["Styles", "Format", "Font", "FontSize"] },
+                { name: "colors", items: ["TextColor", "BGColor"] },
                 {
-                    "name": 'insert',
-                    "items": ['Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']
+                    name: "paragraph",
+                    groups: ["list", "indent", "blocks", "align", "bidi"],
+                    items: [
+                        "NumberedList",
+                        "BulletedList",
+                        "-",
+                        "Outdent",
+                        "Indent",
+                        "-",
+                        "Blockquote",
+                        "CreateDiv",
+                        "-",
+                        "JustifyLeft",
+                        "JustifyCenter",
+                        "JustifyRight",
+                        "JustifyBlock",
+                        "-",
+                        "BidiLtr",
+                        "BidiRtl",
+                        "Language"
+                    ]
                 },
-                { "name": 'FontAwesome', "items": ['FontAwesome'] }
+                { name: "links", items: ["Link", "Unlink", "Anchor"] },
+                {
+                    name: "insert",
+                    items: [
+                        "Table",
+                        "HorizontalRule",
+                        "Smiley",
+                        "SpecialChar",
+                        "PageBreak",
+                        "Iframe"
+                    ]
+                },
+                { name: "FontAwesome", items: ["FontAwesome", "insertimage", "Image"] }
             ],
-            extraAllowedContent: 'i;span;ul;li;table;td;style;*[id];*(*);*{*}',
+            extraAllowedContent: "i;span;ul;li;table;td;style;*[id];*(*);*{*}",
             allowedContent: true,
-            extraPlugins: 'fontawesome',
-            removeButtons: 'Image',
+            extraPlugins: "fontawesome,insertimage",
+            // removeButtons: 'Image',
             htmlEncodeOutput: false,
             entities: false,
-            contentsCss: RESOURCE + 'ckeditor/plugins/fontawesome/css/font-awesome.min.css'
+            contentsCss: RESOURCE + "ckeditor/plugins/fontawesome/css/font-awesome.min.css"
         });
     };
     ModalEditContentElement.prototype.componentDidUpdate = function (preProps) {
-        if (this.props.resAddUpdateContentElement != preProps.resAddUpdateContentElement) {
+        if (this.props.resAddUpdateContentElement !==
+            preProps.resAddUpdateContentElement) {
             this.props.reShowEditContent(false);
         }
     };
@@ -92,30 +150,38 @@ var ModalEditContentElement = /** @class */ (function (_super) {
                             React.createElement("button", { onClick: function () { return _this.props.reShowEditContent(false); }, type: "button", className: "close", "data-dismiss": "modal", "aria-hidden": "true" }, "\u00D7"),
                             React.createElement("h4", null, "Th\u00EAm n\u1ED9i dung")),
                         React.createElement("div", { className: "modal-body" },
-                            React.createElement("textarea", { cols: 80, id: "editor1", name: "editor1", rows: 10 }, this.props.resContentElement.content_page_data)),
+                            React.createElement("textarea", { cols: 80, id: "editor1", name: "editor1", rows: 10 }, this.props.resContentElement.content_element_data)),
                         React.createElement("div", { className: "modal-footer" },
                             React.createElement("button", { onClick: function () { return _this.props.reShowEditContent(false); }, type: "button", className: "btn btn-default waves-effect", "data-dismiss": "modal" }, "Tho\u00E1t"),
-                            React.createElement("button", { onClick: function () { return _this.saveContentPage({
-                                    idVirtualElement: _this.props.resContentElement.detail_ui_random_id + '-content',
-                                    content_element_id: _this.props.resContentElement.content_element_id,
-                                    content_element_id_detail_ui: _this.props.resContentElement.detail_ui_id,
-                                    content_element_id_source: _this.props.resContentElement.idSource
-                                }); }, type: "button", className: "btn btn-danger waves-effect waves-light" }, "L\u01B0u"))))),
+                            React.createElement("button", { onClick: function () {
+                                    return _this.saveContentPage({
+                                        idVirtualElement: _this.props.resContentElement.detail_ui_random_id +
+                                            "-content",
+                                        content_element_id: _this.props.resContentElement
+                                            .content_element_id,
+                                        content_element_id_detail_ui: _this.props.resContentElement
+                                            .detail_ui_id,
+                                        content_element_id_source: _this.props.resContentElement
+                                            .idSource
+                                    });
+                                }, type: "button", className: "btn btn-danger waves-effect waves-light" }, "L\u01B0u"))))),
             React.createElement("div", { className: "modal-backdrop fade in" })));
     };
     return ModalEditContentElement;
 }(React.Component));
 var mapStateToProps = function (storeState) { return ({
-    resAddUpdateContentElement: storeState.reSource.resAddUpdateContentElement,
+    resAddUpdateContentElement: storeState.reUI.resAddUpdateContentElement,
     resShowEditContent: storeState.reSource.resShowEditContent,
-    resContentElement: storeState.reSource.resContentElement,
+    resContentElement: storeState.reSource.resContentElement
 }); };
 var mapDispatchToProps = {
     reIsDanger: reIsDanger,
     reIsSuccess: reIsSuccess,
     reShowEditContent: reShowEditContent,
     reSetContentElement: reSetContentElement,
-    reAddUpdateContentElement: reAddUpdateContentElement
+    reAddUpdateContentElement: reAddUpdateContentElement,
+    reSetCurrentEditorPhoto: reSetCurrentEditorPhoto,
+    reShowPhotoApp: reShowPhotoApp
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ModalEditContentElement);
 //# sourceMappingURL=ModalEditContentElement.js.map

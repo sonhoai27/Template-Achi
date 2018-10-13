@@ -41,16 +41,23 @@ var ClientVideoSource = /** @class */ (function (_super) {
             }
             return React.createElement("li", null, "Kh\u00F4ng c\u00F3");
         };
+        _this.makeIframe = function (link) {
+            return (React.createElement("iframe", { width: 853, height: 480, src: "https://www.youtube.com/embed/" + (link !== "" ? link.split('v=')[1] : ''), 
+                // @ts-ignore
+                frameBorder: "0", allow: "autoplay; encrypted-media", allowFullScreen: true }));
+        };
         _this.state = {
             currentVideo: "",
             isShowingPlayer: false,
-            isShowingModalContact: false
+            isShowingModalContact: false,
+            currentCode: {},
+            currentName: {}
         };
         return _this;
     }
     ClientVideoSource.prototype.componentDidMount = function () {
         var url = this.props.match.params.idSource;
-        var tempArr = url.split('.');
+        var tempArr = url.split('-');
         var idSource = tempArr[0];
         this.props.reDetailSource(idSource);
         this.props.apiListVideoSource(idSource);
@@ -59,9 +66,11 @@ var ClientVideoSource = /** @class */ (function (_super) {
     ClientVideoSource.prototype.componentDidUpdate = function (preProps) {
         if (preProps.resDetailSource != this.props.resDetailSource) {
             this.forceUpdate();
-            if (!Storage.local.get('user_info')) {
+            if (!Storage.local.get('user_info') || Storage.local.get('user_info')[this.props.resDetailSource.source_alias] == undefined) {
                 this.setState({
-                    isShowingModalContact: !this.state.isShowingModalContact
+                    isShowingModalContact: !this.state.isShowingModalContact,
+                    currentCode: this.props.resDetailSource.source_alias,
+                    currentName: this.props.resDetailSource.source_title
                 });
             }
         }
@@ -90,14 +99,6 @@ var ClientVideoSource = /** @class */ (function (_super) {
                         React.createElement("div", { className: "row" },
                             React.createElement("h1", { style: { fontSize: 64 }, className: 'white' }, detail.source_title),
                             React.createElement("p", { className: 'white' }, detail.source_promo)))),
-                React.createElement("div", { className: "row" },
-                    React.createElement("div", { className: "container" },
-                        React.createElement("div", { className: "row" },
-                            React.createElement("div", { className: "col-sm-3" }),
-                            React.createElement("div", { className: "col-sm-6 detail-page__video-player" }, this.state.isShowingPlayer ? React.createElement("iframe", { width: 560, height: 315, src: "https://www.youtube.com/embed/" + (this.state.currentVideo !== "" ? (this.state.currentVideo.source_video_url).split('v=')[1] : ''), 
-                                // @ts-ignore
-                                frameBorder: "0", allow: "autoplay; encrypted-media", allowFullScreen: true }) : ''),
-                            React.createElement("div", { className: "col-sm-3" })))),
                 React.createElement("div", { className: "row paddingY-32 detail-video__main" },
                     React.createElement("div", { className: "container" },
                         React.createElement("div", { className: "row" },
@@ -109,11 +110,24 @@ var ClientVideoSource = /** @class */ (function (_super) {
                                 React.createElement("h2", { style: { fontWeight: 700 } }, "Danh s\u00E1ch video"),
                                 React.createElement("ul", null, this.renderListVideo())))))),
             React.createElement(Footer, null),
-            this.state.isShowingModalContact ? React.createElement(ModalContact, { showHide: function () {
+            this.state.isShowingModalContact ? React.createElement(ModalContact, { code: this.state.currentCode, name: this.state.currentName, showHide: function () {
                     _this.setState({
                         isShowingModalContact: !_this.state.isShowingModalContact
                     });
-                }, name_click: '' }) : ''));
+                } }) : '',
+            this.state.isShowingPlayer ? (React.createElement(React.Fragment, null,
+                React.createElement("div", { style: { display: "block" }, className: "modal fade in play-video", role: "dialog", "aria-hidden": "true" },
+                    React.createElement("div", { className: "modal-dialog modal-lg" },
+                        React.createElement("div", { className: "modal-content" },
+                            React.createElement("div", { className: "modal-header" },
+                                React.createElement("button", { onClick: function () {
+                                        _this.setState({
+                                            isShowingPlayer: !_this.state.isShowingPlayer
+                                        });
+                                    }, type: "button", className: "close", "data-dismiss": "modal", "aria-hidden": "true" }, "\u00D7")),
+                            React.createElement("div", { className: "modal-body" },
+                                React.createElement("div", { className: "video-container" }, this.makeIframe(this.state.currentVideo.source_video_url)))))),
+                React.createElement("div", { className: "modal-backdrop fade in" }))) : ''));
     };
     return ClientVideoSource;
 }(React.Component));

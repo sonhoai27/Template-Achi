@@ -39,6 +39,8 @@ import { Link } from "react-router-dom";
 import Select from "react-select";
 import makeAnimated from "react-select/lib/animated";
 import { BASEURL } from "../../../config/const";
+import Helmet from "react-helmet";
+import CLientFooterBanner from "../home/ClientFooterBanner";
 var ClientBlog = /** @class */ (function (_super) {
     __extends(ClientBlog, _super);
     function ClientBlog(props) {
@@ -69,17 +71,25 @@ var ClientBlog = /** @class */ (function (_super) {
         _this.renderListBlog = function () {
             if (_this.props.resClientListBlog.list) {
                 return _this.props.resClientListBlog.list.map(function (element, index) {
-                    return (React.createElement("div", { className: index + 1 === 1 || (index + 1) % 6 === 0 ? "col-sm-8" : "col-sm-4" },
-                        React.createElement("div", { className: "post" },
-                            React.createElement(Link, { style: { backgroundImage: "url(" + element.blog_cover + ")" }, className: "post-item-image", to: BASEURL + 'page/blog' + "/detail/" + element.blog_id },
-                                React.createElement("div", { className: "post-item-container color3" },
-                                    React.createElement("img", { className: "ico-handshake cat-icon", src: "https://cdnwp.tonyrobbins.com/wp-content/uploads/2017/09/white-outlined_health-and-vitality.png" }))),
-                            React.createElement("div", { className: "post-content" },
-                                React.createElement("h6", { className: "micro" }, element.category_name),
-                                React.createElement("div", { className: "archive_cat_line", style: { backgroundColor: "#6d166d" } }),
-                                React.createElement("h4", { className: "post-title" },
-                                    React.createElement(Link, { to: BASEURL + 'page/blog' + "/detail/" + element.blog_id }, element.blog_title)),
-                                React.createElement(Link, { to: BASEURL + 'page/blog' + "/detail/" + element.blog_id, className: "link-more link-more-grey" }, "Xem th\u00EAm")))));
+                    return (React.createElement(React.Fragment, null,
+                        React.createElement(Helmet, { style: [
+                                {
+                                    cssText: "\n                  .list-blogs .post.post-" + index + " div.post-item-container:hover:before{\n                    background: " + element.category_color + "\n                  }"
+                                }
+                            ] }),
+                        React.createElement("div", { className: index + 1 === 1 || (index + 1) % 6 === 0
+                                ? "col-sm-8"
+                                : "col-sm-4" },
+                            React.createElement("div", { className: "post post-" + index },
+                                React.createElement(Link, { style: { backgroundImage: "url(" + element.blog_cover + ")" }, className: "post-item-image", to: BASEURL + "page/blog" + "/detail/" + element.blog_id },
+                                    React.createElement("div", { className: "post-item-container color3" },
+                                        React.createElement("img", { className: "ico-handshake cat-icon", src: element.category_icon }))),
+                                React.createElement("div", { className: "post-content" },
+                                    React.createElement("h6", { className: "micro" }, element.category_name),
+                                    React.createElement("div", { className: "archive_cat_line", style: { backgroundColor: "#6d166d" } }),
+                                    React.createElement("h4", { className: "post-title" },
+                                        React.createElement(Link, { to: BASEURL + "page/blog" + "/detail/" + element.blog_id }, element.blog_title)),
+                                    React.createElement(Link, { to: BASEURL + "page/blog" + "/detail/" + element.blog_id, className: "link-more link-more-grey" }, "Xem th\u00EAm"))))));
                 });
             }
             return React.createElement("h1", null, "Null");
@@ -87,7 +97,11 @@ var ClientBlog = /** @class */ (function (_super) {
         _this.options = function () {
             if (_this.props.resListCategory.list) {
                 return _this.props.resListCategory.list.map(function (item) {
-                    return { value: item.category_id, label: item.category_name, alias: item.category_alias };
+                    return {
+                        value: item.category_id,
+                        label: item.category_name,
+                        alias: item.category_alias
+                    };
                 });
             }
             return [];
@@ -109,7 +123,9 @@ var ClientBlog = /** @class */ (function (_super) {
                             React.createElement("div", { className: "col-sm-6" },
                                 React.createElement("h1", { className: "white", style: { marginBottom: 64 } },
                                     React.createElement("b", null, "FROM A HISTORY-MAKING STANLEY CUP FINALS TO BUILDING A PERSONAL AI")),
-                                React.createElement("p", { className: "white" }, "Where has Tony been recently \u2013 and what in the world is he up to? Below is the latest edition of the Tony Tracker, where you can see highlights from his journeys and read his narration of some of his favorite experiences. Watching history being made at the Stanley Cup Finals TONIGHT\u2019S GAME IS ONE")))))),
+                                React.createElement("p", { className: "white" }, "Where has Tony been recently \u2013 and what in the world is he up to? Below is the latest edition of the Tony Tracker, where you can see highlights from his journeys and read his narration of some of his favorite experiences. Watching history being made at the Stanley Cup Finals TONIGHT\u2019S GAME IS ONE"))))),
+                React.createElement("div", { className: "row" },
+                    React.createElement(CLientFooterBanner, null))),
             React.createElement("div", { className: "container" },
                 React.createElement("div", { className: "row intro-our-blog" },
                     React.createElement("div", { className: "col-xs-12  paddingY-64 text-center" },
@@ -131,14 +147,20 @@ var ClientBlog = /** @class */ (function (_super) {
                                 } },
                                 React.createElement(Select, { className: "custom-select-category", closeMenuOnSelect: false, components: makeAnimated(), onChange: function (item) {
                                         if (item.value !== 0) {
-                                            window.location.href = BASEURL + 'page/blog/danh-muc/' + item.value + '-' + item.alias;
+                                            window.location.href =
+                                                BASEURL +
+                                                    "page/blog/danh-muc/" +
+                                                    item.value +
+                                                    "-" +
+                                                    item.alias;
                                         }
                                         else {
-                                            window.location.href = BASEURL + 'page/blog';
+                                            window.location.href = BASEURL + "page/blog";
                                         }
                                     }, options: __spread(this.options(), [
                                         {
-                                            value: 0, label: 'Tất cả'
+                                            value: 0,
+                                            label: "Tất cả"
                                         }
                                     ]) })),
                             React.createElement("div", { className: "col-sm-4" })))),

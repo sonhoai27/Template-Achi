@@ -92,7 +92,6 @@ var VideoDetail = /** @class */ (function (_super) {
                     React.createElement("div", { className: "panel-toolbar" },
                         React.createElement("div", { className: "panel-heading" }, "Th\u00EAm video"),
                         React.createElement("div", { className: "panel-action-bar" },
-                            React.createElement("div", { className: "btn btn-xs btn-danger" }, "X\u00F3a"),
                             React.createElement("div", { className: "btn btn-xs btn-info", onClick: this.updateVideo }, "L\u01B0u"))),
                     React.createElement("div", { className: "content" },
                         React.createElement("div", { className: "row" },

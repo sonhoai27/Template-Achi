@@ -26,6 +26,7 @@ import Loading from "../admin/shared/loading";
 import ClientVideo from "./video/ClientVideo";
 import ClientGift from "./gift";
 import ClientAboutPage from "./About";
+import ScheEvents from "./ScheEvents";
 var ClientRouter = /** @class */ (function (_super) {
     __extends(ClientRouter, _super);
     function ClientRouter(props) {
@@ -50,6 +51,7 @@ var ClientRouter = /** @class */ (function (_super) {
                 React.createElement(Route, { path: this.props.match.url + "/video", component: ClientVideo }),
                 React.createElement(Route, { path: this.props.match.url + "/qua-tang", component: ClientGift }),
                 React.createElement(Route, { path: this.props.match.url + "/gioi-thieu", component: ClientAboutPage }),
+                React.createElement(Route, { path: this.props.match.url + "/lich-su-kien", component: ScheEvents }),
                 React.createElement("div", { className: "jq-toast-wrap top-right" },
                     this.props.isSuccess ? React.createElement(NotifySuccess, null) : "",
                     this.props.isDanger ? React.createElement(NotifyDanger, null) : ""),

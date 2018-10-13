@@ -13,9 +13,12 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import * as React from "react";
 import { connect } from "react-redux";
+import axios from "axios";
+import AutofitImage from "../../shared/CropImage";
 import { reDetailBlog, reClientListBlogCategory } from "../../admin/blog/reBlog";
 import Helmet from "react-helmet";
-import { BASEURL } from "../../../config/const";
+import { BASEURL, API } from "../../../config/const";
+import CLientFooterBanner from "../home/ClientFooterBanner";
 var ClientDetailBlog = /** @class */ (function (_super) {
     __extends(ClientDetailBlog, _super);
     function ClientDetailBlog(props) {
@@ -24,10 +27,9 @@ var ClientDetailBlog = /** @class */ (function (_super) {
             if (_this.props.resClientListBlogCategory.list) {
                 return _this.props.resClientListBlogCategory.list.map(function (element) {
                     return (React.createElement("div", { className: "col-sm-3" },
-                        React.createElement("a", { href: BASEURL + 'page/blog/detail/' + element.blog_id },
-                            React.createElement("img", { src: element.blog_cover, alt: "", className: "img-responsive" }),
-                            React.createElement("h3", null, element.blog_title)),
-                        React.createElement("p", null, element.blog_promo)));
+                        React.createElement("a", { href: BASEURL + "page/blog/detail/" + element.blog_id },
+                            React.createElement(AutofitImage, { clasName: "img-responsive", frameWidth: "100%", frameHeight: "200px", imgSrc: element.blog_cover }),
+                            React.createElement("h4", null, element.blog_title))));
                 });
             }
             return React.createElement("h1", null, "NULL");
@@ -48,6 +50,7 @@ var ClientDetailBlog = /** @class */ (function (_super) {
     ClientDetailBlog.prototype.componentDidMount = function () {
         window.scrollTo(0, 0);
         this.props.reDetailBlog(this.props.match.params.idBlog);
+        axios.put(API + "blog/views/" + this.props.match.params.idBlog);
     };
     ClientDetailBlog.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
@@ -62,19 +65,8 @@ var ClientDetailBlog = /** @class */ (function (_super) {
                         backgroundRepeat: "no-repeat",
                         backgroundSize: "cover"
                     } }),
-                React.createElement("div", { className: "row", style: {
-                        background: "#f5f5f5 none repeat scroll 0 0",
-                        fontSize: "25px",
-                        padding: "38px 0 37px",
-                        textAlign: "center"
-                    } },
-                    React.createElement("div", { className: "container-fluid", style: {
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-between"
-                        } },
-                        React.createElement("p", null, "Ready to take the initiative & join our newsletter?"),
-                        React.createElement("a", { href: "#", className: "btn btn-info newsletter" }, "Sign Up Now"))),
+                React.createElement("div", { className: "row" },
+                    React.createElement(CLientFooterBanner, null)),
                 React.createElement("div", { className: "row page-detail-blog_content paddingY-128" },
                     React.createElement("div", { className: "container" },
                         React.createElement("div", { className: "row" },
@@ -84,8 +76,11 @@ var ClientDetailBlog = /** @class */ (function (_super) {
                                         __html: this.state.blog.blog_promo
                                     } }),
                                 React.createElement("span", { className: "article-author" },
-                                    "Posted by ",
-                                    React.createElement("b", null, this.state.blog.author_name))),
+                                    "\u0110\u0103ng b\u1EDFi: ",
+                                    React.createElement("b", null, this.state.blog.author_name),
+                                    React.createElement("br", null),
+                                    "L\u01B0\u1EE3t xem: ",
+                                    React.createElement("b", null, this.state.blog.blog_views))),
                             React.createElement("div", { className: "col-xs-12 page-detail-blog_content_body", dangerouslySetInnerHTML: {
                                     __html: this.state.blog.blog_content
                                 } })))),

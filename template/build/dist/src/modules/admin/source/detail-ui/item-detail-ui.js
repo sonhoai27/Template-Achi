@@ -68,11 +68,10 @@ var ItemDetailUISource = /** @class */ (function (_super) {
                                     _this.props.reSetContentElement(__assign({}, _this.props.detailUI, { idSource: _this.props.match.params.idSource }));
                                 }, className: "btn btn-xs btn-primary" },
                                 React.createElement("i", { className: " icon-doc" }),
-                                " S\u1EEDa"),
-                            React.createElement("p", null, "Nh\u1EA5n v\u00E0o \"s\u1EEDa\" \u0111\u1EC3 th\u00EAm ho\u1EB7c s\u1EEDa."))),
+                                " S\u1EEDa"))),
                     React.createElement("div", { className: "form-group" },
                         React.createElement("label", { className: "col-md-12" },
-                            React.createElement("span", { className: "help" }, " Class c\u1EE7a \u0111\u1ED1i t\u01B0\u1EE3ng"),
+                            React.createElement("span", { className: "help" }, " Class"),
                             React.createElement("div", { onClick: function () { return _this.saveContentElement({
                                     idVirtualElement: _this.props.detailUI.detail_ui_random_id + '-class',
                                     content_element_id: _this.props.detailUI.content_element_id,
@@ -86,7 +85,7 @@ var ItemDetailUISource = /** @class */ (function (_super) {
                 React.createElement("div", { className: "noi-dung" },
                     React.createElement("div", { className: "form-group" },
                         React.createElement("label", { className: "col-md-12" },
-                            React.createElement("span", { className: "help" }, " Attribute c\u1EE7a \u0111\u1ED1i t\u01B0\u1EE3ng"),
+                            React.createElement("span", { className: "help" }, " Attribute"),
                             React.createElement("div", { onClick: function () { return _this.saveContentElement({
                                     idVirtualElement: _this.props.detailUI.detail_ui_random_id + '-attr',
                                     content_element_id: _this.props.detailUI.content_element_id,
@@ -99,7 +98,7 @@ var ItemDetailUISource = /** @class */ (function (_super) {
                             React.createElement("input", { className: "form-control", type: "text", name: "content_element_attribute", defaultValue: _this.state.content_element_attribute, id: _this.props.detailUI.detail_ui_random_id + '-attr' }))),
                     React.createElement("div", { className: "form-group" },
                         React.createElement("label", { className: "col-md-12" },
-                            React.createElement("span", { className: "help" }, " Content Attribute c\u1EE7a \u0111\u1ED1i t\u01B0\u1EE3ng"),
+                            React.createElement("span", { className: "help" }, " Content Attribute"),
                             React.createElement("div", { onClick: function () { return _this.saveContentElement({
                                     idVirtualElement: _this.props.detailUI.detail_ui_random_id + '-content-attr',
                                     content_element_id: _this.props.detailUI.content_element_id,

@@ -11,8 +11,22 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 import * as React from "react";
 import { Storage } from "../../utils/storage-util";
+import { connect } from "react-redux";
+import { reIsDanger, reIsSuccess } from "../../reducers/init";
+import { reAddContact } from "../admin/source/reSource";
 var CryptoJS = require("crypto-js");
 var ModalContact = /** @class */ (function (_super) {
     __extends(ModalContact, _super);
@@ -26,7 +40,19 @@ var ModalContact = /** @class */ (function (_super) {
                 _a));
         };
         _this.submit = function () {
-            Storage.local.set('user_info', CryptoJS.AES.encrypt(JSON.stringify(_this.state), 'NGUYENMINHCHI@1234567890987654321!@#$%^&*()').toString());
+            var _a;
+            var _b = _this.state, email_email = _b.email_email, email_name = _b.email_name, email_phone = _b.email_phone;
+            if (email_email !== "" && email_phone !== "" && email_name !== "") {
+                var enc = CryptoJS.AES.encrypt(JSON.stringify(_this.state), 'NGUYENMINHCHI@1234567890987654321!@#$%^&*()').toString();
+                _this.props.reAddContact(_this.state);
+                Storage.local.set('user_info', __assign({}, Storage.local.get('user_info'), (_a = {}, _a[_this.props.code] = enc, _a)));
+            }
+            else {
+                _this.props.reIsDanger(true);
+                setTimeout(function () {
+                    _this.props.reIsDanger(false);
+                }, 1000);
+            }
         };
         _this.state = {
             email_email: '',
@@ -36,13 +62,36 @@ var ModalContact = /** @class */ (function (_super) {
         };
         return _this;
     }
+    ModalContact.prototype.componentDidMount = function () {
+        this.setState({
+            email_name_click: this.props.name
+        });
+    };
+    ModalContact.prototype.componentDidUpdate = function (preProps) {
+        var _this = this;
+        if (preProps.resAddContact != this.props.resAddContact) {
+            if (this.props.resAddContact.status === 200) {
+                this.props.reIsSuccess(true);
+                setTimeout(function () {
+                    _this.props.reIsSuccess(false);
+                    _this.props.showHide();
+                }, 2000);
+            }
+            else {
+                this.props.reIsDanger(true);
+                setTimeout(function () {
+                    _this.props.reIsDanger(false);
+                }, 2000);
+            }
+        }
+    };
     ModalContact.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
             React.createElement("div", { style: { display: "block" }, className: "modal fade in order-ebook", role: "dialog", "aria-hidden": "true" },
                 React.createElement("div", { className: "modal-dialog modal-sm" },
                     React.createElement("div", { className: "modal-content" },
                         React.createElement("div", { className: "modal-header" },
-                            React.createElement("h4", null, "Nh\u1EADp th\u00F4ng tin tr\u01B0\u1EDBc khi xem")),
+                            React.createElement("h4", null, "Th\u00F4ng tin \u0111\u0103ng k\u00FD")),
                         React.createElement("div", { className: "modal-body" },
                             React.createElement("div", { className: "form-group" },
                                 React.createElement("label", { className: "control-label" }, "H\u1ECD v\u00E0 t\u00EAn"),
@@ -54,13 +103,21 @@ var ModalContact = /** @class */ (function (_super) {
                                 React.createElement("label", { className: "control-label" }, "Email"),
                                 React.createElement("input", { onChange: this.onchange, type: "email", className: "form-control", name: "email_email", placeholder: 'Thư điện tử' }))),
                         React.createElement("div", { className: "modal-footer" },
-                            React.createElement("button", { onClick: this.submit, type: "button", className: "btn btn-danger waves-effect waves-light" }, "L\u01B0u"))))),
+                            React.createElement("button", { onClick: this.submit, type: "button", className: "btn btn-danger waves-effect waves-light" }, "\u0110\u0103ng k\u00FD"))))),
             React.createElement("div", { className: "modal-backdrop fade in", style: {
-                    opacity: 1,
-                    backgroundColor: '#1F9080'
+                    background: '#009688',
+                    opacity: 1
                 } })));
     };
     return ModalContact;
 }(React.Component));
-export default ModalContact;
+var mapStateToProps = function (storeState) { return ({
+    resAddContact: storeState.reSource.resAddContact
+}); };
+var mapDispatchToProps = {
+    reIsDanger: reIsDanger,
+    reIsSuccess: reIsSuccess,
+    reAddContact: reAddContact
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ModalContact);
 //# sourceMappingURL=Contact.js.map

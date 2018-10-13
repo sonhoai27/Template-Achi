@@ -11,7 +11,7 @@ class BreadCrumd extends React.Component<Props, {}> {
   renderListUri = () => {
     return this.props.uri.map(element => {
       return (
-            <li className={element.active ? 'active' : ''}>
+            <li key={element.title} className={element.active ? 'active' : ''}>
                 {element.active ? element.title : <a href={element.uri}>{element.title}</a>}
             </li>
       )
