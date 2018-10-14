@@ -19,7 +19,9 @@ export const ACTION_TYPES = {
     API_STATUS: 'ReBlog/API_STATUS',
     
     API_CLIENT_LIST_BLOG: 'ReBlog/API_CLIENT_LIST_BLOG',
-    API_CLIENT_LIST_BLOG_CATEGORY: 'ReBlog/API_CLIENT_LIST_BLOG_CATEGORY'
+    API_CLIENT_LIST_BLOG_CATEGORY: 'ReBlog/API_CLIENT_LIST_BLOG_CATEGORY',
+
+    API_DETAIL_BLOG_ALIAS: 'ReBlog/API_DETAIL_BLOG_ALIAS'
 }
 
 const initialState = {
@@ -39,7 +41,8 @@ const initialState = {
     resListStatus: [],
 
     resClientListBlog: [],
-    resClientListBlogCategory: {}
+    resClientListBlogCategory: {},
+    resDetailBlogAlias: {}
 }
 
 export default (state = initialState, action) => {
@@ -126,6 +129,24 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 resDetailBlog: action.payload.data
+            }
+        }
+
+         // detail blog 
+         case REQUEST(ACTION_TYPES.API_DETAIL_BLOG_ALIAS): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_DETAIL_BLOG_ALIAS): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_DETAIL_BLOG_ALIAS): {
+            return {
+                ...state,
+                resDetailBlogAlias: action.payload.data
             }
         }
          // update blog 
@@ -446,6 +467,15 @@ export const reUpdateCategory = (form: any, id: number) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_UPDATE_CATEGORY,
         payload: axios.put(API_CATEGORY+"/"+id, form)
+    });
+    return result;
+};
+export const reDetailBlogAlias = (idBlog: string) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_DETAIL_BLOG_ALIAS,
+        payload: axios.post(API_BLOG+"/detail-alias", {
+            key: idBlog
+        })
     });
     return result;
 };

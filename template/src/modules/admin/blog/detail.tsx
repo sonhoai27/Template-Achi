@@ -3,6 +3,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { connect } from "react-redux";
 import { reShowPhotoApp, reSetCurrentEditorPhoto, reIsDanger, reIsSuccess } from "../../../reducers/init";
 import { reDetailBlog, reUpdateBlog, reListAuthor, reListCategory, reListStatus } from "./reBlog";
+import { alias } from './../../../utils/alias';
 
 interface Props {
   match?: any;
@@ -117,7 +118,8 @@ class BlogDetail extends React.Component<Props, State> {
     const temp: any = document.getElementById('img-cover-blog-preview')
    this.props.reUpdateBlog({
      ...this.state,
-     blog_cover: temp.src
+     blog_cover: temp.src,
+     blog_alias: alias(this.state.blog_title)
    }, this.props.match.params.idBlog)
   }
   render() {

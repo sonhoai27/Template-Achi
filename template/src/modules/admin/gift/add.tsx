@@ -5,6 +5,7 @@ import { IGiftModel } from "../../../models/gift";
 import { reSetCurrentEditorPhoto, reShowPhotoApp, reIsDanger, reIsSuccess } from "../../../reducers/init";
 import { reAddGift } from "./reGift";
 import { BASEURLADMIN } from "../../../config/const";
+import { alias } from './../../../utils/alias';
 interface IState {
   gift: IGiftModel
 }
@@ -27,7 +28,8 @@ class GiftAdd extends React.Component<IProps, IState> {
         gift_cover: '',
         gift_name: '',
         gift_promo: '',
-        gift_uri_file: ''
+        gift_uri_file: '',
+        gift_alias: ''
       }
     }
   }
@@ -45,7 +47,8 @@ class GiftAdd extends React.Component<IProps, IState> {
     delete tempGift.gift_id
     this.props.reAddGift({
       ...tempGift,
-      gift_cover: temDom.src
+      gift_cover: temDom.src,
+      gift_alias: alias(this.state.gift.gift_name)
     })
   }
   componentDidUpdate(preProps){

@@ -136,7 +136,7 @@ class ClientHeader extends React.Component<{}, IState> {
                   </ul>
                 </li>
                 <li className="menu-item">
-                  <a title="Sổ tay" href={BASEURL+'page/sach'}>
+                  <a title="Sổ tay" href={'http://sotay.songxungdang.com'}>
                     Sổ tay
                   </a>
                 </li>

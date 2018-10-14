@@ -12,7 +12,7 @@ interface Props {
   reIsDanger: (status: boolean) => void;
 }
 interface State {
-  source_sche_number: number;
+  source_sche_number: string;
   source_sche_price: number;
   source_sche_sale: number;
   source_sche_address: string;
@@ -25,7 +25,7 @@ class AddSche extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
-      source_sche_number: 0,
+      source_sche_number: "",
       source_sche_price: 0,
       source_sche_sale: 0,
       source_sche_address: "",
@@ -113,12 +113,32 @@ class AddSche extends React.Component<Props, State> {
                       <span className="help"> Số lượng</span>
                     </label>
                     <div className="col-md-12">
-                      <input
+                      {/* <input
                         onChange={this.onChange}
                         type="number"
                         name="source_sche_number"
                         className="form-control"
                         placeholder="Số lượng"
+                      /> */}
+                      <Editor
+                        onChange={(e: any) => {
+                          this.setState({
+                            ...this.state,
+                            source_sche_number: e.level.content
+                          });
+                        }}
+                        apiKey="t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl"
+                        init={{
+                          selector: "textarea",
+                          height: 100,
+                          theme: "modern",
+                          plugins:
+                            "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
+                          toolbar1:
+                            "fontsizeselect formatselect | bold italic strikethrough forecolor backcolor | link blockquote | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat",
+                          fontsize_formats:
+                            "10pt 11pt 12pt 14pt 16pt 18pt 20pt 24pt 26pt 28pt 36pt 48pt 72pt"
+                        }}
                       />
                     </div>
                   </div>

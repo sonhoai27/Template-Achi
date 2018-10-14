@@ -10,6 +10,7 @@ define("BASE_URL", 'http://localhost:8080/Achi/template/public/');
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="icon" type="image/ico" sizes="16x16" href="http://nguyenminhchi.com/api/uploads/images/091eeb269d8793879cec1539450000000.png">
         <link href="<?=BASE_URL?>css/bootstrap.css" rel="stylesheet">
         <link href="<?=BASE_URL?>css/sidebar-nav.min.css" rel="stylesheet">
         <link href="<?=BASE_URL?>css/animate.css" rel="stylesheet">

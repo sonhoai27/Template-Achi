@@ -14,7 +14,7 @@ class ClientBanner extends React.Component {
             muted
           >
             <source
-              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148422/Vienna-SD.mp4"
+              src="http://nguyenminhchi.com/api/uploads/images/2baaedd86093850aaa201539450000000.MP4"
               type="video/mp4"
             />
           </video>

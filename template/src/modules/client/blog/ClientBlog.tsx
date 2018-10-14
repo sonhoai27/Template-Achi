@@ -76,7 +76,7 @@ class ClientBlog extends React.Component<IProps, {}> {
                 <Link
                   style={{ backgroundImage: "url(" + element.blog_cover + ")" }}
                   className="post-item-image"
-                  to={BASEURL + "page/blog" + "/detail/" + element.blog_id}
+                  to={BASEURL + "page/blog" + "/detail/" + element.blog_alias}
                 >
                   <div className="post-item-container color3">
                     <img
@@ -93,14 +93,14 @@ class ClientBlog extends React.Component<IProps, {}> {
                   />
                   <h4 className="post-title">
                     <Link
-                      to={BASEURL + "page/blog" + "/detail/" + element.blog_id}
+                      to={BASEURL + "page/blog" + "/detail/" + element.blog_alias}
                     >
                       {element.blog_title}
                     </Link>
                   </h4>
 
                   <Link
-                    to={BASEURL + "page/blog" + "/detail/" + element.blog_id}
+                    to={BASEURL + "page/blog" + "/detail/" + element.blog_alias}
                     className="link-more link-more-grey"
                   >
                     Xem thêm
@@ -134,19 +134,13 @@ class ClientBlog extends React.Component<IProps, {}> {
             <div className="container">
               <div className="row">
                 <div className="col-sm-6">
-                  <h1 className="white" style={{ marginBottom: 64 }}>
+                  <h1 className="white">
                     <b>
-                      FROM A HISTORY-MAKING STANLEY CUP FINALS TO BUILDING A
-                      PERSONAL AI
+                      NGUYENMINHCHI.COM
                     </b>
                   </h1>
                   <p className="white">
-                    Where has Tony been recently – and what in the world is he
-                    up to? Below is the latest edition of the Tony Tracker,
-                    where you can see highlights from his journeys and read his
-                    narration of some of his favorite experiences. Watching
-                    history being made at the Stanley Cup Finals TONIGHT’S GAME
-                    IS ONE
+                  Đọc các bài viết hay cho một tuổi trẻ sống xứng đáng.
                   </p>
                 </div>
               </div>
@@ -171,19 +165,6 @@ class ClientBlog extends React.Component<IProps, {}> {
               >
                 <b>Nguyễn Minh Chí - Blog</b>
               </h2>
-              <p>
-                What is an extraordinary life? What does that look like to you?
-                Starting a business and growing it to a billion-dollar company?
-                Improving the quality of your relationships? Feeling strong and
-                healthy? Ultimately, an extraordinary life = life on your terms.
-                The Tony Robbins' blog is a collection of the teachings of Tony
-                Robbins, the powerful strategies and tools he has employed over
-                40 years of helping others achieve their vision of an
-                extraordinary quality of life. Discover how to achieve massive
-                success and long-lasting fulfillment, too. Start today with the
-                articles, videos and other resources we’ve made available here
-                to help you on your journey to the life you desire and deserve.
-              </p>
             </div>
           </div>
           <div className="row">
@@ -197,6 +178,7 @@ class ClientBlog extends React.Component<IProps, {}> {
                   }}
                 >
                   <Select
+                    placeholder={'Chọn chủ đề'}
                     className="custom-select-category"
                     closeMenuOnSelect={false}
                     components={makeAnimated()}

@@ -12,6 +12,7 @@ class MainSche extends React.Component<IProps, {}> {
     super(props);
   }
   componentDidMount(){
+    console.log(this.props.currentMatch.params.idSource)
     const url = this.props.currentMatch.params.idSource
     const tempArr = url.split('-')
     const idSource = tempArr[tempArr.length - 1]
@@ -29,7 +30,7 @@ class MainSche extends React.Component<IProps, {}> {
         return (
           <ul data-id="row_74">
               <li data-label="Tên chương trình">
-                <ul className="child">
+                <ul className="child" style={{padding: 0}}>
                   <li className="orange">
                     <b id="name_74">{element.source_title} - {element.source_sche_khoa}</b>
                   </li>
@@ -62,19 +63,23 @@ class MainSche extends React.Component<IProps, {}> {
                 </p>
               </li>
               <li className="text-center" data-label="Đăng ký">
-                <p className="red" style={{ lineHeight: "1.8" }}>
-                  Chỉ còn 2 ưu đãi
-                </p>
+                <p className="red" style={{ lineHeight: "1.8" }} dangerouslySetInnerHTML={{__html: element.source_sche_number}}/>
                 <p
-                  className="bold-text uppercase button button-danger"
-                  style={{ display: "inline-block" }}
+                  className="bold-text uppercase btn btn-sm" style={{
+                    color: '#fff',
+                    background: '#1f9080',
+                    textTransform: 'uppercase',
+                    display: "inline-block",
+                    padding: '12px 16px'
+                  }}
                 >
-                  <i className="spin fa fa-spinner checkout" />
+                  <i className="spin fa fa-spinner" style={{marginRight: 8}}/>
                   <a
+                    style={{color: '#fff', fontSize: '16px', fontWeight: 600}}
                     href="http://maxpowervn.com/page/dang-ky/MP1/74"
                     target="_blank"
                   >
-                    Đăng Ký Gấp
+                    Đăng Ký Ngay
                   </a>
                 </p>
               </li>

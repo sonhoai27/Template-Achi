@@ -90,7 +90,8 @@ class ClientListTopSen extends React.Component {
         <div className="row">
           <div className="col-sm-4">
             <img
-              src={RESOURCE+'images/home/16-so-tay.png'}
+              width="70%"
+              src={'http://nguyenminhchi.com/api/uploads/images/ea00646c35438c5c44911539450000000.png'}
               alt=""
               className="img-responsive"
             />

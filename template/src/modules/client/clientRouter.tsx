@@ -14,6 +14,7 @@ import ClientVideo from "./video/ClientVideo";
 import ClientGift from "./gift";
 import ClientAboutPage from "./About";
 import ScheEvents from "./ScheEvents";
+import SuggestGift from './../shared/components/suggestGift';
 interface Props {
   match?: any;
   isDanger: boolean;
@@ -35,7 +36,7 @@ class ClientRouter extends React.Component<Props, {}> {
       <>
         <div className="margin-top">
           <Helmet>
-            <link rel="stylesheet" href={RESOURCE + "css/client.css"} />
+            <link rel="stylesheet" href={'http://nguyenminhchi.com/template/public/' + "css/client.css"} />
             <link
               rel="stylesheet"
               href={RESOURCE + "css/mobile.css"}
@@ -70,6 +71,10 @@ class ClientRouter extends React.Component<Props, {}> {
           <Route
             path={`${this.props.match.url}/lich-su-kien`}
             component={ScheEvents}
+          />
+          <Route
+            path={`${this.props.match.url}/nhan-qua/:idGift`}
+            component={SuggestGift}
           />
           <div className="jq-toast-wrap top-right">
             {this.props.isSuccess ? <NotifySuccess /> : ""}

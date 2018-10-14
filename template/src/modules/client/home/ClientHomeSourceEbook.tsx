@@ -72,7 +72,7 @@ class ClientHomeSource extends React.Component {
           <div className="row list-courses__item" style={{ marginBottom: 32 }}>
             <div className="col-sm-4 wow bounceInLeft" data-wow-duration="1s">
               <img
-                src={RESOURCE + "images/home/11-nguoi-chia-se.png"}
+                src={"http://nguyenminhchi.com/api/uploads/images/d9b57c429e1b096e1c7b1539450000000.png"}
                 className="img-responsive"
               />
             </div>
@@ -151,7 +151,7 @@ class ClientHomeSource extends React.Component {
           <div className="row list-courses__item" style={{ marginBottom: 32 }}>
             <div className="col-sm-4 wow bounceInLeft" data-wow-duration="1s">
               <img
-                src={RESOURCE + "images/home/13-G2B.png"}
+                src={"http://nguyenminhchi.com/api/uploads/images/da5ae6f12368b5ec6aed1539450000000.png"}
                 className="img-responsive"
               />
             </div>
@@ -303,7 +303,8 @@ class ClientHomeSource extends React.Component {
           <div className="row item" style={{ marginBottom: 32 }}>
             <div className="col-sm-4 wow bounceInLeft" data-wow-duration="1s">
               <img
-                src={RESOURCE + "images/home/8-so-tay.png"}
+                width="70%"
+                src={"http://nguyenminhchi.com/api/uploads/images/ea00646c35438c5c44911539450000000.png"}
                 className="img-responsive"
               />
             </div>

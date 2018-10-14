@@ -391,3 +391,16 @@ body {
   .insert-image i {
       font-size: 24px;
   }
+
+  .analytics-info .counter.num{
+    font-size: 64px!important;
+  }
+  .analytics-info i.num {
+    font-size: 64px!important;
+  }
+  .fix-header #page-wrapper {
+      margin-top: 0px!important;
+  }
+  .sidebar {
+      top: 0;
+  }

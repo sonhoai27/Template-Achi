@@ -29,7 +29,7 @@ class ClientHomeBlog extends React.Component<{}, IState> {
     if(this.state.blogs.list){
       return this.state.blogs.list.map(element => {
         return (
-          <div className="item col-sm-4">
+          <div className="item col-sm-4" key={element.blog_title}>
               <div className="social-callout">
                 <AutofitImage frameWidth="100%" frameHeight="200px" imgSrc={element.blog_cover}/>
                 <h4 style={{marginTop: 32, fontWeight: 600}}>

@@ -102,8 +102,9 @@ class ClientVideo extends React.Component<IProps, IState> {
   itemVideo = (element: any)=> {
     return (
       <div className="col-sm-4 margin-b-32">
-        <div className="item">
-          <a onClick={()=>this.onPlay(element)} style={{width: '100%'}}>
+        <div className="item"  onClick={()=>this.onPlay(element)}>
+          <i className="fa fa-play-circle"></i>
+          <a style={{width: '100%'}}>
             <AutofitImage clasName="img-responsive" frameWidth="100%" frameHeight="200px" imgSrc={element.video_cover}/>
             <p
               style={{
@@ -125,23 +126,19 @@ class ClientVideo extends React.Component<IProps, IState> {
       <>
         <ClientHeader />
         <div className="col-xs-12 page-source">
-          <div className="row page-source_banner">
+          <div className="row page-source_banner" style={{
+            backgroundImage: 'url(http://nguyenminhchi.com/api/uploads/images/b023858c12110d79c0311539450000000.jpg)'
+          }}>
             <div className="container">
               <div className="row">
                 <div className="col-sm-6">
-                  <h1 className="white" style={{ marginBottom: 64 }}>
+                  <h1 className="white">
                     <b>
-                      FROM A HISTORY-MAKING STANLEY CUP FINALS TO BUILDING A
-                      PERSONAL AI
+                      VIDEO BÀI HỌC CHIA SẺ
                     </b>
                   </h1>
                   <p className="white">
-                    Where has Tony been recently – and what in the world is he
-                    up to? Below is the latest edition of the Tony Tracker,
-                    where you can see highlights from his journeys and read his
-                    narration of some of his favorite experiences. Watching
-                    history being made at the Stanley Cup Finals TONIGHT’S GAME
-                    IS ONE
+                    Đón xem video bài học chia sẻ tâm đắc từ Mr.Share
                   </p>
                 </div>
               </div>

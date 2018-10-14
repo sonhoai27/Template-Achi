@@ -1,8 +1,45 @@
 import * as React from "react";
-
-class Footer extends React.Component {
+import axios from 'axios'
+import { BASEURL, API } from './../../../config/const';
+interface IState {
+  blogs: any;
+}
+class Footer extends React.Component<{}, IState> {
   constructor(props) {
     super(props);
+    this.state = {
+      blogs: {}
+    }
+  }
+  componentDidMount(){
+    axios.get(API+'blog/all/home')
+    .then(result => {
+      console.log(result.data)
+      this.setState({
+        blogs: result.data
+      })
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+  renderListBlogs = ()=> {
+    if(this.state.blogs.list){
+      return this.state.blogs.list.map((element, index) => {
+        if(index < 4){
+          return (
+            <div key={element.blog_id}>
+            <h5 style={{marginTop: 16, fontWeight:300, lineHeight: 1.4}}>
+              <a className="white" title={element.blog_title} href={BASEURL+'page/blog/detail/'+element.blog_id}>{element.blog_title}</a>
+            </h5>
+            <hr/>
+            </div>
+          )
+        }
+        return ''
+      })
+    }
+    return ''
   }
   render() {
     return (
@@ -14,16 +51,16 @@ class Footer extends React.Component {
               <div className="col-sm-6 list-footer-menu">
                 <ul>
                   <li>
-                    <a href="">Giới thiệu</a>
+                    <a href={BASEURL+'page/gioi-thieu'}>Giới thiệu</a>
                   </li>
                   <li>
-                    <a href="">Khóa học</a>
+                    <a href={BASEURL+'page/khoa-hoc'}>Khóa học</a>
                   </li>
                   <li>
-                    <a href="">Blog</a>
+                    <a href={BASEURL+'page/blog'}>Blog</a>
                   </li>
                   <li>
-                    <a href="">Sổ tay</a>
+                    <a href={'http://sotay.songxungdang.com'}>Sổ tay</a>
                   </li>
                 </ul>
               </div>
@@ -34,27 +71,27 @@ class Footer extends React.Component {
                 <h3>Điều quan trọng</h3>
                 <ul>
                   <li>
-                    <a href="">
+                    <a href={BASEURL+'page/blog'}>
                       <i className="fa fa-chevron-right" /> Đọc Blog
                     </a>
                   </li>
                   <li>
-                    <a href="">
+                    <a href={BASEURL+'page/video'}>
                       <i className="fa fa-chevron-right" /> Video
                     </a>
                   </li>
                   <li>
-                    <a href="">
+                    <a href={BASEURL+'page/qua-tang'}>
                       <i className="fa fa-chevron-right" /> Quà Tặng
                     </a>
                   </li>
                   <li>
-                    <a href="">
+                    <a href={'http://sotay.songxungdang.com'}>
                       <i className="fa fa-chevron-right" /> Sổ Tay
                     </a>
                   </li>
                   <li>
-                    <a href="">
+                    <a href={BASEURL+'page/khoa-hoc'}>
                       <i className="fa fa-chevron-right" /> Các Khóa Học Đầy Tự Hào
                     </a>
                   </li>
@@ -62,6 +99,7 @@ class Footer extends React.Component {
               </div>
               <div className="col-sm-3">
                 <h3>Bài viết hay</h3>
+                {this.renderListBlogs()}
               </div>
               <div className="col-sm-3">
                 <h3>kết nối với Mr.Share</h3>
@@ -114,8 +152,8 @@ class Footer extends React.Component {
                   justifyContent: "space-between"
                 }}
               >
-                <p>@ 2018 - NMC</p>
-                <p>made with love at sonH</p>
+                <p>@ 2018 | Nguyễn Minh Chí - Mr.Share</p>
+                <p>❤ sonH</p>
               </div>
             </div>
           </div>

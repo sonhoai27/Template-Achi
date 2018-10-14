@@ -46,7 +46,7 @@ class ScheEvents extends React.Component<IProps, {}> {
                 >
                   {element.source_is_page == 1 ? (
                     <a target={"blank"} href={element.source_page_url}>
-                      Xem
+                      Xem thêm
                     </a>
                   ) : (
                     <Link
@@ -60,7 +60,7 @@ class ScheEvents extends React.Component<IProps, {}> {
                         element.source_id
                       }
                     >
-                      Xem
+                      Xem thêm
                     </Link>
                   )}
                 </div>
@@ -82,19 +82,13 @@ class ScheEvents extends React.Component<IProps, {}> {
             <div className="container">
               <div className="row">
                 <div className="col-sm-6">
-                  <h2 className="white" style={{ marginBottom: 64 }}>
+                  <h2 className="white">
                     <b>
-                      FROM A HISTORY-MAKING STANLEY CUP FINALS TO BUILDING A
-                      PERSONAL AI
+                    LỊCH SỰ KIỆN CÁC KHÓA HỌC
                     </b>
                   </h2>
                   <p className="white">
-                    Where has Tony been recently – and what in the world is he
-                    up to? Below is the latest edition of the Tony Tracker,
-                    where you can see highlights from his journeys and read his
-                    narration of some of his favorite experiences. Watching
-                    history being made at the Stanley Cup Finals TONIGHT’S GAME
-                    IS ONE
+                  Xem lịch sự kiện các khóa học đầy tự hào của Mr.Share
                   </p>
                 </div>
               </div>

@@ -7,8 +7,8 @@ import ItemPage from '../../DynamicPage/source/item'
 import MainSche from './../../DynamicPage/sche/MainSche';
 import { reSetCurrentMatch } from "../../../reducers/init";
 const listCom = {
-    tks: <MainSche />,
-    tks2: <MainSche />,
+    TKB: <MainSche />,
+    TKB2: <MainSche />,
   };
 interface IProps {
     match: any;

@@ -10,11 +10,7 @@ class ClientIntroNMC extends React.Component {
             <div className="col-sm-6">
               <div className="modal-body">
                 <div className="video-container">
-                  <iframe
-                    height="315"
-                    src="https://www.youtube.com/embed/t4YungZAajc"
-                    width="560"
-                  />
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/IhZL4bQIo7Y" />
                 </div>
               </div>
             </div>

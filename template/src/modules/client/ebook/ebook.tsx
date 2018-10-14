@@ -8,11 +8,13 @@ import ItemPage from "../../DynamicPage/item";
 import EbookPreview from "./com/preview";
 import Customer from "./com/customer";
 import OptionEbook from "./com/optionEbook";
+import ListSocial from "../../shared/components/social";
 const IDPAGE = 5;
 const listCom = {
   EBOOKPREVIEW: <EbookPreview />,
   CUSTOMER: <Customer />,
-  ORDEREBOOK: <OptionEbook />
+  ORDEREBOOK: <OptionEbook />,
+  SOCIAL: <ListSocial/>
 };
 interface IProps {
   resListPageUI: any;

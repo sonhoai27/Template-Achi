@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { reSetCurrentEditorPhoto, reShowPhotoApp, reIsDanger, reIsSuccess } from "../../../reducers/init";
 import { IGiftModel } from "../../../models/gift";
 import { reDetailGift, reUpdateGift } from "./reGift";
+import { alias } from './../../../../build/dist/src/utils/alias';
 
 interface IProps {
   match: any;
@@ -31,7 +32,8 @@ class GiftDetail extends React.Component<IProps, IState> {
         gift_cover: '',
         gift_name: '',
         gift_promo: '',
-        gift_uri_file: ''
+        gift_uri_file: '',
+        gift_alias: ''
       }
     }
   }
@@ -44,7 +46,8 @@ class GiftDetail extends React.Component<IProps, IState> {
           gift_cover:  this.props.resDetailGift.list.gift_cover,
           gift_name:  this.props.resDetailGift.list.gift_name,
           gift_promo:  this.props.resDetailGift.list.gift_promo,
-          gift_uri_file:  this.props.resDetailGift.list.gift_uri_file
+          gift_uri_file:  this.props.resDetailGift.list.gift_uri_file,
+          gift_alias:  this.props.resDetailGift.list.gift_alias
         }
       })
     }
@@ -81,7 +84,8 @@ class GiftDetail extends React.Component<IProps, IState> {
     delete tempGift.gift_id
     this.props.reUpdateGift({
       ...tempGift,
-      gift_cover: temDom.src
+      gift_cover: temDom.src,
+      gift_alias: alias(this.state.gift.gift_name)
     }, this.props.match.params.idGift)
   }
   render() {

@@ -78,7 +78,7 @@ class ClientVideoSource extends React.Component<IProps, IState> {
                             window.scrollTo(10,500)
                         })
                     }}>
-                        {element.source_video_name}
+                        <i className="icon-social-youtube"></i> {element.source_video_name}
                     </li>
                 )
             })
@@ -144,10 +144,12 @@ class ClientVideoSource extends React.Component<IProps, IState> {
                         <div className="container">
                             <div className="row">
                                 <div className="col-xs-12">
-                                    <h2 style={{fontWeight: 700}}>Danh sách video</h2>
+                                   <div className="item">
+                                   <h2 className="white" style={{fontWeight: 700, marginLeft: 8}}><i className="fa fa-star"></i> Danh sách video</h2>
                                     <ul>
                                         {this.renderListVideo()}
                                     </ul>
+                                   </div>
                                 </div>
                             </div>
                         </div>

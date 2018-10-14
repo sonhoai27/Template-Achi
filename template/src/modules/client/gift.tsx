@@ -2,7 +2,6 @@ import * as React from "react";
 import { connect } from "react-redux";
 import ClientHeader from "./client-shared/Header";
 import Footer from "./client-shared/Footer";
-import { RESOURCE } from "../../config/const";
 interface IProps {}
 interface IState {
   email_name: string;
@@ -15,11 +14,11 @@ class ClientGift extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      email_email: '',
-      email_name: '',
-      email_name_click: '',
-      email_phone: ''
-  }
+      email_email: "",
+      email_name: "",
+      email_name_click: "",
+      email_phone: ""
+    };
   }
   onchange = e => {
     // @ts-ignore
@@ -36,25 +35,19 @@ class ClientGift extends React.Component<IProps, IState> {
             className="row page-source_banner"
             style={{
               backgroundImage:
-                "url(https://eraweb.co/attachment/banner/everyone-can-design-website.png)"
+                "url(http://nguyenminhchi.com/api/uploads/images/196050fbecd7a4d6f3801539450000000.jpg)"
             }}
           >
             <div className="container">
               <div className="row">
                 <div className="col-sm-6">
-                  <h2 className="white" style={{ marginBottom: 64 }}>
+                  <h1 className="white" >
                     <b>
-                      FROM A HISTORY-MAKING STANLEY CUP FINALS TO BUILDING A
-                      PERSONAL AI
+                    NGUYENMINHCHI.COM
                     </b>
-                  </h2>
+                  </h1>
                   <p className="white">
-                    Where has Tony been recently – and what in the world is he
-                    up to? Below is the latest edition of the Tony Tracker,
-                    where you can see highlights from his journeys and read his
-                    narration of some of his favorite experiences. Watching
-                    history being made at the Stanley Cup Finals TONIGHT’S GAME
-                    IS ONE
+                  Sở hữu quà tặng từ Mr.Share
                   </p>
                 </div>
               </div>
@@ -99,31 +92,6 @@ class ClientGift extends React.Component<IProps, IState> {
               <div className="col-sm-1" />
             </div>
           </div>
-          <div className="row">
-            <div className="footer-banner col-xs-12">
-              <div className="container">
-                <div className="row">
-                  <div className="col-sm-4 footer-banner-img">
-                    <img
-                      src={RESOURCE + "images/home/keys.jpg"}
-                      alt=""
-                      className="img-responsive"
-                    />
-                  </div>
-                  <div className="col-sm-8">
-                    <h2>
-                      Nhận miễn phí: 7 chìa khóa vàng để sống xứng đáng với
-                      những “tháng năm rực rỡ”.
-                    </h2>
-                    <h4>
-                      Hơn 3.000 nghìn người đã đăng ký nhận để sở hữu cuộc sống
-                      xứng đáng với tuổi trẻ của mình.
-                    </h4>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <div
             className="row paddingY-128 form-send-gift"
             style={{
@@ -136,6 +104,9 @@ class ClientGift extends React.Component<IProps, IState> {
                 <div className="col-sm-3" />
                 <div className="col-sm-6">
                   <div className="gift-body">
+                    <div className="col-xs-12 margin-b-32">
+                      <h2 className="text-center">Thông Tin Đăng Ký</h2>
+                    </div>
                     <div className="form-group">
                       <label className="control-label">Họ và tên</label>
                       <input
@@ -166,7 +137,9 @@ class ClientGift extends React.Component<IProps, IState> {
                         placeholder={"Thư điện tử"}
                       />
                     </div>
-                    <div className="text-center"><div className="btn">Nhận quà</div></div>
+                    <div className="text-center">
+                      <div className="btn">Nhận quà</div>
+                    </div>
                   </div>
                 </div>
                 <div className="col-sm-6" />

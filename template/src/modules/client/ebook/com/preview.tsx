@@ -1,14 +1,4 @@
 import * as React from "react";
-import { RESOURCE } from "../../../../config/const";
-// const images = [
-//   RESOURCE+'images/ebook/1.png',
-//   RESOURCE+'images/ebook/1.png',
-//   RESOURCE+'images/ebook/1.png',
-//   RESOURCE+'images/ebook/1.png',
-//   RESOURCE+'images/ebook/1.png',
-//   RESOURCE+'images/ebook/1.png',
-//   RESOURCE+'images/ebook/1.png'
-// ];
 declare var $: any;
 declare var Swiper: any;
 class EbookPreview extends React.Component {
@@ -64,63 +54,63 @@ class EbookPreview extends React.Component {
           <div className="swiper-wrapper">
             <div className="swiper-slide">
               <img
-                src={RESOURCE + "images/ebook/1.png"}
+                src={"http://nguyenminhchi.com/api/uploads/images/bdf60984143956f8f7951539450000000.png"}
                 alt=""
                 className="img-responsive"
               />
             </div>
             <div className="swiper-slide">
               <img
-                src={RESOURCE + "images/ebook/2.png"}
+                src={"http://nguyenminhchi.com/api/uploads/images/036dc3a90ff5501ef6191539450000000.png"}
                 alt=""
                 className="img-responsive"
               />
             </div>
             <div className="swiper-slide">
               <img
-                src={RESOURCE + "images/ebook/3.png"}
+                src={"http://nguyenminhchi.com/api/uploads/images/1534decea79b82bc2fe91539450000000.png"}
                 alt=""
                 className="img-responsive"
               />
             </div>
             <div className="swiper-slide">
               <img
-                src={RESOURCE + "images/ebook/4.png"}
+                src={"http://nguyenminhchi.com/api/uploads/images/4d22f6abba817c9028401539450000000.png"}
                 alt=""
                 className="img-responsive"
               />
             </div>
             <div className="swiper-slide">
               <img
-                src={RESOURCE + "images/ebook/5.png"}
+                src={"http://nguyenminhchi.com/api/uploads/images/a92f135863b01abdd79e1539450000000.png"}
                 alt=""
                 className="img-responsive"
               />
             </div>
             <div className="swiper-slide">
               <img
-                src={RESOURCE + "images/ebook/6.png"}
+                src={"http://nguyenminhchi.com/api/uploads/images/ba471b19a669e9a385ca1539450000000.png"}
                 alt=""
                 className="img-responsive"
               />
             </div>
             <div className="swiper-slide">
               <img
-                src={RESOURCE + "images/ebook/7.png"}
+                src={"http://nguyenminhchi.com/api/uploads/images/bd7d41f3c025f7be3e2d1539450000000.png"}
                 alt=""
                 className="img-responsive"
               />
             </div>
             <div className="swiper-slide">
               <img
-                src={RESOURCE + "images/ebook/8.png"}
+                src={"http://nguyenminhchi.com/api/uploads/images/c7023ee3a8a920df61c41539450000000.png"}
                 alt=""
                 className="img-responsive"
               />
             </div>
             <div className="swiper-slide">
               <img
-                src={RESOURCE + "images/ebook/9.png"}
+                src={"http://nguyenminhchi.com/api/uploads/images/fbf3e8d080f4413140111539450000000.png"}
                 alt=""
                 className="img-responsive"
               />

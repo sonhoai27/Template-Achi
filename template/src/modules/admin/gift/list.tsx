@@ -7,6 +7,7 @@ import Pagination from "../../shared/Pagination";
 import { IGiftModel } from "../../../models/gift";
 import { reIsSuccess, reIsDanger } from "../../../reducers/init";
 import ModalSendGift from "./modalSendGift";
+import ExportFileSendGift from "./send-gift/exportFile"
 interface IProps {
   resListGift: any;
   reListGift: (page: number) => void;
@@ -18,12 +19,14 @@ interface IProps {
 }
 interface IState {
   isShowingModalSendGift: boolean;
+  isShowingModalExport: boolean
 }
 class GiftList extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      isShowingModalSendGift: false
+      isShowingModalSendGift: false,
+      isShowingModalExport: false
     };
   }
   componentDidMount() {
@@ -53,6 +56,11 @@ class GiftList extends React.Component<IProps, IState> {
   hiddenModalSendGift = () => {
     this.setState({
       isShowingModalSendGift: !this.state.isShowingModalSendGift
+    });
+  };
+  hiddenModalExportFileGift = () => {
+    this.setState({
+      isShowingModalExport: !this.state.isShowingModalExport
     });
   };
   makeCurrentPage = () => {
@@ -119,7 +127,7 @@ class GiftList extends React.Component<IProps, IState> {
                     className="btn btn-xs btn-info"
                     onClick={() => {
                       this.setState({
-                        isShowingModalSendGift: true
+                        isShowingModalExport: true
                       });
                     }}
                     style={{
@@ -172,6 +180,11 @@ class GiftList extends React.Component<IProps, IState> {
         </div>
         {this.state.isShowingModalSendGift ? (
           <ModalSendGift isShowingModal={this.hiddenModalSendGift} />
+        ) : (
+          ""
+        )}
+       {this.state.isShowingModalExport ? (
+          <ExportFileSendGift isShowingModal={this.hiddenModalExportFileGift} />
         ) : (
           ""
         )}

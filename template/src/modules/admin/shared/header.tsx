@@ -5,25 +5,6 @@ class Header extends React.Component {
   render() {
     return (
       <>
-        <nav className="navbar navbar-default navbar-static-top m-b-0">
-          <div className="navbar-header">
-            <div className="top-left-part">
-              <a className="logo" href="index.html">
-                <b>NMC</b>
-              </a>
-            </div>
-            <ul className="nav navbar-top-links navbar-left">
-              <li>
-                <a
-                  href="javascript:void(0)"
-                  className="open-close waves-effect waves-light visible-xs"
-                >
-                  <i className="ti-close ti-menu" />
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
         <div className="navbar-default sidebar" role="navigation">
           <div className="sidebar-nav">
             <div className="sidebar-head">

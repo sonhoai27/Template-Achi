@@ -146,11 +146,12 @@ class ModalSendGift extends React.Component<IProps, IState> {
                                                     <select
                                                         onChange={(e: any) => {
                                                             const click = e.target.options
+                                                            console.log(click[click.selectedIndex].text)
                                                             this.setState({
                                                                 nameGift: click[click.selectedIndex].text
                                                             })
                                                             this.state.editor.insertContent(
-                                                                `<a href="` + e.target.value + `">${e.target.textContent}</a>`
+                                                                `<a href="` + e.target.value + `">${click[click.selectedIndex].text}</a>`
                                                             );
                                                         }}
                                                         className="form-control"

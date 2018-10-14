@@ -10,6 +10,6 @@ export const alias = (name: string) => {
     str = str.replace(/đ/g, "d");
     str = str.replace(/!|@|\\|\$|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\'| |\"|\&|\#|\[|\]|~/g, "-");
     str = str.replace(/-+-/g, "-");
-    str = str.replace(/^\-+|\-+$/g, "");
+    str = str.replace(/^\-+|\“|\”|\-+$/g, "");
     return str;
 }
