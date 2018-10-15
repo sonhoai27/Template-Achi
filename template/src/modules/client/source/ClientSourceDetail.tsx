@@ -6,9 +6,10 @@ import { reListContentUISource } from "../../admin/source/reSource";
 import ItemPage from '../../DynamicPage/source/item'
 import MainSche from './../../DynamicPage/sche/MainSche';
 import { reSetCurrentMatch } from "../../../reducers/init";
+import SXDFooter from "../../shared/components/SXDFooter";
 const listCom = {
     TKB: <MainSche />,
-    TKB2: <MainSche />,
+    SXDFOOTER: <SXDFooter/>
   };
 interface IProps {
     match: any;
