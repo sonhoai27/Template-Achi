@@ -1,6 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { reListSche } from "../../admin/source/reSource";
+import { BASEURL } from "../../../config/const";
 
 interface IProps {
   currentMatch: any;
@@ -24,9 +25,19 @@ class MainSche extends React.Component<IProps, {}> {
   componentWillReceiveProps(nextProps){
     console.log(nextProps)
   }
+  calMoney = (price, sale)=> {
+    const cal = Number(price - sale)
+    if(cal=== 0){
+      return "MIỄN PHÍ"
+    }else {
+      return (cal.toLocaleString('vi-VN'))+'đ'
+    }
+  }
   renderListSche = ()=> {
     if(this.props.resListSche.list){
       return this.props.resListSche.list.map(element => {
+        const price = Number(element.source_sche_price)
+        const discount = Number(element.source_sche_sale)
         return (
           <ul data-id="row_74">
               <li data-label="Tên chương trình">
@@ -35,31 +46,30 @@ class MainSche extends React.Component<IProps, {}> {
                     <b id="name_74">{element.source_title} - {element.source_sche_khoa}</b>
                   </li>
                   <li>
-                    Trainer:
-                    <a href="http://maxpowervn.com/page/giao-vien">
+                    Trainer: 
+                    <a href={BASEURL+'page/gioi-thieu'} style={{marginLeft: 8}}>
                       {element.source_sche_teacher}
                     </a>
                   </li>
                   <li>
-                    Địa chỉ: {element.source_sche_address}
+                    Địa chỉ: <span style={{marginLeft: 8}}>{element.source_sche_address}</span>
                   </li>
                 </ul>
               </li>
               <li data-label="Thời gian">
                 <p dangerouslySetInnerHTML={{__html: element.source_date_sche}}/>
               </li>
-              <li className="text-center" data-label="Ưu đãi">
+              <li data-label="Ưu đãi">
                 <p
-                  className="line-through"
-                  style={{ marginRight: 10, lineHeight: "1.8" }}
+                  style={{ marginRight: 10, lineHeight: "1.8", textDecoration: 'line-through' }}
                 >
-                  <b>5,500,000 đ</b>
+                  <b>{price.toLocaleString('vi-VN')}đ</b>
                 </p>
-                <p className="orange" style={{ lineHeight: "1.8" }}>
-                  - 5,500,000 đ
+                <p style={{ lineHeight: "1.8", color: 'red' }}>
+                  - <b>{discount.toLocaleString('vi-VN')}đ</b>
                 </p>
-                <p className="green" style={{ lineHeight: "1.8" }}>
-                  <b>= Miễn Phí</b>
+                <p style={{ lineHeight: "1.8", color: 'green' }}>
+                  <b>= {this.calMoney(element.source_sche_price, element.source_sche_sale)}</b>
                 </p>
               </li>
               <li className="text-center" data-label="Đăng ký">
@@ -67,7 +77,7 @@ class MainSche extends React.Component<IProps, {}> {
                 <p
                   className="bold-text uppercase btn btn-sm" style={{
                     color: '#fff',
-                    background: '#1f9080',
+                    background: '#F44336',
                     textTransform: 'uppercase',
                     display: "inline-block",
                     padding: '12px 16px'
@@ -76,7 +86,7 @@ class MainSche extends React.Component<IProps, {}> {
                   <i className="spin fa fa-spinner" style={{marginRight: 8}}/>
                   <a
                     style={{color: '#fff', fontSize: '16px', fontWeight: 600}}
-                    href="http://maxpowervn.com/page/dang-ky/MP1/74"
+                    href={BASEURL+'page/khoa-hoc/dang-ky/'+element.source_sche_id}
                     target="_blank"
                   >
                     Đăng Ký Ngay
