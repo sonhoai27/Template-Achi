@@ -43,7 +43,16 @@ class CLientFooterBanner extends React.Component<{}, IState> {
       if(
         this.state.user.send_gift_email !== "" && this.state.user.send_gift_name != "" && this.state.user.send_gift_phone != ""
       ){
-        axios.post(API+'')
+        axios.post(API+'goi-qua-tang/add/', {
+          gift: this.state.gift,
+          user: this.state.user
+        })
+        .then(result => {
+          console.log(result.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
       }else {
         alert("Nhập đủ")
       }

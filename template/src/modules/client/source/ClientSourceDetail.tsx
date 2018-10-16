@@ -7,9 +7,11 @@ import ItemPage from '../../DynamicPage/source/item'
 import MainSche from './../../DynamicPage/sche/MainSche';
 import { reSetCurrentMatch } from "../../../reducers/init";
 import SXDFooter from "../../shared/components/SXDFooter";
+import Customer from "../ebook/com/customer";
 const listCom = {
     TKB: <MainSche />,
-    SXDFOOTER: <SXDFooter/>
+    SXDFOOTER: <SXDFooter/>,
+    HOCVIEN: <Customer/>
   };
 interface IProps {
     match: any;
