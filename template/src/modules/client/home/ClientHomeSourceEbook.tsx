@@ -11,7 +11,7 @@ class ClientHomeSource extends React.Component {
   render() {
     return (
       <>
-        <div className="row section-heading list-courses">
+        <div className="section-heading list-courses">
           <div className="container">
             <div className="row">
               <div className="col-sm-3">
@@ -33,10 +33,10 @@ class ClientHomeSource extends React.Component {
         <div className="container" style={{ marginBottom: 64, marginTop: 64 }}>
           <div className="row list-courses__item" style={{ marginBottom: 32 }}>
             <div className="col-sm-4 wow bounceInLeft" data-wow-duration="1s">
-              <img
+            <a href={"http://songxungdang.com"}><img
                 src={RESOURCE + "images/home/10-khoa-song-xung-dang.png"}
                 className="img-responsive"
-              />
+              /></a>
             </div>
             <div className="col-sm-8">
               <h2>
@@ -71,10 +71,10 @@ class ClientHomeSource extends React.Component {
           </div>
           <div className="row list-courses__item" style={{ marginBottom: 32 }}>
             <div className="col-sm-4 wow bounceInLeft" data-wow-duration="1s">
-              <img
+            <a href={BASEURL + "page/khoa-hoc/nguoi-chia-se-9-7"}><img
                 src={"http://nguyenminhchi.com/api/uploads/images/d9b57c429e1b096e1c7b1539450000000.png"}
                 className="img-responsive"
-              />
+              /></a>
             </div>
             <div className="col-sm-8">
               <h2>
@@ -109,10 +109,10 @@ class ClientHomeSource extends React.Component {
           </div>
           <div className="row list-courses__item" style={{ marginBottom: 32 }}>
             <div className="col-sm-4 wow bounceInLeft" data-wow-duration="1s">
-              <img
+            <a href={BASEURL + "page/khoa-hoc/trai-chien-binh-vo-dich-8-9"}> <img
                 src={RESOURCE + "images/home/12-trai-chien-binh-vo-dich.png"}
                 className="img-responsive"
-              />
+              /></a>
             </div>
             <div className="col-sm-8">
               <h2>
@@ -132,8 +132,7 @@ class ClientHomeSource extends React.Component {
                 sức mạnh thực sự của bạn đang bị “giam cầm”, nó cần được giải
                 thoát để bạn có đủ sức mạnh thực hiện bất kỳ nhiệm vụ nào trong
                 cuộc đời.
-                <i>
-                  Làm thế nào cởi bỏ xiềng xích dẫn dắt cuộc sống quyết liệt,
+                <i> Làm thế nào cởi bỏ xiềng xích dẫn dắt cuộc sống quyết liệt,
                   nhiệt tình làm cho những tháng năm rực rỡ của tuổi trẻ thật
                   đáng giá?
                 </i>
@@ -150,10 +149,10 @@ class ClientHomeSource extends React.Component {
           </div>
           <div className="row list-courses__item" style={{ marginBottom: 32 }}>
             <div className="col-sm-4 wow bounceInLeft" data-wow-duration="1s">
-              <img
+            <a href={"http://songxungdang.com/golden-bee-generation/"}> <img
                 src={"http://nguyenminhchi.com/api/uploads/images/da5ae6f12368b5ec6aed1539450000000.png"}
                 className="img-responsive"
-              />
+              /></a>
             </div>
             <div className="col-sm-8">
               <h2>
@@ -182,14 +181,14 @@ class ClientHomeSource extends React.Component {
                 className="get-link btn"
                 style={{ marginTop: 32, float: "right" }}
               >
-                <a href={BASEURL + "page/khoa-hoc/trai-chien-binh-vo-dich-8-9"}>
+                <a href={"http://songxungdang.com/golden-bee-generation/"}>
                   Xem thêm
                 </a>
               </div>
             </div>
           </div>
         </div>
-        <div className="row  list-courses section-heading">
+        <div className="list-courses section-heading">
           <div className="container">
             <div className="row">
               <div className="col-sm-3">
@@ -211,10 +210,10 @@ class ClientHomeSource extends React.Component {
         <div className="container" style={{ marginBottom: 64, marginTop: 64 }}>
           <div className="row list-courses__item" style={{ marginBottom: 32 }}>
             <div className="col-sm-4 wow bounceInLeft" data-wow-duration="1s">
-              <img
+            <a href={"http://nguyenminhchi.com/page/khoa-hoc/video/4-bo-ky-nang-the-ky-21"}><img
                 src={RESOURCE + "images/home/14-bo-ky-nang-the-ky-21.png"}
                 className="img-responsive"
-              />
+              /></a>
             </div>
             <div className="col-sm-8">
               <h2>
@@ -240,18 +239,18 @@ class ClientHomeSource extends React.Component {
                 className="get-link btn"
                 style={{ marginTop: 32, float: "right" }}
               >
-                Xem thêm
+                <a href="http://nguyenminhchi.com/page/khoa-hoc/video/4-bo-ky-nang-the-ky-21"> Xem thêm</a>
               </div>
             </div>
           </div>
           <div className="row list-courses__item" style={{ marginBottom: 32 }}>
             <div className="col-sm-4 wow bounceInLeft" data-wow-duration="1s">
-              <img
+            <a href={"http://nguyenminhchi.com/page/khoa-hoc/video/8-mindmap-phat-trien-ban-than"}> <img
                 src={
                   RESOURCE + "images/home/15-mindmap-phat-trien-ban-than.png"
                 }
                 className="img-responsive"
-              />
+              /></a>
             </div>
             <div className="col-sm-8">
               <h2>
@@ -272,12 +271,12 @@ class ClientHomeSource extends React.Component {
                 className="get-link btn"
                 style={{ marginTop: 32, float: "right" }}
               >
-                Xem thêm
+                <a href={"http://nguyenminhchi.com/page/khoa-hoc/video/8-mindmap-phat-trien-ban-than"}> Xem thêm</a>
               </div>
             </div>
           </div>
         </div>
-        <div className="row section-heading">
+        <div className="section-heading">
           <div className="container">
             <div className="row">
               <div className="col-sm-3">
@@ -302,11 +301,11 @@ class ClientHomeSource extends React.Component {
         >
           <div className="row item" style={{ marginBottom: 32 }}>
             <div className="col-sm-4 wow bounceInLeft" data-wow-duration="1s">
-              <img
+            <a href={"http://sotay.songxungdang.com"}><img
                 width="70%"
                 src={"http://nguyenminhchi.com/api/uploads/images/ea00646c35438c5c44911539450000000.png"}
                 className="img-responsive"
-              />
+              /></a>
             </div>
             <div className="col-sm-8">
               <h2>
@@ -323,17 +322,14 @@ class ClientHomeSource extends React.Component {
               <p>
                 <i>
                   “Tôi chắc chắn với bạn rằng, bạn sẽ không sở hữu cuốn sổ nào
-                  quan trọng và xứng đáng hơn cuốn sổ này”
-                </i>
-                Một cái cây cổ thụ bắt đầu từ một hạt giống nhỏ Một cuộc sống
+                  quan trọng và xứng đáng hơn cuốn sổ này”. <br/>
+                </i>Một cái cây cổ thụ bắt đầu từ một hạt giống nhỏ. Một cuộc sống
                 hạnh phúc bắt đầu từ một nụ cười. Một gia đình viên mãn bắt đầu
                 từ lời chào hỏi hai người. Một sự nghiệp vĩ đại bắt từ một ý
                 tưởng.
-                <b>Mọi thành tựu đều bắt đầu từ một hành động nhỏ.</b>
-                <br />
-                <i>
-                  <b>Chỉ cần vài phút mỗi ngày đồng hành cùng cuốn da này </b>
-                   bạn, đã từng bước đi trên chặng hành trình sống xứng đáng và
+                <b> Mọi thành tựu đều bắt đầu từ một hành động nhỏ.</b>
+                <br /><br/>
+                <i><b> Chỉ cần vài phút mỗi ngày đồng hành cùng cuốn da này, </b>bạn đã từng bước đi trên chặng hành trình sống xứng đáng và
                   tạo nên những thành tựu của riêng cuộc đời mình.
                 </i>
               </p>

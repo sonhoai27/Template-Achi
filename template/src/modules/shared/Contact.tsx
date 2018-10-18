@@ -133,7 +133,7 @@ class ModalContact extends React.Component<IProps, IState> {
                     </div>
                 </div>
                 <div className="modal-backdrop fade in" style={{
-                    background: '#009688',
+                    background: 'url(http://nguyenminhchi.com/api/uploads/images/b7eeb9d50c18eda6074b1539622800000.jpg)',
                     opacity: 1
                 }}/>
             </>

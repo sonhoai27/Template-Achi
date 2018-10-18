@@ -40,7 +40,6 @@ class OrderEbook extends React.Component<IProps, IState> {
   }
   componentDidUpdate(preProps) {
     if (this.props.resOrderEbook != preProps.resOrderEbook) {
-      console.log(this.props.resOrderEbook.status);
       if (this.props.resOrderEbook.status === 200) {
         this.props.reIsSuccess(true);
         setTimeout(() => {

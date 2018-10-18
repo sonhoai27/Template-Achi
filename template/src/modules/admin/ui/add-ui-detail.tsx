@@ -33,7 +33,6 @@ class AddUIDetail extends React.Component<Props, {}> {
     }
   }
   componentDidUpdate(preProps, preState, snapsot){
-    console.log(this.props.resAddCss,snapsot)
   }
   componentDidMount() {
     this.props.reDetailUI(this.props.match.params.idUi);

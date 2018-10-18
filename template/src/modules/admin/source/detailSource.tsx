@@ -95,7 +95,6 @@ class DetailSource extends React.Component<Props, State> {
     }
 
     componentDidUpdate(preProps) {
-        console.log(this.props.resListUIForSource)
     }
 
     componentDidMount() {

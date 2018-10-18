@@ -30,11 +30,9 @@ class ClientSourceHome extends React.Component<IProps, {}> {
       return this.props.resListSourceBy0.list.map((element, index) => {
          
         if (index === 0) {
-            console.log("0",dem)
           // @ts-ignore
           list = [...list, this.itemSource(element)];
         } else if (dem < 2) {
-            console.log("<= 2",dem)
           // @ts-ignore
           list = [...list, this.itemSource(element)];
           dem = dem + 1;
@@ -51,7 +49,6 @@ class ClientSourceHome extends React.Component<IProps, {}> {
               );
           }
         } else {
-            console.log("Con lai",dem)
           dem = 1;
           // @ts-ignore
           list = [...list, this.itemSource(element)];
@@ -198,7 +195,7 @@ class ClientSourceHome extends React.Component<IProps, {}> {
               <div className="row">
                 <div className="col-sm-6">
                   <h1 className="white">
-                    <b>NGUYENMINHCHI.COM</b>
+                    NGUYENMINHCHI.COM
                   </h1>
                   <p className="white">
                     KHÁM PHÁ TẤT CẢ CÁC CHƯƠNG TRÌNH ĐÀO TẠO GIÚP BẠN ĐỘT PHÁ

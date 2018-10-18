@@ -18,7 +18,6 @@ interface IProps {
 class ClientBlog extends React.Component<IProps, {}> {
   constructor(props) {
     super(props);
-    console.log(this.props.match);
   }
   makeCurrentPage = () => {
     const page = window.location.href.split("page=")[1];

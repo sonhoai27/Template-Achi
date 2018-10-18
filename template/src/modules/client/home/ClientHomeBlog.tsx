@@ -16,13 +16,11 @@ class ClientHomeBlog extends React.Component<{}, IState> {
   componentDidMount(){
     axios.get(API+'blog/all/home')
     .then(result => {
-      console.log(result.data)
       this.setState({
         blogs: result.data
       })
     })
     .catch(err => {
-      console.log(err)
     })
   }
   renderListBlogs = ()=> {
@@ -31,9 +29,11 @@ class ClientHomeBlog extends React.Component<{}, IState> {
         return (
           <div className="item col-sm-4" key={element.blog_title}>
               <div className="social-callout">
+                <a href={BASEURL + "page/blog/detail/" + element.blog_alias}>
                 <AutofitImage frameWidth="100%" frameHeight="200px" imgSrc={element.blog_cover}/>
+                </a>
                 <h4 style={{marginTop: 32, fontWeight: 600}}>
-                  <a title={element.blog_title} href={BASEURL+'page/blog/detail/'+element.blog_id}>{element.blog_title}</a>
+                  <a title={element.blog_title} href={BASEURL+'page/blog/detail/'+element.blog_alias}>{element.blog_title}</a>
                 </h4>
               </div>
             </div>
@@ -45,7 +45,7 @@ class ClientHomeBlog extends React.Component<{}, IState> {
   render() {
     return (
       <>
-        <div className="row section-heading">
+        <div className="section-heading">
           <div className="container">
             <div className="row">
               <div className="col-sm-3">

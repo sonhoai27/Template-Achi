@@ -69,7 +69,7 @@ class Image extends React.Component<Props, State> {
                 style={style.wrapper}>
                 <img
                     onContextMenu={(e: any) => {
-                        this.props.onClick ? this.props.onClick(e): console.log('test')
+                        this.props.onClick ? this.props.onClick(e): ''
                     }}
                     id={this.props.dataSrc}
                     ref="image" src={this.props.src} alt={this.props.alt} style={style.image}

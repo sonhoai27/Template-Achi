@@ -23,7 +23,6 @@ export default (state = initialState, action) => {
             }
         }
         case SUCCESS(ACTION_TYPES.API_ORDER_EBOOK): {
-          console.log(action.payload)
             return {
                 ...state,
                 resOrderEbook: action.payload.data

@@ -46,7 +46,6 @@ class ModalSendGift extends React.Component<IProps, IState> {
 
     componentDidUpdate(preProps) {
         if (this.props.resAddSendGift != preProps.resAddSendGift) {
-          console.log(this.props.resAddSendGift.status);
           if (this.props.resAddSendGift.status === 200) {
             this.props.reIsSuccess(true);
             setTimeout(() => {
@@ -146,7 +145,6 @@ class ModalSendGift extends React.Component<IProps, IState> {
                                                     <select
                                                         onChange={(e: any) => {
                                                             const click = e.target.options
-                                                            console.log(click[click.selectedIndex].text)
                                                             this.setState({
                                                                 nameGift: click[click.selectedIndex].text
                                                             })

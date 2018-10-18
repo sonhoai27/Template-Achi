@@ -13,17 +13,14 @@ class MainSche extends React.Component<IProps, {}> {
     super(props);
   }
   componentDidMount(){
-    console.log(this.props.currentMatch.params.idSource)
     const url = this.props.currentMatch.params.idSource
     const tempArr = url.split('-')
     const idSource = tempArr[tempArr.length - 1]
     this.props.reListSche(idSource)
   }
   componentDidUpdate(preProps){
-    console.log(this.props.currentMatch)
   }
   componentWillReceiveProps(nextProps){
-    console.log(nextProps)
   }
   calMoney = (price, sale)=> {
     const cal = Number(price - sale)

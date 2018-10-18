@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Route } from "react-router-dom";
-import { RESOURCE } from "../../config/const";
 import { Helmet } from "react-helmet";
 import Error from "../admin/shared/error";
 import ClientBlogRoute from "./blog/ClientBlogRoute";
@@ -24,9 +23,7 @@ interface Props {
 class ClientRouter extends React.Component<Props, {}> {
   constructor(props) {
     super(props);
-    console.log(this.props.match);
   }
-
   componentDidMount() {
     var doc = document.body;
     doc.classList.add("client-page");
@@ -34,15 +31,15 @@ class ClientRouter extends React.Component<Props, {}> {
   render() {
     return (
       <>
-        <div className="margin-top">
-          <Helmet>
+        <Helmet>
             <link rel="stylesheet" href={'http://nguyenminhchi.com/template/public/' + "css/client.css"} />
             <link
               rel="stylesheet"
-              href={RESOURCE + "css/mobile.css"}
+              href={'http://nguyenminhchi.com/template/public/' + "css/mobile.css"}
               media="screen and (max-width: 769px)"
             />
           </Helmet>
+        <div className="margin-top">
           <Route exact path={`${this.props.match.url}`} component={Error} />
           <Route
             path={`${this.props.match.url}/blog`}

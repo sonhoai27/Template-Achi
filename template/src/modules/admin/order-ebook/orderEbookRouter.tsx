@@ -21,7 +21,6 @@ const breadCrumb = [
 class OrderEbookRouter extends React.Component<Props, {}> {
   constructor(props){
     super(props)
-    console.log(this.props.match)
   }
   render(){
     return (

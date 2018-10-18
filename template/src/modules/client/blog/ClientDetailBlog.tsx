@@ -48,7 +48,7 @@ class ClientDetailBlog extends React.Component<IProps, IState> {
       return this.props.resClientListBlogCategory.list.map(element => {
         return (
           <div className="col-sm-3">
-            <a href={BASEURL + "page/blog/detail/" + element.blog_id}>
+            <a href={BASEURL + "page/blog/detail/" + element.blog_alias}>
               <AutofitImage
                 clasName="img-responsive"
                 frameWidth="100%"
@@ -113,6 +113,18 @@ class ClientDetailBlog extends React.Component<IProps, IState> {
                 />
                 <div className="col-xs-12">
                   <div className="fb-comments" data-href={'http://nguyenminhchi.com/page/blog/detail/'+this.props.match.params.idBlog} data-width={'100%'} data-numposts={5}></div>
+                </div>
+                <div className="col-sm-12 margin-t-64">
+                  <h4>Tác giả:</h4>
+                  <div className="row margin-t-32">
+                    <div className="col-sm-3">
+                      <img src={this.state.blog.author_avatar} alt="" className="img-responsive" width={'90%'}/>
+                    </div>
+                    <div className="col-sm-9">
+                      <h2>{this.state.blog.author_name}</h2>
+                      <p>{this.state.blog.author_intro}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

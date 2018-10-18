@@ -39,7 +39,6 @@ class AddCategory extends React.Component<IProps, IState> {
     this.setState({
       category_color: color.hex
     })
-    console.log(color.hex)
   };
   onChange = (e: any) => {
     // @ts-ignore
@@ -56,7 +55,6 @@ class AddCategory extends React.Component<IProps, IState> {
     })
   }
   componentDidUpdate(preProps){
-    console.log(this.props.resAddCategory)
     if(this.props.resAddCategory != preProps.resAddCategory){
       if (this.props.resAddCategory.status === 200) {
         this.props.reIsSuccess(true);

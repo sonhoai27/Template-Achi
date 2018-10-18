@@ -78,7 +78,9 @@ class ScheEvents extends React.Component<IProps, {}> {
       <>
         <ClientHeader />
         <div className="col-xs-12 page-source list-course">
-          <div className="row page-source_banner">
+          <div className="row page-source_banner" style={{
+            backgroundImage: 'url(http://nguyenminhchi.com/api/uploads/images/302d805c8eeb049bb9a71539622800000.jpg)'
+          }}>
             <div className="container">
               <div className="row">
                 <div className="col-sm-6">

@@ -91,14 +91,14 @@ class Photo extends React.Component<Props, State> {
       !this.props.currentEditorPhoto.type
     ) {
       this.props.currentEditorPhoto.insertContent(
-        `<img src="` + uri.uri + `" class="img-responsive"/>`
+        `<img src="` + uri.uri + `" class="img-responsive">`
       );
     } else if (
       typeof this.props.currentEditorPhoto === "object" &&
       this.props.currentEditorPhoto.type === "ck"
     ) {
       this.props.currentEditorPhoto.editor.insertHtml(
-        `<img src="` + uri.uri + `" class="img-responsive"/>`
+        `<img src="` + uri.uri + `" class="img-responsive">`
       );
     } else {
       try {
@@ -269,7 +269,6 @@ class Photo extends React.Component<Props, State> {
                         }
                       })
                       .catch(err => {
-                        console.log(err);
                       });
                   }}
                   type="button"

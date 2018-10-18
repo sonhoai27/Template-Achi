@@ -14,13 +14,11 @@ class Footer extends React.Component<{}, IState> {
   componentDidMount(){
     axios.get(API+'blog/all/home')
     .then(result => {
-      console.log(result.data)
       this.setState({
         blogs: result.data
       })
     })
     .catch(err => {
-      console.log(err)
     })
   }
   renderListBlogs = ()=> {
@@ -29,7 +27,7 @@ class Footer extends React.Component<{}, IState> {
         if(index < 4){
           return (
             <div key={element.blog_id}>
-            <h5 style={{marginTop: 16, fontWeight:300, lineHeight: 1.4}}>
+            <h5 style={{marginTop: 16, fontWeight:300, lineHeight: 1.4, fontSize: 17}}>
               <a className="white" title={element.blog_title} href={BASEURL+'page/blog/detail/'+element.blog_id}>{element.blog_title}</a>
             </h5>
             <hr/>

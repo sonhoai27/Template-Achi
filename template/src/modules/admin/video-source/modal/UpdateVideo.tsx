@@ -30,7 +30,6 @@ class UpdateVideo extends React.Component<IProps, iState> {
         }
     }
     componentDidMount() {
-        console.log(this.props.video)
         this.setState({
             source_video_name: this.props.video.source_video_name,
             source_video_url: this.props.video.source_video_url,

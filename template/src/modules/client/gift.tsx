@@ -2,33 +2,94 @@ import * as React from "react";
 import { connect } from "react-redux";
 import ClientHeader from "./client-shared/Header";
 import Footer from "./client-shared/Footer";
-interface IProps {}
+import axios from 'axios'
+import { API } from "../../config/const";
+import Helmet from 'react-helmet'
+import { reIsDanger, reIsSuccess } from "../../reducers/init";
+import { BASEURL } from './../../config/const';
+interface IProps {
+  reIsSuccess: (status: boolean) => void;
+  reIsDanger: (status: boolean) => void;
+}
 interface IState {
-  email_name: string;
-  email_email: string;
-  email_phone: string;
-  email_name_click: string;
+  gift: any;
+  user: {
+    send_gift_email: string;
+    send_gift_name: string;
+    send_gift_title: string;
+    send_gift_phone: string;
+  }
 }
 
 class ClientGift extends React.Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      email_email: "",
-      email_name: "",
-      email_name_click: "",
-      email_phone: ""
-    };
+      gift: {},
+      user: {
+        send_gift_email: "",
+        send_gift_name: "",
+        send_gift_title: "",
+        send_gift_phone: ""
+      }
+    }
   }
   onchange = e => {
     // @ts-ignore
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+     this.setState({
+      user: {
+        ...this.state.user,
+        [e.target.name]: e.target.value
+      }
+    })
   };
+  componentDidMount(){
+    axios.get(API+'gift/detail/active')
+    .then(result =>{
+      this.setState({
+        gift: result.data.list,
+        user: {
+          ...this.state.user,
+          send_gift_title: result.data.list.gift_name
+        }
+      })
+    })
+    .catch(err => {
+    })
+  }
+  onSendGift = ()=> {
+    if(
+      this.state.user.send_gift_email !== "" && this.state.user.send_gift_name != "" && this.state.user.send_gift_phone != ""
+    ){
+      axios.post(API+'goi-qua-tang/add/', {
+        gift: this.state.gift,
+        user: this.state.user
+      })
+      .then(result => {
+        console.log(result)
+        if(result.data.status === 200){
+          this.props.reIsSuccess(true);
+          setTimeout(() => {
+            this.props.reIsSuccess(false);
+            window.location.href = BASEURL+'page/qua-tang'
+          }, 2000);
+        }else {
+          this.props.reIsDanger(true);
+          setTimeout(() => {
+            this.props.reIsDanger(false);
+          }, 2000);
+        }
+      })
+      .catch(err => {
+      })
+    }else {
+      alert("Nhập đủ")
+    }
+}
   render() {
     return (
       <>
+        <Helmet><title>Quà Tặng | Nguyễn Minh Chí</title></Helmet>
         <ClientHeader />
         <div className="col-xs-12 qua-tang page-source">
           <div
@@ -59,37 +120,15 @@ class ClientGift extends React.Component<IProps, IState> {
               <div className="col-sm-4">
                 <img
                   width={"100%"}
-                  src="https://eraweb.co/attachment/images/home/custom-domain.png"
+                  src={this.state.gift.gift_cover}
                   alt=""
                   className="img-responsive"
                 />
               </div>
               <div className="col-sm-1" />
-              <div className="col-sm-6" style={{ fontSize: 16 }}>
-                Hiện là Giám đốc đào tạo – Công ty Tư vấn & Đào tạo Hiệu Quả Tác
-                giả của hơn 30 cuốn sách về Kỹ năng mềm, Tâm lý ứng dụng, Giáo
-                dục nhân bản và Nghệ thuật sống. Chuyên gia đào tạo Kỹ năng mềm
-                cho đội ngũ nhân lực của các doanh nghiệp với hơn 10 năm kinh
-                nghiệm. Giảng viên thỉnh giảng tại các trường đại học
+              <div className="col-sm-6" style={{ fontSize: 18 }}>
+                <p dangerouslySetInnerHTML={{__html: this.state.gift.gift_promo}}/>
               </div>
-            </div>
-            <div className="row margin-t-64 flex-ver">
-              <div className="col-sm-6" style={{ fontSize: 16 }}>
-                Hiện là Giám đốc đào tạo – Công ty Tư vấn & Đào tạo Hiệu Quả Tác
-                giả của hơn 30 cuốn sách về Kỹ năng mềm, Tâm lý ứng dụng, Giáo
-                dục nhân bản và Nghệ thuật sống. Chuyên gia đào tạo Kỹ năng mềm
-                cho đội ngũ nhân lực của các doanh nghiệp với hơn 10 năm kinh
-              </div>
-              <div className="col-sm-1" />
-              <div className="col-sm-4">
-                <img
-                  width={"100%"}
-                  src="https://eraweb.co/attachment/images/home/marketing.svg"
-                  alt=""
-                  className="img-responsive"
-                />
-              </div>
-              <div className="col-sm-1" />
             </div>
           </div>
           <div
@@ -113,7 +152,7 @@ class ClientGift extends React.Component<IProps, IState> {
                         onChange={this.onchange}
                         type="text"
                         className="form-control"
-                        name="email_name"
+                        name="send_gift_name"
                         placeholder={"Tên của bạn"}
                       />
                     </div>
@@ -123,7 +162,7 @@ class ClientGift extends React.Component<IProps, IState> {
                         onChange={this.onchange}
                         type="text"
                         className="form-control"
-                        name="email_phone"
+                        name="send_gift_phone"
                         placeholder={"Số điện thoại"}
                       />
                     </div>
@@ -133,12 +172,12 @@ class ClientGift extends React.Component<IProps, IState> {
                         onChange={this.onchange}
                         type="email"
                         className="form-control"
-                        name="email_email"
+                        name="send_gift_email"
                         placeholder={"Thư điện tử"}
                       />
                     </div>
                     <div className="text-center">
-                      <div className="btn">Nhận quà</div>
+                      <div className="btn" onClick={this.onSendGift}>Nhận quà</div>
                     </div>
                   </div>
                 </div>
@@ -158,7 +197,10 @@ const mapStateToProps = storeState => ({
   isDanger: storeState.reInit.isDanger,
   resAddContact: storeState.reSource.resAddContact
 });
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  reIsDanger,
+  reIsSuccess
+};
 export default connect(
   mapStateToProps,
   mapDispatchToProps

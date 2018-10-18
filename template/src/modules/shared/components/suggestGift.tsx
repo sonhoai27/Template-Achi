@@ -24,7 +24,6 @@ class SuggestGift extends React.Component<IProps, IState> {
         });
       })
       .catch(err => {
-        console.log(err);
       });
   }
   render() {

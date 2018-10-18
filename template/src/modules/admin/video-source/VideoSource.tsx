@@ -93,7 +93,6 @@ class VideoSource extends React.Component<IProps, State> {
         }
     }
     componentDidUpdate(preProps) {
-        console.log(this.props.resListUIForSource)
     }
 
     componentDidMount() {

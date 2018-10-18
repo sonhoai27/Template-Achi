@@ -87,7 +87,6 @@ class DetailSche extends React.Component<Props, State> {
   };
   updateSche = () => {
     this.props.reUpdateSche(this.state, this.state.source_sche_id);
-    console.log(this.state)
   };
   render() {
     return (

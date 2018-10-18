@@ -46,7 +46,6 @@ class AddAuthor extends React.Component<IProps, IState> {
     })
   }
   componentDidUpdate(preProps){
-    console.log(this.props.resAddAuthor)
     if(this.props.resAddAuthor!= preProps.resAddAuthor){
       if (this.props.resAddAuthor.status === 200) {
         this.props.reIsSuccess(true);

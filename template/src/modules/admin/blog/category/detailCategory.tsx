@@ -62,7 +62,6 @@ class DetailCategory extends React.Component<IProps, IState> {
     }, this.state.category_id)
   }
   componentDidUpdate(preProps){
-    console.log(this.props.resUpdateCategory)
     if(this.props.resUpdateCategory != preProps.resUpdateCategory){
       if (this.props.resUpdateCategory.status === 200) {
         this.props.reIsSuccess(true);

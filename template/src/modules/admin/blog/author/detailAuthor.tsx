@@ -52,7 +52,6 @@ class DetailAuthor extends React.Component<IProps, IState> {
     }, this.state.author_id)
   }
   componentDidUpdate(preProps){
-    console.log(this.props.resUpdateAuthor)
     if(this.props.resUpdateAuthor != preProps.resUpdateAuthor){
       if (this.props.resUpdateAuthor.status === 200) {
         this.props.reIsSuccess(true);

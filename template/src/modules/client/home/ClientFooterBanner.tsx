@@ -1,6 +1,9 @@
 import * as React from "react";
 import { API } from './../../../config/const';
 import axios from 'axios'
+import { connect } from "react-redux";
+declare var $: any;
+import { reIsSuccess, reIsDanger } from "../../../reducers/init";
 interface IState {
   gift: any;
   user: {
@@ -10,7 +13,11 @@ interface IState {
     send_gift_phone: string;
   }
 }
-class CLientFooterBanner extends React.Component<{}, IState> {
+interface IProps {
+  reIsSuccess: (status: boolean) => void;
+  reIsDanger: (status: boolean) => void;
+}
+class CLientFooterBanner extends React.Component<IProps, IState> {
   constructor(props){
     super(props)
     this.state = {
@@ -26,7 +33,6 @@ class CLientFooterBanner extends React.Component<{}, IState> {
   componentDidMount(){
     axios.get(API+'gift/detail/active')
     .then(result =>{
-      console.log(result)
       this.setState({
         gift: result.data.list,
         user: {
@@ -36,7 +42,6 @@ class CLientFooterBanner extends React.Component<{}, IState> {
       })
     })
     .catch(err => {
-      console.log(err)
     })
   }
   onSendGift = ()=> {
@@ -48,14 +53,29 @@ class CLientFooterBanner extends React.Component<{}, IState> {
           user: this.state.user
         })
         .then(result => {
-          console.log(result.data)
+          if(result.data.status === 200){
+            this.props.reIsSuccess(true);
+            setTimeout(() => {
+              this.props.reIsSuccess(false);
+              this.setNull()
+            }, 2000);
+          }else {
+            this.props.reIsDanger(true);
+            setTimeout(() => {
+              this.props.reIsDanger(false);
+            }, 2000);
+          }
         })
         .catch(err => {
-          console.log(err)
         })
       }else {
         alert("Nhập đủ")
       }
+  }
+  setNull = ()=> {
+    $("#send_gift_email").val('')
+    $("#send_gift_name").val('')
+    $("#send_gift_phone").val('')
   }
   onChange = (e: any)=> {
     // @ts-ignore
@@ -84,9 +104,9 @@ class CLientFooterBanner extends React.Component<{}, IState> {
               </div>
               <div className="col-sm-3">
               <div className="form-get-access">
-                  <input type="text" placeholder="Họ và tên" onChange={this.onChange} name="send_gift_name"/>
-                  <input type="mail" placeholder="Email"  onChange={this.onChange} name="send_gift_email"/>
-                  <input type="number" placeholder="Số điện thoại"  onChange={this.onChange} name="send_gift_phone"/>
+                  <input type="text" placeholder="Họ và tên" onChange={this.onChange} id="send_gift_name" name="send_gift_name"/>
+                  <input type="mail" placeholder="Email"  onChange={this.onChange} id="send_gift_email" name="send_gift_email"/>
+                  <input type="number" placeholder="Số điện thoại"  onChange={this.onChange} id="send_gift_phone" name="send_gift_phone"/>
                   <div className="get-access btn btn-sm btn-info" onClick={this.onSendGift}>Nhận quà <i className="ti-angle-right"/></div>
                 </div>
               </div>
@@ -97,4 +117,13 @@ class CLientFooterBanner extends React.Component<{}, IState> {
   }
 }
 
-export default CLientFooterBanner
+const mapStateToProps = storeState => ({
+});
+const mapDispatchToProps = {
+  reIsDanger,
+  reIsSuccess
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CLientFooterBanner);

@@ -19,7 +19,7 @@ class ClientListTopSen extends React.Component {
           <div className="col-sm-8">
             <blockquote>
               <p>
-                “Trong suốt quãng thời gian sinh viên năm 2,kiến thức, kỹ năng,
+                “Trong suốt quãng thời gian sinh viên năm 2, kiến thức, kỹ năng,
                 sự phát triển bản thân dường như là con số 0. Tôi lúc đó may mắn
                 hơn là gặp anh Chí, trong suốt quãng thời gian học tập và làm
                 việc cùng anh hơn 1 năm, là khoảng thời gian tôi phát triển vượt
@@ -56,7 +56,7 @@ class ClientListTopSen extends React.Component {
                 vượt qua chông gai và sống tích cực hơn. Tuổi trẻ là học hỏi,
                 trải nghiệm để "lớn" hơn từng ngày. Chúc anh luôn nhiệt huyết
                 hết lòng với thế hệ trẻ, dùng cái tâm sáng của mình để cho đi,
-                để đánh thức nhiều bạn trẻ Việt sống xứng đáng”
+                để đánh thức nhiều bạn trẻ Việt sống xứng đáng”.
               </p>
             </blockquote>
             <div className="quote-source">
@@ -77,7 +77,7 @@ class ClientListTopSen extends React.Component {
           <div className="col-sm-8">
             <blockquote>
               <p>
-              <h1>Một cuộc sống xứng đáng không tự nhiên được sinh ra mà được gieo trồng.<br/></h1>
+              <h1>Một cuộc sống xứng đáng không tự nhiên được sinh ra mà được gieo trồng<br/></h1>
               </p>
             </blockquote>
             {/* <div className="quote-source">

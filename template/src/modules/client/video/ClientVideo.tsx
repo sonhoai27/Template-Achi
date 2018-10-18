@@ -68,30 +68,34 @@ class ClientVideo extends React.Component<IProps, IState> {
       let dem = 1;
       let list = []
       return this.props.resListVideo.list.map((element, index) => {
-        if(index === 0){
-          // @ts-ignore
-          list = [...list, this.itemVideo(element)]
-        }else
         if(dem <= 2) {
-          console.log(dem)
           // @ts-ignore
           list = [...list, this.itemVideo(element)]
           dem = dem + 1;
-          console.log(list)
+          if(index === (this.props.resListVideo.list.length - 1)){
+            // @ts-ignore
+          const tempList = [...[], ...list];
+          return React.createElement(
+              "div",
+              {
+                className: "row",
+                key: index
+              },
+              [<hr/>,...tempList]
+            );
+        }
         }else {
-          console.log('a', dem)
           dem = 1
               // @ts-ignore
           list = [...list, this.itemVideo(element)]
           const tempList = [...[], ...list]
           list = []
-          console.log(list)
           return React.createElement(
             'div',
             {
-              classname: 'row'
+              className: 'row'
             },
-            [...tempList]
+            [(index >= 3 ? <hr/> : ''),...tempList]
           )
         }
         return ""
@@ -101,7 +105,7 @@ class ClientVideo extends React.Component<IProps, IState> {
   };
   itemVideo = (element: any)=> {
     return (
-      <div className="col-sm-4 margin-b-32">
+      <div className="col-sm-4 margin-t-32">
         <div className="item"  onClick={()=>this.onPlay(element)}>
           <i className="fa fa-play-circle"></i>
           <a style={{width: '100%'}}>
@@ -148,20 +152,30 @@ class ClientVideo extends React.Component<IProps, IState> {
           <CLientFooterBanner/>
           </div>
           <div className="row paddingY-32">
-            <h1 className="text-center" style={{marginTop: 64}}>Subscribe to Minh Chi Nguyen’s YouTube Channel</h1>
+            <h1 className="text-center" style={{marginTop: 64}}>
+              Theo dõi kênh Youtube của Nguyễn Minh Chí
+            </h1>
             <div className="col-sm-4"></div>
             <div className="col-sm-4">
             <div className="social-callout" style={{
               marginTop: 64
             }}>
                <h3 className="text-center">Kênh Youtube bài học</h3>
-              <div className="g-ytsubscribe" data-channelid="UCHCeMi9tGx9VCMSHHbscrLg" data-layout="default" data-count="default"></div>
+               <a
+                href="https://www.youtube.com/channel/UCHCeMi9tGx9VCMSHHbscrLg?sub_confirmation=1"
+                target="_blank"
+              >
+                <div className="btn btn-sm btn-info" style={{
+                  background: 'red',
+                  border: 'none'
+                }}><i className="icon-social-youtube"/> Youtube</div>
+              </a>
             </div>
           </div>
           <div className="col-sm-4"></div>
           </div>
           <div className="row page-source_list-source page-video">
-            <div className="container paddingY-128">
+            <div className="container">
               {this.renderListVideo()}
               <div className="pg">
                 <Pagination

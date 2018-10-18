@@ -15,7 +15,6 @@ class Source extends React.Component<Props, {}> {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps.reslistSource)
     }
 
     componentDidMount() {

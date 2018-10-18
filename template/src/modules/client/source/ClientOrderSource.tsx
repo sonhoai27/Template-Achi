@@ -46,7 +46,6 @@ class ClientOrderSource extends React.Component<IProps, IState> {
     this.props.reDetailSche(this.props.match.params.idSche);
   }
   componentDidUpdate(preProps) {
-    console.log((this.props.resDetailSche.list.source_sche_price - this.props.resDetailSche.list.source_sche_sale))
     if (preProps.resDetailSche != this.props.resDetailSche) {
       this.setState({
         source: this.props.resDetailSche.list,
@@ -58,7 +57,6 @@ class ClientOrderSource extends React.Component<IProps, IState> {
       });
     }
     if (this.props.resAddOrder != preProps.resAddOrder) {
-      console.log(this.props.resAddOrder.status);
       if (this.props.resAddOrder.status === 200) {
         this.props.reIsSuccess(true);
         setTimeout(() => {
