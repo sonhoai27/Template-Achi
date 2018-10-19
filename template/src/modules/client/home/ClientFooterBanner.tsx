@@ -1,5 +1,5 @@
 import * as React from "react";
-import { API } from './../../../config/const';
+import { API, BASEURL } from './../../../config/const';
 import axios from 'axios'
 import { connect } from "react-redux";
 declare var $: any;
@@ -58,6 +58,7 @@ class CLientFooterBanner extends React.Component<IProps, IState> {
             setTimeout(() => {
               this.props.reIsSuccess(false);
               this.setNull()
+              window.location.href = BASEURL+'page/nhan-qua/'+this.state.gift.gift_id
             }, 2000);
           }else {
             this.props.reIsDanger(true);

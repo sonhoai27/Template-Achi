@@ -104,7 +104,7 @@ class AddAuthor extends React.Component<IProps, IState> {
                       <div className="form-group col-sm-6">
                         <label className="col-sm-12">Intro</label>
                         <div className="col-sm-12">
-                          <input
+                          <textarea
                             onChange={this.onChange}
                             name="author_intro"
                             className="form-control"

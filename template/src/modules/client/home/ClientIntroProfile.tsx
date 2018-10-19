@@ -52,7 +52,7 @@ class ClientIntroProfile extends React.Component {
             <div className="col-sm-8">
               <b>Khi anh bắt đầu tìm thì mọi thứ dần dần hiện ra.</b> Cuộc sống cho anh
               cơ hội gặp những cuốn sách, những người thầy đáng kính và quan
-              trọng nhất là anh đã <b>bắt đầu sống quyết liệt với tuổi trẻ của mình</b>
+              trọng nhất là anh đã <b>bắt đầu sống quyết liệt với tuổi trẻ của mình </b>
               và có những kết quả khởi động ngay từ lúc tuổi đôi mươi. Sau khi
               trở thành nhân viên kinh doanh xuất sắc nhất, anh trở thành Quản
               lý chi nhánh trẻ tuổi xuất sắc nhất Tập đoàn Giáo dục Quốc Tế năm

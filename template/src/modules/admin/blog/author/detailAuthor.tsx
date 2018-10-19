@@ -101,7 +101,7 @@ class DetailAuthor extends React.Component<IProps, IState> {
                         <div className="col-sm-12">
                           <input
                             onChange={this.onChange}
-                            name="category_name"
+                            name="author_name"
                             className="form-control"
                             defaultValue={this.state.author_name}
                           />
@@ -110,9 +110,9 @@ class DetailAuthor extends React.Component<IProps, IState> {
                       <div className="form-group col-sm-6">
                         <label className="col-sm-12">Intro</label>
                         <div className="col-sm-12">
-                          <input
+                          <textarea
                             onChange={this.onChange}
-                            name="category_color"
+                            name="author_intro"
                             className="form-control"
                             value={this.state.author_intro}
                           />

@@ -71,7 +71,7 @@ class ClientGift extends React.Component<IProps, IState> {
           this.props.reIsSuccess(true);
           setTimeout(() => {
             this.props.reIsSuccess(false);
-            window.location.href = BASEURL+'page/qua-tang'
+            window.location.href = BASEURL+'page/nhan-qua/'+this.state.gift.gift_id
           }, 2000);
         }else {
           this.props.reIsDanger(true);
@@ -173,7 +173,7 @@ class ClientGift extends React.Component<IProps, IState> {
                         type="email"
                         className="form-control"
                         name="send_gift_email"
-                        placeholder={"Thư điện tử"}
+                        placeholder={"Email"}
                       />
                     </div>
                     <div className="text-center">

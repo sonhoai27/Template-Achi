@@ -10,7 +10,14 @@ import ClientHomeSource from "./ClientHomeSourceEbook";
 import CLientFooterBanner from "./ClientFooterBanner";
 import Footer from "../client-shared/Footer";
 import { Helmet } from "react-helmet";
-class ClientHome extends React.Component {
+import { connect } from "react-redux";
+import NotifyDanger from "../../shared/notifyDanger";
+import NotifySuccess from "../../shared/notifySuccess";
+interface Props {
+  isDanger: boolean;
+  isSuccess: boolean;
+}
+class ClientHome extends React.Component<Props, {}> {
   constructor(props){
     super(props)
   }
@@ -39,9 +46,20 @@ class ClientHome extends React.Component {
           <CLientFooterBanner/>
         </div>
         <Footer/>
+        <div className="jq-toast-wrap top-right">
+            {this.props.isSuccess ? <NotifySuccess /> : ""}
+            {this.props.isDanger ? <NotifyDanger /> : ""}
+          </div>
       </>
     )
   }
 }
-
-export default ClientHome
+const mapStateToProps = storeState => ({
+  isSuccess: storeState.reInit.isSuccess,
+  isDanger: storeState.reInit.isDanger
+});
+const mapDispatchToProps = {};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ClientHome);
