@@ -117,7 +117,7 @@ class ClientGift extends React.Component<IProps, IState> {
           <div className="container paddingY-64">
             <div className="row flex-ver">
               <div className="col-sm-1" />
-              <div className="col-sm-4">
+              <div className="col-sm-4 flex-ver">
                 <img
                   width={"100%"}
                   src={this.state.gift.gift_cover}
@@ -127,7 +127,9 @@ class ClientGift extends React.Component<IProps, IState> {
               </div>
               <div className="col-sm-1" />
               <div className="col-sm-6" style={{ fontSize: 18 }}>
+                <h2>{this.state.gift.gift_name}</h2>
                 <p dangerouslySetInnerHTML={{__html: this.state.gift.gift_promo}}/>
+                <p style={{marginTop: 32}} dangerouslySetInnerHTML={{__html: this.state.gift.gift_content}}/>
               </div>
             </div>
           </div>

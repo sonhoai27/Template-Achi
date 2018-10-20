@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { reIsDanger, reIsSuccess } from "../../../reducers/init";
 import {
   reIsShowingModalExportOrderEbook,
-  reListOrderEbook
+  reListOrderEbook,
+  reDeleteOrderEbook
 } from "./reOrderEbook";
 import Pagination from "../../shared/Pagination";
 import ModalExportOrderEbook from "./modalExportOrderEbook";
@@ -15,6 +16,8 @@ interface IProps {
   isShowingModalExportOrderModal: any;
   reListOrderEbook: (page: number) => void;
   reIsShowingModalExportOrderEbook: (status: boolean) => void;
+  reDeleteOrderEbook: (id)=> void;
+  resDeleteOrderEbook: any;
 }
 class OrderEbook extends React.Component<IProps, {}> {
   constructor(props) {
@@ -36,6 +39,15 @@ class OrderEbook extends React.Component<IProps, {}> {
       return "1";
     }
   };
+  componentDidUpdate(preProps){
+    if(this.props.resDeleteOrderEbook != preProps.resDeleteOrderEbook){
+      if(this.props.resDeleteOrderEbook.status === 200){
+        this.props.reListOrderEbook(
+          (parseInt(this.makeCurrentPage(), 10) - 1) * 20
+        );
+      }
+    }
+  }
   renderListOrder = ()=> {
     if(this.props.resListOrderEbook.list){
       return this.props.resListOrderEbook.list.map((element, index) => {
@@ -49,6 +61,13 @@ class OrderEbook extends React.Component<IProps, {}> {
                   <td>{element.package_ebook_name}</td>
                   <td>{element.package_ebook_price}</td>
                   <td>{element.order_ebook_created_date}</td>
+                  <td>
+                    <div className="btn btn-xs btn-danger" onClick={()=> {
+                      this.props.reDeleteOrderEbook(element.order_ebook_id)
+                    }}>
+                      Xóa
+                    </div>
+                  </td>
               </tr>
           )
       })
@@ -89,6 +108,7 @@ class OrderEbook extends React.Component<IProps, {}> {
                     <th>Gói</th>
                     <th>Giá</th>
                     <th>Ngày đăng ký</th>
+                    <th>Hành động</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -115,6 +135,7 @@ class OrderEbook extends React.Component<IProps, {}> {
 
 const mapStateToProps = storeState => ({
   resListOrderEbook: storeState.reOrderEbookAdmin.resListOrderEbook,
+  resDeleteOrderEbook: storeState.reOrderEbookAdmin.resDeleteOrderEbook,
   isShowingModalExportOrderModal:
     storeState.reOrderEbookAdmin.isShowingModalExportOrderModal,
 });
@@ -122,7 +143,8 @@ const mapDispatchToProps = {
   reIsDanger,
   reIsSuccess,
   reListOrderEbook,
-  reIsShowingModalExportOrderEbook
+  reIsShowingModalExportOrderEbook,
+  reDeleteOrderEbook
 };
 export default connect(
   mapStateToProps,

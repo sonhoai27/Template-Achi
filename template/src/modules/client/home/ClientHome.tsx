@@ -9,7 +9,6 @@ import ClientHomeBlog from "./ClientHomeBlog";
 import ClientHomeSource from "./ClientHomeSourceEbook";
 import CLientFooterBanner from "./ClientFooterBanner";
 import Footer from "../client-shared/Footer";
-import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import NotifyDanger from "../../shared/notifyDanger";
 import NotifySuccess from "../../shared/notifySuccess";
@@ -24,14 +23,6 @@ class ClientHome extends React.Component<Props, {}> {
   render(){
     return(
       <>
-      <Helmet>
-            <link rel="stylesheet" href={'http://nguyenminhchi.com/template/public/' + "css/client.css"} />
-            <link
-              rel="stylesheet"
-              href={'http://nguyenminhchi.com/template/public/' + "css/mobile.css"}
-              media="screen and (max-width: 769px)"
-            />
-          </Helmet>
         <ClientHeader/>
         <ClientBanner/>
         <ClientIntroProfile/>

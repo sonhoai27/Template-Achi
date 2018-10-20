@@ -10,8 +10,6 @@ import { connect } from "react-redux";
 import Photo from "../shared/photo";
 import NotifySuccess from "../shared/notifySuccess";
 import NotifyDanger from "../shared/notifyDanger";
-import Helmet from 'react-helmet'
-import { RESOURCE } from "../../config/const";
 import OrderEbookRouter from "./order-ebook/orderEbookRouter";
 import Loading from "./shared/loading";
 interface Props {
@@ -32,9 +30,6 @@ class AdminRouter extends React.Component<Props, {}> {
   render() {
     return (
       <div id="wrapper">
-        <Helmet>
-            <link rel="stylesheet" href={RESOURCE+'css/custom.css'}/>
-        </Helmet>
         <Route exact path={`${this.props.match.url}`} component={Home} />
         <Route path={`${this.props.match.url}/blog`} component={BlogRouter} />
         <Route path={`${this.props.match.url}/video`} component={VideoRouter} />

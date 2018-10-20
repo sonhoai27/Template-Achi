@@ -8,5 +8,4 @@ export interface IOrderSourceModel {
   source_order_ho: string;
   source_order_gender: string;
   source_order_price: number;
-  source_date_sche: string
 }

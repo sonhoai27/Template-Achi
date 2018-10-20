@@ -21,6 +21,9 @@ export const ACTION_TYPES = {
     API_LIST_CONTACT_PAGING: 'ReSource/API_LIST_CONTACT_PAGING',
 
     API_DELETE_SCHE: 'ReSource/API_DELETE_SCHE',
+
+    API_DELETE_CONTACT: 'ReSource/API_DELETE_CONTACT',
+    API_DELETE_SOURCE_ORDER: 'ReSource/API_DELETE_SOURCE_ORDER'
 }
 const initialState = {
     resDetailSource: [],
@@ -39,7 +42,10 @@ const initialState = {
     resAddContact: {},
     resFilterContact: [],
     resListContactPaging: [],
-    resDeleteSche: {}
+    resDeleteSche: {},
+
+    resDeleteContact: {},
+    resDeleteSourceOrder: {}
 }
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -314,6 +320,41 @@ export default (state = initialState, action) => {
                 resContentElement: action.payload
             }
         }
+         //delete contact
+         case REQUEST(ACTION_TYPES.API_DELETE_CONTACT): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_DELETE_CONTACT): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_DELETE_CONTACT): {
+            return {
+                ...state,
+                resDeleteContact: action.payload.data
+            }
+        }
+
+         //delete source order
+         case REQUEST(ACTION_TYPES.API_DELETE_SOURCE_ORDER): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_DELETE_SOURCE_ORDER): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_DELETE_SOURCE_ORDER): {
+            return {
+                ...state,
+                resDeleteSourceOrder: action.payload.data
+            }
+        }
         default:
             return state;
     }
@@ -429,11 +470,26 @@ export const reListContactPaging = (page: number) => async dispatch => {
     });
     return result;
 };
+export const reDeleteContact = (id) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_DELETE_CONTACT,
+        payload: axios.delete(API_CONTACT+'/'+id)
+    });
+    return result;
+};
 
 export const reDeleteSche = (idSche: number) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_DELETE_SCHE,
         payload: axios.delete(API_SOURCE+'delete-sche/'+idSche)
+    });
+    return result;
+};
+
+export const reDeleteSourceOrder = (id) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_DELETE_SOURCE_ORDER,
+        payload: axios.delete(API_SOURCE+'order/'+id)
     });
     return result;
 };

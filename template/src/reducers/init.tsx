@@ -1,6 +1,7 @@
 import axios  from 'axios'
 import { REQUEST, FAILURE, SUCCESS } from '../utils/action-type-util';
 import { API } from '../config/const';
+import { Storage } from '../utils/storage-util';
 
 export const ACTION_TYPES = {
     API_LIST_IMAGE: 'ReInit/API_LIST_IMAGE',
@@ -13,7 +14,8 @@ export const ACTION_TYPES = {
     API_CHECK_LOGIN: 'ReInit/API_CHECK_LOGIN',
     API_LOGIN: 'ReInit/API_LOGIN',
     IS_LOADING: 'ReInit/IS_LOADING',
-    CURRENT_MATCH: 'ReInit/CURRENT_MATCH'
+    CURRENT_MATCH: 'ReInit/CURRENT_MATCH',
+    API_USER_LOGIN: "ReInit/API_USER_LOGIN"
 }
 const initialState = {
     resListImage: [],
@@ -26,7 +28,8 @@ const initialState = {
     resLogin: {},
     resCheckLogin: {},
     isLoading: false,
-    currentMatch: {}
+    currentMatch: {},
+    resUserLogin: {}
 
 }
 export default (state = initialState, action) => {
@@ -135,6 +138,23 @@ export default (state = initialState, action) => {
                 resCheckLogin: action.payload.data
             }
         }
+        //  login
+        case REQUEST(ACTION_TYPES.API_USER_LOGIN): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.API_USER_LOGIN): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.API_USER_LOGIN): {
+            return {
+                ...state,
+                resUserLogin: action.payload.data
+            }
+        }
         default:
             return state;
     }
@@ -199,7 +219,16 @@ export const reIsLoading = (status) => async dispatch => {
 export const reCheckLogin = () => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_CHECK_LOGIN,
-        payload: axios.get(API+'auth/check')
+        payload: axios.post(API+'auth/check', {
+            token: Storage.local.get('user_token')
+        })
+    });
+    return result;
+};
+export const reUserLogin = (form) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_USER_LOGIN,
+        payload: axios.post(API+'auth/login', form)
     });
     return result;
 };

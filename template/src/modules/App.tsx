@@ -9,8 +9,6 @@ import Error from "./admin/shared/error";
 import { BASEURL } from "../config/const";
 import ClientHome from "./client/home/ClientHome";
 import { LoadingPage } from "./client/client-shared/LoadingPage";
-
-// import Login from "./admin/shared/login";
 interface IProps {
   reCheckLogin: () => void;
   resCheckLogin: any;
@@ -36,11 +34,7 @@ class App extends React.Component<IProps, IState> {
     }
   }
   componentDidMount() {
-    //this.props.reCheckLogin();
-    setTimeout(() => {
-      // @ts-ignore
-      document.getElementById("ui-loading").style.display = "none";
-    }, 1500);
+    this.props.reCheckLogin();
   }
   render() {
     return (
@@ -53,7 +47,7 @@ class App extends React.Component<IProps, IState> {
               component={Loadable({
                 loader: () =>
                   import(/*webpackChunkName: "client"*/ "./client/clientRouter"),
-                loading: () => <h1>Loading....</h1>
+                loading: () => <LoadingPage/>
               })}
             />
             {this.state.user.status === 404 ? (
@@ -61,25 +55,21 @@ class App extends React.Component<IProps, IState> {
             ) : (
               <Route path={BASEURL + "login"} component={Error} />
             )}
-            {/* {this.state.user.status ? (
-            ) : (
-              ""
-            )} */}
-
-            <PrivateRouter
-              resCheckLogin={this.props.resCheckLogin}
+            {this.state.user.status ? (
+              <PrivateRouter
+              resCheckLogin={this.state.user}
               path={BASEURL + "admin"}
               component={Loadable({
                 loader: () =>
                   import(/*webpackChunkName: "admin"*/ "./admin/AdminRouter"),
-                loading: () => <h1>Loading....</h1>
+                loading: () => <LoadingPage/>
               })}
             />
+            ) : (
+              ""
+            )}
           </Switch>
         </Router>
-        <div id="ui-loading">
-          <LoadingPage />
-        </div>
       </>
     );
   }

@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Route } from "react-router-dom";
-import { Helmet } from "react-helmet";
 import Error from "../admin/shared/error";
 import ClientBlogRoute from "./blog/ClientBlogRoute";
 import ClientSourceRoute from "./source/ClientSourceRoute";
@@ -31,14 +30,6 @@ class ClientRouter extends React.Component<Props, {}> {
   render() {
     return (
       <>
-        <Helmet>
-            <link rel="stylesheet" href={'http://nguyenminhchi.com/template/public/' + "css/client.css"} />
-            <link
-              rel="stylesheet"
-              href={'http://nguyenminhchi.com/template/public/' + "css/mobile.css"}
-              media="screen and (max-width: 769px)"
-            />
-          </Helmet>
         <div className="margin-top">
           <Route exact path={`${this.props.match.url}`} component={Error} />
           <Route

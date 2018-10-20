@@ -31,6 +31,7 @@ class BlogList extends React.Component<Props, {}> {
   }
   getMoreBlog = page => {
     this.props.reListBlog((page - 1) * 20);
+    window.history.pushState("", "", `${BASEURLADMIN+'blog'}?page=` + page);
   };
   componentDidUpdate(preProps) {
     if (preProps.resDeleteBlog != this.props.resDeleteBlog) {

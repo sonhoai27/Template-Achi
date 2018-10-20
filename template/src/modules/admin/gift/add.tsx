@@ -29,7 +29,8 @@ class GiftAdd extends React.Component<IProps, IState> {
         gift_name: '',
         gift_promo: '',
         gift_uri_file: '',
-        gift_alias: ''
+        gift_alias: '',
+        gift_content: ''
       }
     }
   }
@@ -144,6 +145,42 @@ class GiftAdd extends React.Component<IProps, IState> {
                               }
                             });
                           }
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div
+                    className="form-group"
+                    style={{ display: "inline-block", width: "100%" }}
+                  >
+                    <label className="col-md-12">
+                      <span className="help"> Nội dung</span>
+                    </label>
+                    <div className="col-md-12">
+                      <Editor
+                        id="source_date_sche"
+                        value={this.state.gift.gift_content}
+                        onChange={(e: any) => {
+                          const html: string = e.level.content;
+                          this.setState({
+                            gift: {
+                              ...this.state.gift,
+                              gift_content: html
+                            }
+                          });
+                        }}
+                        apiKey="t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl"
+                        init={{
+                          mode: "exact",
+                          element: "source_date_sche",
+                          height: 100,
+                          theme: "modern",
+                          plugins:
+                            "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
+                          toolbar1:
+                            "fontsizeselect formatselect | bold italic strikethrough forecolor backcolor | link blockquote | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat",
+                          fontsize_formats:
+                            "10pt 11pt 12pt 14pt 16pt 18pt 20pt 24pt 26pt 28pt 36pt 48pt 72pt"
                         }}
                       />
                     </div>

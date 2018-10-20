@@ -36,8 +36,7 @@ class ClientOrderSource extends React.Component<IProps, IState> {
         source_order_number_phone: "",
         source_order_ho: "",
         source_order_gender: "",
-        source_order_price: 0,
-        source_date_sche: ""
+        source_order_price: 0
       },
       source: {}
     };

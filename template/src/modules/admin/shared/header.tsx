@@ -206,7 +206,7 @@ class Header extends React.Component {
                 </a>
                 <ul className="nav nav-second-level collapse">
                   <li>
-                    <a href="chat.html">
+                    <a href={BASEURLADMIN+'order-ebook'}>
                       <i className="ti-comments-smiley fa-fw" />
                       <span className="hide-menu">Danh sách đăng ký</span>
                     </a>

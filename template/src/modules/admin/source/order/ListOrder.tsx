@@ -3,11 +3,14 @@ import { connect } from "react-redux";
 import { reListOrder, reIsShowingModalExport } from "./reOrder";
 import Pagination from "../../../shared/Pagination";
 import ModalExport from './modalExport'
+import { reDeleteSourceOrder } from './../reSource';
 interface Props {
   resListOrder: any;
   reListOrder: (page: number) => void;
   reIsShowingModalExport: (status: boolean)=>void,
-  isShowingModalExport: any
+  isShowingModalExport: any;
+  resDeleteSourceOrder: any;
+  reDeleteSourceOrder: (id)=> void;
 }
 class ListOrder extends React.Component<Props, {}> {
   constructor(props) {
@@ -31,6 +34,15 @@ class ListOrder extends React.Component<Props, {}> {
       return "1";
     }
   };
+  componentDidUpdate(preProps){
+    if(this.props.resDeleteSourceOrder != preProps.resDeleteSourceOrder){
+      if(this.props.resDeleteSourceOrder.status === 200){
+        this.props.reListOrder(
+            (parseInt(this.makeCurrentPage(), 10) - 1)*20
+        )
+      }
+    }
+  }
   renderListOrder = ()=> {
       if(this.props.resListOrder.list){
         return this.props.resListOrder.list.map((element, index) => {
@@ -46,7 +58,13 @@ class ListOrder extends React.Component<Props, {}> {
                     <td>{element.source_order_email}</td>
                     <td>{element.source_title} - {element.source_sche_khoa}</td>
                     <td>{element.source_order_price}</td>
-                    <td>{element.source_order_created_date}</td>
+                    <td>
+                      <div className="btn btn-xs btn-danger" onClick={()=> {
+                        this.props.reDeleteSourceOrder(element.source_order_id)
+                      }}>
+                        Xóa
+                      </div>
+                    </td>
                 </tr>
             )
         })
@@ -82,7 +100,7 @@ class ListOrder extends React.Component<Props, {}> {
                     <th>Email</th>
                     <th>Khóa học - TKB</th>
                     <th>Giá</th>
-                    <th>Ngày đăng ký</th>
+                    <th>Hành động</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -108,11 +126,13 @@ class ListOrder extends React.Component<Props, {}> {
 
 const mapStateToProps = storeState => ({
   resListOrder: storeState.reOrder.resListOrder,
-  isShowingModalExport: storeState.reOrder.isShowingModalExport
+  isShowingModalExport: storeState.reOrder.isShowingModalExport,
+  resDeleteSourceOrder: storeState.reSource.resDeleteSourceOrder
 });
 const mapDispatchToProps = {
   reListOrder,
-  reIsShowingModalExport
+  reIsShowingModalExport,
+  reDeleteSourceOrder
 };
 export default connect(
   mapStateToProps,

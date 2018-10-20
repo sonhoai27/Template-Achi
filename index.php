@@ -20,6 +20,19 @@ define("BASE_URL", 'http://localhost:8080/Achi/template/public/');
         <link href="<?=BASE_URL?>css/swiper.min.css" rel="stylesheet">
         <script src="<?=BASE_URL?>js/jquery-3.3.1.slim.min.js"></script>
         <link href="<?=BASE_URL?>css/cdn.css" rel="stylesheet">
+        <link
+              rel="stylesheet"
+              href="http://nguyenminhchi.com/template/public/css/custom.css"
+            />
+        <link
+              rel="stylesheet"
+              href="http://nguyenminhchi.com/template/public/css/client.css"
+            />
+        <link
+              rel="stylesheet"
+              href="http://nguyenminhchi.com/template/public/css/mobile.css"
+              media="screen and (max-width: 769px)"
+            />
         <meta name="robots" content="noindex, nofollow">
         <link href="<?=BASE_URL?>css/style_2.css" rel="stylesheet">
         <link href="<?=BASE_URL?>css/style_3.css" rel="stylesheet">

@@ -8,7 +8,8 @@ export const ACTION_TYPES = {
     API_LIST_ORDER_EBOOK_BY_PACKAGE: 'ReOrderEbook/API_LIST_ORDER_EBOOK_BY_PACKAGE',
     API_ADD_PACKAGE: 'ReOrderEbook/API_ADD_PACKAGE',
     API_UPDATE_PACKAGE: 'ReOrderEbook/API_UPDATE_PACKAGE',
-    API_SHOW_ALL_ORDER_EBOOK: 'ReOrderEbook/API_SHOW_ALL_ORDER_EBOOK'
+    API_SHOW_ALL_ORDER_EBOOK: 'ReOrderEbook/API_SHOW_ALL_ORDER_EBOOK',
+    API_DELETE_ORDER_EBOOK: 'ReOrderEbook/API_DELETE_ORDER_EBOOK'
 }
 
 const initialState = {
@@ -17,7 +18,8 @@ const initialState = {
     isShowingModalExportOrderModal: false,
     resListOrderEbookByPackage: {},
     resAddPackage: {},
-    resUpdatePackage: {}
+    resUpdatePackage: {},
+    resDeleteOrderEbook: {}
 }
 
 export default (state = initialState, action) => {
@@ -132,6 +134,23 @@ export default (state = initialState, action) => {
               resUpdatePackage: action.payload.data
           }
       }
+      // delete order ebook
+      case REQUEST(ACTION_TYPES.API_DELETE_ORDER_EBOOK): {
+        return {
+            ...state
+        }
+      }
+      case FAILURE(ACTION_TYPES.API_DELETE_ORDER_EBOOK): {
+          return {
+              ...state
+          }
+      }
+      case SUCCESS(ACTION_TYPES.API_DELETE_ORDER_EBOOK): {
+          return {
+              ...state,
+              resDeleteOrderEbook: action.payload.data
+          }
+      }
         default:
             return state;
     }
@@ -188,3 +207,10 @@ export const reAddPackage = (form: any) => async dispatch => {
   });
   return result;
 };
+export const reDeleteOrderEbook = (id) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.API_DELETE_ORDER_EBOOK,
+        payload: axios.delete(API_ORDER_EBOOK+'/'+ id)
+    });
+    return result;
+  };

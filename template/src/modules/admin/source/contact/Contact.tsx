@@ -1,11 +1,15 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { reListContactPaging } from "../reSource";
+import { reListContactPaging, reDeleteContact } from "../reSource";
 import ModalExportContact from "./ModalExportContact";
+import Pagination from "../../../shared/Pagination";
+import { BASEURLADMIN } from "../../../../config/const";
 
 interface IProps {
   resListContactPaging: any;
   reListContactPaging: (page: number) => void;
+  resDeleteContact: any;
+  reDeleteContact: (id)=> void;
 }
 interface IState {
     isShowingModal: boolean;
@@ -32,7 +36,15 @@ class Contact extends React.Component<IProps, IState> {
   }
   getMoreBlog = page => {
     this.props.reListContactPaging((page - 1) * 20);
+    window.history.pushState("", "", `${BASEURLADMIN+'source/contact'}?page=` + page);
   };
+  componentDidUpdate(preProps){
+    if(this.props.resDeleteContact != preProps.resDeleteContact){
+      this.props.reListContactPaging(
+        (parseInt(this.makeCurrentPage(), 10) - 1) * 20
+      );
+    }
+  }
   renderListContact = () => {
     if (this.props.resListContactPaging.list) {
       return this.props.resListContactPaging.list.map((element, index)=> {
@@ -42,6 +54,13 @@ class Contact extends React.Component<IProps, IState> {
             <td>{element.email_name}</td>
             <td>{element.email_email}</td>
             <td>{element.email_phone}</td>
+            <td>
+              <div className="btn btn-xs btn-danger" onClick={()=> {
+                this.props.reDeleteContact(element.email_id)
+              }}>
+                Xóa
+              </div>
+            </td>
           </tr>
         )
       })
@@ -75,10 +94,19 @@ class Contact extends React.Component<IProps, IState> {
                         <th>Tên</th>
                         <th>Email</th>
                         <th>Số điện thoại</th>
+                        <th>Hành động</th>
                       </tr>
                     </thead>
                     <tbody>{this.renderListContact()}</tbody>
                   </table>
+                </div>
+                <div className="pg">
+                  <Pagination
+                    initialPage={parseInt(this.makeCurrentPage(), 10)}
+                    pageSize={20}
+                    totalItems={this.props.resListContactPaging.count}
+                    onChangePage={e => this.getMoreBlog(e.currentPage)}
+                  />
                 </div>
               </div>
             </div>
@@ -97,10 +125,12 @@ class Contact extends React.Component<IProps, IState> {
 }
 
 const mapStateToProps = storeState => ({
-  resListContactPaging: storeState.reSource.resListContactPaging
+  resListContactPaging: storeState.reSource.resListContactPaging,
+  resDeleteContact: storeState.reSource.resDeleteContact
 });
 const mapDispatchToProps = {
-  reListContactPaging
+  reListContactPaging,
+  reDeleteContact
 };
 export default connect(
   mapStateToProps,

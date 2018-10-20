@@ -7,79 +7,179 @@ import { reShowEditContent, reSetContentElement } from "../../source/reSource";
 interface Props {
   detailUI: any;
   sub?: any;
-  match: any,
-  reSaveContent: (form: any)=> void;
-  reShowEditContent: (status: boolean)=> void;
-  reSetContentElement: (content: any)=> void;
+  match: any;
+  reSaveContent: (form: any) => void;
+  reShowEditContent: (status: boolean) => void;
+  reSetContentElement: (content: any) => void;
 }
 interface State {
-  content_page_attribute: string,
-  content_page_attribute_src: string,
-  content_page_data: string,
-  content_page_class: string
+  content_page_attribute: string;
+  content_page_attribute_src: string;
+  content_page_data: string;
+  content_page_class: string;
 }
 class ItemDetailUIPage extends React.Component<Props, State> {
   state = {
     content_page_attribute: this.props.detailUI.content_page_attribute,
-      content_page_attribute_src: this.props.detailUI.content_page_attribute_src,
-      content_page_data: this.props.detailUI.content_page_data,
-      content_page_class: this.props.detailUI.content_page_class
-  }
-  saveContentPage = (obj)=> {
-    const tempDom: any = document.getElementById(obj.idVirtualElement)
+    content_page_attribute_src: this.props.detailUI.content_page_attribute_src,
+    content_page_data: this.props.detailUI.content_page_data,
+    content_page_class: this.props.detailUI.content_page_class
+  };
+  saveContentPage = obj => {
+    const tempDom: any = document.getElementById(obj.idVirtualElement);
     this.props.reSaveContent({
       ...obj,
       [tempDom.name]: tempDom.value
-    })
-  }
+    });
+  };
+  checkChild = () => {
+    if (this.props.detailUI.child) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  renderNoiDung = () => {
+    return (
+      <>
+        <div className="form-group">
+          <label className="col-md-12">
+            <span className="help"> Attribute</span>
+            <div
+              onClick={() =>
+                this.saveContentPage({
+                  idVirtualElement:
+                    this.props.detailUI.detail_ui_random_id + "-attr",
+                  content_page_id: this.props.detailUI.content_page_id,
+                  content_page_id_detail_ui: this.props.detailUI.detail_ui_id
+                })
+              }
+              className="btn btn-xs btn-info"
+            >
+              <i className=" icon-doc" /> Lưu
+            </div>
+          </label>
+          <div className="col-md-12">
+            <input
+              className="form-control"
+              type="text"
+              name="content_page_attribute"
+              defaultValue={this.state.content_page_attribute}
+              id={this.props.detailUI.detail_ui_random_id + "-attr"}
+            />
+          </div>
+        </div>
+        <div className="form-group">
+          <label className="col-md-12">
+            <span className="help"> Content Attribute</span>
+            <div
+              onClick={() =>
+                this.saveContentPage({
+                  idVirtualElement:
+                    this.props.detailUI.detail_ui_random_id + "-content-attr",
+                  content_page_id: this.props.detailUI.content_page_id,
+                  content_page_id_detail_ui: this.props.detailUI.detail_ui_id
+                })
+              }
+              className="btn btn-xs btn-info"
+            >
+              <i className=" icon-doc" /> Lưu
+            </div>
+          </label>
+          <div className="col-md-12">
+            <input
+              name="content_page_attribute_src"
+              id={this.props.detailUI.detail_ui_random_id + "-content-attr"}
+              type="text"
+              defaultValue={this.state.content_page_attribute_src}
+              className="form-control"
+            />
+          </div>
+        </div>
+      </>
+    );
+  };
   generateInfo = () => {
     return (
-      <div className="item-block" style={{marginBottom: 0}}>
-        <div className="toolbar" style={{justifyContent: 'left'}}>
+      <div className="item-block" style={{ marginBottom: 0 }}>
+        <div className="toolbar" style={{ justifyContent: "left" }}>
           <h3>{this.props.detailUI.element_name}</h3>
-          <input type="text"
+          <input
+            type="text"
             name="content_page_name"
-            id={this.props.detailUI.detail_ui_random_id+'-name-row'} 
+            id={this.props.detailUI.detail_ui_random_id + "-name-row"}
             defaultValue={this.props.detailUI.content_page_name}
-            className="form-control" style={{
-            width: '10%',
-            marginLeft: '16px',
-            marginRight: '16px'
-          }}/>
-          <div onClick={()=> this.saveContentPage({
-                idVirtualElement: this.props.detailUI.detail_ui_random_id+'-name-row',
+            className="form-control"
+            style={{
+              width: "10%",
+              marginLeft: "16px",
+              marginRight: "16px"
+            }}
+          />
+          <div
+            onClick={() =>
+              this.saveContentPage({
+                idVirtualElement:
+                  this.props.detailUI.detail_ui_random_id + "-name-row",
                 content_page_id: this.props.detailUI.content_page_id,
                 content_page_id_detail_ui: this.props.detailUI.detail_ui_id
-              })} className="btn btn-xs btn-info">Lưu tên</div>
-         </div>
-        <div className="style">
-          <div className="form-group">
-            <label className="col-md-12">
-              <span className="help"> Nội dung của đối tượng</span>
-              <div onClick={()=> {
-                  this.props.reShowEditContent(true)
-                  this.props.reSetContentElement(this.props.detailUI)
-                }} className="btn btn-xs btn-primary">
-                <i className=" icon-doc" /> sửa
-              </div>
-            </label>
-            <p>Nhấn vào "sửa" để thêm hoặc sửa.</p>
+              })
+            }
+            className="btn btn-xs btn-info"
+          >
+            Lưu tên
           </div>
+        </div>
+        <div className="style">
+          {!this.checkChild() ? (
+            <>
+              <div className="form-group">
+                <label className="col-md-12">
+                  <span className="help"> Nội dung</span>
+                  <div
+                    onClick={() => {
+                      this.props.reShowEditContent(true);
+                      this.props.reSetContentElement(this.props.detailUI);
+                    }}
+                    className="btn btn-xs btn-primary"
+                  >
+                    <i className=" icon-doc" /> sửa
+                  </div>
+                </label>
+              </div>
+              <div className="xem-truoc-noi-dung">
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: this.props.detailUI.content_page_data
+                  }}
+                />
+              </div>
+            </>
+          ) : (
+            ""
+          )}
+
           <div className="form-group">
             <label className="col-md-12">
-              <span className="help"> Class của đối tượng</span>
-              <div onClick={()=> this.saveContentPage({
-                idVirtualElement: this.props.detailUI.detail_ui_random_id+'-class',
-                content_page_id: this.props.detailUI.content_page_id,
-                content_page_id_detail_ui: this.props.detailUI.detail_ui_id
-              })} className="btn btn-xs btn-info">
+              <span className="help"> Class</span>
+              <div
+                onClick={() =>
+                  this.saveContentPage({
+                    idVirtualElement:
+                      this.props.detailUI.detail_ui_random_id + "-class",
+                    content_page_id: this.props.detailUI.content_page_id,
+                    content_page_id_detail_ui: this.props.detailUI.detail_ui_id
+                  })
+                }
+                className="btn btn-xs btn-info"
+              >
                 <i className=" icon-doc" /> Lưu
               </div>
             </label>
             <div className="col-md-12">
               <input
                 name="content_page_class"
-                id={this.props.detailUI.detail_ui_random_id+'-class'}
+                id={this.props.detailUI.detail_ui_random_id + "-class"}
                 type="text"
                 className="form-control"
                 defaultValue={this.state.content_page_class}
@@ -88,46 +188,7 @@ class ItemDetailUIPage extends React.Component<Props, State> {
           </div>
         </div>
         <div className="noi-dung">
-          <div className="form-group">
-            <label className="col-md-12">
-              <span className="help"> Attribute của đối tượng</span>
-              <div onClick={()=> this.saveContentPage({
-                idVirtualElement: this.props.detailUI.detail_ui_random_id+'-attr',
-                content_page_id: this.props.detailUI.content_page_id,
-                content_page_id_detail_ui: this.props.detailUI.detail_ui_id
-              })} className="btn btn-xs btn-info">
-                <i className=" icon-doc" /> Lưu
-              </div>
-            </label>
-            <div className="col-md-12">
-              <input className="form-control"
-              type="text"
-              name="content_page_attribute"
-              defaultValue={this.state.content_page_attribute}
-              id={this.props.detailUI.detail_ui_random_id+'-attr'}/>
-            </div>
-          </div>
-          <div className="form-group">
-            <label className="col-md-12">
-              <span className="help"> Content Attribute của đối tượng</span>
-              <div onClick={()=> this.saveContentPage({
-                idVirtualElement: this.props.detailUI.detail_ui_random_id+'-content-attr',
-                content_page_id: this.props.detailUI.content_page_id,
-                content_page_id_detail_ui: this.props.detailUI.detail_ui_id
-              })} className="btn btn-xs btn-info">
-                <i className=" icon-doc" /> Lưu
-              </div>
-            </label>
-            <div className="col-md-12">
-              <input
-                name="content_page_attribute_src"
-                id={this.props.detailUI.detail_ui_random_id+'-content-attr'}
-                type="text"
-                defaultValue={this.state.content_page_attribute_src}
-                className="form-control"
-              />
-            </div>
-          </div>
+          {!this.checkChild() ? this.renderNoiDung() : ""}
         </div>
       </div>
     );
@@ -141,7 +202,11 @@ class ItemDetailUIPage extends React.Component<Props, State> {
   };
   generateSubItemDetailUI = () => {
     return (
-      <ListElementDetailUIPage match={this.props.match} sub="child" detail={this.props.detailUI.child} />
+      <ListElementDetailUIPage
+        match={this.props.match}
+        sub="child"
+        detail={this.props.detailUI.child}
+      />
     );
   };
   render() {
@@ -155,8 +220,7 @@ class ItemDetailUIPage extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = storeState => ({
-});
+const mapStateToProps = storeState => ({});
 const mapDispatchToProps = {
   reSaveContent,
   reShowEditContent,

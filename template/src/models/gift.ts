@@ -5,5 +5,6 @@ export interface IGiftModel {
   gift_promo: string,
   gift_cover: string,
   gift_active: number,
-  gift_alias: string
+  gift_alias: string,
+  gift_content: string
 }
