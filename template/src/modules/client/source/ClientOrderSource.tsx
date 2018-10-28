@@ -7,7 +7,6 @@ import { IOrderSourceModel } from "../../../models/orderSource";
 import { reAddOrder } from "../../admin/source/order/reOrder";
 import { reDetailSche } from "../../admin/source/reSource";
 import { BASEURL } from "../../../config/const";
-import Footer from "../client-shared/Footer";
 interface IState {
   order: IOrderSourceModel;
   source: any;
@@ -61,13 +60,13 @@ class ClientOrderSource extends React.Component<IProps, IState> {
         setTimeout(() => {
           this.props.reIsSuccess(false);
           this.props.reIsLoading(!this.props.isLoading)
-          window.location.href = BASEURL+'page/khoa-hoc/dang-ky/'+this.props.match.params.idSche
+          window.location.href = BASEURL+'page/dang-ky-khoa-hoc/'+this.props.match.params.idSche
         }, 2000);
       } else {
         this.props.reIsDanger(true);
         setTimeout(() => {
           this.props.reIsDanger(false);
-          window.location.href = BASEURL+'page/khoa-hoc/dang-ky/'+this.props.match.params.idSche
+          window.location.href = BASEURL+'page/dang-ky-khoa-hoc/'+this.props.match.params.idSche
         }, 2000);
       }
     }
@@ -96,12 +95,17 @@ class ClientOrderSource extends React.Component<IProps, IState> {
         this.props.reIsLoading(!this.props.isLoading)
       }, 2000);
    }else {
-    this.props.reAddOrder(this.state.order)
+    this.props.reAddOrder({
+      ...this.state.order,
+      source_order_birthday: this.makeDateText(this.state.order.source_order_birthday)
+    })
    }
   };
+  makeDateText = (day: any)=> {
+    const date = new Date(day)
+    return date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()
+  }
   handleDayClick = (day: any) =>{
-    // const date = new Date(day)
-    // date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()
     this.setState({
       order: {
         ...this.state.order,
@@ -113,6 +117,9 @@ class ClientOrderSource extends React.Component<IProps, IState> {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
   };
   render() {
+    const price = Number(this.state.source.source_sche_price)
+    const sale = Number(this.state.source.source_sche_sale)
+    const discount = price - sale
     return (
       <>
         <Helmet
@@ -140,8 +147,7 @@ class ClientOrderSource extends React.Component<IProps, IState> {
           <div className="row">
             <div className="col-sm-12">
               <h2 style={{ fontWeight: 600, marginTop: 32 }}>
-                {this.state.source.source_title} - Khóa{" "}
-                {this.state.source.source_sche_id}
+                {this.state.source.source_title}&nbsp;-&nbsp;{this.state.source.source_sche_khoa}
               </h2>
               <hr
                 style={{
@@ -159,29 +165,20 @@ class ClientOrderSource extends React.Component<IProps, IState> {
                 </li>
                 <li>
                   <p>Mức phí: </p>
-                  <p>
-                    <u>{this.state.source.source_sche_price}</u>
+                  <p style={{textDecoration: 'line-through'}}>
+                    {price.toLocaleString('VN')}đ
                   </p>
                 </li>
                 <li>
                   <p>Ưu đãi hiện tại: </p>
-                  <p>{this.state.source.source_sche_sale}</p>
+                  <p style={{color: 'red'}}>{discount.toLocaleString('VN')}đ</p>
                 </li>
                 <li>
                   <p>Thời gian: </p>
                   <p dangerouslySetInnerHTML={{__html: this.state.source.source_date_sche}}/>
                 </li>
               </ul>
-              <ul>
-                <li>
-                  Để được hỗ trợ thêm, bạn có thể gọi hotline 24/7 của chúng tôi
-                  bằng cách bấm vào đây.
-                </li>
-                <li>
-                  Mỗi mức ưu đãi học phí đều chỉ có một số lượng suất đăng ký
-                  nhất định.
-                </li>
-              </ul>
+              <div dangerouslySetInnerHTML={{__html: this.state.source.source_sche_uu_dai}}/>
               <hr
                 style={{
                   backgroundColor: "#999",
@@ -191,35 +188,40 @@ class ClientOrderSource extends React.Component<IProps, IState> {
               />
             </div>
             <div className="col-sm-12">
-              <h4>
-                <b style={{ color: "red" }}>QUAN TRỌNG:</b> Vui lòng nhập chính
-                xác <b style={{ color: "red" }}>email và số điện thoại</b> bạn
-                thường dùng (ở mẫu đăng ký bên dưới) bởi vì NMC sẽ gửi cho bạn
-                các thông tin sau:
-              </h4>
-              <ul
-                style={{
-                  listStyle: "circle",
-                  padding: 0
-                }}
-              >
-                <li style={{ marginLeft: 16 }}>
-                  Xác nhận đăng ký thành công (email)
+            <b style={{color: 'red'}}>CHÚ Ý</b>: <b>Nhập chính xác các thông tin đăng ký</b> (theo  mẫu bên dưới) sau đó <b>check email</b> đăng ký để kiểm tra lại thông tin để đảm bảo chính xác (nếu sai hãy đăng ký lại thêm lần nữa), sau đó xác nhận email và làm theo hướng dẫn từ Sống Xứng Đáng.<br/>
+            {/* <p style={{color: 'blue'}}>Có 2 hình thức hoàn tất phí:</p>
+            <ol type="1" style={{color: 'blue'}}>
+                <li>Trực tiếp tại văn phòng: 26/3 Phan Chu Trinh, Hiệp Phú, Quận 9, Hồ Chí Minh.</li>
+                <li>Chuyển khoản qua ngân hàng theo thông tin dưới đây:
+                  <ul>
+                  <li>Ngân Hàng: VP Bank - Chi nhánh quận 10 </li>
+                  <li>Chủ tài khoản: Nguyễn Minh Chí</li>
+                  <li>Số tài khoản: 85461052</li>
+                  <li>Nội dung chuyển khoản: Họ tên_Số điện thoại _Khóa học đăng ký​</li>
+                  </ul>
                 </li>
-              </ul>
+            </ol> */}
+            <b style={{color: 'red'}}>Hotline hỗ trợ</b>: <b> 0977 545 374</b> để được giải đáp thêm thông tin.<br/>
+                  Trân trọng,
             </div>
           </div>
           <div className="row">
             <div className="col-sm-12 form-order-source">
-              <h3>
-                <i className="icon-user" /> Khách hàng
-              </h3>
+              <div className="row">
+                <div className="col-sm-4">
+                  <h3 style={{color: '#1f9080'}}>
+                    <i className="icon-user" /> Học viên
+                  </h3>
+                </div>
+                <div className="col-sm-4 text-center" style={{marginTop: 8,color: '#1f9080'}}>Điền chính xác thông tin bên dưới</div>
+                <div className="col-sm-4"></div>
+              </div>
               <div className="row form-order-source_form">
                 <div className="col-sm-4" />
                 <div className="col-sm-4">
                   <div className="form-group">
                     <label className="col-md-12">
-                      <span className="help"> Email</span>
+                      <span className="help">* Email</span>
                     </label>
                     <div className="col-md-12">
                       <input
@@ -240,7 +242,7 @@ class ClientOrderSource extends React.Component<IProps, IState> {
                   </div>
                   <div className="form-group">
                     <label className="col-md-12">
-                      <span className="help"> Số điện thoại</span>
+                      <span className="help">* Số điện thoại</span>
                     </label>
                     <div className="col-md-12">
                       <input
@@ -255,7 +257,7 @@ class ClientOrderSource extends React.Component<IProps, IState> {
 
                   <div className="form-group">
                     <label className="col-md-12">
-                      <span className="help"> Họ</span>
+                      <span className="help">* Họ</span>
                     </label>
                     <div className="col-md-12">
                       <input
@@ -269,7 +271,7 @@ class ClientOrderSource extends React.Component<IProps, IState> {
                   </div>
                   <div className="form-group">
                     <label className="col-md-12">
-                      <span className="help"> Tên lót và tên</span>
+                      <span className="help">* Tên lót và tên</span>
                     </label>
                     <div className="col-md-12">
                       <input
@@ -283,7 +285,7 @@ class ClientOrderSource extends React.Component<IProps, IState> {
                   </div>
                   <div className="form-group">
                     <label className="col-md-12">
-                      <span className="help"> Giới tính</span>
+                      <span className="help">* Giới tính</span>
                     </label>
                     <div className="col-md-12">
                       <select
@@ -300,7 +302,7 @@ class ClientOrderSource extends React.Component<IProps, IState> {
                   </div>
                   <div className="form-group">
                     <label className="col-md-12">
-                      <span className="help"> Ngày sinh</span>
+                      <span className="help">* Ngày sinh</span>
                     </label>
                     <div className="col-md-12">
                     <DatePicker
@@ -320,7 +322,6 @@ class ClientOrderSource extends React.Component<IProps, IState> {
             </div>
           </div>
         </div>
-        <Footer/>
       </>
     );
   }

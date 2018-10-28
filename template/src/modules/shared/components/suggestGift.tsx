@@ -81,7 +81,7 @@ class SuggestGift extends React.Component<IProps, IState> {
           </div>
           <hr/>
           <div className="row">
-            <div className="col-sm-12">
+            {/* <div className="col-sm-12">
               <p
                 style={{
                   textAlign: "center",
@@ -93,23 +93,23 @@ class SuggestGift extends React.Component<IProps, IState> {
               >
                 Có thể bạn thích
               </p>
-            </div>
+            </div> */}
           </div>
           <div className="row">
             <div className="col-sm-2" />
-            <div className="col-sm-8" style={{
+            <div className="col-sm-8 goi-y-qua" style={{
               display: 'flex',
               alignItems: 'center',
               border: '2px dashed #607D8B',
               padding: 16
             }}>
-              <img
+             <a href="http://sotay.songxungdang.com"><img
                 src="http://nguyenminhchi.com/api/uploads/images/ea00646c35438c5c44911539450000000.png"
                 alt=""
                 width="150px"
                 style={{marginRight: 16}}
                 className="img-responsive"
-              />
+              /></a>
               <div style={{textAlign: 'justify'}}>
               <h3><a href="http://sotay.songxungdang.com">Sổ Tay Sống Xứng Đáng</a></h3>
               <p>Người bạn tin cậy đồng hành cùng bạn sống xứng đáng và tạo nên những thành tựu riêng cuộc đời mình</p>
@@ -119,7 +119,7 @@ class SuggestGift extends React.Component<IProps, IState> {
           </div>
           <div className="row margin-t-64 margin-b-32">
             <div className="col-sm-2" />
-            <div className="col-sm-8" style={{
+            <div className="col-sm-8 goi-y-qua" style={{
               display: 'flex',
               alignItems: 'center',
               border: '2px dashed #607D8B',
@@ -129,13 +129,13 @@ class SuggestGift extends React.Component<IProps, IState> {
              <h3><a href="http://songxungdang.com">Khóa Học Sống Xứng Đáng</a></h3>
               <p>Hãy để bạn sống nhật nhiệt huyết, có một tuổi trẻ đầy say mê và kiến tạo những kiệt tác cho riêng cuộc đời mình.</p>
              </div>
-             <img
+             <a href="http://songxungdang.com"><img
                 width="50%"
                 style={{marginLeft: 16}}
                 src="http://nguyenminhchi.com/api/uploads/images/8127bb0352a746135c261539450000000.png"
                 alt=""
                 className="img-responsive"
-              />
+              /></a>
             </div>
             <div className="col-sm-2" />
           </div>
@@ -146,7 +146,8 @@ class SuggestGift extends React.Component<IProps, IState> {
                 <a target="_blank" href="https://www.facebook.com/sharer.php?u=http://nguyenminhchi.com/page/qua-tang">
                   <div className="btn btn-lg" style={{
                     background: '#3b5998',
-                    color: '#fff'
+                    color: '#fff',
+                    marginBottom: 16
                   }}>
                     Chia sẻ Facebook
                   </div>
@@ -156,7 +157,8 @@ class SuggestGift extends React.Component<IProps, IState> {
                 <a target="_blank" href="http://nguyenminhchi.com">
                   <div className="btn btn-lg" style={{
                     background: 'rgb(31, 144, 128)',
-                    color: '#fff'
+                    color: '#fff',
+                    marginBottom: 16
                   }}>
                     Trang chủ
                   </div>

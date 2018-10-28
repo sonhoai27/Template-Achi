@@ -7,12 +7,12 @@ import EbookLadingPage from "./ebook/ebook";
 import { connect } from "react-redux";
 import NotifySuccess from "../shared/notifySuccess";
 import NotifyDanger from "../shared/notifyDanger";
-import Loading from "../admin/shared/loading";
 import ClientVideo from "./video/ClientVideo";
 import ClientGift from "./gift";
 import ClientAboutPage from "./About";
 import ScheEvents from "./ScheEvents";
 import SuggestGift from './../shared/components/suggestGift';
+import SuggestKH from './../shared/components/suggestKH';
 interface Props {
   match?: any;
   isDanger: boolean;
@@ -64,11 +64,14 @@ class ClientRouter extends React.Component<Props, {}> {
             path={`${this.props.match.url}/nhan-qua/:idGift`}
             component={SuggestGift}
           />
+          <Route
+            path={`${this.props.match.url}/dang-ky-khoa-hoc/:idSource`}
+            component={SuggestKH}
+          />
           <div className="jq-toast-wrap top-right">
             {this.props.isSuccess ? <NotifySuccess /> : ""}
             {this.props.isDanger ? <NotifyDanger /> : ""}
           </div>
-          {this.props.isLoading ? <Loading /> : ""}
         </div>
       </>
     );

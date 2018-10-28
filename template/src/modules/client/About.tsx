@@ -26,7 +26,7 @@ class ClientAboutPage extends React.Component<IProps, {}> {
           <title>Giới thiệu - Nguyễn Minh Chí</title>
         </Helmet>
         <ClientHeader/>
-        <div className="row">
+        <div>
           <ItemPage items={this.props.resListPageUI.list}/>
         </div>
         <Footer/>

@@ -1,5 +1,4 @@
 import * as React from "react";
-import AutofitImage from "../shared/CropImage";
 import { reListSourceByType } from "../admin/source/reSource";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -29,11 +28,7 @@ class ScheEvents extends React.Component<IProps, {}> {
               style={{ marginBottom: 64, width: '100%' }}
             >
               <div className="col-sm-4 wow bounceInLeft" data-wow-duration="2s">
-                <AutofitImage
-                  frameWidth="100%"
-                  frameHeight="200px"
-                  imgSrc={element.source_cover}
-                />
+                <img src={element.source_cover} className="img-responsive"/>
               </div>
               <div className="col-sm-8">
                 <h2>
@@ -99,7 +94,7 @@ class ScheEvents extends React.Component<IProps, {}> {
           <div className="row">
             <CLientFooterBanner />
           </div>
-          <div className="row page-source_list-source">
+          <div className="row page-source_list-source lich-su-kien">
             <div className="container paddingY-64">
               <div className="row">
                 {this.renderListSources()}

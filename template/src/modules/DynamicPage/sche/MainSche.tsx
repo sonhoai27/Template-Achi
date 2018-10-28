@@ -40,16 +40,16 @@ class MainSche extends React.Component<IProps, {}> {
               <li data-label="Tên chương trình">
                 <ul className="child" style={{padding: 0}}>
                   <li className="orange">
-                    <b id="name_74">{element.source_title} - {element.source_sche_khoa}</b>
+                    <b id="name_74"><i className="icon-layers"/> {element.source_title} - {element.source_sche_khoa}</b>
                   </li>
                   <li>
-                    Trainer: 
+                  <i className="icon-microphone"/> Trainer: 
                     <a href={BASEURL+'page/gioi-thieu'} style={{marginLeft: 8}}>
                       {element.source_sche_teacher}
                     </a>
                   </li>
                   <li>
-                    Địa chỉ: <span style={{marginLeft: 8}}>{element.source_sche_address}</span>
+                  <i className="icon-location-pin"/>  Địa chỉ: <span style={{marginLeft: 8}}>{element.source_sche_address}</span>
                   </li>
                 </ul>
               </li>
@@ -60,13 +60,13 @@ class MainSche extends React.Component<IProps, {}> {
                 <p
                   style={{ marginRight: 10, lineHeight: "1.8", textDecoration: 'line-through' }}
                 >
-                  <b>{price.toLocaleString('vi-VN')}đ</b>
+                  <b style={{fontWeight: 'bold'}}>{price.toLocaleString('vi-VN')}đ</b>
                 </p>
                 <p style={{ lineHeight: "1.8", color: 'red' }}>
-                  - <b>{discount.toLocaleString('vi-VN')}đ</b>
+                  - <b style={{fontWeight: 'bold'}}>{discount.toLocaleString('vi-VN')}đ</b>
                 </p>
                 <p style={{ lineHeight: "1.8", color: 'green' }}>
-                  <b>= {this.calMoney(element.source_sche_price, element.source_sche_sale)}</b>
+                  <b style={{fontWeight: 'bold'}}>= {this.calMoney(element.source_sche_price, element.source_sche_sale)}</b>
                 </p>
               </li>
               <li className="text-center" data-label="Đăng ký">

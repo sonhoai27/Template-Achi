@@ -1,5 +1,4 @@
 import * as React from "react";
-import ClientHeader from "../client-shared/Header";
 import ClientBanner from "./ClientBanner";
 import ClientIntroProfile from "./ClientIntroProfile";
 import ClientListTopSen from "./ClientListTopSen";
@@ -12,6 +11,7 @@ import Footer from "../client-shared/Footer";
 import { connect } from "react-redux";
 import NotifyDanger from "../../shared/notifyDanger";
 import NotifySuccess from "../../shared/notifySuccess";
+import NewMenu from "../client-shared/NewMenu";
 interface Props {
   isDanger: boolean;
   isSuccess: boolean;
@@ -23,7 +23,7 @@ class ClientHome extends React.Component<Props, {}> {
   render(){
     return(
       <>
-        <ClientHeader/>
+        <NewMenu/>
         <ClientBanner/>
         <ClientIntroProfile/>
         <div className="bg-gradient-grey">

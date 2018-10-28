@@ -9,9 +9,11 @@ import Error from "./admin/shared/error";
 import { BASEURL } from "../config/const";
 import ClientHome from "./client/home/ClientHome";
 import { LoadingPage } from "./client/client-shared/LoadingPage";
+import Loading from "./admin/shared/loading";
 interface IProps {
   reCheckLogin: () => void;
   resCheckLogin: any;
+  isLoading: boolean;
 }
 
 interface IState {
@@ -70,13 +72,15 @@ class App extends React.Component<IProps, IState> {
             )}
           </Switch>
         </Router>
+        {this.props.isLoading ? <Loading /> : ""}
       </>
     );
   }
 }
 
 const mapStateToProps = storeState => ({
-  resCheckLogin: storeState.reInit.resCheckLogin
+  resCheckLogin: storeState.reInit.resCheckLogin,
+  isLoading: storeState.reInit.isLoading
 });
 const mapDispatchToProps = {
   reCheckLogin

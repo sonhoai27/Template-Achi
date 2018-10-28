@@ -5,11 +5,13 @@ import Footer from "./client-shared/Footer";
 import axios from 'axios'
 import { API } from "../../config/const";
 import Helmet from 'react-helmet'
-import { reIsDanger, reIsSuccess } from "../../reducers/init";
+import { reIsDanger, reIsSuccess, reIsLoading } from "../../reducers/init";
 import { BASEURL } from './../../config/const';
 interface IProps {
   reIsSuccess: (status: boolean) => void;
   reIsDanger: (status: boolean) => void;
+  reIsLoading: (status: boolean)=>void;
+  isLoading: any;
 }
 interface IState {
   gift: any;
@@ -58,6 +60,7 @@ class ClientGift extends React.Component<IProps, IState> {
     })
   }
   onSendGift = ()=> {
+    this.props.reIsLoading(!this.props.isLoading)
     if(
       this.state.user.send_gift_email !== "" && this.state.user.send_gift_name != "" && this.state.user.send_gift_phone != ""
     ){
@@ -76,6 +79,7 @@ class ClientGift extends React.Component<IProps, IState> {
         }else {
           this.props.reIsDanger(true);
           setTimeout(() => {
+            this.props.reIsLoading(!this.props.isLoading)
             this.props.reIsDanger(false);
           }, 2000);
         }
@@ -83,7 +87,8 @@ class ClientGift extends React.Component<IProps, IState> {
       .catch(err => {
       })
     }else {
-      alert("Nhập đủ")
+      alert("Vui lòng nhập đủ thông tin.")
+      this.props.reIsLoading(!this.props.isLoading)
     }
 }
   render() {
@@ -197,11 +202,13 @@ class ClientGift extends React.Component<IProps, IState> {
 const mapStateToProps = storeState => ({
   isSuccess: storeState.reInit.isSuccess,
   isDanger: storeState.reInit.isDanger,
-  resAddContact: storeState.reSource.resAddContact
+  resAddContact: storeState.reSource.resAddContact,
+  isLoading: storeState.reInit.isLoading
 });
 const mapDispatchToProps = {
   reIsDanger,
-  reIsSuccess
+  reIsSuccess,
+  reIsLoading
 };
 export default connect(
   mapStateToProps,

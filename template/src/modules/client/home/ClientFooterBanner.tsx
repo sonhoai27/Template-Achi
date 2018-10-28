@@ -3,7 +3,7 @@ import { API, BASEURL } from './../../../config/const';
 import axios from 'axios'
 import { connect } from "react-redux";
 declare var $: any;
-import { reIsSuccess, reIsDanger } from "../../../reducers/init";
+import { reIsSuccess, reIsDanger, reIsLoading } from "../../../reducers/init";
 interface IState {
   gift: any;
   user: {
@@ -16,6 +16,8 @@ interface IState {
 interface IProps {
   reIsSuccess: (status: boolean) => void;
   reIsDanger: (status: boolean) => void;
+  reIsLoading: (status: boolean)=>void;
+  isLoading: boolean;
 }
 class CLientFooterBanner extends React.Component<IProps, IState> {
   constructor(props){
@@ -45,6 +47,7 @@ class CLientFooterBanner extends React.Component<IProps, IState> {
     })
   }
   onSendGift = ()=> {
+    this.props.reIsLoading(!this.props.isLoading)
       if(
         this.state.user.send_gift_email !== "" && this.state.user.send_gift_name != "" && this.state.user.send_gift_phone != ""
       ){
@@ -63,6 +66,7 @@ class CLientFooterBanner extends React.Component<IProps, IState> {
           }else {
             this.props.reIsDanger(true);
             setTimeout(() => {
+              this.props.reIsLoading(!this.props.isLoading)
               this.props.reIsDanger(false);
             }, 2000);
           }
@@ -70,7 +74,8 @@ class CLientFooterBanner extends React.Component<IProps, IState> {
         .catch(err => {
         })
       }else {
-        alert("Nhập đủ")
+        this.props.reIsLoading(!this.props.isLoading)
+        alert("Vui lòng nhập đầy đủ thông tin.")
       }
   }
   setNull = ()=> {
@@ -119,10 +124,12 @@ class CLientFooterBanner extends React.Component<IProps, IState> {
 }
 
 const mapStateToProps = storeState => ({
+  isLoading: storeState.reInit.isLoading
 });
 const mapDispatchToProps = {
   reIsDanger,
-  reIsSuccess
+  reIsSuccess,
+  reIsLoading
 };
 export default connect(
   mapStateToProps,

@@ -114,7 +114,7 @@ class ClientDetailBlog extends React.Component<IProps, IState> {
                 <div className="col-xs-12">
                   <div className="fb-comments" data-href={'http://nguyenminhchi.com/page/blog/detail/'+this.props.match.params.idBlog} data-width={'100%'} data-numposts={5}></div>
                 </div>
-                <div className="col-sm-12 margin-t-64">
+                <div className="col-xs-12 margin-t-64">
                   <h4>Tác giả:</h4>
                   <div className="row margin-t-32">
                     <div className="col-sm-3">

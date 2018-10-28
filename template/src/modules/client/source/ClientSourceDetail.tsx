@@ -8,6 +8,7 @@ import MainSche from './../../DynamicPage/sche/MainSche';
 import { reSetCurrentMatch } from "../../../reducers/init";
 import SXDFooter from "../../shared/components/SXDFooter";
 import Customer from "../ebook/com/customer";
+import {LoadingPage} from "../client-shared/LoadingPage"
 const listCom = {
     TKB: <MainSche />,
     SXDFOOTER: <SXDFooter/>,
@@ -18,12 +19,19 @@ interface IProps {
     resListContentUISource: any;
     reListContentUISource: (idUI: number, idSource: number)=> void;
     reSetCurrentMatch: (match: any)=> void;
-  }
-class ClientSourceDetail extends React.Component<IProps, {}> {
+}
+interface IState {
+    isLoading: boolean;
+}
+class ClientSourceDetail extends React.Component<IProps, IState> {
     constructor(props) {
         super(props)
+        this.state = {
+            isLoading: false
+        }
     }
     componentDidMount(){
+        window.scrollTo(0,0)
         const url = this.props.match.params.idSource
         const tempArr = url.split('-')
         const idUI = tempArr[tempArr.length - 2]
@@ -32,6 +40,11 @@ class ClientSourceDetail extends React.Component<IProps, {}> {
         this.props.reSetCurrentMatch(this.props.match)
     }
     componentDidUpdate(preProps){
+        if(this.props.resListContentUISource != preProps.resListContentUISource){
+            this.setState({
+                isLoading: !this.state.isLoading
+            })
+        }
     }
     render() {
         return (
@@ -41,6 +54,9 @@ class ClientSourceDetail extends React.Component<IProps, {}> {
                     <ItemPage coms={listCom} items={this.props.resListContentUISource.list}/>
                 </div>
             <Footer/>
+            {
+                !this.state.isLoading ? <LoadingPage/> : ''
+            }
             </>
         )
     }

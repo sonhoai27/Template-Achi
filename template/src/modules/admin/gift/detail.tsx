@@ -10,6 +10,8 @@ import {
 import { IGiftModel } from "../../../models/gift";
 import { reDetailGift, reUpdateGift } from "./reGift";
 import { alias } from "./../../../../build/dist/src/utils/alias";
+import { RESOURCE } from "../../../config/const";
+declare var CKEDITOR: any;
 
 interface IProps {
   match: any;
@@ -76,6 +78,102 @@ class GiftDetail extends React.Component<IProps, IState> {
   }
   componentDidMount() {
     this.props.reDetailGift(this.props.match.params.idGift);
+    try {
+      CKEDITOR.plugins.add("insertimage", {
+        init: editor => {
+          editor.addCommand("insertImage", {
+            exec: editor => {
+              this.props.reShowPhotoApp(true);
+              this.props.reSetCurrentEditorPhoto({
+                type: "ck",
+                editor: editor
+              });
+              // var timestamp = new Date();
+              // editor.insertHtml( 'The current date and time is: <em>' + timestamp.toString() + '</em>' );
+            }
+          });
+          editor.ui.addButton("insertimage", {
+            label: "Insert Image",
+            command: "insertImage",
+            icon: RESOURCE + "images/icon/picture-24.png"
+          });
+        }
+      });
+    } catch (e) {}
+    CKEDITOR.plugins.addExternal(
+      "fontawesome",
+      RESOURCE + "ckeditor/plugins/fontawesome/",
+      "plugin.js"
+    );
+    CKEDITOR.replace("editor1", {
+      toolbar: [
+        {
+          name: "document",
+          groups: ["mode", "document", "doctools"],
+          items: ["Source"]
+        },
+        {
+          name: "basicstyles",
+          groups: ["basicstyles", "cleanup"],
+          items: [
+            "Bold",
+            "Italic",
+            "Underline",
+            "Strike",
+            "Subscript",
+            "Superscript",
+            "-",
+            "CopyFormatting",
+            "RemoveFormat"
+          ]
+        },
+        { name: "styles", items: ["Styles", "Format", "Font", "FontSize"] },
+        { name: "colors", items: ["TextColor", "BGColor"] },
+        {
+          name: "paragraph",
+          groups: ["list", "indent", "blocks", "align", "bidi"],
+          items: [
+            "NumberedList",
+            "BulletedList",
+            "-",
+            "Outdent",
+            "Indent",
+            "-",
+            "Blockquote",
+            "CreateDiv",
+            "-",
+            "JustifyLeft",
+            "JustifyCenter",
+            "JustifyRight",
+            "JustifyBlock",
+            "-",
+            "BidiLtr",
+            "BidiRtl",
+            "Language"
+          ]
+        },
+        { name: "links", items: ["Link", "Unlink", "Anchor"] },
+        {
+          name: "insert",
+          items: [
+            "Table",
+            "HorizontalRule",
+            "Smiley",
+            "SpecialChar",
+            "PageBreak",
+            "Iframe"
+          ]
+        },
+        { name: "FontAwesome", items: ["FontAwesome", "insertimage", "Image"] }
+      ],
+      extraAllowedContent: "i;span;ul;li;table;td;style;*[id];*(*);*{*}",
+      allowedContent: true,
+      extraPlugins: "fontawesome,insertimage",
+      htmlEncodeOutput: false,
+      entities: false,
+      contentsCss:
+        RESOURCE + "ckeditor/plugins/fontawesome/css/font-awesome.min.css"
+    });
   }
   onChange = (e: any) => {
     this.setState({
@@ -88,12 +186,14 @@ class GiftDetail extends React.Component<IProps, IState> {
   updateGift = () => {
     const temDom: any = document.getElementById("img-cover-blog-preview");
     const tempGift = this.state.gift;
+    const data = CKEDITOR.instances.editor1.getData();
     delete tempGift.gift_id;
     this.props.reUpdateGift(
       {
         ...tempGift,
         gift_cover: temDom.src,
-        gift_alias: alias(this.state.gift.gift_name)
+        gift_alias: alias(this.state.gift.gift_name),
+        gift_content: data
       },
       this.props.match.params.idGift
     );
@@ -191,7 +291,7 @@ class GiftDetail extends React.Component<IProps, IState> {
                       <span className="help"> Nội dung</span>
                     </label>
                     <div className="col-md-12">
-                      <Editor
+                      {/* <Editor
                         id="source_date_sche"
                         value={this.state.gift.gift_content}
                         onChange={(e: any) => {
@@ -205,18 +305,23 @@ class GiftDetail extends React.Component<IProps, IState> {
                         }}
                         apiKey="t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl"
                         init={{
+                          content_css:
+                            "https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css",
+                          noneditable_noneditable_class: "fa",
                           mode: "exact",
                           element: "source_date_sche",
                           height: 100,
                           theme: "modern",
                           plugins:
-                            "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
+                            "fontawesome noneditable print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
                           toolbar1:
-                            "fontsizeselect formatselect | bold italic strikethrough forecolor backcolor | link blockquote | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat",
+                            "fontsizeselect formatselect | bold italic strikethrough forecolor backcolor | link blockquote | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | fontawesome",
                           fontsize_formats:
-                            "10pt 11pt 12pt 14pt 16pt 18pt 20pt 24pt 26pt 28pt 36pt 48pt 72pt"
+                            "10pt 11pt 12pt 14pt 16pt 18pt 20pt 24pt 26pt 28pt 36pt 48pt 72pt",
+                          extended_valid_elements: "span[*]"
                         }}
-                      />
+                      /> */}
+                      <textarea cols={80} id="editor1" name="editor1" rows={10} value={this.state.gift.gift_content}/>
                     </div>
                   </div>
                 </div>

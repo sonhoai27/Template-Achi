@@ -208,7 +208,7 @@ class ClientSourceHome extends React.Component<IProps, {}> {
           <div className="row">
             <CLientFooterBanner />
           </div>
-          <div className="row page-source_list-source">
+          <div className="page-source_list-source">
             <div className="container paddingY-64">
               <div className="row">
                 <div className="col-xs-12 page-source_title">

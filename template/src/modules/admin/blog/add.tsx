@@ -72,12 +72,28 @@ class BlogAdd extends React.Component<Props, State> {
   }
   addBlog = ()=> {
     const temp: any = document.getElementById('img-cover-blog-preview')
-    this.props.reAddBlog({
-      ...this.state,
-      blog_alias: alias(this.state.blog_title),
-      blog_cover: temp.src,
-      blog_id: (Date.now())
-    })
+    if(this.checkBlog()){
+      this.props.reAddBlog({
+        ...this.state,
+        blog_alias: alias(this.state.blog_title),
+        blog_cover: temp.src,
+        blog_id: (Date.now())
+      })
+    }else {
+      alert("Vui lòng chọn đầy đủ")
+    }
+  }
+  checkBlog = ()=> {
+    if(
+      this.state.blog_content !== ""
+      && this.state.blog_id_author != 0
+      && this.state.blog_id_category != 0
+      && this.state.blog_promo != ""
+      && this.state.blog_title != ""
+    ){
+      return true
+    }
+    return false
   }
   renderListAuthor = ()=> {
     if(this.props.resListAuthor.list){

@@ -10,7 +10,7 @@ class ClientBanner extends React.Component {
             autoPlay
             loop
             id="video-background"
-            poster="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148422/screencap-wheel.png"
+            poster="http://nguyenminhchi.com/api/uploads/images/0c70204d9323542f870e1540141200000.png"
             muted
           >
             <source

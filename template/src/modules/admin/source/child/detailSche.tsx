@@ -23,6 +23,7 @@ interface State {
   source_sche_status: number;
   source_sche_khoa: string;
   source_date_sche: string;
+  source_sche_uu_dai: string;
 }
 class DetailSche extends React.Component<Props, State> {
   constructor(props) {
@@ -37,7 +38,8 @@ class DetailSche extends React.Component<Props, State> {
       source_sche_teacher: "",
       source_sche_status: 0,
       source_sche_khoa: "",
-      source_date_sche: ""
+      source_date_sche: "",
+      source_sche_uu_dai: ""
     };
   }
   componentWillReceiveProps(nextProps) {
@@ -53,7 +55,8 @@ class DetailSche extends React.Component<Props, State> {
         source_sche_teacher: nextProps.resDetailSche.list.source_sche_teacher,
         source_sche_status: nextProps.resDetailSche.list.source_sche_status,
         source_sche_khoa: nextProps.resDetailSche.list.source_sche_khoa,
-        source_date_sche: nextProps.resDetailSche.list.source_date_sche
+        source_date_sche: nextProps.resDetailSche.list.source_date_sche,
+        source_sche_uu_dai: nextProps.resDetailSche.list.source_sche_uu_dai
       });
     }
   }
@@ -135,7 +138,6 @@ class DetailSche extends React.Component<Props, State> {
                             value={this.state.source_sche_number}
                           /> */}
                           <Editor
-
                             id="source_sche_number"
                             value={this.state.source_sche_number}
                             onChange={(e: any) => {
@@ -146,8 +148,8 @@ class DetailSche extends React.Component<Props, State> {
                             }}
                             apiKey="t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl"
                             init={{
-                              mode : "exact",
-                              element: 'source_sche_number',
+                              mode: "exact",
+                              element: "source_sche_number",
                               height: 100,
                               theme: "modern",
                               plugins:
@@ -286,8 +288,39 @@ class DetailSche extends React.Component<Props, State> {
                             }}
                             apiKey="t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl"
                             init={{
-                              mode : "exact",
-                              element: 'source_date_sche',
+                              mode: "exact",
+                              element: "source_date_sche",
+                              height: 100,
+                              theme: "modern",
+                              plugins:
+                                "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
+                              toolbar1:
+                                "fontsizeselect formatselect | bold italic strikethrough forecolor backcolor | link blockquote | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat",
+                              fontsize_formats:
+                                "10pt 11pt 12pt 14pt 16pt 18pt 20pt 24pt 26pt 28pt 36pt 48pt 72pt"
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <div
+                        className="form-group"
+                        style={{ display: "inline-block", width: "100%" }}
+                      >
+                        <label className="col-md-12">
+                          <span className="help"> Mô tả ưu đã khi đăng ký</span>
+                        </label>
+                        <div className="col-md-12">
+                          <Editor
+                            value={this.state.source_sche_uu_dai}
+                            onChange={(e: any) => {
+                              this.setState({
+                                ...this.state,
+                                source_sche_uu_dai: e.level.content
+                              });
+                            }}
+                            apiKey="t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl"
+                            init={{
+                              mode: "exact",
                               height: 100,
                               theme: "modern",
                               plugins:
