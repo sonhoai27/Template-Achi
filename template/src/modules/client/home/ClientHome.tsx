@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import NotifyDanger from "../../shared/notifyDanger";
 import NotifySuccess from "../../shared/notifySuccess";
 import NewMenu from "../client-shared/NewMenu";
+import { addTraffic } from "../../shared/traffic";
 interface Props {
   isDanger: boolean;
   isSuccess: boolean;
@@ -19,6 +20,12 @@ interface Props {
 class ClientHome extends React.Component<Props, {}> {
   constructor(props){
     super(props)
+  }
+  componentDidMount(){
+    addTraffic({
+      type: 0,
+      url:  window.location.href
+    })
   }
   render(){
     return(

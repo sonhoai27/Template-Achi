@@ -37,6 +37,7 @@ class AdminRouter extends React.Component<Props, {}> {
         <Route path={`${this.props.match.url}/ui`} component={UIRouter} />
         <Route path={`${this.props.match.url}/source`} component={SourceRouter} />
         <Route path={`${this.props.match.url}/order-ebook`} component={OrderEbookRouter} />
+          <Route path={`${this.props.match.url}/thong-ke`} component={OrderEbookRouter} />
         {this.props.isShowPhotoApp ? <Photo/> : ''}
         <div className="jq-toast-wrap top-right">
             {this.props.isSuccess ? <NotifySuccess/> : ''}

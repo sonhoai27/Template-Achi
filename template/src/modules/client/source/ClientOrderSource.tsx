@@ -7,6 +7,7 @@ import { IOrderSourceModel } from "../../../models/orderSource";
 import { reAddOrder } from "../../admin/source/order/reOrder";
 import { reDetailSche } from "../../admin/source/reSource";
 import { BASEURL } from "../../../config/const";
+import { addTraffic } from "../../shared/traffic";
 interface IState {
   order: IOrderSourceModel;
   source: any;
@@ -41,6 +42,10 @@ class ClientOrderSource extends React.Component<IProps, IState> {
     };
   }
   componentDidMount() {
+    addTraffic({
+      type: 0,
+      url:  window.location.href
+    })
     this.props.reDetailSche(this.props.match.params.idSche);
   }
   componentDidUpdate(preProps) {
@@ -79,6 +84,10 @@ class ClientOrderSource extends React.Component<IProps, IState> {
       }
     });
   };
+  getFullDate = (): string => {
+    const date = new Date()
+    return date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()
+  }
   addOrder = () => {
     this.props.reIsLoading(!this.props.isLoading)
    if(
@@ -97,7 +106,8 @@ class ClientOrderSource extends React.Component<IProps, IState> {
    }else {
     this.props.reAddOrder({
       ...this.state.order,
-      source_order_birthday: this.makeDateText(this.state.order.source_order_birthday)
+      source_order_birthday: this.makeDateText(this.state.order.source_order_birthday),
+      source_order_created_date: this.getFullDate()
     })
    }
   };

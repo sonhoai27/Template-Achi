@@ -22,6 +22,7 @@ import Error from "./admin/shared/error";
 import { BASEURL } from "../config/const";
 import ClientHome from "./client/home/ClientHome";
 import { LoadingPage } from "./client/client-shared/LoadingPage";
+import Loading from "./admin/shared/loading";
 var App = /** @class */ (function (_super) {
     __extends(App, _super);
     function App(props) {
@@ -39,11 +40,7 @@ var App = /** @class */ (function (_super) {
         }
     };
     App.prototype.componentDidMount = function () {
-        //this.props.reCheckLogin();
-        setTimeout(function () {
-            // @ts-ignore
-            document.getElementById("ui-loading").style.display = "none";
-        }, 0);
+        this.props.reCheckLogin();
     };
     App.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
@@ -54,22 +51,22 @@ var App = /** @class */ (function (_super) {
                             loader: function () {
                                 return import(/*webpackChunkName: "client"*/ "./client/clientRouter");
                             },
-                            loading: function () { return React.createElement("h1", null, "Loading...."); }
+                            loading: function () { return React.createElement(LoadingPage, null); }
                         }) }),
                     this.state.user.status === 404 ? (React.createElement(Route, { path: BASEURL + "login", component: Login })) : (React.createElement(Route, { path: BASEURL + "login", component: Error })),
-                    React.createElement(PrivateRouter, { resCheckLogin: this.props.resCheckLogin, path: BASEURL + "admin", component: Loadable({
+                    this.state.user.status ? (React.createElement(PrivateRouter, { resCheckLogin: this.state.user, path: BASEURL + "admin", component: Loadable({
                             loader: function () {
                                 return import(/*webpackChunkName: "admin"*/ "./admin/AdminRouter");
                             },
-                            loading: function () { return React.createElement("h1", null, "Loading...."); }
-                        }) }))),
-            React.createElement("div", { id: "ui-loading" },
-                React.createElement(LoadingPage, null))));
+                            loading: function () { return React.createElement(LoadingPage, null); }
+                        }) })) : (""))),
+            this.props.isLoading ? React.createElement(Loading, null) : ""));
     };
     return App;
 }(React.Component));
 var mapStateToProps = function (storeState) { return ({
-    resCheckLogin: storeState.reInit.resCheckLogin
+    resCheckLogin: storeState.reInit.resCheckLogin,
+    isLoading: storeState.reInit.isLoading
 }); };
 var mapDispatchToProps = {
     reCheckLogin: reCheckLogin

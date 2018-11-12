@@ -105,7 +105,7 @@ var ModalContact = /** @class */ (function (_super) {
                         React.createElement("div", { className: "modal-footer" },
                             React.createElement("button", { onClick: this.submit, type: "button", className: "btn btn-danger waves-effect waves-light" }, "\u0110\u0103ng k\u00FD"))))),
             React.createElement("div", { className: "modal-backdrop fade in", style: {
-                    background: '#009688',
+                    background: 'url(http://nguyenminhchi.com/api/uploads/images/b7eeb9d50c18eda6074b1539622800000.jpg)',
                     opacity: 1
                 } })));
     };

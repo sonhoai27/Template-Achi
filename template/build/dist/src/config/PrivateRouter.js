@@ -23,7 +23,7 @@ import * as React from "react";
 import { BASEURL } from "./const";
 export var PrivateRouter = function (_a) {
     var Component = _a.component, User = _a.resCheckLogin, rest = __rest(_a, ["component", "resCheckLogin"]);
-    return (React.createElement(Route, __assign({}, rest, { render: function (props) { return (User.status !== 202
+    return (React.createElement(Route, __assign({}, rest, { render: function (props) { return (User.status === 202
             ? React.createElement(Component, __assign({}, props))
             : React.createElement(Redirect, { to: BASEURL + 'login' })); } })));
 };

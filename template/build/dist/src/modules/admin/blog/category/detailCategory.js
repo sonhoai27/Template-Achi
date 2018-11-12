@@ -63,7 +63,6 @@ var DetailCategory = /** @class */ (function (_super) {
     }
     DetailCategory.prototype.componentDidUpdate = function (preProps) {
         var _this = this;
-        console.log(this.props.resUpdateCategory);
         if (this.props.resUpdateCategory != preProps.resUpdateCategory) {
             if (this.props.resUpdateCategory.status === 200) {
                 this.props.reIsSuccess(true);

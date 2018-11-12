@@ -5,6 +5,7 @@ import ItemPage from '../DynamicPage/item'
 import ClientHeader from "./client-shared/Header";
 import Footer from "./client-shared/Footer";
 import { Helmet } from "react-helmet";
+import { addTraffic } from "../shared/traffic";
 
 const IDPAGE = 4;
 
@@ -18,6 +19,10 @@ class ClientAboutPage extends React.Component<IProps, {}> {
   }
   componentDidMount(){
     this.props.reListPageUI(IDPAGE);
+    addTraffic({
+      type: 0,
+      url:  window.location.href
+    })
   }
   render(){
     return (

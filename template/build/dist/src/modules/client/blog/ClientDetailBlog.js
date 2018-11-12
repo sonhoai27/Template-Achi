@@ -15,7 +15,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import AutofitImage from "../../shared/CropImage";
-import { reDetailBlog, reClientListBlogCategory } from "../../admin/blog/reBlog";
+import { reDetailBlogAlias, reClientListBlogCategory } from "../../admin/blog/reBlog";
 import Helmet from "react-helmet";
 import { BASEURL, API } from "../../../config/const";
 import CLientFooterBanner from "../home/ClientFooterBanner";
@@ -27,7 +27,7 @@ var ClientDetailBlog = /** @class */ (function (_super) {
             if (_this.props.resClientListBlogCategory.list) {
                 return _this.props.resClientListBlogCategory.list.map(function (element) {
                     return (React.createElement("div", { className: "col-sm-3" },
-                        React.createElement("a", { href: BASEURL + "page/blog/detail/" + element.blog_id },
+                        React.createElement("a", { href: BASEURL + "page/blog/detail/" + element.blog_alias },
                             React.createElement(AutofitImage, { clasName: "img-responsive", frameWidth: "100%", frameHeight: "200px", imgSrc: element.blog_cover }),
                             React.createElement("h4", null, element.blog_title))));
                 });
@@ -40,17 +40,19 @@ var ClientDetailBlog = /** @class */ (function (_super) {
         return _this;
     }
     ClientDetailBlog.prototype.componentDidUpdate = function (preProps) {
-        if (preProps.resDetailBlog != this.props.resDetailBlog) {
+        if (preProps.resDetailBlogAlias != this.props.resDetailBlogAlias) {
             this.setState({
-                blog: this.props.resDetailBlog.list
+                blog: this.props.resDetailBlogAlias.list
             });
-            this.props.reClientListBlogCategory(this.props.resDetailBlog.list.blog_id_category);
+            this.props.reClientListBlogCategory(this.props.resDetailBlogAlias.list.blog_id_category);
         }
     };
     ClientDetailBlog.prototype.componentDidMount = function () {
         window.scrollTo(0, 0);
-        this.props.reDetailBlog(this.props.match.params.idBlog);
-        axios.put(API + "blog/views/" + this.props.match.params.idBlog);
+        this.props.reDetailBlogAlias(this.props.match.params.idBlog);
+        axios.put(API + "blog/views", {
+            key: this.props.match.params.idBlog
+        });
     };
     ClientDetailBlog.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
@@ -80,27 +82,22 @@ var ClientDetailBlog = /** @class */ (function (_super) {
                                     React.createElement("b", null, this.state.blog.author_name),
                                     React.createElement("br", null),
                                     "L\u01B0\u1EE3t xem: ",
-                                    React.createElement("b", null, this.state.blog.blog_views))),
+                                    React.createElement("b", null, this.state.blog.blog_views)),
+                                React.createElement("p", null,
+                                    React.createElement("iframe", { src: 'https://www.facebook.com/plugins/like.php?href=http://nguyenminhchi.com/page/blog/detail/' + this.props.match.params.idBlog + '&width=156&layout=button_count&action=like&size=small&show_faces=false&share=true&height=46&appId=1440913602698681', width: 156, height: 46, style: { border: 'none', overflow: 'hidden' }, scrolling: "no", frameBorder: 0 }))),
                             React.createElement("div", { className: "col-xs-12 page-detail-blog_content_body", dangerouslySetInnerHTML: {
                                     __html: this.state.blog.blog_content
-                                } })))),
-                React.createElement("hr", null),
-                React.createElement("div", { className: "row page-detail-blog_author" },
-                    React.createElement("div", { className: "container paddingY-64" },
-                        React.createElement("div", { className: "row" },
-                            React.createElement("div", { className: "col-sm-12" },
-                                React.createElement("div", { className: "media", style: { border: "none" } },
-                                    React.createElement("div", { className: "media-left" },
-                                        React.createElement("a", null,
-                                            React.createElement("img", { alt: "64x64", className: "media-object", src: "https://secure.gravatar.com/avatar/c0308f547359f5bdc519a301b32ba34c?s=96&d=mm&r=g", "data-holder-rendered": "true", style: {
-                                                    width: "128px",
-                                                    height: "128px",
-                                                    borderRadius: "100%"
-                                                } }),
-                                            " ")),
-                                    React.createElement("div", { className: "media-body" },
-                                        React.createElement("h4", { className: "media-heading" }, "Media heading"),
-                                        " Tony Robbins is an entrepreneur, bestselling author, philanthropist and the nation\u2019s #1 Life and Business Strategist. Author of five internationally bestselling books, including the recent New York Times #1 best-seller UNSHAKEABLE, Mr. Robbins has empowered more than 50 million people from 100 countries through his audio, video and life training programs. He created the #1 personal and professional development program of all time, and more than 4 million people have attended his live seminars.")))))),
+                                } }),
+                            React.createElement("div", { className: "col-xs-12" },
+                                React.createElement("div", { className: "fb-comments", "data-href": 'http://nguyenminhchi.com/page/blog/detail/' + this.props.match.params.idBlog, "data-width": '100%', "data-numposts": 5 })),
+                            React.createElement("div", { className: "col-xs-12 margin-t-64" },
+                                React.createElement("h4", null, "T\u00E1c gi\u1EA3:"),
+                                React.createElement("div", { className: "row margin-t-32" },
+                                    React.createElement("div", { className: "col-sm-3" },
+                                        React.createElement("img", { src: this.state.blog.author_avatar, alt: "", className: "img-responsive", width: '90%' })),
+                                    React.createElement("div", { className: "col-sm-9" },
+                                        React.createElement("h2", null, this.state.blog.author_name),
+                                        React.createElement("p", null, this.state.blog.author_intro))))))),
                 React.createElement("hr", null),
                 React.createElement("div", { className: "row" },
                     React.createElement("div", { className: "container paddingY-64" },
@@ -112,11 +109,11 @@ var ClientDetailBlog = /** @class */ (function (_super) {
     return ClientDetailBlog;
 }(React.Component));
 var mapStateToProps = function (storeState) { return ({
-    resDetailBlog: storeState.reBlog.resDetailBlog,
+    resDetailBlogAlias: storeState.reBlog.resDetailBlogAlias,
     resClientListBlogCategory: storeState.reBlog.resClientListBlogCategory
 }); };
 var mapDispatchToProps = {
-    reDetailBlog: reDetailBlog,
+    reDetailBlogAlias: reDetailBlogAlias,
     reClientListBlogCategory: reClientListBlogCategory
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ClientDetailBlog);

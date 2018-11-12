@@ -9,7 +9,9 @@ export const ACTION_TYPES = {
   API_DETAIL_GIFT: "ReGift/API_DETAIL_GIFT",
   API_LIST_CONTACT: "ReGift/API_LIST_CONTACT",
   API_SEND_GIFT: "ReGift/API_SEND_GIFT",
-  API_SEND_GIFT_BY_USER: 'ReGift/API_SEND_GIFT_BY_USER'
+  API_SEND_GIFT_BY_USER: 'ReGift/API_SEND_GIFT_BY_USER',
+  API_CUSTOMER_LIST: 'ReGift/API_CUSTOMER_LIST',
+  API_DELETE_CUSTOMER: 'ReGift/API_DELETE_CUSTOMER'
 };
 
 const initialState = {
@@ -20,7 +22,9 @@ const initialState = {
   resDetailGift: {},
   resListContact: [],
   resSendGift: {},
-  resSendGiftByUser: {}
+  resSendGiftByUser: {},
+  resCustomerList: [],
+  resDeleteCustomer: {}
 };
 
 export default (state = initialState, action) => {
@@ -146,6 +150,34 @@ export default (state = initialState, action) => {
           resSendGift: action.payload.data
         };
       }
+
+      // customer list
+    case REQUEST(ACTION_TYPES.API_CUSTOMER_LIST):
+    case FAILURE(ACTION_TYPES.API_CUSTOMER_LIST): {
+      return {
+        ...state
+      };
+    }
+    case SUCCESS(ACTION_TYPES.API_CUSTOMER_LIST): {
+      return {
+        ...state,
+        resCustomerList: action.payload.data
+      };
+    }
+
+      // delete customer
+      case REQUEST(ACTION_TYPES.API_DELETE_CUSTOMER):
+      case FAILURE(ACTION_TYPES.API_DELETE_CUSTOMER): {
+        return {
+          ...state
+        };
+      }
+      case SUCCESS(ACTION_TYPES.API_DELETE_CUSTOMER): {
+        return {
+          ...state,
+          resDeleteCustomer: action.payload.data
+        };
+      }
     default:
       return state;
   }
@@ -154,7 +186,7 @@ export default (state = initialState, action) => {
 const API_GIFT = API + "gift";
 const API_SEND_GIFT = API + "send-gift";
 const API_CONTACT = API + "contact";
-
+const GOI_QUA = API+'goi-qua-tang'
 export const reListGift = page => async dispatch => {
   const result = await dispatch({
     type: ACTION_TYPES.API_LIST_GIFT,
@@ -207,5 +239,20 @@ export const reListContact = () => async dispatch => {
       payload: axios.get(API_CONTACT+'/without-page')
     });
     return result;
-  };
+};
+
+export const reCustomerList = (page: number) => async dispatch => {
+  const result = await dispatch({
+    type: ACTION_TYPES.API_CUSTOMER_LIST,
+    payload: axios.get(GOI_QUA+'/customers/'+page)
+  });
+  return result;
+};
+export const reDeleteCustomer = (id: number) => async dispatch => {
+  const result = await dispatch({
+    type: ACTION_TYPES.API_DELETE_CUSTOMER,
+    payload: axios.delete(GOI_QUA+'/customers/'+id)
+  });
+  return result;
+};
   

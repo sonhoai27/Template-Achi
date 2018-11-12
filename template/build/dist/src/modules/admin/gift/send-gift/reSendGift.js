@@ -107,7 +107,7 @@ export var reClientGetGift = function (form, idGift) { return function (dispatch
         switch (_a.label) {
             case 0: return [4 /*yield*/, dispatch({
                     type: ACTION_TYPES.API_CLIENT_GET_GIFT,
-                    payload: axios.get(API_GOI_QUA_TANG + "/add/" + idGift)
+                    payload: axios.post(API_GOI_QUA_TANG + "/add/" + idGift, form)
                 })];
             case 1:
                 result = _a.sent();
@@ -121,7 +121,7 @@ export var reAddSendGift = function (form, count) { return function (dispatch) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, dispatch({
                     type: ACTION_TYPES.API_SEND_GIFT,
-                    payload: axios.get(API_GOI_QUA_TANG + "/tang/" + count)
+                    payload: axios.post(API_GOI_QUA_TANG + "/tang/" + count, form)
                 })];
             case 1:
                 result = _a.sent();

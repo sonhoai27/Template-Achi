@@ -7,6 +7,7 @@ import Footer from "../client-shared/Footer";
 import ClientFollow from "../home/ClientFollow";
 import AutofitImage from "../../shared/CropImage";
 import CLientFooterBanner from "../home/ClientFooterBanner";
+import { addTraffic } from "../../shared/traffic";
 interface IProps {
   resListVideo: any;
   reListVideo: (page: number) => void;
@@ -25,6 +26,10 @@ class ClientVideo extends React.Component<IProps, IState> {
   }
   }
   componentDidMount() {
+    addTraffic({
+      type: 0,
+      url:  window.location.href
+    })
     this.props.reListVideo((parseInt(this.makeCurrentPage(), 10) - 1) * 20);
   }
   makeCurrentPage = () => {

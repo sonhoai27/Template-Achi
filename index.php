@@ -44,6 +44,21 @@ define("BASE_URL", 'http://localhost:8080/Achi/template/public/');
         echo file_get_contents("http://localhost:8080/Achi/api/seo/home");
     ?>
             <style>
+            /* new version menu */
+.new-menu {
+  
+}
+.new-menu .new-menu_container {
+  background: #fff;
+}
+.new-menu .navbar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.new-menu .navbar-brand {
+  flex: 1;
+}
                 :root {
                     --admin-primary-color: #096dd9;
                     font-family: 'Montserrat', sans-serif!important;

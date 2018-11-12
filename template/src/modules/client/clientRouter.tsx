@@ -13,6 +13,7 @@ import ClientAboutPage from "./About";
 import ScheEvents from "./ScheEvents";
 import SuggestGift from './../shared/components/suggestGift';
 import SuggestKH from './../shared/components/suggestKH';
+import Search from "./search";
 interface Props {
   match?: any;
   isDanger: boolean;
@@ -67,6 +68,10 @@ class ClientRouter extends React.Component<Props, {}> {
           <Route
             path={`${this.props.match.url}/dang-ky-khoa-hoc/:idSource`}
             component={SuggestKH}
+          />
+          <Route
+            path={`${this.props.match.url}/tim-kiem/:key`}
+            component={Search}
           />
           <div className="jq-toast-wrap top-right">
             {this.props.isSuccess ? <NotifySuccess /> : ""}

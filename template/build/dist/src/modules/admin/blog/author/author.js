@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import * as React from "react";
 import { connect } from "react-redux";
-import { reListAuthor } from "../reBlog";
+import { reListAuthor, reDeleteAuthor } from "../reBlog";
 import DetailAuthor from "./detailAuthor";
 import AddAuthor from "./addAuthor";
 var Author = /** @class */ (function (_super) {
@@ -37,7 +37,7 @@ var Author = /** @class */ (function (_super) {
         _this.renderListAuthor = function () {
             if (_this.props.resListAuthor.list) {
                 return _this.props.resListAuthor.list.map(function (element) {
-                    return (React.createElement("tr", { key: element.category_id },
+                    return (React.createElement("tr", { key: element.author_id },
                         React.createElement("td", { onClick: function () {
                                 _this.setState({
                                     currentAuthor: element
@@ -48,7 +48,11 @@ var Author = /** @class */ (function (_super) {
                                 });
                             }, role: "row" },
                             React.createElement("p", null, element.author_name)),
-                        React.createElement("td", null, element.author_intro)));
+                        React.createElement("td", null, element.author_intro),
+                        React.createElement("td", null,
+                            React.createElement("div", { className: "btn btn-xs btn-danger", onClick: function () {
+                                    _this.props.reDeleteAuthor(element.author_id);
+                                } }, "X\u00F3a"))));
                 });
             }
             return React.createElement("h1", null, "NULL");
@@ -63,14 +67,21 @@ var Author = /** @class */ (function (_super) {
     Author.prototype.componentDidMount = function () {
         this.props.reListAuthor();
     };
+    Author.prototype.componentDidUpdate = function (preProps) {
+        if (this.props.resDeleteAuthor != preProps.resDeleteAuthor) {
+            if (this.props.resDeleteAuthor.status === 200) {
+                this.props.reListAuthor();
+            }
+        }
+    };
     Author.prototype.render = function () {
         var _this = this;
         return (React.createElement(React.Fragment, null,
             React.createElement("div", { className: "row" },
-                React.createElement("div", { className: "col-md-8" },
+                React.createElement("div", { className: "col-md-12" },
                     React.createElement("div", { className: "panel" },
                         React.createElement("div", { className: "panel-toolbar" },
-                            React.createElement("div", { className: "panel-heading" }, "Danh s\u00E1ch author"),
+                            React.createElement("div", { className: "panel-heading" }, "Danh s\u00E1ch t\u00E1c gi\u1EA3"),
                             React.createElement("div", { className: "panel-action-bar" },
                                 React.createElement("div", { className: "btn btn-xs btn-info", onClick: function () {
                                         _this.setState({
@@ -83,7 +94,8 @@ var Author = /** @class */ (function (_super) {
                                     React.createElement("thead", null,
                                         React.createElement("tr", null,
                                             React.createElement("th", { role: "row" }, "T\u00EAn"),
-                                            React.createElement("th", null, "Intro"))),
+                                            React.createElement("th", null, "Intro"),
+                                            React.createElement("th", null, "H\u00E0nh \u0111\u1ED9ng"))),
                                     React.createElement("tbody", null, this.renderListAuthor()))))))),
             this.state.isShowingModalDetail ? React.createElement(DetailAuthor, { author: this.state.currentAuthor, isShowingModal: this.hiddenModalDetail }) : '',
             this.state.isShowingModalAdd ? React.createElement(AddAuthor, { author: this.state.currentAuthor, isShowingModal: this.hiddenModalAdd }) : ''));
@@ -91,10 +103,12 @@ var Author = /** @class */ (function (_super) {
     return Author;
 }(React.Component));
 var mapStateToProps = function (storeState) { return ({
-    resListAuthor: storeState.reBlog.resListAuthor
+    resListAuthor: storeState.reBlog.resListAuthor,
+    resDeleteAuthor: storeState.reBlog.resDeleteAuthor
 }); };
 var mapDispatchToProps = {
-    reListAuthor: reListAuthor
+    reListAuthor: reListAuthor,
+    reDeleteAuthor: reDeleteAuthor
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Author);
 //# sourceMappingURL=author.js.map

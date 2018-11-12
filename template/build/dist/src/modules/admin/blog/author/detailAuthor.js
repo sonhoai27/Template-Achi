@@ -53,7 +53,6 @@ var DetailAuthor = /** @class */ (function (_super) {
     }
     DetailAuthor.prototype.componentDidUpdate = function (preProps) {
         var _this = this;
-        console.log(this.props.resUpdateAuthor);
         if (this.props.resUpdateAuthor != preProps.resUpdateAuthor) {
             if (this.props.resUpdateAuthor.status === 200) {
                 this.props.reIsSuccess(true);
@@ -88,11 +87,11 @@ var DetailAuthor = /** @class */ (function (_super) {
                                         React.createElement("div", { className: "form-group col-sm-6" },
                                             React.createElement("label", { className: "col-sm-12" }, "T\u00EAn"),
                                             React.createElement("div", { className: "col-sm-12" },
-                                                React.createElement("input", { onChange: this.onChange, name: "category_name", className: "form-control", defaultValue: this.state.author_name }))),
+                                                React.createElement("input", { onChange: this.onChange, name: "author_name", className: "form-control", defaultValue: this.state.author_name }))),
                                         React.createElement("div", { className: "form-group col-sm-6" },
                                             React.createElement("label", { className: "col-sm-12" }, "Intro"),
                                             React.createElement("div", { className: "col-sm-12" },
-                                                React.createElement("input", { onChange: this.onChange, name: "category_color", className: "form-control", value: this.state.author_intro }))),
+                                                React.createElement("textarea", { onChange: this.onChange, name: "author_intro", className: "form-control", value: this.state.author_intro }))),
                                         React.createElement("div", { className: "form-group col-sm-12" },
                                             React.createElement("label", { className: "col-sm-12" }, "H\u00ECnh cover"),
                                             React.createElement("div", { className: "col-sm-12 cover-blog", onClick: function () {

@@ -21,8 +21,8 @@ var ClientBanner = /** @class */ (function (_super) {
     ClientBanner.prototype.render = function () {
         return (React.createElement("div", { className: "banner" },
             React.createElement("div", { className: "home-banner-video" },
-                React.createElement("video", { autoPlay: true, loop: true, id: "video-background", poster: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/148422/screencap-wheel.png", muted: true },
-                    React.createElement("source", { src: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/148422/Vienna-SD.mp4", type: "video/mp4" }))),
+                React.createElement("video", { autoPlay: true, loop: true, id: "video-background", poster: "http://nguyenminhchi.com/api/uploads/images/0c70204d9323542f870e1540141200000.png", muted: true },
+                    React.createElement("source", { src: "http://nguyenminhchi.com/template/public/images/intro.MP4", type: "video/mp4" }))),
             React.createElement(CLientFooterBanner, null)));
     };
     return ClientBanner;

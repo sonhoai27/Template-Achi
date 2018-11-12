@@ -1,6 +1,5 @@
 import * as React from "react";
-import SearchBar from "./SearchBar";
-import { BASEURL, RESOURCE } from "../../../config/const";
+import NewMenu from "./NewMenu";
 
 interface IState {
   isShowingMenu: boolean,
@@ -27,7 +26,7 @@ class ClientHeader extends React.Component<{}, IState> {
   render() {
     return (
       <>
-        <div id="header-bar-desktop" className="header-bar">
+        {/* <div id="header-bar-desktop" className="header-bar">
           <div className="header-container">
             <div className="header-socials">
               <p className="phone">
@@ -179,7 +178,8 @@ class ClientHeader extends React.Component<{}, IState> {
             </div>
           </div>
           { this.state.isShowingSearch ? <SearchBar/> : ''}
-        </nav>
+        </nav> */}
+        <NewMenu/>
       </>
     );
   }

@@ -21,11 +21,13 @@ import ItemPage from "../../DynamicPage/item";
 import EbookPreview from "./com/preview";
 import Customer from "./com/customer";
 import OptionEbook from "./com/optionEbook";
+import ListSocial from "../../shared/components/social";
 var IDPAGE = 5;
 var listCom = {
     EBOOKPREVIEW: React.createElement(EbookPreview, null),
     CUSTOMER: React.createElement(Customer, null),
-    ORDEREBOOK: React.createElement(OptionEbook, null)
+    ORDEREBOOK: React.createElement(OptionEbook, null),
+    SOCIAL: React.createElement(ListSocial, null)
 };
 var EbookLadingPage = /** @class */ (function (_super) {
     __extends(EbookLadingPage, _super);
@@ -54,7 +56,6 @@ var EbookLadingPage = /** @class */ (function (_super) {
         };
         var coll = document.getElementsByClassName("collapsible");
         var i;
-        console.log(coll);
         for (i = 0; i < coll.length; i++) {
             coll[i].addEventListener("click", myToggle, false);
         }

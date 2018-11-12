@@ -36,7 +36,6 @@ var AddCategory = /** @class */ (function (_super) {
             _this.setState({
                 category_color: color.hex
             });
-            console.log(color.hex);
         };
         _this.onChange = function (e) {
             var _a;
@@ -59,7 +58,6 @@ var AddCategory = /** @class */ (function (_super) {
     }
     AddCategory.prototype.componentDidUpdate = function (preProps) {
         var _this = this;
-        console.log(this.props.resAddCategory);
         if (this.props.resAddCategory != preProps.resAddCategory) {
             if (this.props.resAddCategory.status === 200) {
                 this.props.reIsSuccess(true);

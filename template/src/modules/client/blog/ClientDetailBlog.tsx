@@ -9,6 +9,7 @@ import {
 import Helmet from "react-helmet";
 import { BASEURL, API } from "../../../config/const";
 import CLientFooterBanner from "../home/ClientFooterBanner";
+import { addTraffic } from "../../shared/traffic";
 interface IProps {
   match?: any;
   resDetailBlogAlias: any;
@@ -37,6 +38,10 @@ class ClientDetailBlog extends React.Component<IProps, IState> {
     }
   }
   componentDidMount() {
+    addTraffic({
+      type: 1,
+      url:  window.location.href
+    })
     window.scrollTo(0, 0);
     this.props.reDetailBlogAlias(this.props.match.params.idBlog);
     axios.put(API + "blog/views", {

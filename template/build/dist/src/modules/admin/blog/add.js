@@ -42,7 +42,22 @@ var BlogAdd = /** @class */ (function (_super) {
         };
         _this.addBlog = function () {
             var temp = document.getElementById('img-cover-blog-preview');
-            _this.props.reAddBlog(__assign({}, _this.state, { blog_alias: alias(_this.state.blog_title), blog_cover: temp.src, blog_id: (Date.now()) }));
+            if (_this.checkBlog()) {
+                _this.props.reAddBlog(__assign({}, _this.state, { blog_alias: alias(_this.state.blog_title), blog_cover: temp.src, blog_id: (Date.now()) }));
+            }
+            else {
+                alert("Vui lòng chọn đầy đủ");
+            }
+        };
+        _this.checkBlog = function () {
+            if (_this.state.blog_content !== ""
+                && _this.state.blog_id_author != 0
+                && _this.state.blog_id_category != 0
+                && _this.state.blog_promo != ""
+                && _this.state.blog_title != "") {
+                return true;
+            }
+            return false;
         };
         _this.renderListAuthor = function () {
             if (_this.props.resListAuthor.list) {

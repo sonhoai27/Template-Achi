@@ -12,7 +12,6 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import * as React from "react";
-import { RESOURCE } from "../../../../config/const";
 var EbookPreview = /** @class */ (function (_super) {
     __extends(EbookPreview, _super);
     function EbookPreview(props) {
@@ -66,23 +65,23 @@ var EbookPreview = /** @class */ (function (_super) {
             React.createElement("div", { className: "swiper-container" },
                 React.createElement("div", { className: "swiper-wrapper" },
                     React.createElement("div", { className: "swiper-slide" },
-                        React.createElement("img", { src: RESOURCE + "images/ebook/1.png", alt: "", className: "img-responsive" })),
+                        React.createElement("img", { src: "http://nguyenminhchi.com/api/uploads/images/bdf60984143956f8f7951539450000000.png", alt: "", className: "img-responsive" })),
                     React.createElement("div", { className: "swiper-slide" },
-                        React.createElement("img", { src: RESOURCE + "images/ebook/2.png", alt: "", className: "img-responsive" })),
+                        React.createElement("img", { src: "http://nguyenminhchi.com/api/uploads/images/036dc3a90ff5501ef6191539450000000.png", alt: "", className: "img-responsive" })),
                     React.createElement("div", { className: "swiper-slide" },
-                        React.createElement("img", { src: RESOURCE + "images/ebook/3.png", alt: "", className: "img-responsive" })),
+                        React.createElement("img", { src: "http://nguyenminhchi.com/api/uploads/images/1534decea79b82bc2fe91539450000000.png", alt: "", className: "img-responsive" })),
                     React.createElement("div", { className: "swiper-slide" },
-                        React.createElement("img", { src: RESOURCE + "images/ebook/4.png", alt: "", className: "img-responsive" })),
+                        React.createElement("img", { src: "http://nguyenminhchi.com/api/uploads/images/4d22f6abba817c9028401539450000000.png", alt: "", className: "img-responsive" })),
                     React.createElement("div", { className: "swiper-slide" },
-                        React.createElement("img", { src: RESOURCE + "images/ebook/5.png", alt: "", className: "img-responsive" })),
+                        React.createElement("img", { src: "http://nguyenminhchi.com/api/uploads/images/a92f135863b01abdd79e1539450000000.png", alt: "", className: "img-responsive" })),
                     React.createElement("div", { className: "swiper-slide" },
-                        React.createElement("img", { src: RESOURCE + "images/ebook/6.png", alt: "", className: "img-responsive" })),
+                        React.createElement("img", { src: "http://nguyenminhchi.com/api/uploads/images/ba471b19a669e9a385ca1539450000000.png", alt: "", className: "img-responsive" })),
                     React.createElement("div", { className: "swiper-slide" },
-                        React.createElement("img", { src: RESOURCE + "images/ebook/7.png", alt: "", className: "img-responsive" })),
+                        React.createElement("img", { src: "http://nguyenminhchi.com/api/uploads/images/bd7d41f3c025f7be3e2d1539450000000.png", alt: "", className: "img-responsive" })),
                     React.createElement("div", { className: "swiper-slide" },
-                        React.createElement("img", { src: RESOURCE + "images/ebook/8.png", alt: "", className: "img-responsive" })),
+                        React.createElement("img", { src: "http://nguyenminhchi.com/api/uploads/images/c7023ee3a8a920df61c41539450000000.png", alt: "", className: "img-responsive" })),
                     React.createElement("div", { className: "swiper-slide" },
-                        React.createElement("img", { src: RESOURCE + "images/ebook/9.png", alt: "", className: "img-responsive" }))),
+                        React.createElement("img", { src: "http://nguyenminhchi.com/api/uploads/images/fbf3e8d080f4413140111539450000000.png", alt: "", className: "img-responsive" }))),
                 React.createElement("div", { className: "swiper-pagination" }),
                 React.createElement("div", { className: "swiper-button-next" }),
                 React.createElement("div", { className: "swiper-button-prev" }))));

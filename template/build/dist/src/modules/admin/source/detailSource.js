@@ -109,7 +109,6 @@ var DetailSource = /** @class */ (function (_super) {
         }
     };
     DetailSource.prototype.componentDidUpdate = function (preProps) {
-        console.log(this.props.resListUIForSource);
     };
     DetailSource.prototype.componentDidMount = function () {
         this.props.reListUIForSource();

@@ -19,16 +19,25 @@ import { reListContentUISource } from "../../admin/source/reSource";
 import ItemPage from '../../DynamicPage/source/item';
 import MainSche from './../../DynamicPage/sche/MainSche';
 import { reSetCurrentMatch } from "../../../reducers/init";
+import SXDFooter from "../../shared/components/SXDFooter";
+import Customer from "../ebook/com/customer";
+import { LoadingPage } from "../client-shared/LoadingPage";
 var listCom = {
-    tks: React.createElement(MainSche, null),
-    tks2: React.createElement(MainSche, null),
+    TKB: React.createElement(MainSche, null),
+    SXDFOOTER: React.createElement(SXDFooter, null),
+    HOCVIEN: React.createElement(Customer, null)
 };
 var ClientSourceDetail = /** @class */ (function (_super) {
     __extends(ClientSourceDetail, _super);
     function ClientSourceDetail(props) {
-        return _super.call(this, props) || this;
+        var _this = _super.call(this, props) || this;
+        _this.state = {
+            isLoading: false
+        };
+        return _this;
     }
     ClientSourceDetail.prototype.componentDidMount = function () {
+        window.scrollTo(0, 0);
         var url = this.props.match.params.idSource;
         var tempArr = url.split('-');
         var idUI = tempArr[tempArr.length - 2];
@@ -37,13 +46,19 @@ var ClientSourceDetail = /** @class */ (function (_super) {
         this.props.reSetCurrentMatch(this.props.match);
     };
     ClientSourceDetail.prototype.componentDidUpdate = function (preProps) {
+        if (this.props.resListContentUISource != preProps.resListContentUISource) {
+            this.setState({
+                isLoading: !this.state.isLoading
+            });
+        }
     };
     ClientSourceDetail.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
             React.createElement(ClientHeader, null),
             React.createElement("div", { className: "margin-top" },
                 React.createElement(ItemPage, { coms: listCom, items: this.props.resListContentUISource.list })),
-            React.createElement(Footer, null)));
+            React.createElement(Footer, null),
+            !this.state.isLoading ? React.createElement(LoadingPage, null) : ''));
     };
     return ClientSourceDetail;
 }(React.Component));

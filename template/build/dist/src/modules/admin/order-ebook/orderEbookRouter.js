@@ -31,9 +31,7 @@ var breadCrumb = [
 var OrderEbookRouter = /** @class */ (function (_super) {
     __extends(OrderEbookRouter, _super);
     function OrderEbookRouter(props) {
-        var _this = _super.call(this, props) || this;
-        console.log(_this.props.match);
-        return _this;
+        return _super.call(this, props) || this;
     }
     OrderEbookRouter.prototype.render = function () {
         return (React.createElement(React.Fragment, null,

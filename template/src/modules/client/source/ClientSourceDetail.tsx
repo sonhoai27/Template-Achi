@@ -9,6 +9,7 @@ import { reSetCurrentMatch } from "../../../reducers/init";
 import SXDFooter from "../../shared/components/SXDFooter";
 import Customer from "../ebook/com/customer";
 import {LoadingPage} from "../client-shared/LoadingPage"
+import { addTraffic } from "../../shared/traffic";
 const listCom = {
     TKB: <MainSche />,
     SXDFOOTER: <SXDFooter/>,
@@ -31,6 +32,10 @@ class ClientSourceDetail extends React.Component<IProps, IState> {
         }
     }
     componentDidMount(){
+        addTraffic({
+            type: 0,
+            url:  window.location.href
+          })
         window.scrollTo(0,0)
         const url = this.props.match.params.idSource
         const tempArr = url.split('-')

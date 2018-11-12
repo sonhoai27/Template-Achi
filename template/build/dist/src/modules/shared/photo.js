@@ -48,11 +48,11 @@ var Photo = /** @class */ (function (_super) {
             var uri = _this.state.dataImage;
             if (typeof _this.props.currentEditorPhoto === "object" &&
                 !_this.props.currentEditorPhoto.type) {
-                _this.props.currentEditorPhoto.insertContent("<img src=\"" + uri.uri + "\" class=\"img-responsive\"/>");
+                _this.props.currentEditorPhoto.insertContent("<img src=\"" + uri.uri + "\" class=\"img-responsive\">");
             }
             else if (typeof _this.props.currentEditorPhoto === "object" &&
                 _this.props.currentEditorPhoto.type === "ck") {
-                _this.props.currentEditorPhoto.editor.insertHtml("<img src=\"" + uri.uri + "\" class=\"img-responsive\"/>");
+                _this.props.currentEditorPhoto.editor.insertHtml("<img src=\"" + uri.uri + "\" class=\"img-responsive\">");
             }
             else {
                 try {
@@ -179,7 +179,6 @@ var Photo = /** @class */ (function (_super) {
                                         }
                                     })
                                         .catch(function (err) {
-                                        console.log(err);
                                     });
                                 }, type: "button", className: "btn btn-danger waves-effect waves-light" }, "T\u1EA3i l\u00EAn")))))));
     };

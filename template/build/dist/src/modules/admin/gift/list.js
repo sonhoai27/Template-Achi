@@ -24,12 +24,14 @@ var __assign = (this && this.__assign) || function () {
 };
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { BASEURLADMIN } from "../../../config/const";
+import { API, BASEURLADMIN } from "../../../config/const";
 import { connect } from "react-redux";
 import { reListGift, reUpdateGift } from "./reGift";
 import Pagination from "../../shared/Pagination";
 import { reIsSuccess, reIsDanger } from "../../../reducers/init";
 import ModalSendGift from "./modalSendGift";
+import ExportFileSendGift from "./send-gift/exportFile";
+import axios from "axios";
 var GiftList = /** @class */ (function (_super) {
     __extends(GiftList, _super);
     function GiftList(props) {
@@ -37,6 +39,11 @@ var GiftList = /** @class */ (function (_super) {
         _this.hiddenModalSendGift = function () {
             _this.setState({
                 isShowingModalSendGift: !_this.state.isShowingModalSendGift
+            });
+        };
+        _this.hiddenModalExportFileGift = function () {
+            _this.setState({
+                isShowingModalExport: !_this.state.isShowingModalExport
             });
         };
         _this.makeCurrentPage = function () {
@@ -72,7 +79,10 @@ var GiftList = /** @class */ (function (_super) {
                 React.createElement("td", null));
         };
         _this.state = {
-            isShowingModalSendGift: false
+            isShowingModalSendGift: false,
+            isShowingModalExport: false,
+            isShowingModalImportMail: false,
+            csvChoose: {}
         };
         return _this;
     }
@@ -109,7 +119,7 @@ var GiftList = /** @class */ (function (_super) {
                             React.createElement("div", { className: "panel-action-bar" },
                                 React.createElement("div", { className: "btn btn-xs btn-info", onClick: function () {
                                         _this.setState({
-                                            isShowingModalSendGift: true
+                                            isShowingModalExport: true
                                         });
                                     }, style: {
                                         marginRight: 16
@@ -125,6 +135,15 @@ var GiftList = /** @class */ (function (_super) {
                                     } },
                                     React.createElement("i", { className: "ti-gift" }),
                                     " G\u1EDFi qu\u00E0"),
+                                React.createElement("div", { className: "btn btn-xs btn-info", onClick: function () {
+                                        _this.setState({
+                                            isShowingModalImportMail: !_this.state.isShowingModalImportMail
+                                        });
+                                    }, style: {
+                                        marginRight: 16
+                                    } },
+                                    React.createElement("i", { className: "ti-gift" }),
+                                    " Upload mail"),
                                 React.createElement(Link, { to: BASEURLADMIN + "gift/add" },
                                     React.createElement("div", { className: "btn btn-xs btn-info" }, "Th\u00EAm m\u1EDBi")))),
                         React.createElement("div", { className: "table-responsive" },
@@ -138,7 +157,39 @@ var GiftList = /** @class */ (function (_super) {
                                 React.createElement("tbody", null, this.renderListGifts()))),
                         React.createElement("div", { className: "pg" },
                             React.createElement(Pagination, { initialPage: parseInt(this.makeCurrentPage(), 10), pageSize: 20, totalItems: this.props.resListGift.count, onChangePage: function (e) { return _this.getMoreGift(e.currentPage); } }))))),
-            this.state.isShowingModalSendGift ? (React.createElement(ModalSendGift, { isShowingModal: this.hiddenModalSendGift })) : ("")));
+            this.state.isShowingModalSendGift ? (React.createElement(ModalSendGift, { isShowingModal: this.hiddenModalSendGift })) : (""),
+            this.state.isShowingModalExport ? (React.createElement(ExportFileSendGift, { isShowingModal: this.hiddenModalExportFileGift })) : (""),
+            this.state.isShowingModalImportMail ?
+                React.createElement("div", { className: "modal fade in", tabIndex: -1, role: "dialog", "aria-labelledby": "upload-image", "aria-hidden": "true" },
+                    React.createElement("div", { className: "modal-dialog modal-lg" },
+                        React.createElement("div", { className: "modal-content" },
+                            React.createElement("div", { className: "modal-header" },
+                                React.createElement("button", { onClick: function () {
+                                        _this.setState({
+                                            isShowingModalImportMail: !_this.state.isShowingModalImportMail
+                                        });
+                                    }, type: "button", className: "close", "data-dismiss": "modal", "aria-hidden": "true" }, "\u00D7"),
+                                React.createElement("h4", { className: "modal-title", id: "mySmallModalLabel" }, "Upload CSV"),
+                                " "),
+                            React.createElement("div", { className: "modal-body" },
+                                React.createElement("input", { onChange: function (e) {
+                                        _this.setState({
+                                            csvChoose: e.target.files[0]
+                                        });
+                                    }, name: "file", id: "photo-app-choose-file", type: "file", placeholder: "Ch\u1ECDn h\u00ECnh" })),
+                            React.createElement("div", { className: "modal-footer" },
+                                React.createElement("button", { onClick: function () {
+                                        var data = new FormData();
+                                        data.append("upload-csv", _this.state.csvChoose);
+                                        axios
+                                            .post(API + "file/import", data)
+                                            .then(function (result) {
+                                            console.log(result);
+                                        })
+                                            .catch(function (err) {
+                                        });
+                                    }, type: "button", className: "btn btn-danger waves-effect waves-light" }, "T\u1EA3i l\u00EAn")))))
+                : ""));
     };
     return GiftList;
 }(React.Component));

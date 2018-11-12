@@ -5,6 +5,7 @@ import BreadCrumd from "../shared/breadcrumb";
 import VideoList from "./list";
 import detail from "./detail";
 import add from "./add";
+import Customer from './customers';
 
 interface Props {
   match?: any;
@@ -38,6 +39,7 @@ class VideoRouter extends React.Component<Props, {}> {
               component={VideoList}
             />
             <Route path={`${this.props.match.url}/add`} component={add} />
+            <Route path={`${this.props.match.url}/customers`} component={Customer} />
             <Route path={`${this.props.match.url}/detail/:idGift`} component={detail} />
           </div>
         </div>

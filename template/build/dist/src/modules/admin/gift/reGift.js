@@ -56,7 +56,9 @@ export var ACTION_TYPES = {
     API_DETAIL_GIFT: "ReGift/API_DETAIL_GIFT",
     API_LIST_CONTACT: "ReGift/API_LIST_CONTACT",
     API_SEND_GIFT: "ReGift/API_SEND_GIFT",
-    API_SEND_GIFT_BY_USER: 'ReGift/API_SEND_GIFT_BY_USER'
+    API_SEND_GIFT_BY_USER: 'ReGift/API_SEND_GIFT_BY_USER',
+    API_CUSTOMER_LIST: 'ReGift/API_CUSTOMER_LIST',
+    API_DELETE_CUSTOMER: 'ReGift/API_DELETE_CUSTOMER'
 };
 var initialState = {
     resListGift: [],
@@ -66,7 +68,9 @@ var initialState = {
     resDetailGift: {},
     resListContact: [],
     resSendGift: {},
-    resSendGiftByUser: {}
+    resSendGiftByUser: {},
+    resCustomerList: [],
+    resDeleteCustomer: {}
 };
 export default (function (state, action) {
     if (state === void 0) { state = initialState; }
@@ -140,6 +144,22 @@ export default (function (state, action) {
         case SUCCESS(ACTION_TYPES.API_SEND_GIFT): {
             return __assign({}, state, { resSendGift: action.payload.data });
         }
+        // customer list
+        case REQUEST(ACTION_TYPES.API_CUSTOMER_LIST):
+        case FAILURE(ACTION_TYPES.API_CUSTOMER_LIST): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_CUSTOMER_LIST): {
+            return __assign({}, state, { resCustomerList: action.payload.data });
+        }
+        // delete customer
+        case REQUEST(ACTION_TYPES.API_DELETE_CUSTOMER):
+        case FAILURE(ACTION_TYPES.API_DELETE_CUSTOMER): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_DELETE_CUSTOMER): {
+            return __assign({}, state, { resDeleteCustomer: action.payload.data });
+        }
         default:
             return state;
     }
@@ -147,6 +167,7 @@ export default (function (state, action) {
 var API_GIFT = API + "gift";
 var API_SEND_GIFT = API + "send-gift";
 var API_CONTACT = API + "contact";
+var GOI_QUA = API + 'goi-qua-tang';
 export var reListGift = function (page) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
     var result;
     return __generator(this, function (_a) {
@@ -238,6 +259,34 @@ export var reListContact = function () { return function (dispatch) { return __a
             case 0: return [4 /*yield*/, dispatch({
                     type: ACTION_TYPES.API_LIST_CONTACT,
                     payload: axios.get(API_CONTACT + '/without-page')
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reCustomerList = function (page) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.API_CUSTOMER_LIST,
+                    payload: axios.get(GOI_QUA + '/customers/' + page)
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reDeleteCustomer = function (id) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.API_DELETE_CUSTOMER,
+                    payload: axios.delete(GOI_QUA + '/customers/' + id)
                 })];
             case 1:
                 result = _a.sent();

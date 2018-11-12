@@ -7,6 +7,7 @@ import {reIsDanger, reIsSuccess} from "../../../reducers/init";
 import {apiListVideoSource} from "../../admin/video-source/reVideoSource";
 import {Storage} from "../../../utils/storage-util";
 import ModalContact from "../../shared/Contact";
+import { addTraffic } from "../../shared/traffic";
 
 interface IProps {
     match?: any;
@@ -39,6 +40,10 @@ class ClientVideoSource extends React.Component<IProps, IState> {
     }
 
     componentDidMount() {
+        addTraffic({
+            type: 0,
+            url:  window.location.href
+          })
         const url = this.props.match.params.idSource
         const tempArr = url.split('-')
         const idSource = tempArr[0]

@@ -23,16 +23,32 @@ var ClientFollow = /** @class */ (function (_super) {
                 React.createElement("div", { className: "col-sm-4" },
                     React.createElement("div", { className: "social-callout" },
                         React.createElement("h3", { className: "text-center" }, "Nh\u1EADn b\u00E0i \u0111\u1ED9ng l\u1EF1c h\u00E0ng ng\u00E0y"),
-                        React.createElement("iframe", { src: "https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FNguyenMinhChi.MrShare%2F&width=84&layout=button_count&action=like&size=small&show_faces=false&share=false&height=21&appId=1440913602698681", width: 84, height: 21, style: { border: "none", overflow: "hidden" }, scrolling: "no", frameBorder: 0, allowTransparency: true }))),
+                        React.createElement("a", { href: "https://www.facebook.com/NguyenMinhChi.MrShare/", target: "_blank" },
+                            React.createElement("div", { className: "btn btn-sm btn-info", style: {
+                                    background: '#4267b2',
+                                    border: 'none'
+                                } },
+                                React.createElement("i", { className: " icon-social-facebook" }),
+                                "Facebook")))),
                 React.createElement("div", { className: "col-sm-4" },
                     React.createElement("div", { className: "social-callout" },
                         React.createElement("h3", { className: "text-center" }, "K\u00EAnh Youtube b\u00E0i h\u1ECDc"),
-                        React.createElement("div", { className: "g-ytsubscribe", "data-channelid": "UCHCeMi9tGx9VCMSHHbscrLg", "data-layout": "default", "data-count": "default" }))),
+                        React.createElement("a", { href: "https://www.youtube.com/channel/UCHCeMi9tGx9VCMSHHbscrLg?sub_confirmation=1", target: "_blank" },
+                            React.createElement("div", { className: "btn btn-sm btn-info", style: {
+                                    background: 'red',
+                                    border: 'none'
+                                } },
+                                React.createElement("i", { className: "icon-social-youtube" }),
+                                " Youtube")))),
                 React.createElement("div", { className: "col-sm-4" },
                     React.createElement("div", { className: "social-callout" },
                         React.createElement("h3", { className: "text-center" }, "Nh\u00F3m ph\u00E1t tri\u1EC3n b\u1EA3n th\u00E2n"),
                         React.createElement("a", { href: "https://www.facebook.com/groups/MatMaThoiSinhVien/", target: "_blank" },
-                            React.createElement("div", { className: "btn btn-sm btn-info" }, "Group Facebook")))))));
+                            React.createElement("div", { className: "btn btn-sm btn-info", style: {
+                                    background: '#4267b2'
+                                } },
+                                React.createElement("i", { className: " icon-social-facebook" }),
+                                " Group Facebook")))))));
     };
     return ClientFollow;
 }(React.Component));

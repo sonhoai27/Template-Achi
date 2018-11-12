@@ -16,13 +16,13 @@ import Header from "./shared/header";
 import BreadCrumd from "./shared/breadcrumb";
 var breadCrumb = [
     {
-        title: 'Admin',
-        uri: '',
+        title: "Admin",
+        uri: "",
         active: false
     },
     {
-        title: 'Blog',
-        uri: '',
+        title: "Home",
+        uri: "",
         active: true
     }
 ];
@@ -34,9 +34,48 @@ var Home = /** @class */ (function (_super) {
     Home.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
             React.createElement(Header, null),
-            React.createElement("div", { id: "wrapper" },
+            React.createElement("div", { id: "page-wrapper" },
                 React.createElement("div", { className: "container-fluid" },
-                    React.createElement(BreadCrumd, { uri: breadCrumb, title: "B\u00E0i vi\u1EBFt" })))));
+                    React.createElement(BreadCrumd, { uri: breadCrumb, title: "Trang ch\u1EE7" }),
+                    React.createElement("div", { className: "container" },
+                        React.createElement("div", { className: "row" },
+                            React.createElement("div", { className: "col-sm-4" },
+                                React.createElement("div", { className: "white-box analytics-info" },
+                                    React.createElement("h3", { className: "box-title" }, "Li\u00EAn h\u1EC7 h\u00F4m nay"),
+                                    React.createElement("ul", { className: "list-inline two-part" },
+                                        React.createElement("li", null,
+                                            React.createElement("div", { id: "sparklinedash" },
+                                                React.createElement("i", { className: "ti-stats-up text-success num" }))),
+                                        React.createElement("li", { className: "text-right" },
+                                            React.createElement("span", { className: "counter num text-success" }, "659"))))),
+                            React.createElement("div", { className: "col-sm-4" },
+                                React.createElement("div", { className: "white-box analytics-info" },
+                                    React.createElement("h3", { className: "box-title" }, "\u0110\u0103ng k\u00FD h\u00F4m nay"),
+                                    React.createElement("ul", { className: "list-inline two-part" },
+                                        React.createElement("li", null,
+                                            React.createElement("div", { id: "sparklinedash" },
+                                                React.createElement("i", { className: "ti-stats-up text-success num" }))),
+                                        React.createElement("li", { className: "text-right" },
+                                            React.createElement("span", { className: "counter num text-success" }, "659"))))),
+                            React.createElement("div", { className: "col-sm-4" },
+                                React.createElement("div", { className: "white-box analytics-info" },
+                                    React.createElement("h3", { className: "box-title" }, "Xem Blog"),
+                                    React.createElement("ul", { className: "list-inline two-part" },
+                                        React.createElement("li", null,
+                                            React.createElement("div", { id: "sparklinedash" },
+                                                React.createElement("i", { className: "ti-stats-up text-success num" }))),
+                                        React.createElement("li", { className: "text-right" },
+                                            React.createElement("span", { className: "counter num text-success" }, "659")))))),
+                        React.createElement("div", { className: "row" },
+                            React.createElement("div", { className: "col-sm-4" },
+                                React.createElement("div", { className: "white-box analytics-info" },
+                                    React.createElement("h3", { className: "box-title" }, "\u0110\u0103ng k\u00FD kh\u00F3a h\u1ECDc"))),
+                            React.createElement("div", { className: "col-sm-4" },
+                                React.createElement("div", { className: "white-box analytics-info" },
+                                    React.createElement("h3", { className: "box-title" }, "Nh\u1EADn qu\u00E0"))),
+                            React.createElement("div", { className: "col-sm-4" },
+                                React.createElement("div", { className: "white-box analytics-info" },
+                                    React.createElement("h3", { className: "box-title" }, "Li\u00EAn h\u1EC7")))))))));
     };
     return Home;
 }(React.Component));

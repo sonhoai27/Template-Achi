@@ -28,6 +28,7 @@ import { connect } from "react-redux";
 import { reSetCurrentEditorPhoto, reShowPhotoApp, reIsDanger, reIsSuccess } from "../../../reducers/init";
 import { reAddGift } from "./reGift";
 import { BASEURLADMIN } from "../../../config/const";
+import { alias } from './../../../utils/alias';
 var GiftAdd = /** @class */ (function (_super) {
     __extends(GiftAdd, _super);
     function GiftAdd(props) {
@@ -42,7 +43,7 @@ var GiftAdd = /** @class */ (function (_super) {
             var temDom = document.getElementById('img-cover-blog-preview');
             var tempGift = _this.state.gift;
             delete tempGift.gift_id;
-            _this.props.reAddGift(__assign({}, tempGift, { gift_cover: temDom.src }));
+            _this.props.reAddGift(__assign({}, tempGift, { gift_cover: temDom.src, gift_alias: alias(_this.state.gift.gift_name) }));
         };
         _this.state = {
             gift: {
@@ -51,7 +52,9 @@ var GiftAdd = /** @class */ (function (_super) {
                 gift_cover: '',
                 gift_name: '',
                 gift_promo: '',
-                gift_uri_file: ''
+                gift_uri_file: '',
+                gift_alias: '',
+                gift_content: ''
             }
         };
         return _this;
@@ -123,6 +126,24 @@ var GiftAdd = /** @class */ (function (_super) {
                                                         }
                                                     });
                                                 }
+                                            } }))),
+                                React.createElement("div", { className: "form-group", style: { display: "inline-block", width: "100%" } },
+                                    React.createElement("label", { className: "col-md-12" },
+                                        React.createElement("span", { className: "help" }, " N\u1ED9i dung")),
+                                    React.createElement("div", { className: "col-md-12" },
+                                        React.createElement(Editor, { id: "source_date_sche", value: this.state.gift.gift_content, onChange: function (e) {
+                                                var html = e.level.content;
+                                                _this.setState({
+                                                    gift: __assign({}, _this.state.gift, { gift_content: html })
+                                                });
+                                            }, apiKey: "t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl", init: {
+                                                mode: "exact",
+                                                element: "source_date_sche",
+                                                height: 100,
+                                                theme: "modern",
+                                                plugins: "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
+                                                toolbar1: "fontsizeselect formatselect | bold italic strikethrough forecolor backcolor | link blockquote | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat",
+                                                fontsize_formats: "10pt 11pt 12pt 14pt 16pt 18pt 20pt 24pt 26pt 28pt 36pt 48pt 72pt"
                                             } })))),
                             React.createElement("div", { className: "col-sm-3" },
                                 React.createElement("div", { className: "form-group" },

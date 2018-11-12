@@ -50,7 +50,6 @@ var AddAuthor = /** @class */ (function (_super) {
     }
     AddAuthor.prototype.componentDidUpdate = function (preProps) {
         var _this = this;
-        console.log(this.props.resAddAuthor);
         if (this.props.resAddAuthor != preProps.resAddAuthor) {
             if (this.props.resAddAuthor.status === 200) {
                 this.props.reIsSuccess(true);
@@ -89,7 +88,7 @@ var AddAuthor = /** @class */ (function (_super) {
                                         React.createElement("div", { className: "form-group col-sm-6" },
                                             React.createElement("label", { className: "col-sm-12" }, "Intro"),
                                             React.createElement("div", { className: "col-sm-12" },
-                                                React.createElement("input", { onChange: this.onChange, name: "author_intro", className: "form-control", value: this.state.author_intro }))),
+                                                React.createElement("textarea", { onChange: this.onChange, name: "author_intro", className: "form-control", value: this.state.author_intro }))),
                                         React.createElement("div", { className: "form-group col-sm-12" },
                                             React.createElement("label", { className: "col-sm-12" }, "H\u00ECnh cover"),
                                             React.createElement("div", { className: "col-sm-12 cover-blog", onClick: function () {

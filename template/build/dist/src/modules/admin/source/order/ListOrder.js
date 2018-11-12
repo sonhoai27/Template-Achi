@@ -16,6 +16,7 @@ import { connect } from "react-redux";
 import { reListOrder, reIsShowingModalExport } from "./reOrder";
 import Pagination from "../../../shared/Pagination";
 import ModalExport from './modalExport';
+import { reDeleteSourceOrder } from './../reSource';
 var ListOrder = /** @class */ (function (_super) {
     __extends(ListOrder, _super);
     function ListOrder(props) {
@@ -49,7 +50,10 @@ var ListOrder = /** @class */ (function (_super) {
                             " - ",
                             element.source_sche_khoa),
                         React.createElement("td", null, element.source_order_price),
-                        React.createElement("td", null, element.source_order_created_date)));
+                        React.createElement("td", null,
+                            React.createElement("div", { className: "btn btn-xs btn-danger", onClick: function () {
+                                    _this.props.reDeleteSourceOrder(element.source_order_id);
+                                } }, "X\u00F3a"))));
                 });
             }
             return React.createElement("h1", null, "Null");
@@ -58,6 +62,13 @@ var ListOrder = /** @class */ (function (_super) {
     }
     ListOrder.prototype.componentDidMount = function () {
         this.props.reListOrder((parseInt(this.makeCurrentPage(), 10) - 1) * 20);
+    };
+    ListOrder.prototype.componentDidUpdate = function (preProps) {
+        if (this.props.resDeleteSourceOrder != preProps.resDeleteSourceOrder) {
+            if (this.props.resDeleteSourceOrder.status === 200) {
+                this.props.reListOrder((parseInt(this.makeCurrentPage(), 10) - 1) * 20);
+            }
+        }
     };
     ListOrder.prototype.render = function () {
         var _this = this;
@@ -86,7 +97,7 @@ var ListOrder = /** @class */ (function (_super) {
                                     React.createElement("th", null, "Email"),
                                     React.createElement("th", null, "Kh\u00F3a h\u1ECDc - TKB"),
                                     React.createElement("th", null, "Gi\u00E1"),
-                                    React.createElement("th", null, "Ng\u00E0y \u0111\u0103ng k\u00FD"))),
+                                    React.createElement("th", null, "H\u00E0nh \u0111\u1ED9ng"))),
                             React.createElement("tbody", null, this.renderListOrder()))),
                     React.createElement("div", { className: "pg" },
                         React.createElement(Pagination, { initialPage: parseInt(this.makeCurrentPage(), 10), pageSize: 20, totalItems: this.props.resListOrder.count, onChangePage: function (e) { return _this.getMoreProduct(e.currentPage); } })))),
@@ -96,11 +107,13 @@ var ListOrder = /** @class */ (function (_super) {
 }(React.Component));
 var mapStateToProps = function (storeState) { return ({
     resListOrder: storeState.reOrder.resListOrder,
-    isShowingModalExport: storeState.reOrder.isShowingModalExport
+    isShowingModalExport: storeState.reOrder.isShowingModalExport,
+    resDeleteSourceOrder: storeState.reSource.resDeleteSourceOrder
 }); };
 var mapDispatchToProps = {
     reListOrder: reListOrder,
-    reIsShowingModalExport: reIsShowingModalExport
+    reIsShowingModalExport: reIsShowingModalExport,
+    reDeleteSourceOrder: reDeleteSourceOrder
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ListOrder);
 //# sourceMappingURL=ListOrder.js.map

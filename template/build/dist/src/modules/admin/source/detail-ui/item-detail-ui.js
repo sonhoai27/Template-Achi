@@ -33,7 +33,8 @@ var ItemDetailUISource = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.state = {
             content_element_attribute: _this.props.detailUI.content_element_attribute,
-            content_element_attribute_src: _this.props.detailUI.content_element_attribute_src,
+            content_element_attribute_src: _this.props.detailUI
+                .content_element_attribute_src,
             content_element_data: _this.props.detailUI.content_element_data,
             content_element_class: _this.props.detailUI.content_element_class
         };
@@ -42,73 +43,97 @@ var ItemDetailUISource = /** @class */ (function (_super) {
             var tempDom = document.getElementById(obj.idVirtualElement);
             _this.props.reAddUpdateContentElement(__assign({}, obj, (_a = {}, _a[tempDom.name] = tempDom.value, _a)));
         };
-        _this.saveContentElementByTiny = function () {
+        _this.saveContentElementByTiny = function () { };
+        _this.checkChild = function () {
+            if (_this.props.detailUI.child) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        };
+        _this.renderNoiDung = function () {
+            return (React.createElement(React.Fragment, null,
+                React.createElement("div", { className: "form-group" },
+                    React.createElement("label", { className: "col-md-12" },
+                        React.createElement("span", { className: "help" }, " Attribute"),
+                        React.createElement("div", { onClick: function () {
+                                return _this.saveContentElement({
+                                    idVirtualElement: _this.props.detailUI.detail_ui_random_id + "-attr",
+                                    content_element_id: _this.props.detailUI.content_element_id,
+                                    content_element_id_detail_ui: _this.props.detailUI
+                                        .detail_ui_id,
+                                    content_element_id_source: _this.props.match.params.idSource
+                                });
+                            }, className: "btn btn-xs btn-info" },
+                            React.createElement("i", { className: " icon-doc" }),
+                            " L\u01B0u")),
+                    React.createElement("div", { className: "col-md-12" },
+                        React.createElement("input", { className: "form-control", type: "text", name: "content_element_attribute", defaultValue: _this.state.content_element_attribute, id: _this.props.detailUI.detail_ui_random_id + "-attr" }))),
+                React.createElement("div", { className: "form-group" },
+                    React.createElement("label", { className: "col-md-12" },
+                        React.createElement("span", { className: "help" }, " Content Attribute"),
+                        React.createElement("div", { onClick: function () {
+                                return _this.saveContentElement({
+                                    idVirtualElement: _this.props.detailUI.detail_ui_random_id + "-content-attr",
+                                    content_element_id: _this.props.detailUI.content_element_id,
+                                    content_element_id_detail_ui: _this.props.detailUI
+                                        .detail_ui_id,
+                                    content_element_id_source: _this.props.match.params.idSource
+                                });
+                            }, className: "btn btn-xs btn-info" },
+                            React.createElement("i", { className: " icon-doc" }),
+                            " L\u01B0u")),
+                    React.createElement("div", { className: "col-md-12" },
+                        React.createElement("input", { name: "content_element_attribute_src", id: _this.props.detailUI.detail_ui_random_id + "-content-attr", type: "text", defaultValue: _this.state.content_element_attribute_src, className: "form-control" })))));
         };
         _this.generateInfo = function () {
             return (React.createElement("div", { className: "item-block", style: { marginBottom: 0 } },
-                React.createElement("div", { className: "toolbar", style: { justifyContent: 'left' } },
+                React.createElement("div", { className: "toolbar", style: { justifyContent: "left" } },
                     React.createElement("h3", null, _this.props.detailUI.element_name),
-                    React.createElement("input", { type: "text", name: "content_element_name", id: _this.props.detailUI.detail_ui_random_id + '-name-row', defaultValue: _this.props.detailUI.content_element_name, className: "form-control", style: {
-                            width: '10%',
-                            marginLeft: '16px',
-                            marginRight: '16px'
+                    React.createElement("input", { type: "text", name: "content_element_name", id: _this.props.detailUI.detail_ui_random_id + "-name-row", defaultValue: _this.props.detailUI.content_element_name, className: "form-control", style: {
+                            width: "10%",
+                            marginLeft: "16px",
+                            marginRight: "16px"
                         } }),
-                    React.createElement("div", { onClick: function () { return _this.saveContentElement({
-                            idVirtualElement: _this.props.detailUI.detail_ui_random_id + '-name-row',
-                            content_element_id: _this.props.detailUI.content_element_id,
-                            content_element_id_detail_ui: _this.props.detailUI.detail_ui_id,
-                            content_element_id_source: _this.props.match.params.idSource
-                        }); }, className: "btn btn-xs btn-info" }, "L\u01B0u t\u00EAn")),
+                    React.createElement("div", { onClick: function () {
+                            return _this.saveContentElement({
+                                idVirtualElement: _this.props.detailUI.detail_ui_random_id + "-name-row",
+                                content_element_id: _this.props.detailUI.content_element_id,
+                                content_element_id_detail_ui: _this.props.detailUI.detail_ui_id,
+                                content_element_id_source: _this.props.match.params.idSource
+                            });
+                        }, className: "btn btn-xs btn-info" }, "L\u01B0u t\u00EAn")),
                 React.createElement("div", { className: "style" },
-                    React.createElement("div", { className: "form-group" },
-                        React.createElement("label", { className: "col-md-12" },
-                            React.createElement("span", { className: "help" }, " N\u1ED9i dung c\u1EE7a \u0111\u1ED1i t\u01B0\u1EE3ng"),
-                            React.createElement("div", { onClick: function () {
-                                    _this.props.reShowEditContent(true);
-                                    _this.props.reSetContentElement(__assign({}, _this.props.detailUI, { idSource: _this.props.match.params.idSource }));
-                                }, className: "btn btn-xs btn-primary" },
-                                React.createElement("i", { className: " icon-doc" }),
-                                " S\u1EEDa"))),
+                    !_this.checkChild() ? (React.createElement(React.Fragment, null,
+                        React.createElement("div", { className: "form-group" },
+                            React.createElement("label", { className: "col-md-12" },
+                                React.createElement("span", { className: "help" }, " N\u1ED9i dung c\u1EE7a \u0111\u1ED1i t\u01B0\u1EE3ng"),
+                                React.createElement("div", { onClick: function () {
+                                        _this.props.reShowEditContent(true);
+                                        _this.props.reSetContentElement(__assign({}, _this.props.detailUI, { idSource: _this.props.match.params.idSource }));
+                                    }, className: "btn btn-xs btn-primary" },
+                                    React.createElement("i", { className: " icon-doc" }),
+                                    " S\u1EEDa"))),
+                        React.createElement("div", { className: "xem-truoc-noi-dung" },
+                            React.createElement("div", { dangerouslySetInnerHTML: { __html: _this.props.detailUI.content_element_data } })))) : '',
                     React.createElement("div", { className: "form-group" },
                         React.createElement("label", { className: "col-md-12" },
                             React.createElement("span", { className: "help" }, " Class"),
-                            React.createElement("div", { onClick: function () { return _this.saveContentElement({
-                                    idVirtualElement: _this.props.detailUI.detail_ui_random_id + '-class',
-                                    content_element_id: _this.props.detailUI.content_element_id,
-                                    content_element_id_detail_ui: _this.props.detailUI.detail_ui_id,
-                                    content_element_id_source: _this.props.match.params.idSource
-                                }); }, className: "btn btn-xs btn-info" },
+                            React.createElement("div", { onClick: function () {
+                                    return _this.saveContentElement({
+                                        idVirtualElement: _this.props.detailUI.detail_ui_random_id + "-class",
+                                        content_element_id: _this.props.detailUI.content_element_id,
+                                        content_element_id_detail_ui: _this.props.detailUI
+                                            .detail_ui_id,
+                                        content_element_id_source: _this.props.match.params.idSource
+                                    });
+                                }, className: "btn btn-xs btn-info" },
                                 React.createElement("i", { className: " icon-doc" }),
                                 " L\u01B0u")),
                         React.createElement("div", { className: "col-md-12" },
-                            React.createElement("input", { name: "content_element_class", id: _this.props.detailUI.detail_ui_random_id + '-class', type: "text", className: "form-control", defaultValue: _this.state.content_element_class })))),
-                React.createElement("div", { className: "noi-dung" },
-                    React.createElement("div", { className: "form-group" },
-                        React.createElement("label", { className: "col-md-12" },
-                            React.createElement("span", { className: "help" }, " Attribute"),
-                            React.createElement("div", { onClick: function () { return _this.saveContentElement({
-                                    idVirtualElement: _this.props.detailUI.detail_ui_random_id + '-attr',
-                                    content_element_id: _this.props.detailUI.content_element_id,
-                                    content_element_id_detail_ui: _this.props.detailUI.detail_ui_id,
-                                    content_element_id_source: _this.props.match.params.idSource
-                                }); }, className: "btn btn-xs btn-info" },
-                                React.createElement("i", { className: " icon-doc" }),
-                                " L\u01B0u")),
-                        React.createElement("div", { className: "col-md-12" },
-                            React.createElement("input", { className: "form-control", type: "text", name: "content_element_attribute", defaultValue: _this.state.content_element_attribute, id: _this.props.detailUI.detail_ui_random_id + '-attr' }))),
-                    React.createElement("div", { className: "form-group" },
-                        React.createElement("label", { className: "col-md-12" },
-                            React.createElement("span", { className: "help" }, " Content Attribute"),
-                            React.createElement("div", { onClick: function () { return _this.saveContentElement({
-                                    idVirtualElement: _this.props.detailUI.detail_ui_random_id + '-content-attr',
-                                    content_element_id: _this.props.detailUI.content_element_id,
-                                    content_element_id_detail_ui: _this.props.detailUI.detail_ui_id,
-                                    content_element_id_source: _this.props.match.params.idSource
-                                }); }, className: "btn btn-xs btn-info" },
-                                React.createElement("i", { className: " icon-doc" }),
-                                " L\u01B0u")),
-                        React.createElement("div", { className: "col-md-12" },
-                            React.createElement("input", { name: "content_element_attribute_src", id: _this.props.detailUI.detail_ui_random_id + '-content-attr', type: "text", defaultValue: _this.state.content_element_attribute_src, className: "form-control" }))))));
+                            React.createElement("input", { name: "content_element_class", id: _this.props.detailUI.detail_ui_random_id + "-class", type: "text", className: "form-control", defaultValue: _this.state.content_element_class })))),
+                React.createElement("div", { className: "noi-dung" }, !_this.checkChild() ? _this.renderNoiDung() : "")));
         };
         _this.generateContent = function () {
             var content = [_this.generateInfo()];

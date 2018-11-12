@@ -6,6 +6,7 @@ import CLientFooterBanner from "./home/ClientFooterBanner";
 import Footer from "./client-shared/Footer";
 import ClientHeader from "./client-shared/Header";
 import { BASEURL } from "../../config/const";
+import { addTraffic } from "../shared/traffic";
 interface IProps {
   reListSourceByType: (type: number) => void;
   resListSourceBy0: any;
@@ -16,6 +17,10 @@ class ScheEvents extends React.Component<IProps, {}> {
   }
   componentDidMount() {
     this.props.reListSourceByType(0);
+    addTraffic({
+      type: 0,
+      url:  window.location.href
+    })
   }
   renderListSources = () => {
     if (this.props.resListSourceBy0.list) {

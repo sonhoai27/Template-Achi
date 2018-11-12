@@ -28,7 +28,7 @@ class Footer extends React.Component<{}, IState> {
           return (
             <div key={element.blog_id}>
             <h5 style={{marginTop: 16, fontWeight:300, lineHeight: 1.4, fontSize: 17}}>
-              <a className="white" title={element.blog_title} href={BASEURL+'page/blog/detail/'+element.blog_id}>{element.blog_title}</a>
+              <a className="white" title={element.blog_title} href={BASEURL+'page/blog/detail/'+element.blog_alias}>{element.blog_title}</a>
             </h5>
             <hr/>
             </div>

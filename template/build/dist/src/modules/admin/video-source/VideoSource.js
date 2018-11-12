@@ -133,7 +133,6 @@ var VideoSource = /** @class */ (function (_super) {
         }
     };
     VideoSource.prototype.componentDidUpdate = function (preProps) {
-        console.log(this.props.resListUIForSource);
     };
     VideoSource.prototype.componentDidMount = function () {
         this.props.reListUIForSource();

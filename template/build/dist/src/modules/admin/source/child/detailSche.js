@@ -46,14 +46,15 @@ var DetailSche = /** @class */ (function (_super) {
         _this.state = {
             source_sche_id: 0,
             source_sche_id_source: 0,
-            source_sche_number: 0,
+            source_sche_number: "",
             source_sche_price: 0,
             source_sche_sale: 0,
             source_sche_address: "",
             source_sche_teacher: "",
             source_sche_status: 0,
             source_sche_khoa: "",
-            source_date_sche: ""
+            source_date_sche: "",
+            source_sche_uu_dai: ""
         };
         return _this;
     }
@@ -69,7 +70,8 @@ var DetailSche = /** @class */ (function (_super) {
                 source_sche_teacher: nextProps.resDetailSche.list.source_sche_teacher,
                 source_sche_status: nextProps.resDetailSche.list.source_sche_status,
                 source_sche_khoa: nextProps.resDetailSche.list.source_sche_khoa,
-                source_date_sche: nextProps.resDetailSche.list.source_date_sche
+                source_date_sche: nextProps.resDetailSche.list.source_date_sche,
+                source_sche_uu_dai: nextProps.resDetailSche.list.source_sche_uu_dai
             });
         }
     };
@@ -119,7 +121,17 @@ var DetailSche = /** @class */ (function (_super) {
                                             React.createElement("label", { className: "col-md-12" },
                                                 React.createElement("span", { className: "help" }, " S\u1ED1 l\u01B0\u1EE3ng")),
                                             React.createElement("div", { className: "col-md-12" },
-                                                React.createElement("input", { onChange: this.onChange, type: "number", name: "source_sche_number", className: "form-control", value: this.state.source_sche_number })))),
+                                                React.createElement(Editor, { id: "source_sche_number", value: this.state.source_sche_number, onChange: function (e) {
+                                                        _this.setState(__assign({}, _this.state, { source_sche_number: e.level.content }));
+                                                    }, apiKey: "t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl", init: {
+                                                        mode: "exact",
+                                                        element: "source_sche_number",
+                                                        height: 100,
+                                                        theme: "modern",
+                                                        plugins: "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
+                                                        toolbar1: "fontsizeselect formatselect | bold italic strikethrough forecolor backcolor | link blockquote | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat",
+                                                        fontsize_formats: "10pt 11pt 12pt 14pt 16pt 18pt 20pt 24pt 26pt 28pt 36pt 48pt 72pt"
+                                                    } })))),
                                     React.createElement("div", { className: "col-sm-6" },
                                         React.createElement("div", { className: "form-group" },
                                             React.createElement("label", { className: "col-md-12" },
@@ -162,10 +174,25 @@ var DetailSche = /** @class */ (function (_super) {
                                             React.createElement("label", { className: "col-md-12" },
                                                 React.createElement("span", { className: "help" }, " Th\u1EDDi gian")),
                                             React.createElement("div", { className: "col-md-12" },
-                                                React.createElement(Editor, { initialValue: this.state.source_date_sche, onChange: function (e) {
+                                                React.createElement(Editor, { id: "source_date_sche", value: this.state.source_date_sche, onChange: function (e) {
                                                         _this.setState(__assign({}, _this.state, { source_date_sche: e.level.content }));
                                                     }, apiKey: "t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl", init: {
-                                                        selector: "textarea",
+                                                        mode: "exact",
+                                                        element: "source_date_sche",
+                                                        height: 100,
+                                                        theme: "modern",
+                                                        plugins: "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
+                                                        toolbar1: "fontsizeselect formatselect | bold italic strikethrough forecolor backcolor | link blockquote | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat",
+                                                        fontsize_formats: "10pt 11pt 12pt 14pt 16pt 18pt 20pt 24pt 26pt 28pt 36pt 48pt 72pt"
+                                                    } }))),
+                                        React.createElement("div", { className: "form-group", style: { display: "inline-block", width: "100%" } },
+                                            React.createElement("label", { className: "col-md-12" },
+                                                React.createElement("span", { className: "help" }, " M\u00F4 t\u1EA3 \u01B0u \u0111\u00E3 khi \u0111\u0103ng k\u00FD")),
+                                            React.createElement("div", { className: "col-md-12" },
+                                                React.createElement(Editor, { value: this.state.source_sche_uu_dai, onChange: function (e) {
+                                                        _this.setState(__assign({}, _this.state, { source_sche_uu_dai: e.level.content }));
+                                                    }, apiKey: "t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl", init: {
+                                                        mode: "exact",
                                                         height: 100,
                                                         theme: "modern",
                                                         plugins: "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",

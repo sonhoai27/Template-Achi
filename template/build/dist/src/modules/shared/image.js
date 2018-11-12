@@ -66,7 +66,7 @@ var Image = /** @class */ (function (_super) {
         };
         return (React.createElement("div", { style: style.wrapper },
             React.createElement("img", { onContextMenu: function (e) {
-                    _this.props.onClick ? _this.props.onClick(e) : console.log('test');
+                    _this.props.onClick ? _this.props.onClick(e) : '';
                 }, id: this.props.dataSrc, ref: "image", src: this.props.src, alt: this.props.alt, style: style.image, onLoad: this.resizeImage })));
     };
     return Image;

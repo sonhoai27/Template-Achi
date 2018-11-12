@@ -14,7 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 import * as React from "react";
 import { connect } from "react-redux";
 import { reIsDanger, reIsSuccess } from "../../../reducers/init";
-import { reIsShowingModalExportOrderEbook, reListOrderEbook } from "./reOrderEbook";
+import { reIsShowingModalExportOrderEbook, reListOrderEbook, reDeleteOrderEbook } from "./reOrderEbook";
 import Pagination from "../../shared/Pagination";
 import ModalExportOrderEbook from "./modalExportOrderEbook";
 var OrderEbook = /** @class */ (function (_super) {
@@ -44,7 +44,11 @@ var OrderEbook = /** @class */ (function (_super) {
                         React.createElement("td", null, element.order_ebook_phone),
                         React.createElement("td", null, element.package_ebook_name),
                         React.createElement("td", null, element.package_ebook_price),
-                        React.createElement("td", null, element.order_ebook_created_date)));
+                        React.createElement("td", null, element.order_ebook_created_date),
+                        React.createElement("td", null,
+                            React.createElement("div", { className: "btn btn-xs btn-danger", onClick: function () {
+                                    _this.props.reDeleteOrderEbook(element.order_ebook_id);
+                                } }, "X\u00F3a"))));
                 });
             }
             return React.createElement("h1", null, "Null");
@@ -53,6 +57,13 @@ var OrderEbook = /** @class */ (function (_super) {
     }
     OrderEbook.prototype.componentDidMount = function () {
         this.props.reListOrderEbook((parseInt(this.makeCurrentPage(), 10) - 1) * 20);
+    };
+    OrderEbook.prototype.componentDidUpdate = function (preProps) {
+        if (this.props.resDeleteOrderEbook != preProps.resDeleteOrderEbook) {
+            if (this.props.resDeleteOrderEbook.status === 200) {
+                this.props.reListOrderEbook((parseInt(this.makeCurrentPage(), 10) - 1) * 20);
+            }
+        }
     };
     OrderEbook.prototype.render = function () {
         var _this = this;
@@ -82,7 +93,8 @@ var OrderEbook = /** @class */ (function (_super) {
                                         React.createElement("th", null, "S\u1ED1 \u0111i\u1EC7n tho\u1EA1i"),
                                         React.createElement("th", null, "G\u00F3i"),
                                         React.createElement("th", null, "Gi\u00E1"),
-                                        React.createElement("th", null, "Ng\u00E0y \u0111\u0103ng k\u00FD"))),
+                                        React.createElement("th", null, "Ng\u00E0y \u0111\u0103ng k\u00FD"),
+                                        React.createElement("th", null, "H\u00E0nh \u0111\u1ED9ng"))),
                                 React.createElement("tbody", null, this.renderListOrder()))),
                         React.createElement("div", { className: "pg" },
                             React.createElement(Pagination, { initialPage: parseInt(this.makeCurrentPage(), 10), pageSize: 20, totalItems: this.props.resListOrderEbook.count, onChangePage: function (e) { return _this.getMoreProduct(e.currentPage); } }))))),
@@ -92,13 +104,15 @@ var OrderEbook = /** @class */ (function (_super) {
 }(React.Component));
 var mapStateToProps = function (storeState) { return ({
     resListOrderEbook: storeState.reOrderEbookAdmin.resListOrderEbook,
+    resDeleteOrderEbook: storeState.reOrderEbookAdmin.resDeleteOrderEbook,
     isShowingModalExportOrderModal: storeState.reOrderEbookAdmin.isShowingModalExportOrderModal,
 }); };
 var mapDispatchToProps = {
     reIsDanger: reIsDanger,
     reIsSuccess: reIsSuccess,
     reListOrderEbook: reListOrderEbook,
-    reIsShowingModalExportOrderEbook: reIsShowingModalExportOrderEbook
+    reIsShowingModalExportOrderEbook: reIsShowingModalExportOrderEbook,
+    reDeleteOrderEbook: reDeleteOrderEbook
 };
 export default connect(mapStateToProps, mapDispatchToProps)(OrderEbook);
 //# sourceMappingURL=orderEbook.js.map

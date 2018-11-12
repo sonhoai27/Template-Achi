@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import * as React from "react";
 import { connect } from "react-redux";
-import { reIsSuccess, reIsDanger, reIsLoading } from "../../../reducers/init";
+import { reIsSuccess, reIsDanger, reIsLoading, reShowPhotoApp, reSetCurrentEditorPhoto } from "../../../reducers/init";
 import { reListGift } from "./reGift";
 import { Editor } from "@tinymce/tinymce-react";
 import { reAddSendGift, reListCounter } from "./send-gift/reSendGift";
@@ -38,14 +38,16 @@ var ModalSendGift = /** @class */ (function (_super) {
             return null;
         };
         _this.send = function () {
-            // this.props.reIsLoading(!this.props.isLoading)
-            console.log(_this.state);
+            _this.props.reIsLoading(!_this.props.isLoading);
+            _this.props.reAddSendGift({
+                titleEmail: _this.state.titleEmail,
+                contentEmail: _this.state.content
+            }, _this.state.count);
         };
         _this.state = {
-            listEmail: [],
             content: "",
             editor: {},
-            name: '',
+            titleEmail: '',
             count: 0,
             nameGift: ""
         };
@@ -55,24 +57,25 @@ var ModalSendGift = /** @class */ (function (_super) {
         this.props.reListCounter();
     };
     ModalSendGift.prototype.componentDidUpdate = function (preProps) {
-        // if (this.props.resSendGift != preProps.resSendGift) {
-        //   console.log(this.props.resSendGift.status);
-        //   if (this.props.resSendGift.status === 200) {
-        //     this.props.reIsSuccess(true);
-        //     setTimeout(() => {
-        //       this.props.reIsSuccess(false);
-        //       this.props.reIsLoading(!this.props.isLoading)
-        //       this.props.isShowingModal()
-        //     }, 2000);
-        //   } else {
-        //     this.props.reIsDanger(true);
-        //     setTimeout(() => {
-        //       this.props.reIsDanger(false);
-        //       this.props.reIsLoading(!this.props.isLoading)
-        //       this.props.isShowingModal()
-        //     }, 2000);
-        //   }
-        // }
+        var _this = this;
+        if (this.props.resAddSendGift != preProps.resAddSendGift) {
+            if (this.props.resAddSendGift.status === 200) {
+                this.props.reIsSuccess(true);
+                setTimeout(function () {
+                    _this.props.reIsSuccess(false);
+                    _this.props.reIsLoading(!_this.props.isLoading);
+                    _this.props.isShowingModal();
+                }, 2000);
+            }
+            else {
+                this.props.reIsDanger(true);
+                setTimeout(function () {
+                    _this.props.reIsDanger(false);
+                    _this.props.reIsLoading(!_this.props.isLoading);
+                    _this.props.isShowingModal();
+                }, 2000);
+            }
+        }
     };
     ModalSendGift.prototype.render = function () {
         var _this = this;
@@ -94,24 +97,27 @@ var ModalSendGift = /** @class */ (function (_super) {
                                                         _this.setState({
                                                             count: e.target.value
                                                         });
-                                                    } }, this.options()))),
+                                                    } },
+                                                    React.createElement("option", null, "Ch\u1ECDn"),
+                                                    this.options()))),
                                         React.createElement("div", { className: "form-group col-sm-6" },
                                             React.createElement("label", { className: "col-sm-12" }, "Danh s\u00E1ch qu\u00E0"),
                                             React.createElement("div", { className: "col-sm-12" },
                                                 React.createElement("select", { onChange: function (e) {
+                                                        var click = e.target.options;
                                                         _this.setState({
-                                                            nameGift: e.options[e.selectedIndex].text
+                                                            nameGift: click[click.selectedIndex].text
                                                         });
-                                                        _this.state.editor.insertContent("<a href=\"" + e.target.value + ("\">" + e.target.textContent + "</a>"));
+                                                        _this.state.editor.insertContent("<a href=\"" + e.target.value + ("\">" + click[click.selectedIndex].text + "</a>"));
                                                     }, className: "form-control" },
-                                                    React.createElement("option", { value: '', selected: true }, "Ch\u1ECDn qu\u00E0"),
+                                                    React.createElement("option", { value: '' }, "Ch\u1ECDn qu\u00E0"),
                                                     this.renderListGifts()))),
                                         React.createElement("div", { className: "form-group col-sm-6" },
                                             React.createElement("label", { className: "col-sm-12" }, "Ti\u00EAu \u0111\u1EC1"),
                                             React.createElement("div", { className: "col-sm-12" },
                                                 React.createElement("input", { className: "form-control", onChange: function (e) {
                                                         _this.setState({
-                                                            name: e.target.value
+                                                            titleEmail: e.target.value
                                                         });
                                                     }, placeholder: "Ti\u00EAu \u0111\u1EC1" }))),
                                         React.createElement("div", { className: "form-group col-sm-12" },
@@ -139,11 +145,19 @@ var ModalSendGift = /** @class */ (function (_super) {
                                                         height: 500,
                                                         theme: "modern",
                                                         plugins: "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
-                                                        toolbar1: "fontsizeselect formatselect | bold italic strikethrough forecolor backcolor | link blockquote | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat",
+                                                        toolbar1: "fontsizeselect formatselect | addImage | bold italic strikethrough forecolor backcolor | link blockquote | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat",
                                                         fontsize_formats: "10pt 11pt 12pt 14pt 16pt 18pt 20pt 24pt 26pt 28pt 36pt 48pt 72pt",
                                                         setup: function (editor) {
                                                             _this.setState({
                                                                 editor: editor
+                                                            });
+                                                            editor.addButton("addImage", {
+                                                                icon: "image",
+                                                                tooltip: "Add Image",
+                                                                onclick: function () {
+                                                                    _this.props.reShowPhotoApp(true);
+                                                                    _this.props.reSetCurrentEditorPhoto(editor);
+                                                                }
                                                             });
                                                         }
                                                     } }))))))),
@@ -167,7 +181,9 @@ var mapDispatchToProps = {
     reIsSuccess: reIsSuccess,
     reIsLoading: reIsLoading,
     reAddSendGift: reAddSendGift,
-    reListCounter: reListCounter
+    reListCounter: reListCounter,
+    reSetCurrentEditorPhoto: reSetCurrentEditorPhoto,
+    reShowPhotoApp: reShowPhotoApp,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ModalSendGift);
 //# sourceMappingURL=modalSendGift.js.map

@@ -32,7 +32,7 @@ var ClientAboutPage = /** @class */ (function (_super) {
             React.createElement(Helmet, null,
                 React.createElement("title", null, "Gi\u1EDBi thi\u1EC7u - Nguy\u1EC5n Minh Ch\u00ED")),
             React.createElement(ClientHeader, null),
-            React.createElement("div", { className: "row" },
+            React.createElement("div", null,
                 React.createElement(ItemPage, { items: this.props.resListPageUI.list })),
             React.createElement(Footer, null)));
     };

@@ -7,6 +7,7 @@ import { API } from "../../config/const";
 import Helmet from 'react-helmet'
 import { reIsDanger, reIsSuccess, reIsLoading } from "../../reducers/init";
 import { BASEURL } from './../../config/const';
+import { addTraffic } from './../shared/traffic';
 interface IProps {
   reIsSuccess: (status: boolean) => void;
   reIsDanger: (status: boolean) => void;
@@ -20,6 +21,7 @@ interface IState {
     send_gift_name: string;
     send_gift_title: string;
     send_gift_phone: string;
+    created_date: string;
   }
 }
 
@@ -32,9 +34,15 @@ class ClientGift extends React.Component<IProps, IState> {
         send_gift_email: "",
         send_gift_name: "",
         send_gift_title: "",
-        send_gift_phone: ""
+        send_gift_phone: "",
+        created_date: this.getFullDate()
       }
     }
+  }
+  
+  getFullDate = (): string => {
+    const date = new Date()
+    return date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()
   }
   onchange = e => {
     // @ts-ignore
@@ -45,7 +53,14 @@ class ClientGift extends React.Component<IProps, IState> {
       }
     })
   };
+  validateEmail = (email: string) => {
+    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+  };
   componentDidMount(){
+    addTraffic({
+      type: 0,
+      url:  window.location.href
+    })
     axios.get(API+'gift/detail/active')
     .then(result =>{
       this.setState({
@@ -60,10 +75,11 @@ class ClientGift extends React.Component<IProps, IState> {
     })
   }
   onSendGift = ()=> {
-    this.props.reIsLoading(!this.props.isLoading)
+
     if(
-      this.state.user.send_gift_email !== "" && this.state.user.send_gift_name != "" && this.state.user.send_gift_phone != ""
+      this.state.user.send_gift_email !== "" && this.validateEmail(this.state.user.send_gift_email) && this.state.user.send_gift_name != "" && this.state.user.send_gift_phone != ""
     ){
+      this.props.reIsLoading(!this.props.isLoading)
       axios.post(API+'goi-qua-tang/add/', {
         gift: this.state.gift,
         user: this.state.user
@@ -88,7 +104,6 @@ class ClientGift extends React.Component<IProps, IState> {
       })
     }else {
       alert("Vui lòng nhập đủ thông tin.")
-      this.props.reIsLoading(!this.props.isLoading)
     }
 }
   render() {
@@ -121,8 +136,7 @@ class ClientGift extends React.Component<IProps, IState> {
           </div>
           <div className="container paddingY-64">
             <div className="row flex-ver">
-              <div className="col-sm-1" />
-              <div className="col-sm-4 flex-ver">
+              <div className="col-sm-6 flex-ver">
                 <img
                   width={"100%"}
                   src={this.state.gift.gift_cover}
@@ -130,7 +144,6 @@ class ClientGift extends React.Component<IProps, IState> {
                   className="img-responsive"
                 />
               </div>
-              <div className="col-sm-1" />
               <div className="col-sm-6" style={{ fontSize: 18 }}>
                 <h2>{this.state.gift.gift_name}</h2>
                 <p dangerouslySetInnerHTML={{__html: this.state.gift.gift_promo}}/>

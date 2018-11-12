@@ -18,6 +18,7 @@ import BreadCrumd from "../shared/breadcrumb";
 import VideoList from "./list";
 import detail from "./detail";
 import add from "./add";
+import Customer from './customers';
 var breadCrumb = [
     {
         title: "Admin",
@@ -43,6 +44,7 @@ var VideoRouter = /** @class */ (function (_super) {
                     React.createElement(BreadCrumd, { uri: breadCrumb, title: "Video" }),
                     React.createElement(Route, { exact: true, path: "" + this.props.match.url, component: VideoList }),
                     React.createElement(Route, { path: this.props.match.url + "/add", component: add }),
+                    React.createElement(Route, { path: this.props.match.url + "/customers", component: Customer }),
                     React.createElement(Route, { path: this.props.match.url + "/detail/:idGift", component: detail })))));
     };
     return VideoRouter;

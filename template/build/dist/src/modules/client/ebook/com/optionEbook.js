@@ -13,101 +13,57 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import * as React from "react";
 import OrderEbook from "./orderEbook";
+import axios from 'axios';
+import { API } from "../../../../config/const";
 var OptionEbook = /** @class */ (function (_super) {
     __extends(OptionEbook, _super);
     function OptionEbook(props) {
         var _this = _super.call(this, props) || this;
-        _this.state = {
-            isShowingModalOrder: false,
-            currentPackage: -1,
-            price: 0
-        };
-        return _this;
-    }
-    OptionEbook.prototype.render = function () {
-        var _this = this;
-        return (React.createElement(React.Fragment, null,
-            React.createElement("div", { className: "row pricing-table" },
-                React.createElement("div", { className: "col-sm-3" },
+        _this.renderListPackage = function () {
+            return _this.state.listPackage.map(function (element) {
+                var price = Number(element.package_ebook_price);
+                return (React.createElement("div", { className: "col-sm-3" },
                     React.createElement("div", { className: "pricing-option" },
-                        React.createElement("h1", null, "\u01AFU \u0110\u00C3I 1"),
+                        React.createElement("h1", { style: { textTransform: 'uppercase' } }, element.package_ebook_name),
                         React.createElement("hr", null),
-                        React.createElement("p", null,
-                            "Mua 1 cu\u1ED1n",
-                            React.createElement("br", null),
-                            "D\u00E0nh cho ng\u01B0\u1EDDi m\u1EDBi l\u00E0m quen ho\u1EB7c mua t\u1EB7ng l\u00E0m qu\u00E0."),
+                        React.createElement("p", { dangerouslySetInnerHTML: { __html: element.package_ebook_content } }),
                         React.createElement("hr", null),
                         React.createElement("div", { className: "price" },
                             React.createElement("div", { className: "front" },
-                                React.createElement("span", { className: "price" }, "150.000\u0111/cu\u1ED1n")),
+                                React.createElement("span", { className: "price" },
+                                    price.toLocaleString('VN'),
+                                    "\u0111/cu\u1ED1n")),
                             React.createElement("div", { className: "back" },
                                 React.createElement("a", { className: "button", onClick: function () {
                                         _this.setState({
-                                            currentPackage: 1,
-                                            price: 150000,
-                                            isShowingModalOrder: !_this.state.isShowingModalOrder
-                                        });
-                                    } }, "Mua Ngay"))))),
-                React.createElement("div", { className: "col-sm-3" },
-                    React.createElement("div", { className: "pricing-option" },
-                        React.createElement("h1", null, "\u01AFU \u0110\u00C3I 2"),
-                        React.createElement("hr", null),
-                        React.createElement("p", null,
-                            "Mua 2 cu\u1ED1n",
-                            React.createElement("br", null),
-                            "Ho\u00E0n h\u1EA3o cho ng\u01B0\u1EDDi t\u1EADp r\u00E8n luy\u1EC7n th\u00F3i quen s\u1ED1ng \u201Cch\u1EA5t\u201D m\u1ED7i ng\u00E0y."),
-                        React.createElement("hr", null),
-                        React.createElement("div", { className: "price" },
-                            React.createElement("div", { className: "front" },
-                                React.createElement("span", { className: "price" }, "120.000\u0111/cu\u1ED1n")),
-                            React.createElement("div", { className: "back" },
-                                React.createElement("a", { className: "button", onClick: function () {
-                                        _this.setState({
-                                            currentPackage: 2,
-                                            price: 120000,
-                                            isShowingModalOrder: !_this.state.isShowingModalOrder
-                                        });
-                                    } }, "Mua Ngay"))))),
-                React.createElement("div", { className: "col-sm-3" },
-                    React.createElement("div", { className: "pricing-option" },
-                        React.createElement("h1", null, "\u01AFU \u0110\u00C3I 3"),
-                        React.createElement("hr", null),
-                        React.createElement("p", null,
-                            "Mua 5 cu\u1ED1n",
-                            React.createElement("br", null),
-                            "D\u00E0nh cho ng\u01B0\u1EDDi mu\u1ED1n t\u0103ng t\u1ED1c trong h\u1ECDc t\u1EADp, c\u00F4ng vi\u1EC7c."),
-                        React.createElement("hr", null),
-                        React.createElement("div", { className: "price" },
-                            React.createElement("div", { className: "front" },
-                                React.createElement("span", { className: "price" }, "105.000\u0111/cu\u1ED1n")),
-                            React.createElement("div", { className: "back" },
-                                React.createElement("a", { className: "button", onClick: function () {
-                                        _this.setState({
-                                            currentPackage: 3,
+                                            currentPackage: element.package_ebook_id,
                                             price: 105000,
                                             isShowingModalOrder: !_this.state.isShowingModalOrder
                                         });
-                                    } }, "Mua Ngay"))))),
-                React.createElement("div", { className: "col-sm-3" },
-                    React.createElement("div", { className: "pricing-option" },
-                        React.createElement("h1", null, "\u01AFU \u0110\u00C3I 4"),
-                        React.createElement("hr", null),
-                        React.createElement("p", null,
-                            "Mua 10 cu\u1ED1n",
-                            React.createElement("br", null),
-                            "D\u00E0nh cho nh\u00F3m ng\u01B0\u1EDDi trong t\u1ED5 ch\u1EE9c mu\u1ED1n ph\u00E1t tri\u1EC3n s\u1ED1ng \u201Cch\u1EA5t\u201D c\u00F9ng nhau."),
-                        React.createElement("hr", null),
-                        React.createElement("div", { className: "price" },
-                            React.createElement("div", { className: "front" },
-                                React.createElement("span", { className: "price" }, "85.000\u0111/cu\u1ED1n")),
-                            React.createElement("div", { className: "back" },
-                                React.createElement("a", { className: "button", onClick: function () {
-                                        _this.setState({
-                                            currentPackage: 4,
-                                            price: 85000,
-                                            isShowingModalOrder: !_this.state.isShowingModalOrder
-                                        });
-                                    } }, "Mua Ngay")))))),
+                                    } }, "Mua Ngay"))))));
+            });
+        };
+        _this.state = {
+            isShowingModalOrder: false,
+            currentPackage: -1,
+            price: 0,
+            listPackage: []
+        };
+        return _this;
+    }
+    OptionEbook.prototype.componentDidMount = function () {
+        var _this = this;
+        axios.get(API + 'package-ebook')
+            .then(function (result) {
+            _this.setState({
+                listPackage: result.data.list
+            });
+        });
+    };
+    OptionEbook.prototype.render = function () {
+        var _this = this;
+        return (React.createElement(React.Fragment, null,
+            React.createElement("div", { className: "row pricing-table" }, this.renderListPackage()),
             this.state.isShowingModalOrder ? (React.createElement(OrderEbook, { package: this.state.currentPackage, price: this.state.price, exit: function () {
                     _this.setState({
                         isShowingModalOrder: !_this.state.isShowingModalOrder

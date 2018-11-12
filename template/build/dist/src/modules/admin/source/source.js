@@ -47,7 +47,6 @@ var Source = /** @class */ (function (_super) {
         return _this;
     }
     Source.prototype.componentWillReceiveProps = function (nextProps) {
-        console.log(nextProps.reslistSource);
     };
     Source.prototype.componentDidMount = function () {
         this.props.reListSource(0);

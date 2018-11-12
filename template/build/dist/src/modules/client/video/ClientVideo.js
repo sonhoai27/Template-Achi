@@ -72,28 +72,28 @@ var ClientVideo = /** @class */ (function (_super) {
                 var dem_1 = 1;
                 var list_1 = [];
                 return _this.props.resListVideo.list.map(function (element, index) {
-                    if (index === 0) {
-                        // @ts-ignore
-                        list_1 = __spread(list_1, [_this.itemVideo(element)]);
-                    }
-                    else if (dem_1 <= 2) {
-                        console.log(dem_1);
+                    if (dem_1 <= 2) {
                         // @ts-ignore
                         list_1 = __spread(list_1, [_this.itemVideo(element)]);
                         dem_1 = dem_1 + 1;
-                        console.log(list_1);
+                        if (index === (_this.props.resListVideo.list.length - 1)) {
+                            // @ts-ignore
+                            var tempList = __spread([], list_1);
+                            return React.createElement("div", {
+                                className: "row",
+                                key: index
+                            }, __spread([React.createElement("hr", null)], tempList));
+                        }
                     }
                     else {
-                        console.log('a', dem_1);
                         dem_1 = 1;
                         // @ts-ignore
                         list_1 = __spread(list_1, [_this.itemVideo(element)]);
                         var tempList = __spread([], list_1);
                         list_1 = [];
-                        console.log(list_1);
                         return React.createElement('div', {
-                            classname: 'row'
-                        }, __spread(tempList));
+                            className: 'row'
+                        }, __spread([(index >= 3 ? React.createElement("hr", null) : '')], tempList));
                     }
                     return "";
                 });
@@ -101,9 +101,10 @@ var ClientVideo = /** @class */ (function (_super) {
             return "";
         };
         _this.itemVideo = function (element) {
-            return (React.createElement("div", { className: "col-sm-4 margin-b-32" },
-                React.createElement("div", { className: "item" },
-                    React.createElement("a", { onClick: function () { return _this.onPlay(element); }, style: { width: '100%' } },
+            return (React.createElement("div", { className: "col-sm-4 margin-t-32" },
+                React.createElement("div", { className: "item", onClick: function () { return _this.onPlay(element); } },
+                    React.createElement("i", { className: "fa fa-play-circle" }),
+                    React.createElement("a", { style: { width: '100%' } },
                         React.createElement(AutofitImage, { clasName: "img-responsive", frameWidth: "100%", frameHeight: "200px", imgSrc: element.video_cover }),
                         React.createElement("p", { style: {
                                 marginTop: "16px",
@@ -138,27 +139,35 @@ var ClientVideo = /** @class */ (function (_super) {
         return (React.createElement(React.Fragment, null,
             React.createElement(ClientHeader, null),
             React.createElement("div", { className: "col-xs-12 page-source" },
-                React.createElement("div", { className: "row page-source_banner" },
+                React.createElement("div", { className: "row page-source_banner", style: {
+                        backgroundImage: 'url(http://nguyenminhchi.com/api/uploads/images/b023858c12110d79c0311539450000000.jpg)'
+                    } },
                     React.createElement("div", { className: "container" },
                         React.createElement("div", { className: "row" },
                             React.createElement("div", { className: "col-sm-6" },
-                                React.createElement("h1", { className: "white", style: { marginBottom: 64 } },
-                                    React.createElement("b", null, "FROM A HISTORY-MAKING STANLEY CUP FINALS TO BUILDING A PERSONAL AI")),
-                                React.createElement("p", { className: "white" }, "Where has Tony been recently \u2013 and what in the world is he up to? Below is the latest edition of the Tony Tracker, where you can see highlights from his journeys and read his narration of some of his favorite experiences. Watching history being made at the Stanley Cup Finals TONIGHT\u2019S GAME IS ONE"))))),
+                                React.createElement("h1", { className: "white" },
+                                    React.createElement("b", null, "VIDEO B\u00C0I H\u1ECCC CHIA S\u1EBA")),
+                                React.createElement("p", { className: "white" }, "\u0110\u00F3n xem video b\u00E0i h\u1ECDc chia s\u1EBB t\u00E2m \u0111\u1EAFc t\u1EEB Mr.Share"))))),
                 React.createElement("div", { className: "row" },
                     React.createElement(CLientFooterBanner, null)),
                 React.createElement("div", { className: "row paddingY-32" },
-                    React.createElement("h1", { className: "text-center", style: { marginTop: 64 } }, "Subscribe to Minh Chi Nguyen\u2019s YouTube Channel"),
+                    React.createElement("h1", { className: "text-center", style: { marginTop: 64 } }, "Theo d\u00F5i k\u00EAnh Youtube c\u1EE7a Nguy\u1EC5n Minh Ch\u00ED"),
                     React.createElement("div", { className: "col-sm-4" }),
                     React.createElement("div", { className: "col-sm-4" },
                         React.createElement("div", { className: "social-callout", style: {
                                 marginTop: 64
                             } },
                             React.createElement("h3", { className: "text-center" }, "K\u00EAnh Youtube b\u00E0i h\u1ECDc"),
-                            React.createElement("div", { className: "g-ytsubscribe", "data-channelid": "UCHCeMi9tGx9VCMSHHbscrLg", "data-layout": "default", "data-count": "default" }))),
+                            React.createElement("a", { href: "https://www.youtube.com/channel/UCHCeMi9tGx9VCMSHHbscrLg?sub_confirmation=1", target: "_blank" },
+                                React.createElement("div", { className: "btn btn-sm btn-info", style: {
+                                        background: 'red',
+                                        border: 'none'
+                                    } },
+                                    React.createElement("i", { className: "icon-social-youtube" }),
+                                    " Youtube")))),
                     React.createElement("div", { className: "col-sm-4" })),
                 React.createElement("div", { className: "row page-source_list-source page-video" },
-                    React.createElement("div", { className: "container paddingY-128" },
+                    React.createElement("div", { className: "container" },
                         this.renderListVideo(),
                         React.createElement("div", { className: "pg" },
                             React.createElement(Pagination, { initialPage: parseInt(this.makeCurrentPage(), 10), pageSize: 20, totalItems: this.props.resListVideo.count, onChangePage: function (e) { return _this.getMoreVideo(e.currentPage); } })))),

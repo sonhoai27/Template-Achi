@@ -48,6 +48,7 @@ var _this = this;
 import axios from 'axios';
 import { REQUEST, FAILURE, SUCCESS } from '../utils/action-type-util';
 import { API } from '../config/const';
+import { Storage } from '../utils/storage-util';
 export var ACTION_TYPES = {
     API_LIST_IMAGE: 'ReInit/API_LIST_IMAGE',
     API_ADD_IMAGE: 'ReInit/API_ADD_IMAGE',
@@ -59,7 +60,8 @@ export var ACTION_TYPES = {
     API_CHECK_LOGIN: 'ReInit/API_CHECK_LOGIN',
     API_LOGIN: 'ReInit/API_LOGIN',
     IS_LOADING: 'ReInit/IS_LOADING',
-    CURRENT_MATCH: 'ReInit/CURRENT_MATCH'
+    CURRENT_MATCH: 'ReInit/CURRENT_MATCH',
+    API_USER_LOGIN: "ReInit/API_USER_LOGIN"
 };
 var initialState = {
     resListImage: [],
@@ -72,7 +74,8 @@ var initialState = {
     resLogin: {},
     resCheckLogin: {},
     isLoading: false,
-    currentMatch: {}
+    currentMatch: {},
+    resUserLogin: {}
 };
 export default (function (state, action) {
     if (state === void 0) { state = initialState; }
@@ -134,6 +137,16 @@ export default (function (state, action) {
         }
         case SUCCESS(ACTION_TYPES.API_CHECK_LOGIN): {
             return __assign({}, state, { resCheckLogin: action.payload.data });
+        }
+        //  login
+        case REQUEST(ACTION_TYPES.API_USER_LOGIN): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_USER_LOGIN): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_USER_LOGIN): {
+            return __assign({}, state, { resUserLogin: action.payload.data });
         }
         default:
             return state;
@@ -258,7 +271,23 @@ export var reCheckLogin = function () { return function (dispatch) { return __aw
         switch (_a.label) {
             case 0: return [4 /*yield*/, dispatch({
                     type: ACTION_TYPES.API_CHECK_LOGIN,
-                    payload: axios.get(API + 'auth/check')
+                    payload: axios.post(API + 'auth/check', {
+                        token: Storage.local.get('user_token')
+                    })
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reUserLogin = function (form) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.API_USER_LOGIN,
+                    payload: axios.post(API + 'auth/login', form)
                 })];
             case 1:
                 result = _a.sent();

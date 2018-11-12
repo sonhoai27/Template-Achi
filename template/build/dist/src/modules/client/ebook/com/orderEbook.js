@@ -78,7 +78,6 @@ var OrderEbook = /** @class */ (function (_super) {
     OrderEbook.prototype.componentDidUpdate = function (preProps) {
         var _this = this;
         if (this.props.resOrderEbook != preProps.resOrderEbook) {
-            console.log(this.props.resOrderEbook.status);
             if (this.props.resOrderEbook.status === 200) {
                 this.props.reIsSuccess(true);
                 setTimeout(function () {

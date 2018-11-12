@@ -36,7 +36,10 @@ var ClientVideoSource = /** @class */ (function (_super) {
                                 });
                                 window.scrollTo(10, 500);
                             });
-                        } }, element.source_video_name));
+                        } },
+                        React.createElement("i", { className: "icon-social-youtube" }),
+                        " ",
+                        element.source_video_name));
                 });
             }
             return React.createElement("li", null, "Kh\u00F4ng c\u00F3");
@@ -107,8 +110,11 @@ var ClientVideoSource = /** @class */ (function (_super) {
                     React.createElement("div", { className: "container" },
                         React.createElement("div", { className: "row" },
                             React.createElement("div", { className: "col-xs-12" },
-                                React.createElement("h2", { style: { fontWeight: 700 } }, "Danh s\u00E1ch video"),
-                                React.createElement("ul", null, this.renderListVideo())))))),
+                                React.createElement("div", { className: "item" },
+                                    React.createElement("h2", { className: "white", style: { fontWeight: 700, marginLeft: 8 } },
+                                        React.createElement("i", { className: "fa fa-star" }),
+                                        " Danh s\u00E1ch video"),
+                                    React.createElement("ul", null, this.renderListVideo()))))))),
             React.createElement(Footer, null),
             this.state.isShowingModalContact ? React.createElement(ModalContact, { code: this.state.currentCode, name: this.state.currentName, showHide: function () {
                     _this.setState({

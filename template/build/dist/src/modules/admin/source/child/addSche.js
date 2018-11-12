@@ -45,14 +45,15 @@ var AddSche = /** @class */ (function (_super) {
             _this.props.reAddSche(__assign({}, _this.state, { source_sche_id_source: _this.props.match.params.idSource }));
         };
         _this.state = {
-            source_sche_number: 0,
+            source_sche_number: "",
             source_sche_price: 0,
             source_sche_sale: 0,
             source_sche_address: "",
             source_sche_teacher: "",
             source_sche_status: 0,
             source_sche_khoa: "",
-            source_date_sche: ""
+            source_date_sche: "",
+            source_sche_uu_dai: ""
         };
         return _this;
     }
@@ -102,7 +103,16 @@ var AddSche = /** @class */ (function (_super) {
                                     React.createElement("label", { className: "col-md-12" },
                                         React.createElement("span", { className: "help" }, " S\u1ED1 l\u01B0\u1EE3ng")),
                                     React.createElement("div", { className: "col-md-12" },
-                                        React.createElement("input", { onChange: this.onChange, type: "number", name: "source_sche_number", className: "form-control", placeholder: "S\u1ED1 l\u01B0\u1EE3ng" }))),
+                                        React.createElement(Editor, { onChange: function (e) {
+                                                _this.setState(__assign({}, _this.state, { source_sche_number: e.level.content }));
+                                            }, apiKey: "t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl", init: {
+                                                mode: "exact",
+                                                height: 100,
+                                                theme: "modern",
+                                                plugins: "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
+                                                toolbar1: "fontsizeselect formatselect | bold italic strikethrough forecolor backcolor | link blockquote | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat",
+                                                fontsize_formats: "10pt 11pt 12pt 14pt 16pt 18pt 20pt 24pt 26pt 28pt 36pt 48pt 72pt"
+                                            } }))),
                                 React.createElement("div", { className: "form-group", style: { width: "50%", float: "left" } },
                                     React.createElement("label", { className: "col-md-12" },
                                         React.createElement("span", { className: "help" }, " Gi\u00E1")),
@@ -138,13 +148,27 @@ var AddSche = /** @class */ (function (_super) {
                                         React.createElement(Editor, { onChange: function (e) {
                                                 _this.setState(__assign({}, _this.state, { source_date_sche: e.level.content }));
                                             }, apiKey: "t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl", init: {
-                                                selector: "textarea",
+                                                mode: "exact",
                                                 height: 100,
                                                 theme: "modern",
                                                 plugins: "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
                                                 toolbar1: "fontsizeselect formatselect | bold italic strikethrough forecolor backcolor | link blockquote | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat",
                                                 fontsize_formats: "10pt 11pt 12pt 14pt 16pt 18pt 20pt 24pt 26pt 28pt 36pt 48pt 72pt"
-                                            } }))))))))));
+                                            } })),
+                                    React.createElement("div", { className: "form-group", style: { display: "inline-block", width: "100%" } },
+                                        React.createElement("label", { className: "col-md-12" },
+                                            React.createElement("span", { className: "help" }, " M\u00F4 t\u1EA3 \u01B0u \u0111\u00E3 khi \u0111\u0103ng k\u00FD")),
+                                        React.createElement("div", { className: "col-md-12" },
+                                            React.createElement(Editor, { onChange: function (e) {
+                                                    _this.setState(__assign({}, _this.state, { source_sche_uu_dai: e.level.content }));
+                                                }, apiKey: "t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl", init: {
+                                                    mode: "exact",
+                                                    height: 100,
+                                                    theme: "modern",
+                                                    plugins: "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
+                                                    toolbar1: "fontsizeselect formatselect | bold italic strikethrough forecolor backcolor | link blockquote | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat",
+                                                    fontsize_formats: "10pt 11pt 12pt 14pt 16pt 18pt 20pt 24pt 26pt 28pt 36pt 48pt 72pt"
+                                                } })))))))))));
     };
     return AddSche;
 }(React.Component));

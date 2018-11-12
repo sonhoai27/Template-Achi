@@ -23,8 +23,6 @@ import { connect } from "react-redux";
 import Photo from "../shared/photo";
 import NotifySuccess from "../shared/notifySuccess";
 import NotifyDanger from "../shared/notifyDanger";
-import Helmet from 'react-helmet';
-import { RESOURCE } from "../../config/const";
 import OrderEbookRouter from "./order-ebook/orderEbookRouter";
 import Loading from "./shared/loading";
 var AdminRouter = /** @class */ (function (_super) {
@@ -38,8 +36,6 @@ var AdminRouter = /** @class */ (function (_super) {
     };
     AdminRouter.prototype.render = function () {
         return (React.createElement("div", { id: "wrapper" },
-            React.createElement(Helmet, null,
-                React.createElement("link", { rel: "stylesheet", href: RESOURCE + 'css/custom.css' })),
             React.createElement(Route, { exact: true, path: "" + this.props.match.url, component: Home }),
             React.createElement(Route, { path: this.props.match.url + "/blog", component: BlogRouter }),
             React.createElement(Route, { path: this.props.match.url + "/video", component: VideoRouter }),
@@ -47,6 +43,7 @@ var AdminRouter = /** @class */ (function (_super) {
             React.createElement(Route, { path: this.props.match.url + "/ui", component: UIRouter }),
             React.createElement(Route, { path: this.props.match.url + "/source", component: SourceRouter }),
             React.createElement(Route, { path: this.props.match.url + "/order-ebook", component: OrderEbookRouter }),
+            React.createElement(Route, { path: this.props.match.url + "/thong-ke", component: OrderEbookRouter }),
             this.props.isShowPhotoApp ? React.createElement(Photo, null) : '',
             React.createElement("div", { className: "jq-toast-wrap top-right" },
                 this.props.isSuccess ? React.createElement(NotifySuccess, null) : '',

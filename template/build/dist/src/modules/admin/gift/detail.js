@@ -27,6 +27,8 @@ import { Editor } from "@tinymce/tinymce-react";
 import { connect } from "react-redux";
 import { reSetCurrentEditorPhoto, reShowPhotoApp, reIsDanger, reIsSuccess } from "../../../reducers/init";
 import { reDetailGift, reUpdateGift } from "./reGift";
+import { alias } from "./../../../../build/dist/src/utils/alias";
+import { RESOURCE } from "../../../config/const";
 var GiftDetail = /** @class */ (function (_super) {
     __extends(GiftDetail, _super);
     function GiftDetail(props) {
@@ -38,19 +40,22 @@ var GiftDetail = /** @class */ (function (_super) {
             });
         };
         _this.updateGift = function () {
-            var temDom = document.getElementById('img-cover-blog-preview');
+            var temDom = document.getElementById("img-cover-blog-preview");
             var tempGift = _this.state.gift;
+            var data = CKEDITOR.instances.editor1.getData();
             delete tempGift.gift_id;
-            _this.props.reUpdateGift(__assign({}, tempGift, { gift_cover: temDom.src }), _this.props.match.params.idGift);
+            _this.props.reUpdateGift(__assign({}, tempGift, { gift_cover: temDom.src, gift_alias: alias(_this.state.gift.gift_name), gift_content: data }), _this.props.match.params.idGift);
         };
         _this.state = {
             gift: {
                 gift_id: 0,
                 gift_active: 0,
-                gift_cover: '',
-                gift_name: '',
-                gift_promo: '',
-                gift_uri_file: ''
+                gift_cover: "",
+                gift_name: "",
+                gift_promo: "",
+                gift_uri_file: "",
+                gift_alias: "",
+                gift_content: ""
             }
         };
         return _this;
@@ -65,7 +70,9 @@ var GiftDetail = /** @class */ (function (_super) {
                     gift_cover: this.props.resDetailGift.list.gift_cover,
                     gift_name: this.props.resDetailGift.list.gift_name,
                     gift_promo: this.props.resDetailGift.list.gift_promo,
-                    gift_uri_file: this.props.resDetailGift.list.gift_uri_file
+                    gift_uri_file: this.props.resDetailGift.list.gift_uri_file,
+                    gift_alias: this.props.resDetailGift.list.gift_alias,
+                    gift_content: this.props.resDetailGift.list.gift_content
                 }
             });
         }
@@ -87,7 +94,100 @@ var GiftDetail = /** @class */ (function (_super) {
         }
     };
     GiftDetail.prototype.componentDidMount = function () {
+        var _this = this;
         this.props.reDetailGift(this.props.match.params.idGift);
+        try {
+            CKEDITOR.plugins.add("insertimage", {
+                init: function (editor) {
+                    editor.addCommand("insertImage", {
+                        exec: function (editor) {
+                            _this.props.reShowPhotoApp(true);
+                            _this.props.reSetCurrentEditorPhoto({
+                                type: "ck",
+                                editor: editor
+                            });
+                            // var timestamp = new Date();
+                            // editor.insertHtml( 'The current date and time is: <em>' + timestamp.toString() + '</em>' );
+                        }
+                    });
+                    editor.ui.addButton("insertimage", {
+                        label: "Insert Image",
+                        command: "insertImage",
+                        icon: RESOURCE + "images/icon/picture-24.png"
+                    });
+                }
+            });
+        }
+        catch (e) { }
+        CKEDITOR.plugins.addExternal("fontawesome", RESOURCE + "ckeditor/plugins/fontawesome/", "plugin.js");
+        CKEDITOR.replace("editor1", {
+            toolbar: [
+                {
+                    name: "document",
+                    groups: ["mode", "document", "doctools"],
+                    items: ["Source"]
+                },
+                {
+                    name: "basicstyles",
+                    groups: ["basicstyles", "cleanup"],
+                    items: [
+                        "Bold",
+                        "Italic",
+                        "Underline",
+                        "Strike",
+                        "Subscript",
+                        "Superscript",
+                        "-",
+                        "CopyFormatting",
+                        "RemoveFormat"
+                    ]
+                },
+                { name: "styles", items: ["Styles", "Format", "Font", "FontSize"] },
+                { name: "colors", items: ["TextColor", "BGColor"] },
+                {
+                    name: "paragraph",
+                    groups: ["list", "indent", "blocks", "align", "bidi"],
+                    items: [
+                        "NumberedList",
+                        "BulletedList",
+                        "-",
+                        "Outdent",
+                        "Indent",
+                        "-",
+                        "Blockquote",
+                        "CreateDiv",
+                        "-",
+                        "JustifyLeft",
+                        "JustifyCenter",
+                        "JustifyRight",
+                        "JustifyBlock",
+                        "-",
+                        "BidiLtr",
+                        "BidiRtl",
+                        "Language"
+                    ]
+                },
+                { name: "links", items: ["Link", "Unlink", "Anchor"] },
+                {
+                    name: "insert",
+                    items: [
+                        "Table",
+                        "HorizontalRule",
+                        "Smiley",
+                        "SpecialChar",
+                        "PageBreak",
+                        "Iframe"
+                    ]
+                },
+                { name: "FontAwesome", items: ["FontAwesome", "insertimage", "Image"] }
+            ],
+            extraAllowedContent: "i;span;ul;li;table;td;style;*[id];*(*);*{*}",
+            allowedContent: true,
+            extraPlugins: "fontawesome,insertimage",
+            htmlEncodeOutput: false,
+            entities: false,
+            contentsCss: RESOURCE + "ckeditor/plugins/fontawesome/css/font-awesome.min.css"
+        });
     };
     GiftDetail.prototype.render = function () {
         var _this = this;
@@ -121,8 +221,8 @@ var GiftDetail = /** @class */ (function (_super) {
                                                     gift: __assign({}, _this.state.gift, { gift_promo: html })
                                                 });
                                             }, apiKey: "t7eqx9nyehld0fibzbgtu06aax2f3beil1q091d12j97cmfl", init: {
-                                                selector: "textarea",
-                                                spellchecker_language: 'vi-VN',
+                                                mode: "exact",
+                                                spellchecker_language: "vi-VN",
                                                 height: 500,
                                                 theme: "modern",
                                                 plugins: "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
@@ -137,7 +237,12 @@ var GiftDetail = /** @class */ (function (_super) {
                                                         }
                                                     });
                                                 }
-                                            } })))),
+                                            } }))),
+                                React.createElement("div", { className: "form-group", style: { display: "inline-block", width: "100%" } },
+                                    React.createElement("label", { className: "col-md-12" },
+                                        React.createElement("span", { className: "help" }, " N\u1ED9i dung")),
+                                    React.createElement("div", { className: "col-md-12" },
+                                        React.createElement("textarea", { cols: 80, id: "editor1", name: "editor1", rows: 10, value: this.state.gift.gift_content })))),
                             React.createElement("div", { className: "col-sm-3" },
                                 React.createElement("div", { className: "form-group" },
                                     React.createElement("label", { className: "col-sm-12" }, "T\u1EB7ng? - m\u1EB7c \u0111\u1ECBnh l\u00E0 kh\u00F4ng t\u1EB7ng."),
@@ -150,7 +255,7 @@ var GiftDetail = /** @class */ (function (_super) {
                                     React.createElement("label", { className: "col-sm-12" }, "H\u00ECnh cover"),
                                     React.createElement("div", { className: "col-sm-12 cover-blog", onClick: function () {
                                             _this.props.reShowPhotoApp(true);
-                                            _this.props.reSetCurrentEditorPhoto('img-cover-blog-preview');
+                                            _this.props.reSetCurrentEditorPhoto("img-cover-blog-preview");
                                         } },
                                         React.createElement("i", { className: "ti-upload" }),
                                         React.createElement("img", { id: "img-cover-blog-preview", className: "img-responsive", src: this.state.gift.gift_cover }))))))))));

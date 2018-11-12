@@ -165,6 +165,12 @@ class Header extends React.Component {
                       <span className="hide-menu">Thêm mới quà tặng</span>
                     </a>
                   </li>
+                  <li>
+                    <a href={BASEURLADMIN+'gift/customers'} >
+                      <i className="fa-fw">L</i>
+                      <span className="hide-menu">Danh sách đăng ký</span>
+                    </a>
+                  </li>
                 </ul>
               </li>
               <li className="last-nav">
@@ -219,6 +225,41 @@ class Header extends React.Component {
                     </li>
                   </ul>
               </li>
+                <li className="last-nav">
+                    <a href="javascript:void(0)" className="waves-effect">
+                        <i className="mdi mdi-apps fa-fw" />
+                        <span className="hide-menu">
+                    Thống kê
+                    <span className="fa arrow" />
+                  </span>
+                    </a>
+                    <ul className="nav nav-second-level collapse">
+                        <li>
+                            <a href={BASEURLADMIN+'order-ebook'}>
+                                <i className="ti-comments-smiley fa-fw" />
+                                <span className="hide-menu">Tổng quan</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" className="waves-effect">
+                                <i className="ti-desktop fa-fw" />
+                                <span className="hide-menu">Khóa học</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" className="waves-effect">
+                                <i className="ti-desktop fa-fw" />
+                                <span className="hide-menu">Blog</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" className="waves-effect">
+                                <i className="ti-desktop fa-fw" />
+                                <span className="hide-menu">Quà tặng</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
           </div>
         </div>

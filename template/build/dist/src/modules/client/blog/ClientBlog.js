@@ -81,15 +81,15 @@ var ClientBlog = /** @class */ (function (_super) {
                                 ? "col-sm-8"
                                 : "col-sm-4" },
                             React.createElement("div", { className: "post post-" + index },
-                                React.createElement(Link, { style: { backgroundImage: "url(" + element.blog_cover + ")" }, className: "post-item-image", to: BASEURL + "page/blog" + "/detail/" + element.blog_id },
+                                React.createElement(Link, { style: { backgroundImage: "url(" + element.blog_cover + ")" }, className: "post-item-image", to: BASEURL + "page/blog" + "/detail/" + element.blog_alias },
                                     React.createElement("div", { className: "post-item-container color3" },
                                         React.createElement("img", { className: "ico-handshake cat-icon", src: element.category_icon }))),
                                 React.createElement("div", { className: "post-content" },
                                     React.createElement("h6", { className: "micro" }, element.category_name),
                                     React.createElement("div", { className: "archive_cat_line", style: { backgroundColor: "#6d166d" } }),
                                     React.createElement("h4", { className: "post-title" },
-                                        React.createElement(Link, { to: BASEURL + "page/blog" + "/detail/" + element.blog_id }, element.blog_title)),
-                                    React.createElement(Link, { to: BASEURL + "page/blog" + "/detail/" + element.blog_id, className: "link-more link-more-grey" }, "Xem th\u00EAm"))))));
+                                        React.createElement(Link, { to: BASEURL + "page/blog" + "/detail/" + element.blog_alias }, element.blog_title)),
+                                    React.createElement(Link, { to: BASEURL + "page/blog" + "/detail/" + element.blog_alias, className: "link-more link-more-grey" }, "Xem th\u00EAm"))))));
                 });
             }
             return React.createElement("h1", null, "Null");
@@ -106,7 +106,6 @@ var ClientBlog = /** @class */ (function (_super) {
             }
             return [];
         };
-        console.log(_this.props.match);
         return _this;
     }
     ClientBlog.prototype.componentDidMount = function () {
@@ -121,9 +120,9 @@ var ClientBlog = /** @class */ (function (_super) {
                     React.createElement("div", { className: "container" },
                         React.createElement("div", { className: "row" },
                             React.createElement("div", { className: "col-sm-6" },
-                                React.createElement("h1", { className: "white", style: { marginBottom: 64 } },
-                                    React.createElement("b", null, "FROM A HISTORY-MAKING STANLEY CUP FINALS TO BUILDING A PERSONAL AI")),
-                                React.createElement("p", { className: "white" }, "Where has Tony been recently \u2013 and what in the world is he up to? Below is the latest edition of the Tony Tracker, where you can see highlights from his journeys and read his narration of some of his favorite experiences. Watching history being made at the Stanley Cup Finals TONIGHT\u2019S GAME IS ONE"))))),
+                                React.createElement("h1", { className: "white" },
+                                    React.createElement("b", null, "NGUYENMINHCHI.COM")),
+                                React.createElement("p", { className: "white" }, "\u0110\u1ECDc c\u00E1c b\u00E0i vi\u1EBFt hay cho m\u1ED9t tu\u1ED5i tr\u1EBB s\u1ED1ng x\u1EE9ng \u0111\u00E1ng."))))),
                 React.createElement("div", { className: "row" },
                     React.createElement(CLientFooterBanner, null))),
             React.createElement("div", { className: "container" },
@@ -136,8 +135,7 @@ var ClientBlog = /** @class */ (function (_super) {
                                 fontWeight: 700,
                                 marginBottom: 16
                             } },
-                            React.createElement("b", null, "Nguy\u1EC5n Minh Ch\u00ED - Blog")),
-                        React.createElement("p", null, "What is an extraordinary life? What does that look like to you? Starting a business and growing it to a billion-dollar company? Improving the quality of your relationships? Feeling strong and healthy? Ultimately, an extraordinary life = life on your terms. The Tony Robbins' blog is a collection of the teachings of Tony Robbins, the powerful strategies and tools he has employed over 40 years of helping others achieve their vision of an extraordinary quality of life. Discover how to achieve massive success and long-lasting fulfillment, too. Start today with the articles, videos and other resources we\u2019ve made available here to help you on your journey to the life you desire and deserve."))),
+                            React.createElement("b", null, "Nguy\u1EC5n Minh Ch\u00ED - Blog")))),
                 React.createElement("div", { className: "row" },
                     React.createElement("div", { className: "col-sm-12" },
                         React.createElement("div", { className: "row" },
@@ -145,7 +143,7 @@ var ClientBlog = /** @class */ (function (_super) {
                             React.createElement("div", { className: "col-sm-4", style: {
                                     marginBottom: 32
                                 } },
-                                React.createElement(Select, { className: "custom-select-category", closeMenuOnSelect: false, components: makeAnimated(), onChange: function (item) {
+                                React.createElement(Select, { placeholder: 'Chọn chủ đề', className: "custom-select-category", closeMenuOnSelect: false, components: makeAnimated(), onChange: function (item) {
                                         if (item.value !== 0) {
                                             window.location.href =
                                                 BASEURL +

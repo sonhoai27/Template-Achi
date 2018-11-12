@@ -64,7 +64,8 @@ export var ACTION_TYPES = {
     API_UPDATE_CATEGORY: 'ReBlog/API_UPDATE_CATEGORY',
     API_STATUS: 'ReBlog/API_STATUS',
     API_CLIENT_LIST_BLOG: 'ReBlog/API_CLIENT_LIST_BLOG',
-    API_CLIENT_LIST_BLOG_CATEGORY: 'ReBlog/API_CLIENT_LIST_BLOG_CATEGORY'
+    API_CLIENT_LIST_BLOG_CATEGORY: 'ReBlog/API_CLIENT_LIST_BLOG_CATEGORY',
+    API_DETAIL_BLOG_ALIAS: 'ReBlog/API_DETAIL_BLOG_ALIAS'
 };
 var initialState = {
     resAddBlog: {},
@@ -82,7 +83,8 @@ var initialState = {
     resUpdateCategory: {},
     resListStatus: [],
     resClientListBlog: [],
-    resClientListBlogCategory: {}
+    resClientListBlogCategory: {},
+    resDetailBlogAlias: {}
 };
 export default (function (state, action) {
     if (state === void 0) { state = initialState; }
@@ -133,6 +135,16 @@ export default (function (state, action) {
         }
         case SUCCESS(ACTION_TYPES.API_DETAIL_BLOG): {
             return __assign({}, state, { resDetailBlog: action.payload.data });
+        }
+        // detail blog 
+        case REQUEST(ACTION_TYPES.API_DETAIL_BLOG_ALIAS): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_DETAIL_BLOG_ALIAS): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_DETAIL_BLOG_ALIAS): {
+            return __assign({}, state, { resDetailBlogAlias: action.payload.data });
         }
         // update blog 
         case REQUEST(ACTION_TYPES.API_UPDATE_BLOG): {
@@ -474,6 +486,22 @@ export var reUpdateCategory = function (form, id) { return function (dispatch) {
             case 0: return [4 /*yield*/, dispatch({
                     type: ACTION_TYPES.API_UPDATE_CATEGORY,
                     payload: axios.put(API_CATEGORY + "/" + id, form)
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reDetailBlogAlias = function (idBlog) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.API_DETAIL_BLOG_ALIAS,
+                    payload: axios.post(API_BLOG + "/detail-alias", {
+                        key: idBlog
+                    })
                 })];
             case 1:
                 result = _a.sent();

@@ -55,7 +55,8 @@ export var ACTION_TYPES = {
     API_LIST_ORDER_EBOOK_BY_PACKAGE: 'ReOrderEbook/API_LIST_ORDER_EBOOK_BY_PACKAGE',
     API_ADD_PACKAGE: 'ReOrderEbook/API_ADD_PACKAGE',
     API_UPDATE_PACKAGE: 'ReOrderEbook/API_UPDATE_PACKAGE',
-    API_SHOW_ALL_ORDER_EBOOK: 'ReOrderEbook/API_SHOW_ALL_ORDER_EBOOK'
+    API_SHOW_ALL_ORDER_EBOOK: 'ReOrderEbook/API_SHOW_ALL_ORDER_EBOOK',
+    API_DELETE_ORDER_EBOOK: 'ReOrderEbook/API_DELETE_ORDER_EBOOK'
 };
 var initialState = {
     resListOrderEbook: {},
@@ -63,7 +64,8 @@ var initialState = {
     isShowingModalExportOrderModal: false,
     resListOrderEbookByPackage: {},
     resAddPackage: {},
-    resUpdatePackage: {}
+    resUpdatePackage: {},
+    resDeleteOrderEbook: {}
 };
 export default (function (state, action) {
     if (state === void 0) { state = initialState; }
@@ -128,6 +130,16 @@ export default (function (state, action) {
         }
         case SUCCESS(ACTION_TYPES.API_UPDATE_PACKAGE): {
             return __assign({}, state, { resUpdatePackage: action.payload.data });
+        }
+        // delete order ebook
+        case REQUEST(ACTION_TYPES.API_DELETE_ORDER_EBOOK): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_DELETE_ORDER_EBOOK): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_DELETE_ORDER_EBOOK): {
+            return __assign({}, state, { resDeleteOrderEbook: action.payload.data });
         }
         default:
             return state;
@@ -226,6 +238,20 @@ export var reAddPackage = function (form) { return function (dispatch) { return 
             case 0: return [4 /*yield*/, dispatch({
                     type: ACTION_TYPES.API_UPDATE_PACKAGE,
                     payload: axios.post(API_PACKAGE, form)
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reDeleteOrderEbook = function (id) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.API_DELETE_ORDER_EBOOK,
+                    payload: axios.delete(API_ORDER_EBOOK + '/' + id)
                 })];
             case 1:
                 result = _a.sent();

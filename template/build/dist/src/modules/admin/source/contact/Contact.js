@@ -13,8 +13,10 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import * as React from "react";
 import { connect } from "react-redux";
-import { reListContactPaging } from "../reSource";
+import { reListContactPaging, reDeleteContact } from "../reSource";
 import ModalExportContact from "./ModalExportContact";
+import Pagination from "../../../shared/Pagination";
+import { BASEURLADMIN } from "../../../../config/const";
 var Contact = /** @class */ (function (_super) {
     __extends(Contact, _super);
     function Contact(props) {
@@ -30,6 +32,7 @@ var Contact = /** @class */ (function (_super) {
         };
         _this.getMoreBlog = function (page) {
             _this.props.reListContactPaging((page - 1) * 20);
+            window.history.pushState("", "", BASEURLADMIN + 'source/contact' + "?page=" + page);
         };
         _this.renderListContact = function () {
             if (_this.props.resListContactPaging.list) {
@@ -38,7 +41,11 @@ var Contact = /** @class */ (function (_super) {
                         React.createElement("td", null, index + 1),
                         React.createElement("td", null, element.email_name),
                         React.createElement("td", null, element.email_email),
-                        React.createElement("td", null, element.email_phone)));
+                        React.createElement("td", null, element.email_phone),
+                        React.createElement("td", null,
+                            React.createElement("div", { className: "btn btn-xs btn-danger", onClick: function () {
+                                    _this.props.reDeleteContact(element.email_id);
+                                } }, "X\u00F3a"))));
                 });
             }
             return React.createElement("h1", null, "Null");
@@ -50,6 +57,11 @@ var Contact = /** @class */ (function (_super) {
     }
     Contact.prototype.componentDidMount = function () {
         this.props.reListContactPaging((parseInt(this.makeCurrentPage(), 10) - 1) * 20);
+    };
+    Contact.prototype.componentDidUpdate = function (preProps) {
+        if (this.props.resDeleteContact != preProps.resDeleteContact) {
+            this.props.reListContactPaging((parseInt(this.makeCurrentPage(), 10) - 1) * 20);
+        }
     };
     Contact.prototype.render = function () {
         var _this = this;
@@ -73,8 +85,11 @@ var Contact = /** @class */ (function (_super) {
                                             React.createElement("th", { className: "text-center", role: "row" }, "#"),
                                             React.createElement("th", null, "T\u00EAn"),
                                             React.createElement("th", null, "Email"),
-                                            React.createElement("th", null, "S\u1ED1 \u0111i\u1EC7n tho\u1EA1i"))),
-                                    React.createElement("tbody", null, this.renderListContact()))))))),
+                                            React.createElement("th", null, "S\u1ED1 \u0111i\u1EC7n tho\u1EA1i"),
+                                            React.createElement("th", null, "H\u00E0nh \u0111\u1ED9ng"))),
+                                    React.createElement("tbody", null, this.renderListContact()))),
+                            React.createElement("div", { className: "pg" },
+                                React.createElement(Pagination, { initialPage: parseInt(this.makeCurrentPage(), 10), pageSize: 20, totalItems: this.props.resListContactPaging.count, onChangePage: function (e) { return _this.getMoreBlog(e.currentPage); } })))))),
             this.state.isShowingModal ? React.createElement(ModalExportContact, { showHide: function () {
                     _this.setState({
                         isShowingModal: !_this.state.isShowingModal
@@ -84,10 +99,12 @@ var Contact = /** @class */ (function (_super) {
     return Contact;
 }(React.Component));
 var mapStateToProps = function (storeState) { return ({
-    resListContactPaging: storeState.reSource.resListContactPaging
+    resListContactPaging: storeState.reSource.resListContactPaging,
+    resDeleteContact: storeState.reSource.resDeleteContact
 }); };
 var mapDispatchToProps = {
-    reListContactPaging: reListContactPaging
+    reListContactPaging: reListContactPaging,
+    reDeleteContact: reDeleteContact
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Contact);
 //# sourceMappingURL=Contact.js.map

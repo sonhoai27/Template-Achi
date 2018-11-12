@@ -13,8 +13,6 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import * as React from "react";
 import { Route } from "react-router-dom";
-import { RESOURCE } from "../../config/const";
-import { Helmet } from "react-helmet";
 import Error from "../admin/shared/error";
 import ClientBlogRoute from "./blog/ClientBlogRoute";
 import ClientSourceRoute from "./source/ClientSourceRoute";
@@ -22,17 +20,17 @@ import EbookLadingPage from "./ebook/ebook";
 import { connect } from "react-redux";
 import NotifySuccess from "../shared/notifySuccess";
 import NotifyDanger from "../shared/notifyDanger";
-import Loading from "../admin/shared/loading";
 import ClientVideo from "./video/ClientVideo";
 import ClientGift from "./gift";
 import ClientAboutPage from "./About";
 import ScheEvents from "./ScheEvents";
+import SuggestGift from './../shared/components/suggestGift';
+import SuggestKH from './../shared/components/suggestKH';
+import Search from "./search";
 var ClientRouter = /** @class */ (function (_super) {
     __extends(ClientRouter, _super);
     function ClientRouter(props) {
-        var _this = _super.call(this, props) || this;
-        console.log(_this.props.match);
-        return _this;
+        return _super.call(this, props) || this;
     }
     ClientRouter.prototype.componentDidMount = function () {
         var doc = document.body;
@@ -41,9 +39,6 @@ var ClientRouter = /** @class */ (function (_super) {
     ClientRouter.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
             React.createElement("div", { className: "margin-top" },
-                React.createElement(Helmet, null,
-                    React.createElement("link", { rel: "stylesheet", href: RESOURCE + "css/client.css" }),
-                    React.createElement("link", { rel: "stylesheet", href: RESOURCE + "css/mobile.css", media: "screen and (max-width: 769px)" })),
                 React.createElement(Route, { exact: true, path: "" + this.props.match.url, component: Error }),
                 React.createElement(Route, { path: this.props.match.url + "/blog", component: ClientBlogRoute }),
                 React.createElement(Route, { path: this.props.match.url + "/khoa-hoc", component: ClientSourceRoute }),
@@ -52,10 +47,12 @@ var ClientRouter = /** @class */ (function (_super) {
                 React.createElement(Route, { path: this.props.match.url + "/qua-tang", component: ClientGift }),
                 React.createElement(Route, { path: this.props.match.url + "/gioi-thieu", component: ClientAboutPage }),
                 React.createElement(Route, { path: this.props.match.url + "/lich-su-kien", component: ScheEvents }),
+                React.createElement(Route, { path: this.props.match.url + "/nhan-qua/:idGift", component: SuggestGift }),
+                React.createElement(Route, { path: this.props.match.url + "/dang-ky-khoa-hoc/:idSource", component: SuggestKH }),
+                React.createElement(Route, { path: this.props.match.url + "/tim-kiem/:key", component: Search }),
                 React.createElement("div", { className: "jq-toast-wrap top-right" },
                     this.props.isSuccess ? React.createElement(NotifySuccess, null) : "",
-                    this.props.isDanger ? React.createElement(NotifyDanger, null) : ""),
-                this.props.isLoading ? React.createElement(Loading, null) : "")));
+                    this.props.isDanger ? React.createElement(NotifyDanger, null) : ""))));
     };
     return ClientRouter;
 }(React.Component));

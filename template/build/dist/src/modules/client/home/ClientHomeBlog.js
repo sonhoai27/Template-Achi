@@ -23,11 +23,12 @@ var ClientHomeBlog = /** @class */ (function (_super) {
         _this.renderListBlogs = function () {
             if (_this.state.blogs.list) {
                 return _this.state.blogs.list.map(function (element) {
-                    return (React.createElement("div", { className: "item col-sm-4" },
+                    return (React.createElement("div", { className: "item col-sm-4", key: element.blog_title },
                         React.createElement("div", { className: "social-callout" },
-                            React.createElement(AutofitImage, { frameWidth: "100%", frameHeight: "200px", imgSrc: element.blog_cover }),
+                            React.createElement("a", { href: BASEURL + "page/blog/detail/" + element.blog_alias },
+                                React.createElement(AutofitImage, { frameWidth: "100%", frameHeight: "200px", imgSrc: element.blog_cover })),
                             React.createElement("h4", { style: { marginTop: 32, fontWeight: 600 } },
-                                React.createElement("a", { title: element.blog_title, href: BASEURL + 'page/blog/detail/' + element.blog_id }, element.blog_title)))));
+                                React.createElement("a", { title: element.blog_title, href: BASEURL + 'page/blog/detail/' + element.blog_alias }, element.blog_title)))));
                 });
             }
             return '';
@@ -41,18 +42,16 @@ var ClientHomeBlog = /** @class */ (function (_super) {
         var _this = this;
         axios.get(API + 'blog/all/home')
             .then(function (result) {
-            console.log(result.data);
             _this.setState({
                 blogs: result.data
             });
         })
             .catch(function (err) {
-            console.log(err);
         });
     };
     ClientHomeBlog.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
-            React.createElement("div", { className: "row section-heading" },
+            React.createElement("div", { className: "section-heading" },
                 React.createElement("div", { className: "container" },
                     React.createElement("div", { className: "row" },
                         React.createElement("div", { className: "col-sm-3" },

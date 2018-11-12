@@ -11,12 +11,31 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+var __spread = (this && this.__spread) || function () {
+    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
+    return ar;
+};
 import * as React from "react";
 import ClientHeader from "../client-shared/Header";
 import Footer from "../client-shared/Footer";
 import { reListSourceByType } from "../../admin/source/reSource";
 import { connect } from "react-redux";
-import AutofitImage from "../../shared/CropImage";
 import { BASEURL } from "../../../config/const";
 import { Link } from "react-router-dom";
 import CLientFooterBanner from "../home/ClientFooterBanner";
@@ -26,32 +45,82 @@ var ClientSourceHome = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         _this.renderListSources = function () {
             if (_this.props.resListSourceBy0.list) {
-                return _this.props.resListSourceBy0.list.map(function (element) {
-                    return (React.createElement("div", { className: "col-sm-3" },
-                        React.createElement("div", { className: "panel sales-page-listing" },
-                            React.createElement(AutofitImage, { frameWidth: "100%", frameHeight: "150px", imgSrc: element.source_cover }),
-                            React.createElement("div", { className: "panel-body" },
-                                React.createElement("h3", { className: "title text-dark" }, element.source_is_page == 1 ?
-                                    React.createElement("a", { target: 'blank', href: element.source_page_url }, element.source_title) : React.createElement(Link, { to: BASEURL + 'page/khoa-hoc/' + element.source_alias + '-' + element.source_id_ui + '-' + element.source_id }, element.source_title)),
-                                React.createElement("p", { className: "desc", style: { fontSize: 15 } }, element.source_promo),
-                                element.source_is_page == 1 ?
-                                    React.createElement("a", { target: 'blank', className: "btn btn-primary learn-more", href: element.source_page_url }, "Xem th\u00EAm") :
-                                    React.createElement(Link, { className: "btn btn-primary learn-more", to: BASEURL + 'page/khoa-hoc/' + element.source_alias + '-' + element.source_id_ui + '-' + element.source_id }, "Xem th\u00EAm")))));
+                var dem_1 = 1;
+                var list_1 = [];
+                return _this.props.resListSourceBy0.list.map(function (element, index) {
+                    if (index === 0) {
+                        // @ts-ignore
+                        list_1 = __spread(list_1, [_this.itemSource(element)]);
+                    }
+                    else if (dem_1 < 2) {
+                        // @ts-ignore
+                        list_1 = __spread(list_1, [_this.itemSource(element)]);
+                        dem_1 = dem_1 + 1;
+                        if (index === (_this.props.resListSourceBy0.list.length - 1)) {
+                            // @ts-ignore
+                            var tempList = __spread([], list_1);
+                            return React.createElement("div", {
+                                className: "row",
+                                key: index
+                            }, __spread(tempList));
+                        }
+                    }
+                    else {
+                        dem_1 = 1;
+                        // @ts-ignore
+                        list_1 = __spread(list_1, [_this.itemSource(element)]);
+                        var tempList = __spread([], list_1);
+                        list_1 = [];
+                        return React.createElement("div", {
+                            className: "row",
+                            key: index
+                        }, __spread(tempList));
+                    }
+                    return "";
                 });
             }
             return React.createElement("h1", null, "Kh\u00F4ng c\u00F3.");
         };
+        _this.itemSource = function (element) {
+            return (React.createElement("div", { className: "col-sm-4", key: element.source_alias },
+                React.createElement("div", { className: "panel sales-page-listing" },
+                    React.createElement("img", { src: element.source_cover, alt: "", className: "img-responsive" }),
+                    React.createElement("div", { className: "panel-body" },
+                        React.createElement("h3", { style: { fontWeight: 600 }, className: "title text-dark" }, element.source_is_page == 1 ? (React.createElement("a", { target: "blank", href: element.source_page_url }, element.source_title)) : (React.createElement(Link, { to: BASEURL +
+                                "page/khoa-hoc/" +
+                                element.source_alias +
+                                "-" +
+                                element.source_id_ui +
+                                "-" +
+                                element.source_id }, element.source_title))),
+                        React.createElement("p", { className: "desc", style: { fontSize: 15 } }, element.source_promo),
+                        element.source_is_page == 1 ? (React.createElement("a", { style: { background: "#1f9080" }, target: "blank", className: "btn btn-primary learn-more", href: element.source_page_url }, "Xem th\u00EAm")) : (React.createElement(Link, { style: { background: "#1f9080" }, className: "btn btn-primary learn-more", to: BASEURL +
+                                "page/khoa-hoc/" +
+                                element.source_alias +
+                                "-" +
+                                element.source_id_ui +
+                                "-" +
+                                element.source_id }, "Xem th\u00EAm"))))));
+        };
         _this.renderListVideos = function () {
             if (_this.props.resListSourceBy1.list) {
                 return _this.props.resListSourceBy1.list.map(function (element) {
-                    return (React.createElement("div", { className: "col-sm-3" },
+                    return (React.createElement("div", { className: "col-sm-4", key: element.source_alias },
                         React.createElement("div", { className: "panel sales-page-listing" },
-                            React.createElement(AutofitImage, { frameWidth: "100%", frameHeight: "150px", imgSrc: element.source_cover }),
+                            React.createElement("img", { src: element.source_cover, alt: "", className: "img-responsive" }),
                             React.createElement("div", { className: "panel-body" },
-                                React.createElement("h3", { className: "title text-dark" },
-                                    React.createElement(Link, { to: BASEURL + 'page/khoa-hoc/video/' + element.source_id + '-' + element.source_alias }, element.source_title)),
+                                React.createElement("h3", { className: "title text-dark", style: { fontWeight: 600 } },
+                                    React.createElement(Link, { to: BASEURL +
+                                            "page/khoa-hoc/video/" +
+                                            element.source_id +
+                                            "-" +
+                                            element.source_alias }, element.source_title)),
                                 React.createElement("p", { className: "desc", style: { fontSize: 15 } }, element.source_promo),
-                                React.createElement(Link, { className: "btn btn-primary learn-more", to: BASEURL + 'page/khoa-hoc/video/' + element.source_id + '-' + element.source_alias, "kjb-settings-id": "language_learn_more" }, "Xem th\u00EAm")))));
+                                React.createElement(Link, { style: { background: "#1f9080" }, className: "btn btn-primary learn-more", to: BASEURL +
+                                        "page/khoa-hoc/video/" +
+                                        element.source_id +
+                                        "-" +
+                                        element.source_alias, "kjb-settings-id": "language_learn_more" }, "Xem th\u00EAm")))));
                 });
             }
             return React.createElement("h1", null, "Kh\u00F4ng c\u00F3.");
@@ -66,27 +135,35 @@ var ClientSourceHome = /** @class */ (function (_super) {
         return (React.createElement(React.Fragment, null,
             React.createElement(ClientHeader, null),
             React.createElement("div", { className: "col-xs-12 page-source" },
-                React.createElement("div", { className: "row page-source_banner" },
+                React.createElement("div", { className: "row page-source_banner", style: {
+                        backgroundImage: "url(http://nguyenminhchi.com/api/uploads/images/4476bdd2a0fd060b490d1539450000000.jpg)",
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                        backgroundPosition: "center"
+                    } },
                     React.createElement("div", { className: "container" },
                         React.createElement("div", { className: "row" },
                             React.createElement("div", { className: "col-sm-6" },
-                                React.createElement("h2", { className: "white", style: { marginBottom: 64 } },
-                                    React.createElement("b", null, "FROM A HISTORY-MAKING STANLEY CUP FINALS TO BUILDING A PERSONAL AI")),
-                                React.createElement("p", { className: "white" }, "Where has Tony been recently \u2013 and what in the world is he up to? Below is the latest edition of the Tony Tracker, where you can see highlights from his journeys and read his narration of some of his favorite experiences. Watching history being made at the Stanley Cup Finals TONIGHT\u2019S GAME IS ONE"))))),
+                                React.createElement("h1", { className: "white" }, "NGUYENMINHCHI.COM"),
+                                React.createElement("p", { className: "white" }, "KH\u00C1M PH\u00C1 T\u1EA4T C\u1EA2 C\u00C1C CH\u01AF\u01A0NG TR\u00CCNH \u0110\u00C0O T\u1EA0O GI\u00DAP B\u1EA0N \u0110\u1ED8T PH\u00C1 B\u1EA2N TH\u00C2N"))))),
                 React.createElement("div", { className: "row" },
                     React.createElement(CLientFooterBanner, null)),
-                React.createElement("div", { className: "row page-source_list-source" },
+                React.createElement("div", { className: "page-source_list-source" },
                     React.createElement("div", { className: "container paddingY-64" },
                         React.createElement("div", { className: "row" },
                             React.createElement("div", { className: "col-xs-12 page-source_title" },
                                 React.createElement("h2", { style: {} },
-                                    React.createElement("b", null, "Kh\u00F3a h\u1ECDc \u0111\u1EA7y t\u1EF1 h\u00E0o")),
+                                    React.createElement("b", null,
+                                        React.createElement("i", { className: "fa fa-star" }),
+                                        " Kh\u00F3a h\u1ECDc \u0111\u1EA7y t\u1EF1 h\u00E0o")),
                                 React.createElement("hr", { style: { background: "#444" } })),
                             this.renderListSources()),
                         React.createElement("div", { className: "row" },
                             React.createElement("div", { className: "col-xs-12 page-source_title" },
                                 React.createElement("h2", null,
-                                    React.createElement("b", null, "Kh\u00F3a h\u1ECDc online")),
+                                    React.createElement("b", null,
+                                        React.createElement("i", { className: "fa fa-star" }),
+                                        " Kh\u00F3a h\u1ECDc online")),
                                 React.createElement("hr", { style: { background: "#444" } })),
                             this.renderListVideos())))),
             React.createElement(Footer, null)));

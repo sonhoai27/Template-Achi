@@ -27,6 +27,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { connect } from "react-redux";
 import { reShowPhotoApp, reSetCurrentEditorPhoto, reIsDanger, reIsSuccess } from "../../../reducers/init";
 import { reDetailBlog, reUpdateBlog, reListAuthor, reListCategory, reListStatus } from "./reBlog";
+import { alias } from './../../../utils/alias';
 var BlogDetail = /** @class */ (function (_super) {
     __extends(BlogDetail, _super);
     function BlogDetail(props) {
@@ -64,7 +65,7 @@ var BlogDetail = /** @class */ (function (_super) {
         };
         _this.updateBlog = function () {
             var temp = document.getElementById('img-cover-blog-preview');
-            _this.props.reUpdateBlog(__assign({}, _this.state, { blog_cover: temp.src }), _this.props.match.params.idBlog);
+            _this.props.reUpdateBlog(__assign({}, _this.state, { blog_cover: temp.src, blog_alias: alias(_this.state.blog_title) }), _this.props.match.params.idBlog);
         };
         _this.state = {
             blog_id_category: 0,

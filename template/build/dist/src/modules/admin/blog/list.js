@@ -33,6 +33,7 @@ var BlogList = /** @class */ (function (_super) {
         };
         _this.getMoreBlog = function (page) {
             _this.props.reListBlog((page - 1) * 20);
+            window.history.pushState("", "", BASEURLADMIN + 'blog' + "?page=" + page);
         };
         _this.renderListBlog = function () {
             if (_this.props.resListBlog.list) {

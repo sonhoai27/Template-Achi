@@ -65,7 +65,6 @@ export default (function (state, action) {
             return __assign({}, state);
         }
         case SUCCESS(ACTION_TYPES.API_ORDER_EBOOK): {
-            console.log(action.payload);
             return __assign({}, state, { resOrderEbook: action.payload.data });
         }
         default:

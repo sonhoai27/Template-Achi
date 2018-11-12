@@ -33,7 +33,6 @@ var AddUIDetail = /** @class */ (function (_super) {
         }
     };
     AddUIDetail.prototype.componentDidUpdate = function (preProps, preState, snapsot) {
-        console.log(this.props.resAddCss, snapsot);
     };
     AddUIDetail.prototype.componentDidMount = function () {
         this.props.reDetailUI(this.props.match.params.idUi);

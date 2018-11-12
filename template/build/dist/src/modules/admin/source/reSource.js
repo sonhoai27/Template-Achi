@@ -66,6 +66,8 @@ export var ACTION_TYPES = {
     API_FILTER_CONTACT: 'ReSource/API_ADD_CONTACT',
     API_LIST_CONTACT_PAGING: 'ReSource/API_LIST_CONTACT_PAGING',
     API_DELETE_SCHE: 'ReSource/API_DELETE_SCHE',
+    API_DELETE_CONTACT: 'ReSource/API_DELETE_CONTACT',
+    API_DELETE_SOURCE_ORDER: 'ReSource/API_DELETE_SOURCE_ORDER'
 };
 var initialState = {
     resDetailSource: [],
@@ -84,7 +86,9 @@ var initialState = {
     resAddContact: {},
     resFilterContact: [],
     resListContactPaging: [],
-    resDeleteSche: {}
+    resDeleteSche: {},
+    resDeleteContact: {},
+    resDeleteSourceOrder: {}
 };
 export default (function (state, action) {
     if (state === void 0) { state = initialState; }
@@ -244,6 +248,26 @@ export default (function (state, action) {
         }
         case ACTION_TYPES.SET_CONTENT_ELEMENT: {
             return __assign({}, state, { resContentElement: action.payload });
+        }
+        //delete contact
+        case REQUEST(ACTION_TYPES.API_DELETE_CONTACT): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_DELETE_CONTACT): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_DELETE_CONTACT): {
+            return __assign({}, state, { resDeleteContact: action.payload.data });
+        }
+        //delete source order
+        case REQUEST(ACTION_TYPES.API_DELETE_SOURCE_ORDER): {
+            return __assign({}, state);
+        }
+        case FAILURE(ACTION_TYPES.API_DELETE_SOURCE_ORDER): {
+            return __assign({}, state);
+        }
+        case SUCCESS(ACTION_TYPES.API_DELETE_SOURCE_ORDER): {
+            return __assign({}, state, { resDeleteSourceOrder: action.payload.data });
         }
         default:
             return state;
@@ -457,6 +481,20 @@ export var reListContactPaging = function (page) { return function (dispatch) { 
         }
     });
 }); }; };
+export var reDeleteContact = function (id) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.API_DELETE_CONTACT,
+                    payload: axios.delete(API_CONTACT + '/' + id)
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
 export var reDeleteSche = function (idSche) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
     var result;
     return __generator(this, function (_a) {
@@ -464,6 +502,20 @@ export var reDeleteSche = function (idSche) { return function (dispatch) { retur
             case 0: return [4 /*yield*/, dispatch({
                     type: ACTION_TYPES.API_DELETE_SCHE,
                     payload: axios.delete(API_SOURCE + 'delete-sche/' + idSche)
+                })];
+            case 1:
+                result = _a.sent();
+                return [2 /*return*/, result];
+        }
+    });
+}); }; };
+export var reDeleteSourceOrder = function (id) { return function (dispatch) { return __awaiter(_this, void 0, void 0, function () {
+    var result;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dispatch({
+                    type: ACTION_TYPES.API_DELETE_SOURCE_ORDER,
+                    payload: axios.delete(API_SOURCE + 'order/' + id)
                 })];
             case 1:
                 result = _a.sent();

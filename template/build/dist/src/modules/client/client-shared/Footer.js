@@ -12,11 +12,42 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import * as React from "react";
+import axios from 'axios';
+import { BASEURL, API } from './../../../config/const';
 var Footer = /** @class */ (function (_super) {
     __extends(Footer, _super);
     function Footer(props) {
-        return _super.call(this, props) || this;
+        var _this = _super.call(this, props) || this;
+        _this.renderListBlogs = function () {
+            if (_this.state.blogs.list) {
+                return _this.state.blogs.list.map(function (element, index) {
+                    if (index < 4) {
+                        return (React.createElement("div", { key: element.blog_id },
+                            React.createElement("h5", { style: { marginTop: 16, fontWeight: 300, lineHeight: 1.4, fontSize: 17 } },
+                                React.createElement("a", { className: "white", title: element.blog_title, href: BASEURL + 'page/blog/detail/' + element.blog_alias }, element.blog_title)),
+                            React.createElement("hr", null)));
+                    }
+                    return '';
+                });
+            }
+            return '';
+        };
+        _this.state = {
+            blogs: {}
+        };
+        return _this;
     }
+    Footer.prototype.componentDidMount = function () {
+        var _this = this;
+        axios.get(API + 'blog/all/home')
+            .then(function (result) {
+            _this.setState({
+                blogs: result.data
+            });
+        })
+            .catch(function (err) {
+        });
+    };
     Footer.prototype.render = function () {
         return (React.createElement("div", { className: "col-xs-12 client-footer" },
             React.createElement("div", { className: "row" },
@@ -26,40 +57,41 @@ var Footer = /** @class */ (function (_super) {
                         React.createElement("div", { className: "col-sm-6 list-footer-menu" },
                             React.createElement("ul", null,
                                 React.createElement("li", null,
-                                    React.createElement("a", { href: "" }, "Gi\u1EDBi thi\u1EC7u")),
+                                    React.createElement("a", { href: BASEURL + 'page/gioi-thieu' }, "Gi\u1EDBi thi\u1EC7u")),
                                 React.createElement("li", null,
-                                    React.createElement("a", { href: "" }, "Kh\u00F3a h\u1ECDc")),
+                                    React.createElement("a", { href: BASEURL + 'page/khoa-hoc' }, "Kh\u00F3a h\u1ECDc")),
                                 React.createElement("li", null,
-                                    React.createElement("a", { href: "" }, "Blog")),
+                                    React.createElement("a", { href: BASEURL + 'page/blog' }, "Blog")),
                                 React.createElement("li", null,
-                                    React.createElement("a", { href: "" }, "S\u1ED5 tay")))),
+                                    React.createElement("a", { href: 'http://sotay.songxungdang.com' }, "S\u1ED5 tay")))),
                         React.createElement("div", { className: "col-sm-3" })),
                     React.createElement("div", { className: "row footer-intro", style: { marginTop: 32 } },
                         React.createElement("div", { className: "col-sm-3" },
                             React.createElement("h3", null, "\u0110i\u1EC1u quan tr\u1ECDng"),
                             React.createElement("ul", null,
                                 React.createElement("li", null,
-                                    React.createElement("a", { href: "" },
+                                    React.createElement("a", { href: BASEURL + 'page/blog' },
                                         React.createElement("i", { className: "fa fa-chevron-right" }),
                                         " \u0110\u1ECDc Blog")),
                                 React.createElement("li", null,
-                                    React.createElement("a", { href: "" },
+                                    React.createElement("a", { href: BASEURL + 'page/video' },
                                         React.createElement("i", { className: "fa fa-chevron-right" }),
                                         " Video")),
                                 React.createElement("li", null,
-                                    React.createElement("a", { href: "" },
+                                    React.createElement("a", { href: BASEURL + 'page/qua-tang' },
                                         React.createElement("i", { className: "fa fa-chevron-right" }),
                                         " Qu\u00E0 T\u1EB7ng")),
                                 React.createElement("li", null,
-                                    React.createElement("a", { href: "" },
+                                    React.createElement("a", { href: 'http://sotay.songxungdang.com' },
                                         React.createElement("i", { className: "fa fa-chevron-right" }),
                                         " S\u1ED5 Tay")),
                                 React.createElement("li", null,
-                                    React.createElement("a", { href: "" },
+                                    React.createElement("a", { href: BASEURL + 'page/khoa-hoc' },
                                         React.createElement("i", { className: "fa fa-chevron-right" }),
                                         " C\u00E1c Kh\u00F3a H\u1ECDc \u0110\u1EA7y T\u1EF1 H\u00E0o")))),
                         React.createElement("div", { className: "col-sm-3" },
-                            React.createElement("h3", null, "B\u00E0i vi\u1EBFt hay")),
+                            React.createElement("h3", null, "B\u00E0i vi\u1EBFt hay"),
+                            this.renderListBlogs()),
                         React.createElement("div", { className: "col-sm-3" },
                             React.createElement("h3", null, "k\u1EBFt n\u1ED1i v\u1EDBi Mr.Share"),
                             React.createElement("iframe", { src: "https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FNguyenMinhChi.MrShare%2F&tabs&width=340&height=154&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=true&appId=1440913602698681", width: '100%', height: 154, style: { border: "none", overflow: "hidden" }, scrolling: "no", frameBorder: 0, allowTransparency: true }),
@@ -85,8 +117,8 @@ var Footer = /** @class */ (function (_super) {
                                 alignItems: "center",
                                 justifyContent: "space-between"
                             } },
-                            React.createElement("p", null, "@ 2018 - NMC"),
-                            React.createElement("p", null, "made with love at sonH")))))));
+                            React.createElement("p", null, "@ 2018 | Nguy\u1EC5n Minh Ch\u00ED - Mr.Share"),
+                            React.createElement("p", null, "\u2764 sonH")))))));
     };
     return Footer;
 }(React.Component));
