@@ -94,3 +94,31 @@
 .margin-b-80 {
   margin-bottom: 80px;
 }
+.sh-card {
+  border-radius: 6px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  cursor: pointer;
+  background: #fff;
+}
+.bold {
+  font-weight: 600;
+}
+.min-height {
+  height: 400px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.flex {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.flex-1 {
+  flex: 3;
+}
+.flex-2 {
+  flex: 1;
+}
+.padding-16 {
+  padding: 16px;
+}

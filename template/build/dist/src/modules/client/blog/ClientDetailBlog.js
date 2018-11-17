@@ -19,6 +19,7 @@ import { reDetailBlogAlias, reClientListBlogCategory } from "../../admin/blog/re
 import Helmet from "react-helmet";
 import { BASEURL, API } from "../../../config/const";
 import CLientFooterBanner from "../home/ClientFooterBanner";
+import { addTraffic } from "../../shared/traffic";
 var ClientDetailBlog = /** @class */ (function (_super) {
     __extends(ClientDetailBlog, _super);
     function ClientDetailBlog(props) {
@@ -48,6 +49,10 @@ var ClientDetailBlog = /** @class */ (function (_super) {
         }
     };
     ClientDetailBlog.prototype.componentDidMount = function () {
+        addTraffic({
+            type: 1,
+            url: window.location.href
+        });
         window.scrollTo(0, 0);
         this.props.reDetailBlogAlias(this.props.match.params.idBlog);
         axios.put(API + "blog/views", {

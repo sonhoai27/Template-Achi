@@ -181,7 +181,6 @@ class App
     {
         return $this->map(['PATCH'], $pattern, $callable);
     }
-
     /**
      * Add DELETE route
      *

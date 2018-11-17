@@ -40,6 +40,7 @@ import Footer from "../client-shared/Footer";
 import ClientFollow from "../home/ClientFollow";
 import AutofitImage from "../../shared/CropImage";
 import CLientFooterBanner from "../home/ClientFooterBanner";
+import { addTraffic } from "../../shared/traffic";
 var ClientVideo = /** @class */ (function (_super) {
     __extends(ClientVideo, _super);
     function ClientVideo(props) {
@@ -120,6 +121,10 @@ var ClientVideo = /** @class */ (function (_super) {
         return _this;
     }
     ClientVideo.prototype.componentDidMount = function () {
+        addTraffic({
+            type: 0,
+            url: window.location.href
+        });
         this.props.reListVideo((parseInt(this.makeCurrentPage(), 10) - 1) * 20);
     };
     ClientVideo.prototype.componentDidUpdate = function (preProps) {

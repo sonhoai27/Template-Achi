@@ -11,6 +11,7 @@ interface IState {
     send_gift_name: string;
     send_gift_title: string;
     send_gift_phone: string;
+    created_date: string;
   }
 }
 interface IProps {
@@ -28,9 +29,14 @@ class CLientFooterBanner extends React.Component<IProps, IState> {
         send_gift_email: "",
         send_gift_name: "",
         send_gift_title: "",
-        send_gift_phone: ""
+        send_gift_phone: "",
+        created_date: this.getFullDate()
       }
     }
+  }
+  getFullDate = (): string => {
+    const date = new Date()
+    return date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()
   }
   componentDidMount(){
     axios.get(API+'gift/detail/active')

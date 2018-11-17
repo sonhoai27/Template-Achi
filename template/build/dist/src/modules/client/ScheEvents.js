@@ -19,6 +19,7 @@ import CLientFooterBanner from "./home/ClientFooterBanner";
 import Footer from "./client-shared/Footer";
 import ClientHeader from "./client-shared/Header";
 import { BASEURL } from "../../config/const";
+import { addTraffic } from "../shared/traffic";
 var ScheEvents = /** @class */ (function (_super) {
     __extends(ScheEvents, _super);
     function ScheEvents(props) {
@@ -50,6 +51,10 @@ var ScheEvents = /** @class */ (function (_super) {
     }
     ScheEvents.prototype.componentDidMount = function () {
         this.props.reListSourceByType(0);
+        addTraffic({
+            type: 0,
+            url: window.location.href
+        });
     };
     ScheEvents.prototype.render = function () {
         return (React.createElement(React.Fragment, null,

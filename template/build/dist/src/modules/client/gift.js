@@ -31,10 +31,15 @@ import { API } from "../../config/const";
 import Helmet from 'react-helmet';
 import { reIsDanger, reIsSuccess, reIsLoading } from "../../reducers/init";
 import { BASEURL } from './../../config/const';
+import { addTraffic } from './../shared/traffic';
 var ClientGift = /** @class */ (function (_super) {
     __extends(ClientGift, _super);
     function ClientGift(props) {
         var _this = _super.call(this, props) || this;
+        _this.getFullDate = function () {
+            var date = new Date();
+            return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+        };
         _this.onchange = function (e) {
             var _a;
             // @ts-ignore
@@ -82,13 +87,18 @@ var ClientGift = /** @class */ (function (_super) {
                 send_gift_email: "",
                 send_gift_name: "",
                 send_gift_title: "",
-                send_gift_phone: ""
+                send_gift_phone: "",
+                created_date: _this.getFullDate()
             }
         };
         return _this;
     }
     ClientGift.prototype.componentDidMount = function () {
         var _this = this;
+        addTraffic({
+            type: 0,
+            url: window.location.href
+        });
         axios.get(API + 'gift/detail/active')
             .then(function (result) {
             _this.setState({

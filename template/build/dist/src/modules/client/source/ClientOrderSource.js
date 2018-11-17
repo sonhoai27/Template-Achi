@@ -30,6 +30,7 @@ import Helmet from "react-helmet";
 import { reAddOrder } from "../../admin/source/order/reOrder";
 import { reDetailSche } from "../../admin/source/reSource";
 import { BASEURL } from "../../../config/const";
+import { addTraffic } from "../../shared/traffic";
 var ClientOrderSource = /** @class */ (function (_super) {
     __extends(ClientOrderSource, _super);
     function ClientOrderSource(props) {
@@ -39,6 +40,10 @@ var ClientOrderSource = /** @class */ (function (_super) {
             _this.setState({
                 order: __assign({}, _this.state.order, (_a = {}, _a[e.target.name] = e.target.value, _a))
             });
+        };
+        _this.getFullDate = function () {
+            var date = new Date();
+            return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
         };
         _this.addOrder = function () {
             _this.props.reIsLoading(!_this.props.isLoading);
@@ -55,7 +60,7 @@ var ClientOrderSource = /** @class */ (function (_super) {
                 }, 2000);
             }
             else {
-                _this.props.reAddOrder(__assign({}, _this.state.order, { source_order_birthday: _this.makeDateText(_this.state.order.source_order_birthday) }));
+                _this.props.reAddOrder(__assign({}, _this.state.order, { source_order_birthday: _this.makeDateText(_this.state.order.source_order_birthday), source_order_created_date: _this.getFullDate() }));
             }
         };
         _this.makeDateText = function (day) {
@@ -87,6 +92,10 @@ var ClientOrderSource = /** @class */ (function (_super) {
         return _this;
     }
     ClientOrderSource.prototype.componentDidMount = function () {
+        addTraffic({
+            type: 0,
+            url: window.location.href
+        });
         this.props.reDetailSche(this.props.match.params.idSche);
     };
     ClientOrderSource.prototype.componentDidUpdate = function (preProps) {

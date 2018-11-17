@@ -18,7 +18,9 @@ define("BASE_URL", 'http://localhost:8080/Achi/template/public/');
         <link href="<?=BASE_URL?>css/style.css" rel="stylesheet">
         <link href="<?=BASE_URL?>css/megna-dark.css" rel="stylesheet">
         <link href="<?=BASE_URL?>css/swiper.min.css" rel="stylesheet">
+        <link href="<?=BASE_URL?>css/jquery-ui.min.css" rel="stylesheet">
         <script src="<?=BASE_URL?>js/jquery-3.3.1.slim.min.js"></script>
+        <script src="<?=BASE_URL?>js/jquery-ui.min.js"></script>
         <link href="<?=BASE_URL?>css/cdn.css" rel="stylesheet">
         <link
               rel="stylesheet"
@@ -186,6 +188,29 @@ define("BASE_URL", 'http://localhost:8080/Achi/template/public/');
             }
             );
             wow.init();
+        </script>
+        <script>
+            jQuery(function($){
+                $.datepicker.regional['vi'] = {
+                    closeText: 'Đóng',
+                    prevText: 'Trước đó',
+                    nextText: 'Tiếp theo',
+                    currentText: 'Hôm nay',
+                    monthNames: ['Tháng Một', 'Tháng Hai', 'Tháng Ba', 'Tháng Tư', 'Tháng Năm', 'Tháng Sáu',
+                    'Tháng Bảy', 'Tháng Tám', 'Tháng Chín', 'Tháng Mười', 'Tháng Mười Một', 'Tháng Mười Hai'],
+                    monthNamesShort: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
+                    'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+                    dayNames: ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'],
+                    dayNamesShort: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
+                    dayNamesMin: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
+                    weekHeader: 'Tu',
+                    dateFormat: 'dd/mm/yy',
+                    firstDay: 0,
+                    isRTL: false,
+                    showMonthAfterYear: false,
+                    yearSuffix: ''};
+                $.datepicker.setDefaults($.datepicker.regional['vi']);
+            });
         </script>
     </body>
 

@@ -20,6 +20,7 @@ import { reIsDanger, reIsSuccess } from "../../../reducers/init";
 import { apiListVideoSource } from "../../admin/video-source/reVideoSource";
 import { Storage } from "../../../utils/storage-util";
 import ModalContact from "../../shared/Contact";
+import { addTraffic } from "../../shared/traffic";
 var ClientVideoSource = /** @class */ (function (_super) {
     __extends(ClientVideoSource, _super);
     function ClientVideoSource(props) {
@@ -59,6 +60,10 @@ var ClientVideoSource = /** @class */ (function (_super) {
         return _this;
     }
     ClientVideoSource.prototype.componentDidMount = function () {
+        addTraffic({
+            type: 0,
+            url: window.location.href
+        });
         var url = this.props.match.params.idSource;
         var tempArr = url.split('-');
         var idSource = tempArr[0];

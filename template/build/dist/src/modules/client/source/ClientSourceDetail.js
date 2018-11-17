@@ -22,6 +22,7 @@ import { reSetCurrentMatch } from "../../../reducers/init";
 import SXDFooter from "../../shared/components/SXDFooter";
 import Customer from "../ebook/com/customer";
 import { LoadingPage } from "../client-shared/LoadingPage";
+import { addTraffic } from "../../shared/traffic";
 var listCom = {
     TKB: React.createElement(MainSche, null),
     SXDFOOTER: React.createElement(SXDFooter, null),
@@ -37,6 +38,10 @@ var ClientSourceDetail = /** @class */ (function (_super) {
         return _this;
     }
     ClientSourceDetail.prototype.componentDidMount = function () {
+        addTraffic({
+            type: 0,
+            url: window.location.href
+        });
         window.scrollTo(0, 0);
         var url = this.props.match.params.idSource;
         var tempArr = url.split('-');

@@ -18,6 +18,7 @@ import CLientFooterBanner from "./home/ClientFooterBanner";
 import axios from 'axios';
 import { API, BASEURL } from "../../config/const";
 import Helmet from 'react-helmet';
+import { addTraffic } from "../shared/traffic";
 var Search = /** @class */ (function (_super) {
     __extends(Search, _super);
     function Search(props) {
@@ -55,6 +56,10 @@ var Search = /** @class */ (function (_super) {
     }
     Search.prototype.componentDidMount = function () {
         var _this = this;
+        addTraffic({
+            type: 0,
+            url: window.location.href
+        });
         axios.get(API + 'blog/search/' + this.props.match.params.key)
             .then(function (result) {
             console.log(result);

@@ -18,6 +18,7 @@ import ItemPage from '../DynamicPage/item';
 import ClientHeader from "./client-shared/Header";
 import Footer from "./client-shared/Footer";
 import { Helmet } from "react-helmet";
+import { addTraffic } from "../shared/traffic";
 var IDPAGE = 4;
 var ClientAboutPage = /** @class */ (function (_super) {
     __extends(ClientAboutPage, _super);
@@ -26,6 +27,10 @@ var ClientAboutPage = /** @class */ (function (_super) {
     }
     ClientAboutPage.prototype.componentDidMount = function () {
         this.props.reListPageUI(IDPAGE);
+        addTraffic({
+            type: 0,
+            url: window.location.href
+        });
     };
     ClientAboutPage.prototype.render = function () {
         return (React.createElement(React.Fragment, null,

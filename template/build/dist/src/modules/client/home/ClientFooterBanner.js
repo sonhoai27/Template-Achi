@@ -31,6 +31,10 @@ var CLientFooterBanner = /** @class */ (function (_super) {
     __extends(CLientFooterBanner, _super);
     function CLientFooterBanner(props) {
         var _this = _super.call(this, props) || this;
+        _this.getFullDate = function () {
+            var date = new Date();
+            return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+        };
         _this.onSendGift = function () {
             _this.props.reIsLoading(!_this.props.isLoading);
             if (_this.state.user.send_gift_email !== "" && _this.state.user.send_gift_name != "" && _this.state.user.send_gift_phone != "") {
@@ -81,7 +85,8 @@ var CLientFooterBanner = /** @class */ (function (_super) {
                 send_gift_email: "",
                 send_gift_name: "",
                 send_gift_title: "",
-                send_gift_phone: ""
+                send_gift_phone: "",
+                created_date: _this.getFullDate()
             }
         };
         return _this;

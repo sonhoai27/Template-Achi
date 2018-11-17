@@ -25,11 +25,18 @@ import { connect } from "react-redux";
 import NotifyDanger from "../../shared/notifyDanger";
 import NotifySuccess from "../../shared/notifySuccess";
 import NewMenu from "../client-shared/NewMenu";
+import { addTraffic } from "../../shared/traffic";
 var ClientHome = /** @class */ (function (_super) {
     __extends(ClientHome, _super);
     function ClientHome(props) {
         return _super.call(this, props) || this;
     }
+    ClientHome.prototype.componentDidMount = function () {
+        addTraffic({
+            type: 0,
+            url: window.location.href
+        });
+    };
     ClientHome.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
             React.createElement(NewMenu, null),
