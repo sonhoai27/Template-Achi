@@ -1,0 +1,3 @@
+RewriteEngine On
+        RewriteCond %{HTTP_HOST} ^nguyenminhchi.com$
+        RewriteRule ^$ http://nguyenminhchi.com/error/ [L,R=301]

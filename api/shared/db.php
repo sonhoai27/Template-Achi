@@ -1,5 +1,5 @@
 <?php
-define('DB_USER', 'root');
-define('DB_PASSWORD', '');
+define('DB_USER', 'nguye142');
+define('DB_PASSWORD', 'C7cdQVW2z68q');
 define('DB_HOST', 'localhost');
-define("DB_NAME", 'achi');
+define("DB_NAME", 'nguye142_achi');

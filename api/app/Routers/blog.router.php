@@ -13,12 +13,52 @@ $app->get('/blog/{page}', function(Request $request, Response $response, $args){
     "count"=>$this->get('db_blog')->count($this->get('db'))
   ));
 });
+$app->post('/blog/all/{page}', function(Request $request, Response $response, $args){
+  return $response->withJson(array(
+    "status"=>200,
+    "list"=>$this->get('db_blog')->filter(
+            $this->get('db'),
+            $args['page'],
+            $request->getParsedBody()
+    ),
+  "count"=>$this->get('db_blog')->count_by_filter(
+       $this->get('db'),
+       $request->getParsedBody())
+  ));
+});
+$app->put('/blog/views', function(Request $request, Response $response, $args){
+    return $response->withJson(array(
+      "status"=>200,
+      "list"=>$this->get('db_blog')->edit_views(
+              $this->get('db'),
+              $request->getParsedBody()['key']
+      )
+    ));
+});
+$app->get('/blog/category/{id}', function(Request $request, Response $response, $args){
+  return $response->withJson(array(
+    "status"=>200,
+    "list"=>$this->get('db_blog')->category(
+            $this->get('db'),
+            $args['id']
+    )
+  ));
+});
 $app->get('/blog/detail/{id}', function(Request $request, Response $response, $args){
     return $response->withJson(array(
         "status"=>200,
         "list"=>$this->get('db_blog')->detail(
                 $this->get('db'),
                 $args['id']
+        )
+      ));
+});
+$app->post('/blog/detail-alias', function(Request $request, Response $response){
+    return $response->withJson(array(
+        "status"=>200,
+        "list"=>$this->get('db_blog')->detail_alias(
+                $this->get('db'),
+                $request->getParsedBody()['key']
         )
       ));
 });
@@ -55,4 +95,21 @@ $app->delete('/blog/{id}', function(Request $request, Response $response, $args)
             )
           ));
        }
+});
+$app->get('/blog/all/home', function(Request $request, Response $response, $args){
+  return $response->withJson(array(
+    "status"=>200,
+    "list"=>$this->get('db_blog')->home(
+            $this->get('db')
+    )
+  ));
+});
+$app->get('/blog/search/{key}', function(Request $request, Response $response, $args){
+  return $response->withJson(array(
+    "status"=>200,
+    "list"=>$this->get('db_blog')->search(
+            $this->get('db'),
+            $args['key']
+    )
+  ));
 });

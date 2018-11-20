@@ -55,14 +55,14 @@
                 if(!$first_row)
                 {
                     $rows = array();
-                    while( $row = mysqli_fetch_array($this->result))
+                    while( $row = mysqli_fetch_assoc($this->result))
                     {
                         $rows[] = $row;
                     }
                 }
                 else
                 {
-                    $rows = mysqli_fetch_array($this->result);
+                    $rows = mysqli_fetch_assoc($this->result);
                 }
             }
             return $rows;
@@ -98,8 +98,10 @@
             {
                 array_push($resultArray, $row);
             }
+
             if($singleRow === true)
                 return $resultArray[0];
+
             return $resultArray;
         }
         public function select($table, $where) {
@@ -128,7 +130,7 @@
                 $columns .= ($columns == "") ? "" : ", ";
                 $columns .= $column;
                 $values .= ($values == "") ? "'" : ", '";
-                $values .= $value."' ";
+                $values .= addslashes($value)."' ";
             }
             $sql = "INSERT INTO $table ($columns) values ($values)";
             mysqli_query($this->connection,$sql) or die(mysqli_error($this->connection));
@@ -138,9 +140,10 @@
             $changes = "";
             foreach ($data as $column => $value) {
                 $changes .= ($changes == "") ? "" : ", ";
-                $changes .= $column."= '".$value."' ";
+                $changes .= $column."= '".addslashes($value)."' ";
             }
             $sql = "UPDATE $table SET $changes WHERE $where";
+            //echo $sql;
             mysqli_query($this->connection,$sql) or die(mysqli_error($this->connection));
             return true;
         }
