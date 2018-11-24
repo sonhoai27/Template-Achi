@@ -1,42 +1,41 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-include_once(__SITE_PATH."\models\gift.model.php");
-$container['db_gift'] = new GiftModel();
-$app->get('/gift/all/{page}', function(Request $request, Response $response, $args){
+include_once(__SITE_PATH."/models/status.model.php");
+$container['db_status'] = new StatusModel();
+$app->get('/status', function(Request $request, Response $response){
     return $response->withJson(array(
         "status"=>200,
-        "list"=>$this->get('db_gift')->all(
-                $this->get('db'),
-                $args['page']
+        "list"=>$this->get('db_status')->all(
+                $this->get('db')
         ),
       ));
 });
-$app->get('/gift/{id}', function(Request $request, Response $response, $args){
+$app->get('/status/{id}', function(Request $request, Response $response, $args){
     return $response->withJson(array(
         "status"=>200,
-        "list"=>$this->get('db_gift')->detail(
+        "list"=>$this->get('db_status')->detail(
                 $this->get('db'),
                 $args['id']
         ),
       ));
 });
-$app->post('/gift', function(Request $request, Response $response){
-    if(isset_not_null($request->getParsedBody(), 'gift_name')){
+$app->post('/status', function(Request $request, Response $response){
+    if(isset_not_null($request->getParsedBody(), 'status_name')){
         return $response->withJson(array(
             "status"=>200,
-            "list"=>$this->get('db_gift')->add(
+            "list"=>$this->get('db_status')->add(
                     $this->get('db'),
                     $request->getParsedBody()
             )
           ));
        }
 });
-$app->put('/gift/{id}', function(Request $request, Response $response, $args){
-    if(isset_not_null($request->getParsedBody(), 'gift_name')){
+$app->put('/status/{id}', function(Request $request, Response $response, $args){
+    if(isset_not_null($request->getParsedBody(), 'status_name')){
         return $response->withJson(array(
             "status"=>200,
-            "list"=>$this->get('db_gift')->edit(
+            "list"=>$this->get('db_status')->edit(
                     $this->get('db'),
                     $args['id'],
                     $request->getParsedBody()
@@ -44,11 +43,11 @@ $app->put('/gift/{id}', function(Request $request, Response $response, $args){
           ));
        }
 });
-$app->delete('/gift/{id}', function(Request $request, Response $response, $args){
+$app->delete('/status/{id}', function(Request $request, Response $response, $args){
     if(isset($args['id'])){
         return $response->withJson(array(
             "status"=>200,
-            "list"=>$this->get('db_gift')->delete(
+            "list"=>$this->get('db_status')->delete(
                     $this->get('db'),
                     $args['id']
             )

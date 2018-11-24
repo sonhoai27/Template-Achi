@@ -1,7 +1,7 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-include_once(__SITE_PATH."/models/status.model.php");
+include_once(__SITE_PATH."\models\status.model.php");
 $container['db_status'] = new StatusModel();
 $app->get('/status', function(Request $request, Response $response){
     return $response->withJson(array(

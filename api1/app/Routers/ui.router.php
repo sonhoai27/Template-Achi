@@ -1,7 +1,7 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-include_once(__SITE_PATH."\models\ui-source.model.php");
+include_once(__SITE_PATH."/models/ui-source.model.php");
 $container['db_ui'] = new UISourceModel();
 $app->get('/ui/element', function(Request $request, Response $response){
   return $response->withJson(array(
@@ -11,10 +11,37 @@ $app->get('/ui/element', function(Request $request, Response $response){
     )
   ));
 });
-$app->get('/ui/all-ui', function(Request $request, Response $response){
+$app->post('/ui/add-ui', function(Request $request, Response $response){
+   if(isset_not_null($request->getParsedBody(), 'ui_name')){
+    return $response->withJson(array(
+        "status"=>200,
+        "list"=>$this->get('db_ui')->add(
+                $this->get('db'),
+                $request->getParsedBody()
+        )
+      ));
+   }
+});
+$app->get('/ui/all-ui-source', function(Request $request, Response $response){
   return $response->withJson(array(
     "status"=>200,
     "list"=>$this->get('db_ui')->all(
+            $this->get('db')
+    )
+  ));
+});
+$app->get('/ui/all-ui', function(Request $request, Response $response){
+  return $response->withJson(array(
+    "status"=>200,
+    "list"=>$this->get('db_ui')->all_ui(
+            $this->get('db')
+    )
+  ));
+});
+$app->get('/ui/all-ui-page', function(Request $request, Response $response){
+  return $response->withJson(array(
+    "status"=>200,
+    "list"=>$this->get('db_ui')->all_ui_page(
             $this->get('db')
     )
   ));

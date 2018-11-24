@@ -1,42 +1,45 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-include_once(__SITE_PATH."\models\gift.model.php");
-$container['db_gift'] = new GiftModel();
-$app->get('/gift/all/{page}', function(Request $request, Response $response, $args){
+include_once(__SITE_PATH."/models/Video.model.php");
+$container['db_video'] = new VideoModel();
+$app->get('/video/all/{page}', function(Request $request, Response $response, $args){
     return $response->withJson(array(
         "status"=>200,
-        "list"=>$this->get('db_gift')->all(
+        "list"=>$this->get('db_video')->all(
                 $this->get('db'),
                 $args['page']
         ),
+        "count"=>$this->get('db_video')->count(
+                $this->get('db')
+        )
       ));
 });
-$app->get('/gift/{id}', function(Request $request, Response $response, $args){
+$app->get('/video/{id}', function(Request $request, Response $response, $args){
     return $response->withJson(array(
         "status"=>200,
-        "list"=>$this->get('db_gift')->detail(
+        "list"=>$this->get('db_video')->detail(
                 $this->get('db'),
                 $args['id']
         ),
       ));
 });
-$app->post('/gift', function(Request $request, Response $response){
-    if(isset_not_null($request->getParsedBody(), 'gift_name')){
+$app->post('/video', function(Request $request, Response $response){
+    if(isset_not_null($request->getParsedBody(), 'video_name')){
         return $response->withJson(array(
             "status"=>200,
-            "list"=>$this->get('db_gift')->add(
+            "list"=>$this->get('db_video')->add(
                     $this->get('db'),
                     $request->getParsedBody()
             )
           ));
        }
 });
-$app->put('/gift/{id}', function(Request $request, Response $response, $args){
-    if(isset_not_null($request->getParsedBody(), 'gift_name')){
+$app->put('/video/{id}', function(Request $request, Response $response, $args){
+    if(isset_not_null($request->getParsedBody(), 'video_name')){
         return $response->withJson(array(
             "status"=>200,
-            "list"=>$this->get('db_gift')->edit(
+            "list"=>$this->get('db_video')->edit(
                     $this->get('db'),
                     $args['id'],
                     $request->getParsedBody()
@@ -44,11 +47,11 @@ $app->put('/gift/{id}', function(Request $request, Response $response, $args){
           ));
        }
 });
-$app->delete('/gift/{id}', function(Request $request, Response $response, $args){
+$app->delete('/video/{id}', function(Request $request, Response $response, $args){
     if(isset($args['id'])){
         return $response->withJson(array(
             "status"=>200,
-            "list"=>$this->get('db_gift')->delete(
+            "list"=>$this->get('db_video')->delete(
                     $this->get('db'),
                     $args['id']
             )

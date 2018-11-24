@@ -1,7 +1,7 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-include_once(__SITE_PATH."/models/Video.model.php");
+include_once(__SITE_PATH."\models\Video.model.php");
 $container['db_video'] = new VideoModel();
 $app->get('/video/all/{page}', function(Request $request, Response $response, $args){
     return $response->withJson(array(
@@ -10,9 +10,6 @@ $app->get('/video/all/{page}', function(Request $request, Response $response, $a
                 $this->get('db'),
                 $args['page']
         ),
-        "count"=>$this->get('db_video')->count(
-                $this->get('db')
-        )
       ));
 });
 $app->get('/video/{id}', function(Request $request, Response $response, $args){
