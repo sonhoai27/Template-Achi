@@ -4,6 +4,7 @@ import {reIsSuccess, reIsDanger, reIsLoading, reShowPhotoApp, reSetCurrentEditor
 import {reListGift} from "./reGift";
 import {Editor} from "@tinymce/tinymce-react";
 import {reAddSendGift, reListCounter} from "./send-gift/reSendGift";
+import { RESOURCE } from "../../../config/const";
 
 interface IProps {
     isShowingModal: any;
@@ -26,6 +27,10 @@ interface IState {
     titleEmail: string;
     count: any;
     nameGift: any;
+    sendingMail: {
+        sum: number,
+        count: number
+    }
 }
 
 class ModalSendGift extends React.Component<IProps, IState> {
@@ -36,7 +41,11 @@ class ModalSendGift extends React.Component<IProps, IState> {
             editor: {},
             titleEmail: '',
             count: 0,
-            nameGift: ""
+            nameGift: "",
+            sendingMail: {
+                count: 0,
+                sum: 0
+            }
         };
     }
 
@@ -80,7 +89,7 @@ class ModalSendGift extends React.Component<IProps, IState> {
         if (this.props.resListCounter.list) {
             return this.props.resListCounter.list.map(element => {
                 return (
-                    <option key={element.send_gift_counter} value={element.send_gift_counter}>
+                    <option key={element.send_gift_counter} value={JSON.stringify(element)}>
                         {element.send_gift_counter}
                     </option>
                 )
@@ -89,16 +98,42 @@ class ModalSendGift extends React.Component<IProps, IState> {
         return null
     }
     send = () => {
-        this.props.reIsLoading(!this.props.isLoading)
-        this.props.reAddSendGift(
-            {
-                titleEmail: this.state.titleEmail,
-                contentEmail: this.state.content
-            },
-            this.state.count
-        )
+        if(this.validateSendMail()){
+            this.props.reIsLoading(!this.props.isLoading)
+            // this.props.reAddSendGift(
+            //     {
+            //         titleEmail: this.state.titleEmail,
+            //         contentEmail: this.state.content
+            //     },
+            //     this.state.count
+            // )
+
+            // goi lan dau, sau do nha kq ve o ham didupdate, ktra, count, len, ktra tra ve, tiep tuc goi lai ham nao
+            // do de send len noi dung can goi, trang can goi.
+            
+        }else {
+            alert("Vui lòng nhập đủ thông tin!")
+        }
     }
 
+    validateSendMail = (): boolean => {
+        if(this.state.titleEmail !== "" && this.state.content !== ""){
+            return true;
+        }
+        return false;
+    }
+    calPgMails = (len: number, sum: number): number => {
+        const temp: string = (sum/len)+""
+        let chan: number = Number(temp.split(".")[0]);
+        const le = sum%len;
+
+        if(chan == 0){
+            chan = 1;
+        }else if(le > 0 && chan > 0){
+            chan = chan + 1;
+        }
+        return chan;
+    }
     render() {
         return (
             <>
@@ -111,27 +146,25 @@ class ModalSendGift extends React.Component<IProps, IState> {
                     <div className="modal-dialog modal-lg">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <button
-                                    onClick={() => this.props.isShowingModal()}
-                                    type="button"
-                                    className="close"
-                                    data-dismiss="modal"
-                                    aria-hidden="true"
-                                >
-                                    ×
-                                </button>
                                 <h4 className="modal-title">Gởi quà tặng</h4>
                             </div>
                             <div className="modal-body">
                                 <div className="row">
-                                    <div className="col-sm-12">
+                                    <div className="col-sm-6">
                                         <div className="row">
                                             <div className="form-group col-sm-12">
-                                                <label className="col-sm-12">Số lần đã gởi</label>
                                                 <div className="col-sm-12">
                                                     <select className={'form-control'} onChange={(e)=> {
+                                                        const value =(JSON.parse(e.target.value))
                                                         this.setState({
-                                                            count: e.target.value
+                                                            ...this.state,
+                                                            count: value.send_gift_counter,
+                                                            sendingMail: {
+                                                                count: 0,
+                                                                sum: this.calPgMails(90, value.count)
+                                                            }
+                                                        }, ()=> {
+                                                            console.log(this.state)
                                                         })
                                                     }}>
                                                         <option>Chọn</option>
@@ -140,7 +173,6 @@ class ModalSendGift extends React.Component<IProps, IState> {
                                                 </div>
                                             </div>
                                             <div className="form-group col-sm-6">
-                                                <label className="col-sm-12">Danh sách quà</label>
                                                 <div className="col-sm-12">
                                                     <select
                                                         onChange={(e: any) => {
@@ -160,7 +192,6 @@ class ModalSendGift extends React.Component<IProps, IState> {
                                                 </div>
                                             </div>
                                             <div className="form-group col-sm-6">
-                                                <label className="col-sm-12">Tiêu đề</label>
                                                 <div className="col-sm-12">
                                                     <input className="form-control" onChange={(e) => {
                                                         this.setState({
@@ -170,7 +201,6 @@ class ModalSendGift extends React.Component<IProps, IState> {
                                                 </div>
                                             </div>
                                             <div className="form-group col-sm-12">
-                                                <label className="col-sm-12">Nội dung</label>
                                                 <div className="col-sm-12">
                                                     <Editor
                                                         onChange={(e: any) => {
@@ -196,10 +226,8 @@ class ModalSendGift extends React.Component<IProps, IState> {
                                                         init={{
                                                             selector: "textarea",
                                                             spellchecker_language: "vi-VN",
-                                                            height: 500,
+                                                            height: 200,
                                                             theme: "modern",
-                                                            plugins:
-                                                                "print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help",
                                                             toolbar1:
                                                                 "fontsizeselect formatselect | addImage | bold italic strikethrough forecolor backcolor | link blockquote | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat",
                                                             fontsize_formats:
@@ -210,7 +238,7 @@ class ModalSendGift extends React.Component<IProps, IState> {
                                                                 })
                                                                 editor.addButton("addImage", {
                                                                     icon: "image",
-                                                                    tooltip: "Add Image",
+                                                                    tooltip: "Thêm Image",
                                                                     onclick: () => {
                                                                         this.props.reShowPhotoApp(true)
                                                                         this.props.reSetCurrentEditorPhoto(editor)
@@ -220,6 +248,37 @@ class ModalSendGift extends React.Component<IProps, IState> {
                                                         }}
                                                     />
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-sm-6">
+                                        <div className="text-center" style={{display: 'block', width: '100%'}}>
+                                            <img src={RESOURCE+'images/icon/Send.png'}/>
+                                        </div>
+                                        <div style={{marginTop: 80}}>
+                                            <div style={{
+                                                    textAlign: 'center',
+                                                    fontSize: 32
+                                                }}>
+                                                10%
+                                            </div>
+                                            <div style={{
+                                                width: '100%',
+                                                height: 8,
+                                                background: '#eee',
+                                                borderRadius: 8,
+                                                marginTop: 32,
+                                                position: 'relative',
+                                                overflow: 'hidden'
+                                            }}>
+                                                <div style={{
+                                                    position: 'absolute',
+                                                    top: 0,
+                                                    left: 0,
+                                                    bottom: 0,
+                                                    background: '#08f',
+                                                    width: this.state.sendingMail.count+'%'
+                                                }}/>
                                             </div>
                                         </div>
                                     </div>

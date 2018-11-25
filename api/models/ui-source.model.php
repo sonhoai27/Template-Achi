@@ -13,7 +13,15 @@ class UISourceModel {
         return $db->update($form, 'achi_detail_ui', ' detail_ui_id = '.$db->sqlQuote($id));
     }
     function all($db) {
+        $db->query('select * from achi_ui where ui_type = 0 order by achi_ui.ui_id desc');
+        return $db->fetch_object();
+    }
+    function all_ui($db) {
         $db->query('select * from achi_ui order by achi_ui.ui_id desc');
+        return $db->fetch_object();
+    }
+    function all_ui_page($db) {
+        $db->query('select * from achi_ui where ui_type = 1 order by achi_ui.ui_id desc');
         return $db->fetch_object();
     }
     //ui chứa nhiều component hay element
@@ -46,7 +54,7 @@ class UISourceModel {
           on t2.content_element_id_detail_ui = t1.detail_ui_id
           inner join achi_element on t1.detail_ui_id_element = achi_element.element_id
           where  t1.detail_ui_id_ui = '.$db->sqlQuote($idUi).' 
-          ORDER BY `detail_ui_id_ui` ASC');
+          ORDER BY `detail_ui_id`, detail_ui_position DESC');
         $detail = $db->fetch_object();
         return ($this->makeListElementParentChild($detail));
     }
@@ -67,6 +75,7 @@ class UISourceModel {
     function add_element_to_detail_ui($db,$form) {
         return $db->insert($form, 'achi_detail_ui');
     }
+    
     function delete_element_of_detail_ui($db,$idUI, $idDetailUI){
         $db->query('
             select detail_ui_id, detail_ui_parent_id from achi_detail_ui
@@ -77,7 +86,11 @@ class UISourceModel {
         $flag = 0;
         $temp = $this->makeIdDetailUI($this->findChildElement($detail, $idDetailUI),$idDetailUI);
         for($i = 0; $i < count($temp); $i++){
-            if($db->delete('achi_content_element', ' content_element_id_detail_ui = '.$temp[$i]) && $db->delete('achi_detail_ui', ' detail_ui_id = '.$temp[$i])){
+            if(
+              $db->delete('achi_content_element', ' content_element_id_detail_ui = '.$temp[$i]) 
+              && $db->delete('achi_content_page', ' content_page_id_detail_ui = '.$temp[$i])
+              && $db->delete('achi_detail_ui', ' detail_ui_id = '.$temp[$i])
+            ){
                 $flag = 1;
             }else {
                 $flag = 0;
