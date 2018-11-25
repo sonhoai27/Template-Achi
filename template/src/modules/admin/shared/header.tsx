@@ -1,7 +1,15 @@
 import * as React from "react";
 import { BASEURLADMIN } from "../../../config/const";
 import { Link } from "react-router-dom";
-class Header extends React.Component {
+import { connect } from "react-redux";
+import { checkRule } from "../../../config/auth";
+interface IProps {
+  resCheckLogin: any;
+}
+class Header extends React.Component<IProps, {}> {
+  componentDidMount(){
+    console.log(this.props.resCheckLogin)
+  }
   render() {
     return (
       <>
@@ -37,7 +45,10 @@ class Header extends React.Component {
                     Trang chủ <span className="fa arrow" />
                   </span>
                 </a></li>
-              <li>
+              {
+                checkRule(this.props.resCheckLogin.user.userRule, "ADMIN") 
+                || checkRule(this.props.resCheckLogin.user.userRule, "NGUOI_QUAN_LY") ? 
+                <li>
                 <a className="waves-effect ">
                   <i className="mdi mdi-content-copy fa-fw" />
                   <span className="hide-menu">
@@ -70,7 +81,8 @@ class Header extends React.Component {
                     </a>
                   </li>
                 </ul>
-              </li>
+              </li>: ''
+              }
               <li>
                 <a href="javascript:void(0)" className="waves-effect">
                   <i className="mdi mdi-format-color-fill fa-fw" />
@@ -229,7 +241,7 @@ class Header extends React.Component {
                     <a href="javascript:void(0)" className="waves-effect">
                         <i className="mdi mdi-apps fa-fw" />
                         <span className="hide-menu">
-                    Thống kê
+                    Tài khoản
                     <span className="fa arrow" />
                   </span>
                     </a>
@@ -237,25 +249,7 @@ class Header extends React.Component {
                         <li>
                             <a href={BASEURLADMIN+'order-ebook'}>
                                 <i className="ti-comments-smiley fa-fw" />
-                                <span className="hide-menu">Tổng quan</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" className="waves-effect">
-                                <i className="ti-desktop fa-fw" />
-                                <span className="hide-menu">Khóa học</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" className="waves-effect">
-                                <i className="ti-desktop fa-fw" />
-                                <span className="hide-menu">Blog</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" className="waves-effect">
-                                <i className="ti-desktop fa-fw" />
-                                <span className="hide-menu">Quà tặng</span>
+                                <span className="hide-menu">Danh sách tài khoản</span>
                             </a>
                         </li>
                     </ul>
@@ -267,4 +261,12 @@ class Header extends React.Component {
     );
   }
 }
-export default Header;
+const mapStateToProps = storeState => ({
+  resCheckLogin: storeState.reInit.resCheckLogin
+});
+const mapDispatchToProps = {
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);
