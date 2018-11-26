@@ -51,6 +51,6 @@
         "webpack-dev-server": "^3.1.5"
     },
     "scripts": {
-        "build": "webpack --watch -d --progress"
+        "build": "webpack --watch -p --progress"
     }
 }

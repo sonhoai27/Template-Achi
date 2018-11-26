@@ -8,12 +8,16 @@ import {
   reSetCurrentEditorPhoto,
   reDeleteImage,
   reAddImage,
-  reListImage
+  reListImage,
+  reAddGroupPhoto
 } from "../../reducers/init";
 import { API } from "../../config/const";
+import { alias } from "../../utils/alias";
 interface State {
   dataImage: object;
   imageChoose: any;
+  isShowHideAddGroup: boolean;
+  currentPath: any;
 }
 interface Props {
   isShowPhotoApp: any;
@@ -23,9 +27,11 @@ interface Props {
   resAddImage: any;
   reShowPhotoApp: (status: boolean) => void;
   reSetCurrentEditorPhoto: (editor: any) => void;
-  reListImage: () => void;
+  reListImage: (where: string) => void;
   reDeleteImage: (id: string) => void;
   reAddImage: (form: any) => void;
+  reAddGroupPhoto: (form: any)=> void;
+  addPhotoGroup: any;
 }
 class Photo extends React.Component<Props, State> {
   private nodeContextMenuPhotoApp;
@@ -33,14 +39,22 @@ class Photo extends React.Component<Props, State> {
     super(props);
     this.state = {
       dataImage: {},
-      imageChoose: {}
+      imageChoose: {},
+      isShowHideAddGroup: false,
+      currentPath: ['']
     };
+
     this.nodeContextMenuPhotoApp = React.createRef();
   }
   componentDidUpdate(preProps) {
     if (preProps.resDeleteImage != this.props.resDeleteImage) {
       if (this.props.resDeleteImage.status === 200) {
-        this.props.reListImage();
+        this.props.reListImage(this.makeRealPath());
+      }
+    }
+    if (preProps.addPhotoGroup != this.props.addPhotoGroup) {
+      if (this.props.addPhotoGroup.status === 202) {
+        this.props.reListImage(this.makeRealPath());
       }
     }
   }
@@ -60,7 +74,7 @@ class Photo extends React.Component<Props, State> {
     );
   }
   componentDidMount() {
-    this.props.reListImage();
+    this.props.reListImage(this.makeRealPath());
   }
   handleClickHideUIComponents = e => {
     try {
@@ -116,23 +130,70 @@ class Photo extends React.Component<Props, State> {
     let name: any = this.state.dataImage;
     this.props.reDeleteImage(name.name);
   };
+  handleAddGroup = (name: string)=> {
+    this.props.reAddGroupPhoto({
+      name: name,
+      where: this.makeRealPath()
+    })
+  }
+  viewGroup = (e)=> {
+    e.preventDefault();
+    const tempInfo = JSON.parse(e.target.id)
+    this.setState({
+      currentPath: [...this.state.currentPath, tempInfo.name]
+    }, ()=> {
+      this.props.reListImage(this.makeRealPath());
+    })
+  }
   renderListImage = () => {
     if (this.props.resListImage) {
       return this.props.resListImage.map((element, i) => {
-        return (
-          <div className="col-sm-2 item" key={i}>
-            <Image
-              dataSrc={JSON.stringify({
-                uri: element.uri,
-                name: element.name
-              })}
-              onClick={e => this._contextMenu(e)}
-              src={element.uri}
-              width={150}
-              height={150}
-            />
-          </div>
-        );
+        if(element.type === "FILE"){
+          return (
+            <div className="col-sm-2 item" key={i}>
+              <Image
+                dataSrc={JSON.stringify({
+                  uri: element.uri,
+                  name: element.name
+                })}
+                onClick={e => this._contextMenu(e)}
+                src={element.uri}
+                width={150}
+                height={150}
+              />
+            </div>
+          );
+        }else {
+          return (
+            <div className="col-sm-2 item" 
+              key={i}
+              onClick={this.viewGroup}
+              style={{position: 'relative'}}>
+              <Image
+                dataSrc={JSON.stringify({
+                  uri: element.uri,
+                  name: element.name
+                })}
+                src={'http://nguyenminhchi.com/api/uploads/images/5350e224d887e85b99781543165200000.png'}
+                width={150}
+                height={150}
+              />
+              <p style={{
+                display: 'inline-block',
+                textAlign: 'center',
+                position: 'absolute',
+                background: '#f7fafcb8',
+                margin: 'auto',
+                right: 0,
+                left: 0,
+                color: '#333',
+                padding: '8px',
+                bottom: 0,
+                width: '64%'
+              }}>{element.name}</p>
+            </div>
+          );
+        }
       });
     }
     return "";
@@ -149,28 +210,123 @@ class Photo extends React.Component<Props, State> {
     this.props.reShowPhotoApp(false);
     document.body.style.overflowY = "auto";
   };
+  addGroup = () => {
+    return (
+      <>
+        <div className="photo-app__add-group">
+          <h4 className="m-b-16">Thêm mới nhóm</h4>
+          <input
+            id="group-name-photo"
+            style={{width: '100%'}}
+            placeholder="Nhập tên group"
+            type="text"
+            required={true}
+          />
+          <div className="add-group__btn" style={{
+            marginTop: 32,
+            textAlign: 'right'
+          }}>
+            <div
+              className="btn btn-sm btn-danger"
+              onClick={()=> {
+                this.setState({
+                  isShowHideAddGroup: !this.state.isShowHideAddGroup
+                })
+              }}
+              style={{marginRight: 16}}>
+              Hủy
+            </div>
+            <div
+              onClick={()=> {
+                const groupNamePhoto: any = document.getElementById('group-name-photo')
+                if(groupNamePhoto.value !== ""){
+                  this.handleAddGroup(alias(groupNamePhoto.value))
+                }else {
+                  alert("Chưa nhập")
+                }
+                this.setState({
+                  isShowHideAddGroup: !this.state.isShowHideAddGroup
+                })
+              }}
+              className="btn btn-sm btn-info">
+              Thêm mới
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  };
+  makeRealPath = ()=> {
+    let path = ""
+    this.state.currentPath.map(element => {
+      if(element == ""){
+        path =path+element
+      }else {
+        path = path == "" ? element : path+"/"+element
+      }
+    })
+    return path
+  }
+  makeBreadcrumb = ()=> {
+    const len = this.state.currentPath.length - 1
+    return this.state.currentPath.map((element, index) => {
+      if(len === index){
+        return (
+          <li key={element}>
+            <a onClick={()=> {
+              console.log(element)
+            }}>{element === "" ? "..." : "/"+element}
+          </a>
+          </li>
+        )
+      }else {
+        return (
+          <li key={element}>
+            <a  style={{color: '#ffc36d', cursor: 'pointer'}}  onClick={()=> {
+              this.setState({
+                currentPath: this.state.currentPath.slice(0, index+1)
+              }, ()=> {
+                this.props.reListImage(this.makeRealPath());
+              })
+            }}>{element === "" ? "..." : "/"+element}
+          </a>
+          </li>
+        )
+      }
+    })
+  }
   render() {
     return (
       <>
         <div className="photo-app">
           <div className="header">
-            <div className="title-app">Photo App</div>
+            <div className="title-app">Photo App - 0.2</div>
             <div className="search-bar-app">
-              <input
-                name=""
-                id=""
-                type="text"
-                className="form-control"
-                placeholder="Bạn muốn tìm gì?"
-              />
+              <ul className="photo-app__breadcrumb">
+                {this.makeBreadcrumb()}
+              </ul>
             </div>
             <div className="btn-close">
               <button
-                className="btn btn-block btn-info btn-xs upload-file"
+                onClick={() => {
+                  this.setState({
+                    isShowHideAddGroup: !this.state.isShowHideAddGroup
+                  });
+                }}
+                className="btn btn-block btn-info btn-sm"
+              >
+                <i className="ti-layers" /> Tạo nhóm
+              </button>
+              <button
+                style={{
+                  marginTop: 0,
+                  marginLeft: 16
+                }}
+                className="btn btn-block btn-info btn-sm upload-file"
                 data-toggle="modal"
                 data-target="#upload-image"
               >
-                Tải lên
+                <i className="ti-export" /> Chọn tệp
               </button>
               <i
                 onClick={() => {
@@ -222,54 +378,57 @@ class Photo extends React.Component<Props, State> {
                   ×
                 </button>
                 <h4 className="modal-title" id="mySmallModalLabel">
-                  Upload Hình ảnh
+                  Chọn hình ảnh
                 </h4>{" "}
               </div>
               <div className="modal-body">
-                <input
-                  onChange={(e: any) => {
-                    // const data = new FormData();
-                    // data.append('upload-image', e.target.files[0]);
-                    let reader = new FileReader();
-                    reader.onload = (event: any) => {
-                      const tempDomImage: any = document.getElementById(
-                        "review-image-before-upload"
-                      );
-                      tempDomImage.src = event.target.result;
-                    };
-                    reader.readAsDataURL(e.target.files[0]);
-                    this.setState({
-                      imageChoose: e.target.files[0]
-                    });
-                  }}
-                  name="file"
-                  id="photo-app-choose-file"
-                  type="file"
-                  placeholder="Chọn hình"
-                  accept="image/png, image/jpeg"
-                />
-                <img
-                  id="review-image-before-upload"
-                  className="img-responsive"
-                  width="100%"
-                  height="50"
-                />
+                <div className="modal-body__upload">
+                  <input
+                    onChange={(e: any) => {
+                      // const data = new FormData();
+                      // data.append('upload-image', e.target.files[0]);
+                      let reader = new FileReader();
+                      reader.onload = (event: any) => {
+                        const tempDomImage: any = document.getElementById(
+                          "review-image-before-upload"
+                        );
+                        tempDomImage.src = event.target.result;
+                      };
+                      reader.readAsDataURL(e.target.files[0]);
+                      this.setState({
+                        imageChoose: e.target.files[0]
+                      });
+                    }}
+                    name="file"
+                    id="photo-app-choose-file"
+                    type="file"
+                    placeholder="Chọn hình"
+                    accept="image/png, image/jpeg"
+                  />
+                  <i className="ti-image" />
+                  <img
+                    id="review-image-before-upload"
+                    className="img-responsive"
+                    width="100%"
+                    height="50"
+                  />
+                </div>
               </div>
               <div className="modal-footer">
                 <button
                   onClick={() => {
                     const data = new FormData();
                     data.append("upload-image", this.state.imageChoose);
+                    data.append("where", this.makeRealPath());
                     axios
                       .post(API + "file/upload/photo", data)
                       .then(result => {
                         if (result.status === 200) {
                           $("#upload-image").modal("hide");
-                          this.props.reListImage();
+                          this.props.reListImage(this.makeRealPath());
                         }
                       })
-                      .catch(err => {
-                      });
+                      .catch(err => {});
                   }}
                   type="button"
                   className="btn btn-danger waves-effect waves-light"
@@ -280,6 +439,7 @@ class Photo extends React.Component<Props, State> {
             </div>
           </div>
         </div>
+        {this.state.isShowHideAddGroup ? this.addGroup() : ""}
       </>
     );
   }
@@ -290,14 +450,16 @@ const mapStateToProps = storeState => ({
   currentEditorPhoto: storeState.reInit.currentEditorPhoto,
   resListImage: storeState.reInit.resListImage,
   resDeleteImage: storeState.reInit.resDeleteImage,
-  resAddImage: storeState.reInit.resAddImage
+  resAddImage: storeState.reInit.resAddImage,
+  addPhotoGroup: storeState.reInit.addPhotoGroup
 });
 const mapDispatchToProps = {
   reShowPhotoApp,
   reSetCurrentEditorPhoto,
   reListImage,
   reDeleteImage,
-  reAddImage
+  reAddImage,
+  reAddGroupPhoto
 };
 export default connect(
   mapStateToProps,

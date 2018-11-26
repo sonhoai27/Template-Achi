@@ -15,7 +15,8 @@ export const ACTION_TYPES = {
     API_LOGIN: 'ReInit/API_LOGIN',
     IS_LOADING: 'ReInit/IS_LOADING',
     CURRENT_MATCH: 'ReInit/CURRENT_MATCH',
-    API_USER_LOGIN: "ReInit/API_USER_LOGIN"
+    API_USER_LOGIN: "ReInit/API_USER_LOGIN",
+    ADD_PHOTO_GROUP: 'ReInit/ADD_PHOTO_GROUP'
 }
 const initialState = {
     resListImage: [],
@@ -29,7 +30,8 @@ const initialState = {
     resCheckLogin: {},
     isLoading: false,
     currentMatch: {},
-    resUserLogin: {}
+    resUserLogin: {},
+    addPhotoGroup: {}
 
 }
 export default (state = initialState, action) => {
@@ -155,15 +157,34 @@ export default (state = initialState, action) => {
                 resUserLogin: action.payload.data
             }
         }
+         //  add group photo
+         case REQUEST(ACTION_TYPES.ADD_PHOTO_GROUP): {
+            return {
+                ...state
+            }
+        }
+        case FAILURE(ACTION_TYPES.ADD_PHOTO_GROUP): {
+            return {
+                ...state
+            }
+        }
+        case SUCCESS(ACTION_TYPES.ADD_PHOTO_GROUP): {
+            return {
+                ...state,
+                addPhotoGroup: action.payload.data
+            }
+        }
         default:
             return state;
     }
 }
 const API_FILE = API+'file/'
-export const reListImage = () => async dispatch => {
+export const reListImage = (where) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.API_LIST_IMAGE,
-        payload: axios.get(API_FILE+'all/photo')
+        payload: axios.post(API_FILE+'all/photo', {
+            where: where
+        })
     });
     return result;
 };
@@ -236,6 +257,13 @@ export const reSetCurrentMatch = (match) => async dispatch => {
     const result = await dispatch({
         type: ACTION_TYPES.CURRENT_MATCH,
         payload: match
+    });
+    return result;
+};
+export const reAddGroupPhoto = (form) => async dispatch => {
+    const result = await dispatch({
+        type: ACTION_TYPES.ADD_PHOTO_GROUP,
+        payload: axios.post(API_FILE+'group', form)
     });
     return result;
 };
