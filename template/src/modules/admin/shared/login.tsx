@@ -104,6 +104,11 @@ class Login extends React.Component<IProps, IState> {
                   </button>
                 </div>
               </div>
+              <div className="form-group text-center m-t-20" style={{display: 'inline-block'}}>
+              <div className="col-xs-12">
+                Quên mật khẩu?, liên hệ <a href="" target="_blank">admin</a>
+              </div>
+              </div>
             </div>
           </div>
         </section>

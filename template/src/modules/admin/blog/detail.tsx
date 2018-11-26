@@ -21,6 +21,7 @@ interface Props {
   resListStatus: any;
   reIsSuccess: (status: boolean) => void;
   reIsDanger: (status: boolean) => void;
+  resCheckLogin: any;
 }
 interface State {
   blog_id_category: number,
@@ -266,7 +267,8 @@ const mapStateToProps = storeState => ({
   resUpdateBlog: storeState.reBlog.resUpdateBlog,
   resListCategory: storeState.reBlog.resListCategory,
   resListAuthor: storeState.reBlog.resListAuthor,
-  resListStatus: storeState.reBlog.resListStatus
+  resListStatus: storeState.reBlog.resListStatus,
+  resCheckLogin: storeState.reInit.resCheckLogin
 });
 const mapDispatchToProps = {
   reSetCurrentEditorPhoto,

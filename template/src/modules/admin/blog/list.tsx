@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { reListBlog, reDeleteBlog } from "./reBlog";
 import Pagination from "../../shared/Pagination";
 import { reIsDanger, reIsSuccess } from "../../../reducers/init";
+import { checkRule } from "../../../config/auth";
 
 interface Props {
   resListBlog: any;
@@ -13,6 +14,7 @@ interface Props {
   reDeleteBlog: (id: number) => void;
   reIsSuccess: (status: boolean) => void;
   reIsDanger: (status: boolean) => void;
+  resCheckLogin: any;
 }
 class BlogList extends React.Component<Props, {}> {
   constructor(props) {
@@ -70,14 +72,18 @@ class BlogList extends React.Component<Props, {}> {
             <td>{element.blog_promo}</td>
             <td>{element.blog_created_date}</td>
             <td>
-              <div
+              {
+                checkRule(this.props.resCheckLogin.user.userRule, "ADMIN") 
+                || checkRule(this.props.resCheckLogin.user.userRule, "NGUOI_QUAN_LY")?
+                <div
                 onClick={() => {
                   this.props.reDeleteBlog(element.blog_id);
                 }}
                 className="btn btn-sm btn-danger"
               >
                 Xóa
-              </div>
+              </div>: ''
+              }
             </td>
           </tr>
         );
@@ -133,7 +139,8 @@ class BlogList extends React.Component<Props, {}> {
 
 const mapStateToProps = storeState => ({
   resListBlog: storeState.reBlog.resListBlog,
-  resDeleteBlog: storeState.reBlog.resDeleteBlog
+  resDeleteBlog: storeState.reBlog.resDeleteBlog,
+  resCheckLogin: storeState.reInit.resCheckLogin
 });
 const mapDispatchToProps = {
   reListBlog,
